@@ -9,149 +9,149 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)" />
-            <defs>
-              <linearGradient id="g" x1="0" x2="1">
-                <stop offset="0" stop-color="#00a6ff" stop-opacity="0.9"/>
-                <stop offset="1" stop-color="#0066cc" stop-opacity="0.8"/>
-              </linearGradient>
-            </defs>
-          </svg>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)" />
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#00a6ff" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="#0066cc" stop-opacity="0.8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div>
+        <h1 id="name">Tommy Raffaello Hodoroaba</h1>
+        <p class="lead">3D Digital Artist & Game Developer</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#projects">Progetti</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contatti</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="panel hero">
+        <div class="avatar">
+          <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto">
         </div>
-        <div>
-          <h1 id="name">Tommy Raffaello Hodoroaba</h1>
-          <p class="lead">3D Digital Artist & Game Developer</p>
+        <div class="bio">
+          <h2 id="fullname">Tommy Raffaello Hodoroaba</h2>
+          <p>3D Artist e Game Developer, specializzato in asset 3D e animazioni. Collaborazioni e stage disponibili.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#projects">Guarda i progetti</a>
+            <a class="btn" href="#contact">Contattami</a>
+          </div>
+          <div class="accent-line"></div>
+          <div>
+            <strong style="font-size:13px">Competenze</strong>
+            <div class="skills" style="margin-top:8px">
+              <span class="chip">Blender</span>
+              <span class="chip">Substance</span>
+              <span class="chip">Unreal Engine</span>
+              <span class="chip">Cinema 4D</span>
+              <span class="chip">Photoshop</span>
+              <span class="chip">After Effects</span>
+            </div>
+          </div>
         </div>
       </div>
-      <nav>
-        <a href="#projects">Progetti</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contatti</a>
-      </nav>
-    </header>
 
-    <main>
-      <section>
-        <div class="panel hero">
-          <div class="avatar">
-            <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto">
+      <div id="projects" class="panel" style="margin-top:18px">
+        <h3>Progetti</h3>
+        <p style="color:var(--muted);font-size:13px">Clicca su una miniatura per aprire il dettaglio.</p>
+
+        <div class="projects" id="projectsGrid">
+
+          <div class="project" data-title="Alan Walker Remix - Beautiful Nightmare" data-desc="Animazione e montaggio del remix musicale." data-type="image" data-src="assets/Screenshot 2025-10-12 224346.png">
+            <img src="assets/Screenshot 2025-10-12 224346.png" alt="Alan Walker Remix">
+            <div class="meta">Alan Walker Remix</div>
           </div>
-          <div class="bio">
-            <h2 id="fullname">Tommy Raffaello Hodoroaba</h2>
-            <p>3D Artist e Game Developer, specializzato in asset 3D e animazioni. Collaborazioni e stage disponibili.</p>
-            <div class="cta-row">
-              <a class="btn primary" href="#projects">Guarda i progetti</a>
-              <a class="btn" href="#contact">Contattami</a>
-            </div>
-            <div class="accent-line"></div>
-            <div>
-              <strong style="font-size:13px">Competenze</strong>
-              <div class="skills" style="margin-top:8px">
-                <span class="chip">Blender</span>
-                <span class="chip">Substance</span>
-                <span class="chip">Unreal Engine</span>
-                <span class="chip">Cinema 4D</span>
-                <span class="chip">Photoshop</span>
-                <span class="chip">After Effects</span>
-              </div>
+
+          <div class="project" data-title="Treni Trenitalia" data-desc="Modellazione e texturing di treni per simulazione." data-type="image" data-src="assets/Screenshot 2025-10-12 204155.png">
+            <img src="assets/treni-trenitalia-thumb.jpg" alt="Treni Trenitalia">
+            <div class="meta">Treni Trenitalia</div>
+          </div>
+
+          <div class="project" data-title="Team Treni Low Poly" data-desc="Asset low poly per videogioco in stile Railway Runner." data-type="image" data-src="assets/team-treni-lowpoly.jpg">
+            <img src="assets/team-treni-lowpoly-thumb.jpg" alt="Team Treni Low Poly">
+            <div class="meta">Team Treni Low Poly</div>
+          </div>
+
+          <div class="project" data-title="Oblivion Hospital" data-desc="Animazioni 3D e rendering della struttura ospedaliera." data-type="gallery">
+            <img src="assets/oblivion-hospital-thumb.jpg" alt="Oblivion Hospital">
+            <div class="meta">Oblivion Hospital</div>
+            <div class="subgallery" hidden>
+              <video controls src="assets/oblivion_anim1.mp4"></video>
+              <video controls src="assets/oblivion_anim2.mp4"></video>
+              <video controls src="assets/oblivion_anim3.mp4"></video>
             </div>
           </div>
-        </div>
 
-        <div id="projects" class="panel" style="margin-top:18px">
-          <h3>Progetti</h3>
-          <p style="color:var(--muted);font-size:13px">Clicca su una miniatura per aprire il dettaglio.</p>
-
-          <div class="projects" id="projectsGrid">
-            <div class="project" data-title="Alan Walker Remix" data-desc="Animazione e montaggio remix musicale" data-type="video" data-src="assets/alan-walker-remix.mp4">
-              <img src="assets/alan-walker-remix-thumb.jpg" alt="Alan Walker Remix">
-              <div class="meta">Alan Walker Remix</div>
-            </div>
-
-            <div class="project" data-title="Treni Trenitalia" data-desc="Modellazione e texturing treni per simulazione" data-type="image" data-src="assets/treni-trenitalia.jpg">
-              <img src="assets/treni-trenitalia-thumb.jpg" alt="Treni Trenitalia">
-              <div class="meta">Treni Trenitalia</div>
-            </div>
-
-            <div class="project" data-title="Team Treni Low Poly" data-desc="Asset low poly per gioco ferroviario" data-type="image" data-src="assets/team-treni-lowpoly.jpg">
-              <img src="assets/team-treni-lowpoly-thumb.jpg" alt="Team Treni Low Poly">
-              <div class="meta">Team Treni Low Poly</div>
-            </div>
-
-            <div class="project" data-title="Oblivion Hospital" data-desc="Animazioni 3D della struttura ospedaliera" data-type="video" data-src="assets/oblivion-hospital.mp4">
-              <img src="assets/oblivion-hospital-thumb.jpg" alt="Oblivion Hospital">
-              <div class="meta">Oblivion Hospital</div>
-            </div>
-
-            <div class="project" data-title="Soldier Walker" data-desc="Personaggio 3D per gioco o animazione" data-type="image" data-src="assets/soldier-walker.jpg">
-              <img src="assets/soldier-walker-thumb.jpg" alt="Soldier Walker">
-              <div class="meta">Soldier Walker</div>
-            </div>
-
-            <div class="project" data-title="Salotto" data-desc="Render d'interni realistico" data-type="image" data-src="assets/salotto.jpg">
-              <img src="assets/salotto-thumb.jpg" alt="Salotto">
-              <div class="meta">Salotto</div>
-            </div>
-
-            <div class="project" data-title="Macchina Futuristica" data-desc="Concept car futuristica 3D" data-type="image" data-src="assets/macchina-futuristica.jpg">
-              <img src="assets/macchina-futuristica-thumb.jpg" alt="Macchina Futuristica">
-              <div class="meta">Macchina Futuristica</div>
-            </div>
-
-            <div class="project" data-title="Città Low Poly" data-desc="Ambiente urbano in stile low poly" data-type="image" data-src="assets/citta-lowpoly.jpg">
-              <img src="assets/citta-lowpoly-thumb.jpg" alt="Città Low Poly">
-              <div class="meta">Città Low Poly</div>
-            </div>
-
-            <div class="project" data-title="Pianeti" data-desc="Render spaziale con pianeti e luce volumetrica" data-type="image" data-src="assets/pianeti.jpg">
-              <img src="assets/pianeti-thumb.jpg" alt="Pianeti">
-              <div class="meta">Pianeti</div>
-            </div>
-
-            <div class="project" data-title="Star Destroyer" data-desc="Modello 3D ispirato alla saga Star Wars" data-type="image" data-src="assets/star-destroyer.jpg">
-              <img src="assets/star-destroyer-thumb.jpg" alt="Star Destroyer">
-              <div class="meta">Star Destroyer</div>
-            </div>
+          <div class="project" data-title="Soldier Walker" data-desc="Personaggio 3D per progetto di gioco o animazione." data-type="image" data-src="assets/Untitled.png">
+            <img src="assets/Untitled.png" alt="Soldier Walker">
+            <div class="meta">Soldier Walker</div>
           </div>
+
+          <div class="project" data-title="Salotto" data-desc="Render fotorealistico di un ambiente interno moderno." data-type="image" data-src="assets/untitled_1.png">
+            <img src="assets/salotto-thumb.jpg" alt="Salotto">
+            <div class="meta">Salotto</div>
+          </div>
+
+          <div class="project" data-title="Macchina Futuristica" data-desc="Concept car futuristica modellata in Blender." data-type="image" data-src="assets/Screenshot_20251012_214749_Drive.jpg">
+            <img src="assets/macchina-futuristica-thumb.jpg" alt="Macchina Futuristica">
+            <div class="meta">Macchina Futuristica</div>
+          </div>
+
+          <div class="project" data-title="Città Low Poly" data-desc="Città stilizzata low poly con illuminazione notturna." data-type="image" data-src="assets/Screenshot 2025-10-12 203652.png">
+            <img src="assets/citta-lowpoly-thumb.jpg" alt="Città Low Poly">
+            <div class="meta">Città Low Poly</div>
+          </div>
+
+          <div class="project" data-title="Pianeti" data-desc="Composizione spaziale con pianeti e luce volumetrica." data-type="image" data-src="assets/Screenshot 2025-10-12 203921.png">
+            <img src="assets/pianeti-thumb.jpg" alt="Pianeti">
+            <div class="meta">Pianeti</div>
+          </div>
+
+          <div class="project" data-title="Star Destroyer" data-desc="Modellazione navicella ispirata all’universo Star Wars." data-type="image" data-src="assets/Screenshot 2025-10-12 210314.png">
+            <img src="assets/star-destroyer-thumb.jpg" alt="Star Destroyer">
+            <div class="meta">Star Destroyer</div>
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
 
-      <aside class="sidebar">
-        <div class="panel card" id="about">
-          <h4>About</h4>
-          <p style="color:var(--muted);font-size:14px">Sono uno studente ITS con esperienza in asset 3D, materiali PBR, animazioni e game development. Amo il design creativo e la sperimentazione tecnica.</p>
-        </div>
+    <aside class="sidebar">
+      <div class="panel card" id="about">
+        <h4>About</h4>
+        <p style="color:var(--muted);font-size:14px">
+          Sono uno studente ITS con esperienza in asset 3D, materiali PBR, animazioni e game development. Amo il design creativo e la sperimentazione tecnica.
+        </p>
+      </div>
 
-        <div class="panel card" id="contact">
-          <h4>Contatti</h4>
-          <p style="color:var(--muted);margin:8px 0">Email: <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a></p>
-          <p style="color:var(--muted);margin:4px 0">Tel: +39 3925649950</p>
-          <p style="color:var(--muted);margin:4px 0">Città: Torino, Italia</p>
-          <p style="color:var(--muted);margin:4px 0"><a href="CV_TommyHodoroaba.pdf" target="_blank">Scarica CV (PDF)</a></p>
-          <p style="color:var(--muted);margin:4px 0"><a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a></p>
-        </div>
-      </aside>
-    </main>
+      <div class="panel card" id="contact">
+        <h4>Contatti</h4>
+        <p style="color:var(--muted);margin:8px 0">Email: <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a></p>
+        <p style="color:var(--muted);margin:4px 0">Tel: +39 3925649950</p>
+        <p style="color:var(--muted);margin:4px 0">Città: Torino, Italia</p>
+        <p style="color:var(--muted);margin:4px 0"><a href="CV_TommyHodoroaba.pdf" target="_blank">Scarica CV (PDF)</a></p>
+        <p style="color:var(--muted);margin:4px 0"><a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a></p>
+      </div>
+    </aside>
+  </main>
 
-    <footer>
-      <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
-    </footer>
-  </div>
+  <footer>
+    <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
+  </footer>
+</div>
 
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <div class="backdrop" id="modalBackdrop"></div>
-    <div class="content" role="document">
-      <button id="closeModal" aria-label="Chiudi">✕</button>
-      <div id="modalInner"></div>
-      <div class="info" id="modalInfo"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
