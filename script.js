@@ -13,7 +13,6 @@ function openModal(type, src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = title + ' — ' + desc;
 
-  // Media principale
   const main = document.createElement(type === 'video' ? 'video' : 'img');
   main.src = src;
   main.style.width = '100%';
@@ -24,18 +23,26 @@ function openModal(type, src, title, desc, extras = []) {
   }
   modalInner.appendChild(main);
 
-  // Miniature extra
   if (extras.length > 0) {
     const thumbBar = document.createElement('div');
     thumbBar.className = 'thumb-bar';
     thumbBar.style.display = 'flex';
+    thumbBar.style.flexWrap = 'wrap';
     thumbBar.style.gap = '8px';
     thumbBar.style.marginTop = '10px';
-    thumbBar.style.flexWrap = 'wrap';
 
     extras.forEach((mediaSrc) => {
-      const thumb = document.createElement('img');
-      thumb.src = mediaSrc;
+      let thumb;
+      if (mediaSrc.endsWith('.mp4')) {
+        thumb = document.createElement('video');
+        thumb.src = mediaSrc;
+        thumb.muted = true;
+        thumb.loop = true;
+        thumb.autoplay = true;
+      } else {
+        thumb = document.createElement('img');
+        thumb.src = mediaSrc;
+      }
       thumb.style.width = '90px';
       thumb.style.height = '60px';
       thumb.style.objectFit = 'cover';
@@ -44,11 +51,11 @@ function openModal(type, src, title, desc, extras = []) {
       thumb.style.opacity = '0.7';
       thumb.addEventListener('click', () => {
         main.src = mediaSrc;
-        if (type === 'video') {
+        if (mediaSrc.endsWith('.mp4')) {
           main.load();
           main.play();
         }
-        thumbBar.querySelectorAll('img').forEach((t) => (t.style.opacity = '0.7'));
+        thumbBar.querySelectorAll('img,video').forEach((t) => (t.style.opacity = '0.7'));
         thumb.style.opacity = '1';
       });
       thumbBar.appendChild(thumb);
@@ -71,13 +78,16 @@ function showProject(card) {
   const desc = card.dataset.desc || '';
   const type = card.dataset.type || 'image';
   const src = card.dataset.src || '';
-
-  // Raccogli media extra
   let extras = [];
+
   if (card.dataset.images) {
     extras = card.dataset.images.split('|').map((x) => x.trim());
   } else if (card.dataset.videos) {
     extras = card.dataset.videos.split('|').map((x) => x.trim());
+  }
+
+  if (extras.length === 0 && src) {
+    extras = [src];
   }
 
   pdTitle.textContent = title;
