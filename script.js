@@ -14,16 +14,27 @@ function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = title + ' — ' + desc;
 
-  const type = src.endsWith('.mp4') ? 'video' : 'image';
-  const main = document.createElement(type === 'video' ? 'video' : 'img');
-  main.src = src;
-  main.style.width = '100%';
-  if (type === 'video') {
-    main.controls = true;
-    main.autoplay = true;
-    main.loop = true;
+  // crea sempre un container per il media principale
+  const mainContainer = document.createElement('div');
+  modalInner.appendChild(mainContainer);
+
+  // funzione per caricare un media nel main
+  function loadMain(mediaSrc) {
+    mainContainer.innerHTML = ''; // pulisce il contenitore
+    const type = mediaSrc.endsWith('.mp4') ? 'video' : 'img';
+    const main = document.createElement(type === 'video' ? 'video' : 'img');
+    main.src = mediaSrc;
+    main.style.width = '100%';
+    if (type === 'video') {
+      main.controls = true;
+      main.autoplay = true;
+      main.loop = true;
+    }
+    mainContainer.appendChild(main);
   }
-  modalInner.appendChild(main);
+
+  // carica il primo media
+  loadMain(src);
 
   if (extras.length > 0) {
     const thumbBar = document.createElement('div');
@@ -49,17 +60,7 @@ function openModal(src, title, desc, extras = []) {
       thumb.style.borderRadius = '6px';
       thumb.style.opacity = mediaSrc === src ? '1' : '0.7';
       thumb.addEventListener('click', () => {
-        const newType = mediaSrc.endsWith('.mp4') ? 'video' : 'image';
-        const newMain = document.createElement(newType === 'video' ? 'video' : 'img');
-        newMain.src = mediaSrc;
-        newMain.style.width = '100%';
-        if (newType === 'video') {
-          newMain.controls = true;
-          newMain.autoplay = true;
-          newMain.loop = true;
-        }
-        modalInner.replaceChild(newMain, main);
-        main.src = mediaSrc; // aggiorna riferimento principale
+        loadMain(mediaSrc); // ricarica il media principale
         thumbBar.querySelectorAll('img,video').forEach(t => t.style.opacity = '0.7');
         thumb.style.opacity = '1';
       });
