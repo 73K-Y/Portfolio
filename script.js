@@ -84,22 +84,24 @@ function showProject(card) {
   let src = card.dataset.src || '';
   let extras = [];
 
-  // Aggiunge immagini se presenti
+  // Aggiungi immagini come media
   if (card.dataset.images) {
     extras = card.dataset.images.split('|').map(x => x.trim());
-    src = extras[0];
   }
 
-  // Aggiunge video se presenti
+  // Aggiungi video come media
   if (card.dataset.videos) {
     const videos = card.dataset.videos.split('|').map(x => x.trim());
     extras = [...extras, ...videos];
-    if (!card.dataset.images) {
-      src = videos[0]; // se non ci sono immagini, primo video come principale
-    }
   }
 
-  // Determina il tipo principale
+  // Imposta il media principale
+  if (card.dataset.images) {
+    src = card.dataset.images.split('|')[0]; // prima immagine
+  } else if (card.dataset.videos) {
+    src = card.dataset.videos.split('|')[0]; // primo video se non ci sono immagini
+  }
+
   const type = src.endsWith('.mp4') ? 'video' : 'image';
 
   pdTitle.textContent = title;
