@@ -10,7 +10,7 @@ const yearSpan = document.getElementById('year');
 
 yearSpan.textContent = new Date().getFullYear();
 
-// Funzione per aprire il modal
+// Funzione per aprire il modal con media e thumbnails
 function openModal(type, src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = title + ' — ' + desc;
@@ -50,13 +50,14 @@ function openModal(type, src, title, desc, extras = []) {
       thumb.style.objectFit = 'cover';
       thumb.style.cursor = 'pointer';
       thumb.style.borderRadius = '6px';
-      thumb.style.opacity = '0.7';
+      thumb.style.opacity = mediaSrc === src ? '1' : '0.7'; // evidenzia media attivo
       thumb.addEventListener('click', () => {
         main.src = mediaSrc;
         if (mediaSrc.endsWith('.mp4')) {
           main.load();
           main.play();
         }
+        // reset opacity di tutti i thumbnail
         thumbBar.querySelectorAll('img,video').forEach((t) => (t.style.opacity = '0.7'));
         thumb.style.opacity = '1';
       });
@@ -76,23 +77,30 @@ function closeModalFn() {
   modal.setAttribute('aria-hidden', 'true');
 }
 
-// Funzione per mostrare il progetto
+// Funzione per mostrare il progetto con immagini e video
 function showProject(card) {
   const title = card.dataset.title || 'Progetto';
   const desc = card.dataset.desc || '';
-  let type = card.dataset.type || 'image';
   let src = card.dataset.src || '';
   let extras = [];
 
-  if (card.dataset.videos) {
-    extras = card.dataset.videos.split('|').map(x => x.trim());
-    src = extras[0];  // primo video come principale
-    type = 'video';   // forza tipo video
-  } else if (card.dataset.images) {
+  // Aggiunge immagini se presenti
+  if (card.dataset.images) {
     extras = card.dataset.images.split('|').map(x => x.trim());
     src = extras[0];
-    type = 'image';
   }
+
+  // Aggiunge video se presenti
+  if (card.dataset.videos) {
+    const videos = card.dataset.videos.split('|').map(x => x.trim());
+    extras = [...extras, ...videos];
+    if (!card.dataset.images) {
+      src = videos[0]; // se non ci sono immagini, primo video come principale
+    }
+  }
+
+  // Determina il tipo principale
+  const type = src.endsWith('.mp4') ? 'video' : 'image';
 
   pdTitle.textContent = title;
   pdDesc.textContent = desc;
