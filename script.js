@@ -7,8 +7,10 @@ const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
 const closeModal = document.getElementById('closeModal');
 const yearSpan = document.getElementById('year');
+
 yearSpan.textContent = new Date().getFullYear();
 
+// Funzione per aprire il modal
 function openModal(type, src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = title + ' — ' + desc;
@@ -68,45 +70,48 @@ function openModal(type, src, title, desc, extras = []) {
   modal.setAttribute('aria-hidden', 'false');
 }
 
+// Funzione per chiudere il modal
 function closeModalFn() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
 }
 
+// Funzione per mostrare il progetto
 function showProject(card) {
   const title = card.dataset.title || 'Progetto';
   const desc = card.dataset.desc || '';
-  const type = card.dataset.type || 'image';
-  const src = card.dataset.src || '';
+  let type = card.dataset.type || 'image';
+  let src = card.dataset.src || '';
   let extras = [];
 
-  if (card.dataset.images) {
-    extras = card.dataset.images.split('|').map((x) => x.trim());
-  } else if (card.dataset.videos) {
-    extras = card.dataset.videos.split('|').map((x) => x.trim());
-  }
-
-  if (extras.length === 0 && src) {
-    extras = [src];
+  if (card.dataset.videos) {
+    extras = card.dataset.videos.split('|').map(x => x.trim());
+    src = extras[0];  // primo video come principale
+    type = 'video';   // forza tipo video
+  } else if (card.dataset.images) {
+    extras = card.dataset.images.split('|').map(x => x.trim());
+    src = extras[0];
+    type = 'image';
   }
 
   pdTitle.textContent = title;
   pdDesc.textContent = desc;
   pdMedia.innerHTML = '';
 
-  const thumb = document.createElement(type === 'video' ? 'video' : 'img');
-  thumb.src = src;
-  thumb.style.width = '100%';
+  const main = document.createElement(type === 'video' ? 'video' : 'img');
+  main.src = src;
+  main.style.width = '100%';
   if (type === 'video') {
-    thumb.controls = true;
-    thumb.autoplay = true;
-    thumb.loop = true;
+    main.controls = true;
+    main.autoplay = true;
+    main.loop = true;
   }
-  pdMedia.appendChild(thumb);
+  pdMedia.appendChild(main);
 
   openModal(type, src, title, desc, extras);
 }
 
+// Event listeners
 projectsGrid.addEventListener('click', (e) => {
   const card = e.target.closest('.project');
   if (!card) return;
