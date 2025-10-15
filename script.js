@@ -10,11 +10,11 @@ const yearSpan = document.getElementById('year');
 
 yearSpan.textContent = new Date().getFullYear();
 
-// Funzione per aprire il modal con media e thumbnails
-function openModal(type, src, title, desc, extras = []) {
+function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = title + ' — ' + desc;
 
+  const type = src.endsWith('.mp4') ? 'video' : 'image';
   const main = document.createElement(type === 'video' ? 'video' : 'img');
   main.src = src;
   main.style.width = '100%';
@@ -33,32 +33,34 @@ function openModal(type, src, title, desc, extras = []) {
     thumbBar.style.gap = '8px';
     thumbBar.style.marginTop = '10px';
 
-    extras.forEach((mediaSrc) => {
-      let thumb;
-      if (mediaSrc.endsWith('.mp4')) {
-        thumb = document.createElement('video');
-        thumb.src = mediaSrc;
+    extras.forEach(mediaSrc => {
+      const thumbType = mediaSrc.endsWith('.mp4') ? 'video' : 'image';
+      let thumb = thumbType === 'video' ? document.createElement('video') : document.createElement('img');
+      thumb.src = mediaSrc;
+      if (thumbType === 'video') {
         thumb.muted = true;
         thumb.loop = true;
         thumb.autoplay = true;
-      } else {
-        thumb = document.createElement('img');
-        thumb.src = mediaSrc;
       }
       thumb.style.width = '90px';
       thumb.style.height = '60px';
       thumb.style.objectFit = 'cover';
       thumb.style.cursor = 'pointer';
       thumb.style.borderRadius = '6px';
-      thumb.style.opacity = mediaSrc === src ? '1' : '0.7'; // evidenzia media attivo
+      thumb.style.opacity = mediaSrc === src ? '1' : '0.7';
       thumb.addEventListener('click', () => {
-        main.src = mediaSrc;
-        if (mediaSrc.endsWith('.mp4')) {
-          main.load();
-          main.play();
+        const newType = mediaSrc.endsWith('.mp4') ? 'video' : 'image';
+        const newMain = document.createElement(newType === 'video' ? 'video' : 'img');
+        newMain.src = mediaSrc;
+        newMain.style.width = '100%';
+        if (newType === 'video') {
+          newMain.controls = true;
+          newMain.autoplay = true;
+          newMain.loop = true;
         }
-        // reset opacity di tutti i thumbnail
-        thumbBar.querySelectorAll('img,video').forEach((t) => (t.style.opacity = '0.7'));
+        modalInner.replaceChild(newMain, main);
+        main.src = mediaSrc; // aggiorna riferimento principale
+        thumbBar.querySelectorAll('img,video').forEach(t => t.style.opacity = '0.7');
         thumb.style.opacity = '1';
       });
       thumbBar.appendChild(thumb);
@@ -71,64 +73,32 @@ function openModal(type, src, title, desc, extras = []) {
   modal.setAttribute('aria-hidden', 'false');
 }
 
-// Funzione per chiudere il modal
 function closeModalFn() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
 }
 
-// Funzione per mostrare il progetto con immagini e video
 function showProject(card) {
   const title = card.dataset.title || 'Progetto';
   const desc = card.dataset.desc || '';
-  let src = card.dataset.src || '';
   let extras = [];
 
-  // Aggiungi immagini come media
-  if (card.dataset.images) {
-    extras = card.dataset.images.split('|').map(x => x.trim());
-  }
+  if (card.dataset.images) extras = card.dataset.images.split('|').map(x => x.trim());
+  if (card.dataset.videos) extras = [...extras, ...card.dataset.videos.split('|').map(x => x.trim())];
 
-  // Aggiungi video come media
-  if (card.dataset.videos) {
-    const videos = card.dataset.videos.split('|').map(x => x.trim());
-    extras = [...extras, ...videos];
-  }
+  let src = card.dataset.images ? card.dataset.images.split('|')[0] :
+            card.dataset.videos ? card.dataset.videos.split('|')[0] : '';
 
-  // Imposta il media principale
-  if (card.dataset.images) {
-    src = card.dataset.images.split('|')[0]; // prima immagine
-  } else if (card.dataset.videos) {
-    src = card.dataset.videos.split('|')[0]; // primo video se non ci sono immagini
-  }
-
-  const type = src.endsWith('.mp4') ? 'video' : 'image';
-
-  pdTitle.textContent = title;
-  pdDesc.textContent = desc;
-  pdMedia.innerHTML = '';
-
-  const main = document.createElement(type === 'video' ? 'video' : 'img');
-  main.src = src;
-  main.style.width = '100%';
-  if (type === 'video') {
-    main.controls = true;
-    main.autoplay = true;
-    main.loop = true;
-  }
-  pdMedia.appendChild(main);
-
-  openModal(type, src, title, desc, extras);
+  openModal(src, title, desc, extras);
 }
 
-// Event listeners
-projectsGrid.addEventListener('click', (e) => {
+projectsGrid.addEventListener('click', e => {
   const card = e.target.closest('.project');
   if (!card) return;
   showProject(card);
 });
 
-projectsGrid.addEventListener('keydown', (e) => {
+projectsGrid.addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
     const card = e.target.closest('.project');
@@ -139,6 +109,6 @@ projectsGrid.addEventListener('keydown', (e) => {
 
 closeModal.addEventListener('click', closeModalFn);
 document.getElementById('modalBackdrop').addEventListener('click', closeModalFn);
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModalFn();
 });
