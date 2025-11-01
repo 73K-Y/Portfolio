@@ -17,7 +17,7 @@ function updateProgress(){
 document.addEventListener('scroll', updateProgress, {passive:true});
 updateProgress();
 
-/* Reveal on scroll (molto economico) */
+/* Reveal on scroll (economico) */
 const revealIO = new IntersectionObserver((entries,obs)=>{
   entries.forEach(en=>{
     if(!en.isIntersecting) return;
@@ -90,7 +90,7 @@ function openCaseSection(sec){
   openModal(src, title, desc, extras);
 }
 
-/* Bind alle case (click sull’area o sul bottone) */
+/* Bind alle case */
 document.querySelectorAll('.case').forEach(sec=>{
   const btn = sec.querySelector('.open-modal');
   btn && btn.addEventListener('click', (e)=>{ e.stopPropagation(); openCaseSection(sec); });
@@ -99,3 +99,27 @@ document.querySelectorAll('.case').forEach(sec=>{
     openCaseSection(sec);
   });
 });
+
+/* ===== Glitch orchestrator (burst breve, leggero) ===== */
+const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReduced) {
+  const body = document.body;
+  function burst(){
+    // random piccolo offset per le cover (CSS legge --tx/--ty)
+    const tx = (Math.random() * 2 - 1).toFixed(2) + 'px';
+    const ty = (Math.random() * 2 - 1).toFixed(2) + 'px';
+    body.style.setProperty('--tx', tx);
+    body.style.setProperty('--ty', ty);
+    body.classList.add('glitch-active');
+    setTimeout(()=>{
+      body.classList.remove('glitch-active');
+      body.style.removeProperty('--tx');
+      body.style.removeProperty('--ty');
+    }, 260); // durata burst
+  }
+  // burst casuali ogni 6–10 secondi
+  (function schedule(){
+    const next = 6000 + Math.random()*4000;
+    setTimeout(()=>{ burst(); schedule(); }, next);
+  })();
+}

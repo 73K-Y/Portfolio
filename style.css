@@ -37,7 +37,6 @@ a:active, a:focus { color: var(--white); outline: none; }
   gap: clamp(8px,1.5vw,18px);
   margin: 16px auto 8px;
 }
-/* evita overflow brand su mobile */
 .brand > div { min-width: 0; }
 .nav-glass h1, .nav-glass .lead { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -124,6 +123,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   position:absolute; inset:0; background-image:var(--bg);
   background-size:cover; background-position:center;
   filter:contrast(1.02) saturate(1.04);
+  transform: translate3d(var(--tx,0), var(--ty,0), 0);
 }
 .case::after{
   content:""; position:absolute; inset:0;
@@ -139,15 +139,13 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .case-info h3{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
 .case-info p{margin:0 0 8px;color:var(--muted);font-size:clamp(13px,1.8vw,15px)}
 
-/* About/Contact: stessa larghezza, no sbordi, meno spazio */
-.wrap.section.grid-2.tight-below{
+/* About/Contatti STACK SEMPRE (uno sopra l'altro) */
+.wrap.section.grid-stack.tight-below{
   max-width: var(--max-w);
   margin: 8px auto;
   padding: 8px var(--gutter);
-}
-.grid-2{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr;   /* <— sempre una colonna */
   gap: clamp(10px, 1.2vw, 14px);
 }
 .panel.card{
@@ -194,6 +192,33 @@ footer.wrap{
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .45s ease, transform .45s ease}
 .reveal.is-visible{opacity:1;transform:none}
 
+/* ===== Glitch globale (lightweight) ===== */
+.glitch-overlay{
+  position: fixed; inset: 0; pointer-events: none; z-index: 5;
+  opacity: .05;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0px, rgba(255,255,255,.07) 1px, transparent 2px, transparent 3px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 2px, rgba(0,186,255,.06) 3px, transparent 4px);
+  mix-blend-mode: overlay;
+  animation: scan 9s linear infinite;
+}
+@keyframes scan{
+  0% {opacity:.03; transform: translateY(-1%);}
+  50%{opacity:.06; transform: translateY(1%);}
+  100%{opacity:.03; transform: translateY(-1%);}
+}
+/* burst breve e saltuario */
+body.glitch-active .gradient-title{
+  text-shadow: 1px 0 #0ff, -1px 0 #f0f;
+  transform: skewX(.4deg);
+}
+body.glitch-active .case-bg{
+  filter: hue-rotate(2deg) saturate(1.06) contrast(1.03);
+}
+body.glitch-active .nav-glass{
+  filter: contrast(1.02) saturate(1.02);
+}
+
 /* A11y */
 *:focus{outline:none}
 
@@ -202,7 +227,7 @@ footer.wrap{
   .nav-glass{
     padding: 8px 12px;
     gap: 8px;
-    flex-wrap: wrap;         /* manda la nav a capo */
+    flex-wrap: wrap;
   }
   .brand{
     gap: 10px;
@@ -233,7 +258,8 @@ footer.wrap{
   }
 }
 
-/* prefers-reduced-motion: spegni transizioni superflue */
+/* prefers-reduced-motion: spegni transizioni superflue e glitch burst */
 @media (prefers-reduced-motion: reduce) {
   .reveal{transition:none}
+  .glitch-overlay{animation:none; opacity:.03;}
 }
