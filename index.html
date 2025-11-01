@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="snap">
+    <!-- FX layer + progress -->
+    <div id="fxLayer" aria-hidden="true"></div>
     <div class="progress" id="progress"></div>
     <div id="cursorGlow"></div>
 
+    <!-- Header glass (stessa larghezza hero) -->
     <header class="nav-glass">
       <div class="brand">
         <div class="logo" aria-hidden="true">
@@ -38,6 +41,7 @@
       </nav>
     </header>
 
+    <!-- HERO (più bassa; avatar dimensione intrinseca) -->
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
@@ -60,7 +64,9 @@
       </section>
     </main>
 
+    <!-- SHOWREEL full-width (meno alto) -->
     <div id="showreel" class="wrap">
+      <!-- 1 -->
       <section class="case snap-child reveal"
         data-title="Alan Walker Remix - Beautiful Nightmare"
         data-desc="Animazione e montaggio del remix musicale."
@@ -74,6 +80,7 @@
         </div>
       </section>
 
+      <!-- 2 -->
       <section class="case snap-child reveal"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulazione."
@@ -87,6 +94,7 @@
         </div>
       </section>
 
+      <!-- 3 -->
       <section class="case snap-child reveal"
         data-title="Team Treni Low Poly"
         data-desc="Asset low poly per videogioco in stile Railway Runner."
@@ -100,6 +108,7 @@
         </div>
       </section>
 
+      <!-- 4 (con video) -->
       <section class="case snap-child reveal"
         data-title="Oblivion Hospital"
         data-desc="Animazioni 3D e rendering della struttura ospedaliera."
@@ -114,6 +123,7 @@
         </div>
       </section>
 
+      <!-- 5 -->
       <section class="case snap-child reveal"
         data-title="Soldier Walker"
         data-desc="Personaggio 3D per progetto di gioco o animazione."
@@ -127,10 +137,12 @@
         </div>
       </section>
 
+      <!-- 6 -->
       <section class="case snap-child reveal"
         data-title="Salotto"
         data-desc="Render fotorealistico di un ambiente interno moderno."
-        data-images="assets/untitled_1.png" data-src="assets/untitled_1.png">
+        data-images="assets/untitled_1.png"
+        data-src="assets/untitled_1.png">
         <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
         <div class="case-info">
           <h3>Salotto</h3>
@@ -139,6 +151,7 @@
         </div>
       </section>
 
+      <!-- 7 -->
       <section class="case snap-child reveal"
         data-title="Macchina Futuristica"
         data-desc="Concept car futuristica modellata in Blender."
@@ -152,6 +165,7 @@
         </div>
       </section>
 
+      <!-- 8 -->
       <section class="case snap-child reveal"
         data-title="Città Low Poly"
         data-desc="Città stilizzata low poly con illuminazione notturna."
@@ -165,6 +179,7 @@
         </div>
       </section>
 
+      <!-- 9 -->
       <section class="case snap-child reveal"
         data-title="Pianeti"
         data-desc="Composizione spaziale con pianeti e luce volumetrica."
@@ -178,6 +193,7 @@
         </div>
       </section>
 
+      <!-- 10 -->
       <section class="case snap-child reveal"
         data-title="Star Destroyer"
         data-desc="Modellazione navicella ispirata all’universo Star Wars."
@@ -192,6 +208,7 @@
       </section>
     </div>
 
+    <!-- About & Contatti (molto vicini allo showreel) -->
     <section class="wrap section grid-2 snap-child tight-below">
       <div class="panel card reveal" id="about">
         <h4>About</h4>
@@ -219,6 +236,7 @@
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
+    <!-- Modal -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
       <div class="content" role="document">

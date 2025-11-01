@@ -1,3 +1,4 @@
+/* Elements */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
@@ -8,12 +9,14 @@ const cursorGlow = document.getElementById('cursorGlow');
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
+/* Cursor glow follows pointer */
 window.addEventListener('pointermove', e=>{
   if (!cursorGlow) return;
   cursorGlow.style.left = e.clientX + 'px';
   cursorGlow.style.top  = e.clientY + 'px';
 });
 
+/* Scroll progress */
 function updateProgress(){
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   const h = (document.documentElement.scrollHeight - document.documentElement.clientHeight);
@@ -23,6 +26,7 @@ function updateProgress(){
 document.addEventListener('scroll', updateProgress);
 updateProgress();
 
+/* Reveal on scroll */
 const revealIO = new IntersectionObserver((entries)=>{
   entries.forEach(en=>{
     if(!en.isIntersecting) return;
@@ -32,6 +36,7 @@ const revealIO = new IntersectionObserver((entries)=>{
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
+/* Modal gallery */
 function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = `${title} — ${desc}`;
@@ -64,9 +69,16 @@ function openModal(src, title, desc, extras = []) {
         loadMain(u);
         bar.querySelectorAll('img,video').forEach(n=>n.style.opacity='.72');
         t.style.opacity = '1';
+        bar.querySelectorAll('img,video').forEach(n=>n.classList.remove('is-active'));
+        t.classList.add('is-active');
       });
       bar.appendChild(t);
     });
+    // set first active
+    setTimeout(()=>{
+      const first = bar.querySelector('img,video');
+      if(first) first.classList.add('is-active');
+    },0);
     modalInner.appendChild(bar);
   }
 
@@ -81,6 +93,7 @@ if (closeModal) closeModal.addEventListener('click', closeModalFn);
 if (backdrop) backdrop.addEventListener('click', closeModalFn);
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
+/* Helpers */
 function gatherExtras(node){
   const imgs = node.dataset.images ? node.dataset.images.split('|').map(s=>s.trim()) : [];
   const vids = node.dataset.videos ? node.dataset.videos.split('|').map(s=>s.trim()) : [];
@@ -95,6 +108,7 @@ function openCaseSection(sec){
   openModal(src, title, desc, extras);
 }
 
+/* Bind cases */
 document.querySelectorAll('.case').forEach(sec=>{
   const btn = sec.querySelector('.open-modal');
   if (btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); openCaseSection(sec); });
@@ -105,16 +119,59 @@ document.querySelectorAll('.case').forEach(sec=>{
   });
 });
 
-document.querySelectorAll('.btn').forEach(b=>{
-  b.addEventListener('mousemove', e=>{
-    if (!b.classList.contains('magnet')) return;
-    const r = b.getBoundingClientRect();
-    const x = e.clientX - (r.left + r.width/2);
-    const y = e.clientY - (r.top + r.height/2);
-    b.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`;
+/* Magnet buttons reflection */
+document.querySelectorAll('.btn.primary').forEach(btn=>{
+  btn.addEventListener('mousemove', (e)=>{
+    const r = btn.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    btn.style.setProperty('--mx', x + '%');
   });
-  b.addEventListener('mouseleave', ()=> b.style.transform='translate(0,0)');
-  b.addEventListener('mousedown', ()=> b.style.transform='scale(0.985)');
-  ['mouseup','mouseleave','touchend','touchcancel'].forEach(ev =>
-    b.addEventListener(ev, ()=> b.style.transform=''));
 });
+
+/* Tilt/parallax sulle cards */
+document.querySelectorAll('.case').forEach(sec=>{
+  sec.addEventListener('mousemove', (e)=>{
+    const r = sec.getBoundingClientRect();
+    const cx = r.left + r.width/2;
+    const cy = r.top  + r.height/2;
+    const dx = (e.clientX - cx) / (r.width/2);
+    const dy = (e.clientY - cy) / (r.height/2);
+    sec.style.setProperty('--rx', (-dy*4).toFixed(2) + 'deg');
+    sec.style.setProperty('--ry', ( dx*4).toFixed(2) + 'deg');
+  });
+  sec.addEventListener('mouseleave', ()=>{
+    sec.style.setProperty('--rx', '0deg');
+    sec.style.setProperty('--ry', '0deg');
+  });
+});
+
+/* Particelle background */
+(function spawnParticles(){
+  const layer = document.getElementById('fxLayer');
+  if(!layer) return;
+  const COUNT = 28;
+  const vw = () => window.innerWidth;
+  const vh = () => window.innerHeight;
+
+  for(let i=0;i<COUNT;i++){
+    const p = document.createElement('div');
+    p.className = 'fx-particle';
+    reset(p, true);
+    layer.appendChild(p);
+    p.addEventListener('animationiteration', ()=> reset(p, false));
+  }
+
+  function reset(el, initial){
+    const x = Math.random() * vw();
+    const y = initial ? (Math.random() * vh()) : vh() + 40;
+    const size = 4 + Math.random()*6;
+    const dx = (Math.random()*60 - 30) + 'px';
+    const dur = (16 + Math.random()*18) + 's';
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.style.setProperty('--dx', dx);
+    el.style.setProperty('--dur', dur);
+  }
+})();
