@@ -36,22 +36,6 @@ const revealIO = new IntersectionObserver((entries)=>{
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
-/* ===== Parallax leggero sull’avatar ===== */
-const parallaxEls = document.querySelectorAll('.parallax, .avatar.xl');
-let pxRAF = null;
-function onParallax(e){
-  if(pxRAF) return;
-  const x = (e.clientX / window.innerWidth) - 0.5;
-  const y = (e.clientY / window.innerHeight) - 0.5;
-  pxRAF = requestAnimationFrame(()=>{
-    parallaxEls.forEach(el=>{
-      el.style.transform = `translate3d(${x*8}px, ${y*6}px, 0)`;
-    });
-    pxRAF = null;
-  });
-}
-window.addEventListener('pointermove', onParallax, {passive:true});
-
 /* ===== Modal gallery ===== */
 function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
@@ -102,13 +86,11 @@ if (closeModal) closeModal.addEventListener('click', closeModalFn);
 if (backdrop) backdrop.addEventListener('click', closeModalFn);
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
-/* ===== Cases: click "Apri galleria" o click sulla sezione ===== */
+/* ===== Cases: click “Apri galleria” o click sulla sezione ===== */
 function gatherExtras(node){
-  let extras = [];
   const imgs = node.dataset.images ? node.dataset.images.split('|').map(s=>s.trim()) : [];
   const vids = node.dataset.videos ? node.dataset.videos.split('|').map(s=>s.trim()) : [];
-  extras = [...imgs, ...vids];
-  return extras;
+  return [...imgs, ...vids];
 }
 function openCaseSection(sec){
   const title = sec.dataset.title || 'Progetto';
@@ -120,25 +102,26 @@ function openCaseSection(sec){
 }
 
 document.querySelectorAll('.case').forEach(sec=>{
-  // click sul bottone
   const btn = sec.querySelector('.open-modal');
   if (btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); openCaseSection(sec); });
-  // click anywhere sulla sezione (facoltativo)
   sec.addEventListener('click', (e)=>{
-    // evita doppio trigger se click su link
     const isButton = e.target.closest('button, a');
     if (isButton) return;
     openCaseSection(sec);
   });
 });
 
-/* ===== Magnet buttons ===== */
-document.querySelectorAll('.magnet').forEach(btn=>{
-  btn.addEventListener('mousemove', e=>{
-    const r = btn.getBoundingClientRect();
+/* ===== Magnet buttons (feedback, niente blu) ===== */
+document.querySelectorAll('.btn').forEach(b=>{
+  b.addEventListener('mousemove', e=>{
+    if (!b.classList.contains('magnet')) return;
+    const r = b.getBoundingClientRect();
     const x = e.clientX - (r.left + r.width/2);
     const y = e.clientY - (r.top + r.height/2);
-    btn.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`;
+    b.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`;
   });
-  btn.addEventListener('mouseleave', ()=> btn.style.transform='translate(0,0)');
+  b.addEventListener('mouseleave', ()=> b.style.transform='translate(0,0)');
+  b.addEventListener('mousedown', ()=> b.style.transform='scale(0.985)');
+  ['mouseup','mouseleave','touchend','touchcancel'].forEach(ev =>
+    b.addEventListener(ev, ()=> b.style.transform=''));
 });

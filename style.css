@@ -5,10 +5,10 @@
   --glass-border:rgba(255,255,255,.25); --glow:rgba(0,186,255,.35);
   --max-w:1200px; --blur:18px;
 
-  /* Altezza sezioni progetto (meno alta della hero) */
-  --case-h: clamp(52vh, 62vh, 70vh);
+  /* Altezza sezioni progetto (meno alta) */
+  --case-h: clamp(48vh, 58vh, 64vh);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
 html,body{
   margin:0;height:100%;font-family:Inter,system-ui,sans-serif;color:var(--white);
   background:
@@ -25,6 +25,11 @@ html,body{
   filter:blur(22px); z-index:1; opacity:.8; mix-blend-mode:screen;
 }
 
+/* Link puliti (no blu) */
+a, a:visited { color: var(--white); text-decoration: none; }
+a:hover { color: var(--accent); text-decoration: underline; }
+a:active, a:focus { color: var(--white); outline: none; }
+
 /* NAV: stessa larghezza della hero (.wrap) */
 .nav-glass{
   position:sticky; top:16px; z-index:10;
@@ -33,11 +38,9 @@ html,body{
   border-radius:14px; background:var(--glass); border:1px solid var(--glass-border);
   backdrop-filter:blur(var(--blur)); box-shadow:0 10px 40px rgba(0,0,0,.35);
   gap: clamp(8px,1.5vw,18px);
-
-  /* vincolo larghezza come wrap */
   max-width: var(--max-w);
-  margin: 16px auto 8px;        /* centrato come la hero */
-  width: calc(100% - clamp(32px, 8vw, 64px)); /* rispetta padding “visivo” */
+  margin: 16px auto 8px;
+  width: calc(100% - clamp(32px, 8vw, 64px));
 }
 .brand{display:flex;align-items:center;gap:14px}
 .logo{width:52px;height:52px;display:grid;place-items:center;border-radius:50%;
@@ -56,7 +59,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .section{min-height: clamp(64vh, 78vh, 86vh); display:grid; align-items:center}
 .snap-child{scroll-snap-align:start}
 
-/* HERO (meno alta) */
+/* HERO (più bassa) */
 .hero-full{
   grid-template-columns:minmax(280px,1.05fr) minmax(260px,.95fr);
   gap:clamp(16px,3vw,28px);
@@ -64,9 +67,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   border-radius:20px;
   background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); backdrop-filter:blur(var(--blur));
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 8px 40px rgba(0,0,0,.55),0 0 20px rgba(0,186,255,.08);
-
-  /* altezza più bassa della classica hero */
-  min-height: clamp(58vh, 66vh, 72vh);
+  min-height: clamp(56vh, 64vh, 70vh);
 }
 .gradient-title{
   background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);
@@ -77,39 +78,40 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .hero-sub{color:var(--muted);margin:0 0 14px}
 .hero-chips{display:flex;gap:8px;flex-wrap:wrap}
 
-/* AVATAR — misura fissa (intrinseca) */
+/* AVATAR — misura fissa (intrinseca, nessun crop forzato) */
 .avatar{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.2);box-shadow:0 0 30px rgba(0,186,255,.1);background:rgba(255,255,255,.04)}
-.avatar.xl.fixed-size{
-  width:auto; height:auto; display:inline-block; border-radius:16px;
-  /* niente maschere / niente forzature di altezza */
+.avatar.xl.fixed-size{width:auto;height:auto;display:inline-block;border-radius:16px}
+.avatar.xl.fixed-size img{display:block;max-width:100%;height:auto}
+
+/* Pulsanti/CTA coerenti */
+.btn, .btn:link, .btn:visited, button.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 16px; border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.06);
+  color:var(--white); font-weight:600; text-decoration:none !important;
+  cursor:pointer; transition:transform .15s ease, box-shadow .25s ease, background .25s ease;
+  appearance:none;
 }
-.avatar.xl.fixed-size img{
-  display:block; max-width:100%; height:auto; /* mantiene proporzioni originali */
-}
+.btn:hover{background:rgba(255,255,255,0.10);box-shadow:0 0 12px var(--glow)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#0070ff);border:none;box-shadow:0 0 20px var(--glow)}
+.btn.small{padding:8px 12px;font-size:13px}
 
 /* CASE full-width ma meno alte della hero */
-#showreel{margin-top:14px; margin-bottom:8px} /* meno spazio sotto l’ultima immagine */
+#showreel{margin-top:8px;margin-bottom:0}
 .case{
-  position:relative; 
-  min-height: var(--case-h);
+  position:relative; min-height:var(--case-h);
   display:flex; align-items:flex-end; justify-content:flex-start;
-  overflow:hidden; isolation:isolate;
+  overflow:hidden; isolation:isolate; cursor:pointer;
 
-  border-radius:20px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.15);
-  backdrop-filter:blur(var(--blur));
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.25),
-    0 8px 40px rgba(0,0,0,.55),
-    0 0 20px rgba(0,186,255,.08);
-
-  margin-block: clamp(10px, 2vw, 16px); /* un filo meno spazio tra le sezioni */
+  border-radius:20px; background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15); backdrop-filter:blur(var(--blur));
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.25), 0 8px 40px rgba(0,0,0,.55), 0 0 20px rgba(0,186,255,.08);
+  margin-block: clamp(8px, 1.6vw, 14px);
 }
 .case-bg{
   position:absolute; inset:0; background-image:var(--bg);
-  background-size:cover; background-position:center;
-  filter:contrast(1.02) saturate(1.05); transform:scale(1.02);
+  background-size:cover; background-position:center; filter:contrast(1.02) saturate(1.05); transform:scale(1.02);
 }
 .case::after{
   content:""; position:absolute; inset:0;
@@ -117,31 +119,31 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   pointer-events:none;
 }
 .case-info{
-  position:relative; z-index:2; margin: clamp(10px, 2.2vw, 18px);
-  padding: 9px 12px; border-radius: 14px;
-  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
-  backdrop-filter: blur(10px);
-  max-width: min(760px, 92%);
+  position:relative; z-index:2; margin:clamp(8px,1.8vw,14px);
+  padding:9px 12px; border-radius:14px;
+  background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(10px); max-width:min(760px,92%);
 }
-.case-info h3{ margin:0 0 4px; font-size: clamp(18px, 3.2vw, 26px); }
-.case-info p{  margin:0 0 8px; color:var(--muted); font-size: clamp(13px, 1.8vw, 15px); }
+.case-info h3{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
+.case-info p{margin:0 0 8px;color:var(--muted);font-size:clamp(13px,1.8vw,15px)}
 
 /* ABOUT / CONTACT — meno spazio dall’ultima foto */
-.section.grid-2.tight-below{padding-top: clamp(10px, 2.4vw, 18px)}
+.section.grid-2.tight-below{padding-top:clamp(6px,1.6vw,12px)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
 .panel.card{
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:18px;
-  padding:18px; /* ridotto */
-  backdrop-filter:blur(var(--blur)); box-shadow:inset 0 1px 1px rgba(255,255,255,.3),0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(0,186,255,.08);
+  padding:16px;
+  backdrop-filter:blur(var(--blur));
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.3),0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(0,186,255,.08);
 }
 .muted{color:var(--muted)}
 .links-split a{display:inline-block;margin:2px 0}
 
 /* FOOTER centrato e compatto */
-footer.wrap{padding-top: 8px; padding-bottom: 16px}
-#footerText{margin:4px 0 0;text-align:center;font-size:13px}
+footer.wrap{padding-top:6px;padding-bottom:12px}
+#footerText{margin:2px 0 0;text-align:center;font-size:13px}
 
-/* modal (invariato) */
+/* modal */
 .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;backdrop-filter:blur(12px);z-index:1000}
 .modal.open{display:flex}
 .modal .backdrop{position:absolute;inset:0;background:rgba(0,0,0,.7)}
