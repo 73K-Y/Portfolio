@@ -12,14 +12,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="dark light">
 
-    <!-- Font: titoli Space Grotesk, testo Inter -->
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="snap">
-    <!-- RIMOSSA la progress bar per evitare doppia barra -->
-
     <header class="nav-glass">
       <div class="brand">
         <div class="logo" aria-hidden="true">
@@ -46,20 +44,21 @@
       </nav>
     </header>
 
-    <!-- MARQUEE (unica barra, no emoji) -->
+    <!-- MARQUEE (loop) con contenuti NON duplicati -->
     <div class="marquee" id="topTicker" aria-label="Payoff scorrevole">
       <div class="marquee__rail">
         <div class="marquee__track">
-          <span class="pill">Creo mondi 3D</span>
-          <span class="pill">Game Art</span>
-          <span class="pill">3D Visualization</span>
-          <span class="pill">Motion</span>
-          <span class="pill">VFX</span>
-          <span class="pill">Blender</span>
-          <span class="pill">Unreal Engine</span>
-          <span class="pill">Substance</span>
+          <span class="pill">Workflow: PBR • UDIM • LODs</span>
+          <span class="pill">Ready for UE5 & Unity</span>
+          <span class="pill">Draw calls & lightmaps care</span>
+          <span class="pill">Export: FBX / GLTF</span>
+          <span class="pill">Texturing: 2K–8K sets</span>
+          <span class="pill">Real-time friendly topology</span>
+          <span class="pill">Rigging & simple IK</span>
+          <span class="pill">Remote collab • NDA ok</span>
+          <span class="pill">Turnaround rapido</span>
         </div>
-        <!-- La track viene clonata via JS per il loop -->
+        <!-- Clonata via JS per il loop -->
       </div>
     </div>
 
@@ -93,29 +92,11 @@
         <button class="filter-btn active" data-filter="all">Tutti</button>
         <button class="filter-btn" data-filter="game">Game Art & Dev</button>
         <button class="filter-btn" data-filter="viz">3D Visualization</button>
-        <button class="filter-btn" data-filter="motion">Motion</button>
       </div>
 
-      <!-- Ogni case: nessuna animazione immagine/parallax -->
+      <!-- GAME ART & DEV -->
       <section class="case snap-child reveal"
-        data-cat="motion"
-        data-title="Alan Walker Remix - Beautiful Nightmare"
-        data-desc="Animazione e montaggio del remix musicale."
-        data-tools="Premiere, After Effects"
-        data-note="Transizioni respirate per valorizzare ritmo e texture sonore."
-        data-images="assets/Screenshot 2025-10-12 224346.png"
-        data-src="assets/Screenshot 2025-10-12 224346.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
-        <div class="case-info">
-          <div class="badges"></div>
-          <h3 class="glitchable">Alan Walker Remix</h3>
-          <p>Animazione e montaggio del remix musicale.</p>
-          <button class="btn small open-modal">Apri galleria</button>
-        </div>
-      </section>
-
-      <section class="case snap-child reveal"
-        data-cat="viz"
+        data-cat="game"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulazione."
         data-tools="Blender, Substance"
@@ -149,7 +130,7 @@
       </section>
 
       <section class="case snap-child reveal"
-        data-cat="motion"
+        data-cat="game"
         data-title="Oblivion Hospital"
         data-desc="Animazioni 3D e rendering della struttura ospedaliera."
         data-tools="Blender, UE5"
@@ -166,10 +147,28 @@
         </div>
       </section>
 
+      <!-- 3D VIZ -->
       <section class="case snap-child reveal"
-        data-cat="game"
+        data-cat="viz"
+        data-title="Alan Walker"
+        data-desc="Animazione e montaggio del remix ‘Beautiful Nightmare’."
+        data-tools="Premiere, After Effects"
+        data-note="Transizioni respirate per valorizzare ritmo e texture sonore."
+        data-images="assets/Screenshot 2025-10-12 224346.png"
+        data-src="assets/Screenshot 2025-10-12 224346.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+        <div class="case-info">
+          <div class="badges"></div>
+          <h3 class="glitchable">Alan Walker</h3>
+          <p>Animazione e montaggio del remix “Beautiful Nightmare”.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
+
+      <section class="case snap-child reveal"
+        data-cat="viz"
         data-title="Soldier Walker"
-        data-desc="Personaggio 3D per gioco/animazione."
+        data-desc="Personaggio 3D, studio materiali e posing."
         data-tools="Blender, Substance"
         data-note="Contrasto tra metalli e tessuti per varietà materica."
         data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
@@ -178,7 +177,7 @@
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Soldier Walker</h3>
-          <p>Personaggio 3D per gioco/animazione.</p>
+          <p>Personaggio 3D, studio materiali e posing.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
@@ -218,7 +217,7 @@
       </section>
 
       <section class="case snap-child reveal"
-        data-cat="game"
+        data-cat="viz"
         data-title="Città Low Poly"
         data-desc="Città low poly con luci notturne."
         data-tools="Blender"
@@ -253,8 +252,8 @@
 
       <section class="case snap-child reveal"
         data-cat="viz"
-        data-title="Star Destroyer"
-        data-desc="Modellazione navicella ispirata a Star Wars."
+        data-title="Star Wars"
+        data-desc="Navicella isp. Star Wars (Star Destroyer)."
         data-tools="Blender, Photoshop"
         data-note="Edge highlight + micro-bevel per scala credibile."
         data-images="assets/Screenshot 2025-10-12 210314.png"
@@ -262,8 +261,8 @@
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
-          <h3 class="glitchable">Star Destroyer</h3>
-          <p>Modellazione navicella ispirata a Star Wars.</p>
+          <h3 class="glitchable">Star Wars</h3>
+          <p>Navicella ispirata all’universo Star Wars.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
