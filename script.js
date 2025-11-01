@@ -111,7 +111,7 @@ document.querySelectorAll('.case').forEach(sec=>{
   });
 });
 
-/* ===== Magnet buttons (feedback, niente blu) ===== */
+/* ===== Magnet buttons (feedback) ===== */
 document.querySelectorAll('.btn').forEach(b=>{
   b.addEventListener('mousemove', e=>{
     if (!b.classList.contains('magnet')) return;
