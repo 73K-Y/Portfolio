@@ -196,26 +196,32 @@ footer.wrap{padding-top:6px;padding-bottom:12px}
 }
 @keyframes rise{0%{transform:translateY(20vh) translateX(0);opacity:0}8%{opacity:.55}85%{opacity:.55}100%{transform:translateY(-110vh) translateX(var(--dx));opacity:0}}
 
-/* Modalità ridotta (performance) */
-body.reduced,
-@media (prefers-reduced-motion: reduce){
+/* Modalità ridotta (performance) — CORRETTO */
+body.reduced .gradient-title,
+body.reduced .avatar.xl.fixed-size img,
+body.reduced .case-bg,
+body.reduced .case,
+body.reduced .btn.primary::after {
+  animation: none !important;
+}
+
+body.reduced .case:hover { transform: none !important; }
+body.reduced .case { transition: none !important; }
+body.reduced #cursorGlow { display: none !important; }
+body.reduced #fxLayer { display: none !important; }
+body.reduced * { transition: none !important; box-shadow: none; }
+
+/* Stesse regole per chi ha prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
   .gradient-title,
   .avatar.xl.fixed-size img,
   .case-bg,
   .case,
-  .btn.primary::after { animation: none !important; }
+  .btn.primary::after {
+    animation: none !important;
+  }
   .case:hover { transform: none !important; }
   .case { transition: none !important; }
   #cursorGlow { display: none !important; }
   #fxLayer { display: none !important; }
-}
-body.reduced *{ transition: none !important; box-shadow: none; }
-
-/* A11y */
-*:focus{outline:none}
-
-/* Responsive */
-@media (max-width: 1020px){
-  .hero-full{grid-template-columns:1fr}
-  .grid-2{grid-template-columns:1fr}
 }
