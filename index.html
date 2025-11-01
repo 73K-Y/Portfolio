@@ -2,22 +2,17 @@
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-    <!-- viewport con safe-areas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
     <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
 
-    <!-- Barra del browser trasparente (Android/Chrome) -->
+    <!-- Barra browser trasparente (Android) + dark UI hint -->
     <meta name="theme-color" content="#00000000" />
     <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: light)" />
-
-    <!-- iOS web app in trasparenza -->
+    <!-- iOS full-bleed -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <!-- Dichiara supporto dark/light alla UI -->
     <meta name="color-scheme" content="dark light">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -52,13 +47,23 @@
       </nav>
     </header>
 
+    <!-- Marquee payoff -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__inner">
+        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
+        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
+        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
+        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
+      </div>
+    </div>
+
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
           <h2 class="xxl gradient-title">Creo mondi 3D<br>e li rendo giocabili</h2>
           <p class="hero-sub">Asset, ambienti, VFX e motion per videogiochi e brand.</p>
           <div class="cta-row">
-            <a class="btn primary" href="#showreel">Guarda i progetti</a>
+            <a class="btn primary magnetic" href="#showreel">Guarda i progetti</a>
             <a class="btn" href="#contact">Contattami</a>
           </div>
           <div class="hero-chips">
@@ -69,7 +74,7 @@
           </div>
         </div>
         <div class="hero-right">
-          <figure class="avatar xl fixed-size">
+          <figure class="avatar xl fixed-size" data-parallax="0.08">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
           </figure>
         </div>
@@ -85,16 +90,16 @@
         <button class="filter-btn" data-filter="motion">Motion</button>
       </div>
 
-      <!-- Cards (immutate) -->
-      <section class="case snap-child reveal"
+      <!-- 1 -->
+      <section class="case tilt snap-child reveal"
         data-cat="motion"
         data-title="Alan Walker Remix - Beautiful Nightmare"
         data-desc="Animazione e montaggio del remix musicale."
         data-tools="Premiere, After Effects"
-        data-note="Ho cercato di dare respiro alle transizioni per valorizzare ritmo e texture sonore."
+        data-note="Transizioni respirate per valorizzare ritmo e texture sonore."
         data-images="assets/Screenshot 2025-10-12 224346.png"
         data-src="assets/Screenshot 2025-10-12 224346.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Alan Walker Remix</h3>
@@ -103,15 +108,16 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 2 -->
+      <section class="case tilt snap-child reveal"
         data-cat="viz"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulazione."
         data-tools="Blender, Substance"
-        data-note="Studio di livree e materiali PBR per mantenere fedeltà al brand."
+        data-note="Livree fedeli al brand e PBR pulito."
         data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png"
         data-src="assets/Screenshot 2025-10-12 204155.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Treni Trenitalia</h3>
@@ -120,33 +126,35 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 3 -->
+      <section class="case tilt snap-child reveal"
         data-cat="game"
         data-title="Team Treni Low Poly"
-        data-desc="Asset low poly per videogioco in stile Railway Runner."
+        data-desc="Asset low poly per videogioco stile Railway Runner."
         data-tools="Blender, Unity"
-        data-note="Palette compressa e silhouette leggibili per gameplay mobile."
+        data-note="Palette compressa, silhouette leggibili per mobile."
         data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png"
         data-src="assets/Screenshot 2025-06-05 221951.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Team Treni Low Poly</h3>
-          <p>Asset low poly per videogioco in stile Railway Runner.</p>
+          <p>Asset low poly per videogioco stile Railway Runner.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 4 Oblivion con video -->
+      <section class="case tilt snap-child reveal"
         data-cat="motion"
         data-title="Oblivion Hospital"
         data-desc="Animazioni 3D e rendering della struttura ospedaliera."
         data-tools="Blender, UE5"
-        data-note="Camera lenta e luci fredde per creare tensione psicologica."
+        data-note="Luci fredde e camera lenta per tensione psicologica."
         data-images="assets/scena - background menù - ospedale.png"
         data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4"
         data-src="assets/scena - background menù - ospedale.png">
-        <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Oblivion Hospital</h3>
@@ -155,110 +163,116 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 5 -->
+      <section class="case tilt snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
-        data-desc="Personaggio 3D per progetto di gioco o animazione."
+        data-desc="Personaggio 3D per gioco/animazione."
         data-tools="Blender, Substance"
-        data-note="Ho lavorato sul rapporto tra placca metallica e tessuti per contrasto materico."
+        data-note="Contrasto tra metalli e tessuti per varietà materica."
         data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
         data-src="assets/Screenshot 2025-10-12 205615.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Soldier Walker</h3>
-          <p>Personaggio 3D per progetto di gioco o animazione.</p>
+          <p>Personaggio 3D per gioco/animazione.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 6 -->
+      <section class="case tilt snap-child reveal"
         data-cat="viz"
         data-title="Salotto"
-        data-desc="Render fotorealistico di un ambiente interno moderno."
+        data-desc="Render fotorealistico interno moderno."
         data-tools="Blender, Cycles"
-        data-note="Key light calda e rim più freddo per dare profondità senza perdere morbidezza."
+        data-note="Key light calda + rim freddo per profondità."
         data-images="assets/untitled_1.png"
         data-src="assets/untitled_1.png">
-        <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/untitled_1.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Salotto</h3>
-          <p>Render fotorealistico di un ambiente interno moderno.</p>
+          <p>Render fotorealistico interno moderno.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 7 -->
+      <section class="case tilt snap-child reveal"
         data-cat="viz"
         data-title="Macchina Futuristica"
-        data-desc="Concept car futuristica modellata in Blender."
+        data-desc="Concept car futuristica."
         data-tools="Blender, Photoshop"
-        data-note="Linee tese e cut riflettenti: ispirazione synthwave con materiali anodizzati."
+        data-note="Linee tese e cut riflettenti ispirazione synthwave."
         data-images="assets/Screenshot_20251012_214749_Drive.jpg"
         data-src="assets/Screenshot_20251012_214749_Drive.jpg">
-        <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Macchina Futuristica</h3>
-          <p>Concept car futuristica modellata in Blender.</p>
+          <p>Concept car futuristica.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 8 -->
+      <section class="case tilt snap-child reveal"
         data-cat="game"
         data-title="Città Low Poly"
-        data-desc="Città stilizzata low poly con illuminazione notturna."
+        data-desc="Città low poly con luci notturne."
         data-tools="Blender"
-        data-note="Ho puntato su volumetrie semplici + neon per una lettura immediata."
+        data-note="Volumetrie semplici + neon per lettura immediata."
         data-images="assets/Screenshot 2025-10-12 203652.png"
         data-src="assets/Screenshot 2025-10-12 203652.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Città Low Poly</h3>
-          <p>Città stilizzata low poly con illuminazione notturna.</p>
+          <p>Città low poly con luci notturne.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 9 -->
+      <section class="case tilt snap-child reveal"
         data-cat="viz"
         data-title="Pianeti"
-        data-desc="Composizione spaziale con pianeti e luce volumetrica."
+        data-desc="Composizione spaziale con luce volumetrica."
         data-tools="Blender"
-        data-note="Contrasto scala-luce per senso di vastità; ho mantenuto grana sottile per atmosfera."
+        data-note="Contrasto scala-luce per senso di vastità."
         data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png"
         data-src="assets/Screenshot 2025-10-12 203921.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Pianeti</h3>
-          <p>Composizione spaziale con pianeti e luce volumetrica.</p>
+          <p>Composizione spaziale con luce volumetrica.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <!-- 10 -->
+      <section class="case tilt snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
-        data-desc="Modellazione navicella ispirata all’universo Star Wars."
+        data-desc="Modellazione navicella ispirata a Star Wars."
         data-tools="Blender, Photoshop"
-        data-note="Edge highlight e micro-bevel per dare realismo alla scala del mezzo."
+        data-note="Edge highlight + micro-bevel per scala credibile."
         data-images="assets/Screenshot 2025-10-12 210314.png"
         data-src="assets/Screenshot 2025-10-12 210314.png">
-        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
+        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Star Destroyer</h3>
-          <p>Modellazione navicella ispirata all’universo Star Wars.</p>
+          <p>Modellazione navicella ispirata a Star Wars.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
     </div>
 
-    <!-- INFO unificata -->
+    <!-- INFO (About + Contatti) -->
     <section id="info" class="wrap section info-section snap-child reveal">
       <div class="panel info-card">
         <div class="info-grid">
@@ -297,16 +311,18 @@
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
-    <!-- Modal -->
+    <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
       <div class="content" role="document">
         <button id="closeModal" aria-label="Chiudi">✕</button>
         <div id="modalInner"></div>
+
         <div class="modal-meta">
           <div id="modalTools" class="toolchips"></div>
           <blockquote id="modalNote" class="author-note"></blockquote>
         </div>
+
         <div class="info" id="modalInfo"></div>
       </div>
     </div>
