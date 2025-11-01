@@ -2,9 +2,24 @@
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- viewport con safe-areas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
     <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
+
+    <!-- Barra del browser trasparente (Android/Chrome) -->
+    <meta name="theme-color" content="#00000000" />
+    <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: light)" />
+
+    <!-- iOS web app in trasparenza -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Dichiara supporto dark/light alla UI -->
+    <meta name="color-scheme" content="dark light">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -63,7 +78,6 @@
 
     <!-- SHOWREEL -->
     <div id="showreel" class="wrap">
-      <!-- FILTRO -->
       <div class="filterbar reveal">
         <button class="filter-btn active" data-filter="all">Tutti</button>
         <button class="filter-btn" data-filter="game">Game Art & Dev</button>
@@ -71,7 +85,7 @@
         <button class="filter-btn" data-filter="motion">Motion</button>
       </div>
 
-      <!-- 1 -->
+      <!-- Cards (immutate) -->
       <section class="case snap-child reveal"
         data-cat="motion"
         data-title="Alan Walker Remix - Beautiful Nightmare"
@@ -89,7 +103,6 @@
         </div>
       </section>
 
-      <!-- 2 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Treni Trenitalia"
@@ -107,7 +120,6 @@
         </div>
       </section>
 
-      <!-- 3 -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Team Treni Low Poly"
@@ -125,7 +137,6 @@
         </div>
       </section>
 
-      <!-- 4 (video inclusi) -->
       <section class="case snap-child reveal"
         data-cat="motion"
         data-title="Oblivion Hospital"
@@ -144,7 +155,6 @@
         </div>
       </section>
 
-      <!-- 5 -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
@@ -162,7 +172,6 @@
         </div>
       </section>
 
-      <!-- 6 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Salotto"
@@ -180,7 +189,6 @@
         </div>
       </section>
 
-      <!-- 7 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Macchina Futuristica"
@@ -198,7 +206,6 @@
         </div>
       </section>
 
-      <!-- 8 -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Città Low Poly"
@@ -216,7 +223,6 @@
         </div>
       </section>
 
-      <!-- 9 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Pianeti"
@@ -234,7 +240,6 @@
         </div>
       </section>
 
-      <!-- 10 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
