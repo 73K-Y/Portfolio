@@ -14,7 +14,7 @@
     <!-- cursor glow -->
     <div id="cursorGlow"></div>
 
-    <!-- NAV -->
+    <!-- NAV (stessa larghezza della hero / wrap) -->
     <header class="nav-glass">
       <div class="brand">
         <div class="logo" aria-hidden="true">
@@ -41,7 +41,7 @@
       </nav>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO (meno alta) -->
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
@@ -58,10 +58,12 @@
             <span class="chip">Substance</span><span class="chip">C# / C++</span>
           </div>
         </div>
-        <div class="hero-right parallax">
-          <div class="avatar xl">
+
+        <!-- Avatar a misura fissa (intrinseca) -->
+        <div class="hero-right">
+          <figure class="avatar xl fixed-size">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
-          </div>
+          </figure>
         </div>
       </section>
     </main>
@@ -210,8 +212,8 @@
       </section>
     </div>
 
-    <!-- ABOUT + CONTACT -->
-    <section class="wrap section grid-2 snap-child">
+    <!-- ABOUT + CONTACT (meno spazio dall'ultima foto) -->
+    <section class="wrap section grid-2 snap-child tight-below">
       <div class="panel card reveal" id="about">
         <h4>About</h4>
         <p class="muted">
@@ -225,14 +227,16 @@
         <p class="muted">
           Email: <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a><br>
           Tel: +39 3925649950<br>
-          Città: Torino, Italia<br>
-          <a href="TommyRaffaelloHodoroabaCVEuropass.pdf" target="_blank">Scarica CV (PDF)</a> •
+          Città: Torino, Italia
+        </p>
+        <p class="muted links-split">
+          <a href="TommyRaffaelloHodoroabaCVEuropass.pdf" target="_blank">Scarica CV (PDF)</a><br>
           <a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a>
         </p>
       </div>
     </section>
 
-    <footer class="wrap">
+    <footer class="wrap footer-tight">
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
