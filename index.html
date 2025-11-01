@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
-    <meta name="description" content="Portfolio 3D — render, modellazione, game art e visualizzazione." />
+    <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -18,7 +18,7 @@
     <header class="nav-glass">
       <div class="brand">
         <div class="logo">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)" />
             <defs>
               <linearGradient id="g" x1="0" x2="1">
@@ -35,174 +35,206 @@
       </div>
       <nav>
         <a href="#hero">Home</a>
-        <a href="#reel">Progetti</a>
+        <a href="#showreel">Progetti</a>
         <a href="#about">About</a>
         <a href="#contact">Contatti</a>
       </nav>
     </header>
 
-    <div class="wrap">
-      <main>
-        <!-- HERO -->
-        <section id="hero" class="section hero-full snap-child reveal">
-          <div class="hero-left">
-            <h2 class="xxl gradient-title glitch"
-                data-glitch="Creo mondi 3D e li rendo giocabili">
-              Creo mondi 3D<br>e li rendo giocabili
-            </h2>
-            <p class="hero-sub">Asset, ambienti, VFX e motion per videogiochi e brand.</p>
-            <div class="cta-row">
-              <a class="btn primary magnet" href="#reel">Guarda i progetti</a>
-              <a class="btn magnet" href="#contact">Contattami</a>
-            </div>
-            <div class="hero-chips">
-              <span class="chip">Blender</span><span class="chip">Unreal</span>
-              <span class="chip">Substance</span><span class="chip">C# / C++</span>
-            </div>
+    <main id="hero" class="wrap">
+      <!-- HERO FULLSCREEN -->
+      <section class="section hero-full snap-child reveal">
+        <div class="hero-left">
+          <h2 class="xxl gradient-title" aria-label="Creo mondi 3D e li rendo giocabili">
+            Creo mondi 3D<span class="br"><br></span>e li rendo giocabili
+          </h2>
+          <p class="hero-sub">Asset, ambienti, VFX e motion per videogiochi e brand.</p>
+          <div class="cta-row">
+            <a class="btn primary magnet" href="#showreel">Guarda i progetti</a>
+            <a class="btn magnet" href="#contact">Contattami</a>
           </div>
-          <div class="hero-right parallax">
-            <div class="avatar xl">
-              <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto">
-            </div>
+          <div class="hero-chips">
+            <span class="chip">Blender</span><span class="chip">Unreal</span>
+            <span class="chip">Substance</span><span class="chip">C# / C++</span>
           </div>
-        </section>
-
-        <!-- REEL / CAROUSEL -->
-        <section id="reel" class="section snap-child">
-          <div class="reel-header">
-            <h3 class="section-title reveal">Showreel</h3>
-            <p class="muted">Scroll orizzontale • trascina • ← →</p>
+        </div>
+        <div class="hero-right parallax">
+          <div class="avatar xl">
+            <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
           </div>
+        </div>
+      </section>
+    </main>
 
-          <div class="reel-track" id="projectsTrack" tabindex="0" aria-label="Galleria progetti scorrevole">
-            <!-- Mantieni/aggiorna i tuoi asset: data-images / data-videos supportati -->
-            <div class="project card-3d reveal" data-delay="0.00" role="button"
-              data-title="Alan Walker Remix - Beautiful Nightmare"
-              data-desc="Animazione e montaggio del remix musicale."
-              data-type="image"
-              data-src="assets/Screenshot 2025-10-12 224346.png"
-              data-images="assets/Screenshot 2025-10-12 224346.png">
-              <img src="assets/Screenshot 2025-10-12 224346.png" alt="Alan Walker Remix">
-              <div class="meta">Alan Walker Remix</div>
-            </div>
+    <!-- SHOWREEL FULLSCREEN: ogni progetto = 1 sezione -->
+    <div id="showreel">
+      <!-- 1 -->
+      <section class="case snap-child reveal"
+        data-title="Alan Walker Remix - Beautiful Nightmare"
+        data-desc="Animazione e montaggio del remix musicale."
+        data-images="assets/Screenshot 2025-10-12 224346.png"
+        data-src="assets/Screenshot 2025-10-12 224346.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+        <div class="case-info">
+          <h3>Alan Walker Remix</h3>
+          <p>Animazione e montaggio del remix musicale.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.05" role="button"
-              data-title="Treni Trenitalia"
-              data-desc="Modellazione e texturing di treni per simulazione."
-              data-type="image"
-              data-src="assets/Screenshot 2025-10-12 204155.png"
-              data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png">
-              <img src="assets/Screenshot 2025-10-12 204155.png" alt="Treni Trenitalia">
-              <div class="meta">Treni Trenitalia</div>
-            </div>
+      <!-- 2 -->
+      <section class="case snap-child reveal"
+        data-title="Treni Trenitalia"
+        data-desc="Modellazione e texturing di treni per simulazione."
+        data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png"
+        data-src="assets/Screenshot 2025-10-12 204155.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
+        <div class="case-info">
+          <h3>Treni Trenitalia</h3>
+          <p>Modellazione e texturing di treni per simulazione.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.10" role="button"
-              data-title="Team Treni Low Poly"
-              data-desc="Asset low poly per videogioco in stile Railway Runner."
-              data-type="image"
-              data-src="assets/Screenshot 2025-06-05 221951.png"
-              data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png">
-              <img src="assets/Screenshot 2025-06-05 221951.png" alt="Team Treni Low Poly">
-              <div class="meta">Treni Low Poly</div>
-            </div>
+      <!-- 3 -->
+      <section class="case snap-child reveal"
+        data-title="Team Treni Low Poly"
+        data-desc="Asset low poly per videogioco in stile Railway Runner."
+        data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png"
+        data-src="assets/Screenshot 2025-06-05 221951.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
+        <div class="case-info">
+          <h3>Team Treni Low Poly</h3>
+          <p>Asset low poly per videogioco in stile Railway Runner.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.15" role="button"
-              data-title="Oblivion Hospital"
-              data-desc="Animazioni 3D e rendering della struttura ospedaliera."
-              data-type="image"
-              data-src="assets/scena - background menù - ospedale.png"
-              data-images="assets/scena - background menù - ospedale.png"
-              data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
-              <img src="assets/scena - background menù - ospedale.png" alt="Oblivion Hospital">
-              <div class="meta">Oblivion Hospital</div>
-            </div>
+      <!-- 4 con VIDEO -->
+      <section class="case snap-child reveal"
+        data-title="Oblivion Hospital"
+        data-desc="Animazioni 3D e rendering della struttura ospedaliera."
+        data-images="assets/scena - background menù - ospedale.png"
+        data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4"
+        data-src="assets/scena - background menù - ospedale.png">
+        <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
+        <div class="case-info">
+          <h3>Oblivion Hospital</h3>
+          <p>Animazioni 3D e rendering della struttura ospedaliera.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.20" role="button"
-              data-title="Soldier Walker"
-              data-desc="Personaggio 3D per progetto di gioco o animazione."
-              data-type="image"
-              data-src="assets/Screenshot 2025-10-12 205615.png"
-              data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg">
-              <img src="assets/Screenshot 2025-10-12 205615.png" alt="Soldier Walker">
-              <div class="meta">Soldier Walker</div>
-            </div>
+      <!-- 5 -->
+      <section class="case snap-child reveal"
+        data-title="Soldier Walker"
+        data-desc="Personaggio 3D per progetto di gioco o animazione."
+        data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
+        data-src="assets/Screenshot 2025-10-12 205615.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
+        <div class="case-info">
+          <h3>Soldier Walker</h3>
+          <p>Personaggio 3D per progetto di gioco o animazione.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.25" role="button"
-              data-title="Salotto"
-              data-desc="Render fotorealistico di un ambiente interno moderno."
-              data-type="image"
-              data-src="assets/untitled_1.png"
-              data-images="assets/untitled_1.png">
-              <img src="assets/untitled_1.png" alt="Salotto">
-              <div class="meta">Salotto</div>
-            </div>
+      <!-- 6 -->
+      <section class="case snap-child reveal"
+        data-title="Salotto"
+        data-desc="Render fotorealistico di un ambiente interno moderno."
+        data-images="assets/untitled_1.png"
+        data-src="assets/untitled_1.png">
+        <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
+        <div class="case-info">
+          <h3>Salotto</h3>
+          <p>Render fotorealistico di un ambiente interno moderno.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.30" role="button"
-              data-title="Macchina Futuristica"
-              data-desc="Concept car futuristica modellata in Blender."
-              data-type="image"
-              data-src="assets/Screenshot_20251012_214749_Drive.jpg"
-              data-images="assets/Screenshot_20251012_214749_Drive.jpg">
-              <img src="assets/Screenshot_20251012_214749_Drive.jpg" alt="Macchina Futuristica">
-              <div class="meta">Macchina Futuristica</div>
-            </div>
+      <!-- 7 -->
+      <section class="case snap-child reveal"
+        data-title="Macchina Futuristica"
+        data-desc="Concept car futuristica modellata in Blender."
+        data-images="assets/Screenshot_20251012_214749_Drive.jpg"
+        data-src="assets/Screenshot_20251012_214749_Drive.jpg">
+        <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
+        <div class="case-info">
+          <h3>Macchina Futuristica</h3>
+          <p>Concept car futuristica modellata in Blender.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.35" role="button"
-              data-title="Città Low Poly"
-              data-desc="Città stilizzata low poly con illuminazione notturna."
-              data-type="image"
-              data-src="assets/Screenshot 2025-10-12 203652.png"
-              data-images="assets/Screenshot 2025-10-12 203652.png">
-              <img src="assets/Screenshot 2025-10-12 203652.png" alt="Città Low Poly">
-              <div class="meta">Città Low Poly</div>
-            </div>
+      <!-- 8 -->
+      <section class="case snap-child reveal"
+        data-title="Città Low Poly"
+        data-desc="Città stilizzata low poly con illuminazione notturna."
+        data-images="assets/Screenshot 2025-10-12 203652.png"
+        data-src="assets/Screenshot 2025-10-12 203652.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
+        <div class="case-info">
+          <h3>Città Low Poly</h3>
+          <p>Città stilizzata low poly con illuminazione notturna.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.40" role="button"
-              data-title="Pianeti"
-              data-desc="Composizione spaziale con pianeti e luce volumetrica."
-              data-type="image"
-              data-src="assets/Screenshot 2025-10-12 203921.png"
-              data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png">
-              <img src="assets/Screenshot 2025-10-12 203921.png" alt="Pianeti">
-              <div class="meta">Pianeti</div>
-            </div>
+      <!-- 9 -->
+      <section class="case snap-child reveal"
+        data-title="Pianeti"
+        data-desc="Composizione spaziale con pianeti e luce volumetrica."
+        data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png"
+        data-src="assets/Screenshot 2025-10-12 203921.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
+        <div class="case-info">
+          <h3>Pianeti</h3>
+          <p>Composizione spaziale con pianeti e luce volumetrica.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
 
-            <div class="project card-3d reveal" data-delay="0.45" role="button"
-              data-title="Star Destroyer"
-              data-desc="Modellazione navicella ispirata all’universo Star Wars."
-              data-type="image"
-              data-src="assets/Screenshot 2025-10-12 210314.png"
-              data-images="assets/Screenshot 2025-10-12 210314.png">
-              <img src="assets/Screenshot 2025-10-12 210314.png" alt="Star Destroyer">
-              <div class="meta">Star Destroyer</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ABOUT + CONTACT -->
-        <section class="section grid-2 snap-child">
-          <div class="panel card reveal" id="about">
-            <h4>About</h4>
-            <p class="muted">Sono uno studente ITS con esperienza in asset 3D, materiali PBR, animazioni e game development. Amo il design creativo e la sperimentazione tecnica.</p>
-          </div>
-
-          <div class="panel card reveal" id="contact">
-            <h4>Contatti</h4>
-            <p class="muted">
-              Email: <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a><br>
-              Tel: +39 3925649950<br>
-              Città: Torino, Italia<br>
-              <a href="TommyRaffaelloHodoroabaCVEuropass.pdf" target="_blank">Scarica CV (PDF)</a> •
-              <a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a>
-            </p>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
-      </footer>
+      <!-- 10 -->
+      <section class="case snap-child reveal"
+        data-title="Star Destroyer"
+        data-desc="Modellazione navicella ispirata all’universo Star Wars."
+        data-images="assets/Screenshot 2025-10-12 210314.png"
+        data-src="assets/Screenshot 2025-10-12 210314.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
+        <div class="case-info">
+          <h3>Star Destroyer</h3>
+          <p>Modellazione navicella ispirata all’universo Star Wars.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
     </div>
+
+    <!-- ABOUT + CONTACT -->
+    <section class="wrap section grid-2 snap-child">
+      <div class="panel card reveal" id="about">
+        <h4>About</h4>
+        <p class="muted">
+          Sono uno studente ITS con esperienza in asset 3D, materiali PBR, animazioni e game development.
+          Amo il design creativo e la sperimentazione tecnica.
+        </p>
+      </div>
+
+      <div class="panel card reveal" id="contact">
+        <h4>Contatti</h4>
+        <p class="muted">
+          Email: <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a><br>
+          Tel: +39 3925649950<br>
+          Città: Torino, Italia<br>
+          <a href="TommyRaffaelloHodoroabaCVEuropass.pdf" target="_blank">Scarica CV (PDF)</a> •
+          <a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a>
+        </p>
+      </div>
+    </section>
+
+    <footer class="wrap">
+      <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
+    </footer>
 
     <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
