@@ -9,17 +9,14 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="snap">
-    <!-- progress bar -->
     <div class="progress" id="progress"></div>
-    <!-- cursor glow -->
     <div id="cursorGlow"></div>
 
-    <!-- NAV (stessa larghezza della hero / wrap) -->
     <header class="nav-glass">
       <div class="brand">
         <div class="logo" aria-hidden="true">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)" />
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)"/>
             <defs>
               <linearGradient id="g" x1="0" x2="1">
                 <stop offset="0" stop-color="#00a6ff" stop-opacity="0.9"/>
@@ -41,13 +38,10 @@
       </nav>
     </header>
 
-    <!-- HERO (meno alta) -->
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
-          <h2 class="xxl gradient-title" aria-label="Creo mondi 3D e li rendo giocabili">
-            Creo mondi 3D<br>e li rendo giocabili
-          </h2>
+          <h2 class="xxl gradient-title">Creo mondi 3D<br>e li rendo giocabili</h2>
           <p class="hero-sub">Asset, ambienti, VFX e motion per videogiochi e brand.</p>
           <div class="cta-row">
             <a class="btn primary magnet" href="#showreel">Guarda i progetti</a>
@@ -58,8 +52,6 @@
             <span class="chip">Substance</span><span class="chip">C# / C++</span>
           </div>
         </div>
-
-        <!-- Avatar a misura fissa (intrinseca) -->
         <div class="hero-right">
           <figure class="avatar xl fixed-size">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
@@ -68,9 +60,7 @@
       </section>
     </main>
 
-    <!-- SHOWREEL (stessa larghezza della hero, altezza più bassa) -->
     <div id="showreel" class="wrap">
-      <!-- 1 -->
       <section class="case snap-child reveal"
         data-title="Alan Walker Remix - Beautiful Nightmare"
         data-desc="Animazione e montaggio del remix musicale."
@@ -84,7 +74,6 @@
         </div>
       </section>
 
-      <!-- 2 -->
       <section class="case snap-child reveal"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulazione."
@@ -98,7 +87,6 @@
         </div>
       </section>
 
-      <!-- 3 -->
       <section class="case snap-child reveal"
         data-title="Team Treni Low Poly"
         data-desc="Asset low poly per videogioco in stile Railway Runner."
@@ -112,7 +100,6 @@
         </div>
       </section>
 
-      <!-- 4 (con video) -->
       <section class="case snap-child reveal"
         data-title="Oblivion Hospital"
         data-desc="Animazioni 3D e rendering della struttura ospedaliera."
@@ -127,7 +114,6 @@
         </div>
       </section>
 
-      <!-- 5 -->
       <section class="case snap-child reveal"
         data-title="Soldier Walker"
         data-desc="Personaggio 3D per progetto di gioco o animazione."
@@ -141,12 +127,10 @@
         </div>
       </section>
 
-      <!-- 6 -->
       <section class="case snap-child reveal"
         data-title="Salotto"
         data-desc="Render fotorealistico di un ambiente interno moderno."
-        data-images="assets/untitled_1.png"
-        data-src="assets/untitled_1.png">
+        data-images="assets/untitled_1.png" data-src="assets/untitled_1.png">
         <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
         <div class="case-info">
           <h3>Salotto</h3>
@@ -155,7 +139,6 @@
         </div>
       </section>
 
-      <!-- 7 -->
       <section class="case snap-child reveal"
         data-title="Macchina Futuristica"
         data-desc="Concept car futuristica modellata in Blender."
@@ -169,7 +152,6 @@
         </div>
       </section>
 
-      <!-- 8 -->
       <section class="case snap-child reveal"
         data-title="Città Low Poly"
         data-desc="Città stilizzata low poly con illuminazione notturna."
@@ -183,7 +165,6 @@
         </div>
       </section>
 
-      <!-- 9 -->
       <section class="case snap-child reveal"
         data-title="Pianeti"
         data-desc="Composizione spaziale con pianeti e luce volumetrica."
@@ -197,7 +178,6 @@
         </div>
       </section>
 
-      <!-- 10 -->
       <section class="case snap-child reveal"
         data-title="Star Destroyer"
         data-desc="Modellazione navicella ispirata all’universo Star Wars."
@@ -212,7 +192,6 @@
       </section>
     </div>
 
-    <!-- ABOUT + CONTACT (ancora più vicino allo showreel) -->
     <section class="wrap section grid-2 snap-child tight-below">
       <div class="panel card reveal" id="about">
         <h4>About</h4>
@@ -240,7 +219,6 @@
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
-    <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
       <div class="content" role="document">

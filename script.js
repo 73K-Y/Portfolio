@@ -1,4 +1,3 @@
-/* ===== Elements ===== */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
@@ -9,14 +8,12 @@ const cursorGlow = document.getElementById('cursorGlow');
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* ===== Cursor glow ===== */
 window.addEventListener('pointermove', e=>{
   if (!cursorGlow) return;
   cursorGlow.style.left = e.clientX + 'px';
   cursorGlow.style.top  = e.clientY + 'px';
 });
 
-/* ===== Progress bar scroll ===== */
 function updateProgress(){
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   const h = (document.documentElement.scrollHeight - document.documentElement.clientHeight);
@@ -26,7 +23,6 @@ function updateProgress(){
 document.addEventListener('scroll', updateProgress);
 updateProgress();
 
-/* ===== Reveal on scroll ===== */
 const revealIO = new IntersectionObserver((entries)=>{
   entries.forEach(en=>{
     if(!en.isIntersecting) return;
@@ -36,7 +32,6 @@ const revealIO = new IntersectionObserver((entries)=>{
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
-/* ===== Modal gallery ===== */
 function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = `${title} — ${desc}`;
@@ -86,7 +81,6 @@ if (closeModal) closeModal.addEventListener('click', closeModalFn);
 if (backdrop) backdrop.addEventListener('click', closeModalFn);
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
-/* ===== Cases: click “Apri galleria” o click sulla sezione ===== */
 function gatherExtras(node){
   const imgs = node.dataset.images ? node.dataset.images.split('|').map(s=>s.trim()) : [];
   const vids = node.dataset.videos ? node.dataset.videos.split('|').map(s=>s.trim()) : [];
@@ -111,7 +105,6 @@ document.querySelectorAll('.case').forEach(sec=>{
   });
 });
 
-/* ===== Magnet buttons (feedback) ===== */
 document.querySelectorAll('.btn').forEach(b=>{
   b.addEventListener('mousemove', e=>{
     if (!b.classList.contains('magnet')) return;
