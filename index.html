@@ -44,36 +44,22 @@
       </nav>
     </header>
 
-    <!-- MARQUEE breve, personale e in loop (pill ripetute due volte) -->
+    <!-- MARQUEE -->
     <div class="marquee" id="topTicker" aria-label="Processo e skill">
       <div class="marquee__rail">
         <div class="marquee__track">
-          <span class="pill">Alan Walker (dal 2019)</span>
-          <span class="pill">ITS AR/VR & Game Dev</span>
+          <span class="pill">Alan Walker freelancer (dal 2019)</span>
+          <span class="pill">ITS AR/VR &amp; Game Dev</span>
           <span class="pill">Blender • UE5 • Maya • Unity</span>
           <span class="pill">Fotogrammetria</span>
           <span class="pill">Topology pulita</span>
           <span class="pill">UV • Texel density</span>
           <span class="pill">PBR lookdev</span>
-          <span class="pill">Rig • animazioni base</span>
+          <span class="pill">Rigging base</span>
           <span class="pill">Lighting realtime</span>
           <span class="pill">Python • C • C# • C++ • Lua</span>
-          <span class="pill">AE • Premiere • PS</span>
-          <span class="pill">GitHub / Perforce</span>
-          <span class="pill">QA su device</span>
-          <!-- DUPLICATO per loop continuo -->
-          <span class="pill">Alan Walker (dal 2019)</span>
-          <span class="pill">ITS AR/VR & Game Dev</span>
-          <span class="pill">Blender • UE5 • Maya • Unity</span>
-          <span class="pill">Fotogrammetria</span>
-          <span class="pill">Topology pulita</span>
-          <span class="pill">UV • Texel density</span>
-          <span class="pill">PBR lookdev</span>
-          <span class="pill">Rig • animazioni base</span>
-          <span class="pill">Lighting realtime</span>
-          <span class="pill">Python • C • C# • C++ • Lua</span>
-          <span class="pill">AE • Premiere • PS</span>
-          <span class="pill">GitHub / Perforce</span>
+          <span class="pill">AE • Premiere • Photoshop</span>
+          <span class="pill">Git / Perforce</span>
           <span class="pill">QA su device</span>
         </div>
       </div>
@@ -85,7 +71,7 @@
           <h2 class="xxl gradient-title">Creo mondi 3D<br>e li rendo giocabili</h2>
           <p class="hero-sub">Asset, ambienti, VFX e motion per videogiochi e brand.</p>
           <div class="cta-row">
-            <a class="btn primary magnetic" href="#showreel">Guarda i progetti</a>
+            <a class="btn primary" href="#showreel">Guarda i progetti</a>
             <a class="btn" href="#contact">Contattami</a>
           </div>
           <div class="hero-chips">
@@ -107,7 +93,7 @@
     <div id="showreel" class="wrap">
       <div class="filterbar reveal">
         <button class="filter-btn active" data-filter="all">Tutti</button>
-        <button class="filter-btn" data-filter="game">Game Art & Dev</button>
+        <button class="filter-btn" data-filter="game">Game Art &amp; Dev</button>
         <button class="filter-btn" data-filter="viz">3D Visualization</button>
       </div>
 
@@ -168,7 +154,7 @@
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Alan Walker"
-        data-desc="Animazione e montaggio del remix ‘Beautiful Nightmare’."
+        data-desc="Animazione e montaggio del remix “Beautiful Nightmare”."
         data-tools="Premiere, After Effects"
         data-note="Transizioni respirate per valorizzare ritmo e texture sonore."
         data-images="assets/Screenshot 2025-10-12 224346.png"
@@ -270,7 +256,7 @@
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Wars"
-        data-desc="Navicella isp. Star Wars (Star Destroyer)."
+        data-desc="Navicella ispirata all’universo Star Wars."
         data-tools="Blender, Photoshop"
         data-note="Edge highlight + micro-bevel per scala credibile."
         data-images="assets/Screenshot 2025-10-12 210314.png"
@@ -285,34 +271,33 @@
       </section>
     </div>
 
-    <!-- COMING SOON: card verticali come le altre, con overlay -->
-    <section class="wrap" aria-labelledby="comingTitle">
-      <h3 id="comingTitle" class="coming-title">Coming soon</h3>
-    </section>
+    <!-- COMING SOON (una sotto l’altra, stessa larghezza/altezza delle altre) -->
+    <section class="coming-section wrap reveal">
+      <h3 class="glitchable" style="margin:8px 0 6px">Coming soon</h3>
+      <div class="coming-grid">
 
-    <section class="case case-coming snap-child reveal"
-      data-cat="viz"
-      data-title="Brain.EXE"
-      data-desc="Nuovo progetto personale — teaser"
-      data-src="assets/BrainEXEMiniature.png">
-      <div class="case-bg" style="--bg:url('assets/BrainEXEMiniature.png')"></div>
-      <div class="case-overlay"><span class="label">In arrivo</span></div>
-      <div class="case-info">
-        <h3 class="glitchable">Brain.EXE</h3>
-        <p>Nuovo progetto personale — teaser.</p>
-      </div>
-    </section>
+        <article class="case-coming" data-title="Brain.exe" data-desc="Nuovo corto animato.">
+          <div class="case-bg" style="--bg:url('assets/BrainEXEMiniature.png')"></div>
+          <div class="case-overlay" aria-hidden="true">
+            <span class="label">In arrivo</span>
+          </div>
+          <div class="case-info">
+            <h4 class="coming-title">Brain.exe</h4>
+            <p class="muted">Corto animato – teaser.</p>
+          </div>
+        </article>
 
-    <section class="case case-coming snap-child reveal"
-      data-cat="viz"
-      data-title="TOMHODA Studios"
-      data-desc="Identità & reel — teaser"
-      data-src="assets/LogoTHOMODportfolio.png">
-      <div class="case-bg" style="--bg:url('assets/LogoTHOMODportfolio.png')"></div>
-      <div class="case-overlay"><span class="label">In arrivo</span></div>
-      <div class="case-info">
-        <h3 class="glitchable">TOMHODA Studios</h3>
-        <p>Identità & reel — teaser.</p>
+        <article class="case-coming" data-title="TOMHODA Studios" data-desc="Identità e brand kit.">
+          <div class="case-bg" style="--bg:url('assets/LogoTHOMODportfolio.png')"></div>
+          <div class="case-overlay" aria-hidden="true">
+            <span class="label">In arrivo</span>
+          </div>
+          <div class="case-info">
+            <h4 class="coming-title">TOMHODA Studios</h4>
+            <p class="muted">Logo + brand kit.</p>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -361,12 +346,10 @@
       <div class="content" role="document">
         <button id="closeModal" aria-label="Chiudi">✕</button>
         <div id="modalInner"></div>
-
         <div class="modal-meta">
           <div id="modalTools" class="toolchips"></div>
           <blockquote id="modalNote" class="author-note"></blockquote>
         </div>
-
         <div class="info" id="modalInfo"></div>
       </div>
     </div>

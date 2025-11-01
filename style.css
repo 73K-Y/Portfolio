@@ -9,7 +9,7 @@
   --glow:rgba(0,186,255,.28);
   --max-w:1200px; 
   --blur:18px; 
-  /* Altezza UNICA per tutte le card (compresi i "coming soon") */
+  /* altezza unica per TUTTE le card (incluse coming) */
   --case-h: clamp(48vh,56vh,62vh);
   --gutter: clamp(16px, 4vw, 32px);
   color-scheme: dark;
@@ -128,29 +128,22 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 }
 .filter-btn.active,.filter-btn:hover{background:linear-gradient(90deg,var(--accent),#0070ff);border:none}
 
-/* Case cards — TUTTE le card hanno ora altezza identica */
+/* Case cards — altezza/larghezza uniformi */
 #showreel{margin-top:8px;margin-bottom:0}
 #showreel.wrap{padding-bottom:6px}
 .case{
   position:relative;
-  height: var(--case-h);        /* <-- PRIMA era min-height: ora altezza uniforme */
+  height: var(--case-h);
   display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;cursor:pointer;
   border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(var(--blur));
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);
   margin-block:clamp(6px,1vw,10px);
 }
-.case-bg{
-  position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;
-  filter:contrast(1.02) saturate(1.04);
-}
-.case::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.55) 78%,rgba(0,0,0,.75) 100%)
-}
+.case-bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;filter:contrast(1.02) saturate(1.04)}
+.case::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.55) 78%,rgba(0,0,0,.75) 100%)}
 .case-info{
   position:relative;z-index:2;margin:clamp(8px,1.8vw,14px);padding:10px 12px;border-radius:14px;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(10px);max-width:min(760px,92%);
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);max-width:min(760px,92%);
 }
 .case-info h3{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
 .case-info h3.glitchable:hover{animation:glitch 120ms steps(2) 1}
@@ -160,28 +153,39 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .badge.game{border-color:#3ee07740}
 .badge.viz{border-color:#00baff40}
 
-/* Coming (card teaser) — stessa altezza e nessun bordo extra sull’overlay */
-.coming-title{margin:0 0 10px;font-size:clamp(18px,2.4vw,22px);opacity:.9}
-.case-coming{height: var(--case-h);} /* ridondante ma esplicito */
-.case-coming .case-info{padding-bottom:12px}
-
-/* Overlay grigio (senza bordo per non “ingrassare” visivamente la card) */
+/* --- COMING SOON: allineamento e dimensioni identiche --- */
+.coming-section{
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+.coming-grid{display:grid;gap:clamp(6px,1vw,10px)}
+.case-coming{
+  width:100%;
+  height: var(--case-h);
+  border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(var(--blur));
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);
+  position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;
+  margin-block:clamp(6px,1vw,10px)
+}
+.case-coming .case-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(1.02) saturate(1.04)}
 .case-coming .case-overlay{
-  position:absolute;inset:0;display:grid;place-items:center;
-  background:linear-gradient(180deg,rgba(20,20,22,.52) 0%,rgba(12,14,18,.62) 100%);
-  /* border rimosso per uniformare la percezione della dimensione */
-  border:none;
-  color:var(--white);backdrop-filter:blur(2px);
-  z-index:2;transition:opacity .25s ease,transform .25s ease
+  position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(20,20,22,.52) 0%,rgba(12,14,18,.62) 100%);
+  border:none;color:var(--white);backdrop-filter:blur(2px);z-index:2;transition:opacity .25s ease,transform .25s ease
 }
 .case-coming .case-overlay .label{
-  font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.18)
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)
 }
-@media (hover:hover){
-  .case-coming:hover .case-overlay{opacity:0;transform:scale(.995)}
+@media (hover:hover){ .case-coming:hover .case-overlay{opacity:0;transform:scale(.995)} }
+.case-coming .case-info{
+  position:relative;z-index:3;margin:clamp(8px,1.8vw,14px);padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);max-width:min(760px,92%)
 }
+.coming-title{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
+.case-coming p{margin:0;color:var(--muted);font-size:clamp(13px,1.8vw,15px)}
 
 /* Info (About + Contact) */
 .info-section{min-height:auto;padding-top:8px;padding-bottom:8px}

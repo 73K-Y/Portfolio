@@ -1,118 +1,93 @@
-// ----------------- util -----------------
-const $ = (sel, root = document) => root.querySelector(sel);
-const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-$('#year').textContent = new Date().getFullYear();
+// Anno footer
+const yearSpan = document.getElementById('year');
+if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-// ----------------- reveal on scroll -----------------
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+// Reveal on scroll (leggero)
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    }
+  });
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-$$('.reveal').forEach(el => io.observe(el));
+revealEls.forEach(el => io.observe(el));
 
-// ----------------- filter buttons -----------------
-const filterBtns = $$('.filter-btn');
-const cards = $$('.case');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
+// Filtro categorie
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cases = document.querySelectorAll('.case');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    const f = btn.dataset.filter;
-    cards.forEach(card => {
-      const match = f === 'all' || card.dataset.cat === f;
-      card.style.display = match ? '' : 'none';
+    const cat = btn.dataset.filter;
+    cases.forEach(c=>{
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
     });
   });
 });
 
-// ----------------- badges auto -----------------
-cards.forEach(card => {
-  const box = card.querySelector('.badges');
-  if (!box) return;
-  const cat = card.dataset.cat;
-  const tools = (card.dataset.tools || '').split(',').map(s => s.trim()).filter(Boolean);
-  if (cat) {
-    const b = document.createElement('span');
-    b.className = 'badge ' + (cat === 'game' ? 'game' : 'viz');
-    b.textContent = cat === 'game' ? 'Game Art' : '3D Viz';
-    box.appendChild(b);
-  }
-  tools.forEach(t => {
-    const b = document.createElement('span');
-    b.className = 'badge';
-    b.textContent = t;
-    box.appendChild(b);
-  });
-});
+// Modal semplice (immagini + video)
+const modal = document.getElementById('modal');
+const modalInner = document.getElementById('modalInner');
+const modalInfo = document.getElementById('modalInfo');
+const modalTools = document.getElementById('modalTools');
+const modalNote = document.getElementById('modalNote');
+const closeModal = document.getElementById('closeModal');
 
-// ----------------- modal gallery -----------------
-const modal = $('#modal');
-const modalInner = $('#modalInner');
-const modalInfo = $('#modalInfo');
-const modalTools = $('#modalTools');
-const modalNote = $('#modalNote');
-
-function openModalForCard(card){
-  // Evita modale per i "coming soon"
-  if (card.classList.contains('case-coming')) return;
-
+function openModal(items, title, desc, tools, note){
   modalInner.innerHTML = '';
   modalTools.innerHTML = '';
   modalNote.textContent = '';
 
-  const title = card.dataset.title || '';
-  const desc  = card.dataset.desc || '';
-  const tools = (card.dataset.tools || '').split(',').map(s => s.trim()).filter(Boolean);
-  const note  = card.dataset.note || '';
-
-  const images = (card.dataset.images || '').split('|').map(s => s.trim()).filter(Boolean);
-  const videos = (card.dataset.videos || '').split('|').map(s => s.trim()).filter(Boolean);
-
-  // media
-  images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src; img.loading = 'lazy';
-    modalInner.appendChild(img);
-  });
-  videos.forEach(src => {
-    const video = document.createElement('video');
-    video.src = src; video.controls = true; video.autoplay = true; video.loop = true;
-    video.style.width = '100%';
-    modalInner.appendChild(video);
+  items.forEach(it=>{
+    if (it.endsWith('.mp4')) {
+      const v = document.createElement('video');
+      v.src = it; v.controls = true; v.loop = true; v.style.width='100%';
+      modalInner.appendChild(v);
+    } else {
+      const img = document.createElement('img');
+      img.src = it; img.loading = 'lazy';
+      modalInner.appendChild(img);
+    }
   });
 
-  // tools chips
-  tools.forEach(t => {
-    const chip = document.createElement('span');
-    chip.className = 'chip';
-    chip.textContent = t;
-    modalTools.appendChild(chip);
-  });
-
+  if (tools) {
+    tools.split(',').map(s=>s.trim()).forEach(t=>{
+      const span = document.createElement('span');
+      span.className = 'chip';
+      span.textContent = t;
+      modalTools.appendChild(span);
+    });
+  }
   if (note) modalNote.textContent = note;
-  modalInfo.textContent = `${title} — ${desc}`;
-
+  modalInfo.textContent = title + (desc ? ' — ' + desc : '');
   modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
+  modal.setAttribute('aria-hidden','false');
 }
-
-$('#closeModal').addEventListener('click', closeModal);
-$('#modalBackdrop').addEventListener('click', closeModal);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-function closeModal(){
+function closeModalFn(){
   modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
+  modal.setAttribute('aria-hidden','true');
+  modalInner.innerHTML = '';
 }
+if (closeModal) closeModal.addEventListener('click', closeModalFn);
+document.getElementById('modalBackdrop')?.addEventListener('click', closeModalFn);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
-// open via button or click on card
-cards.forEach(card => {
-  const btn = card.querySelector('.open-modal');
-  card.addEventListener('click', e => {
-    // se clic su bottone, ok; se clic su overlay coming, ignora
-    if (card.classList.contains('case-coming')) return;
-    // evita che click su bottoni/links diversi dal tasto apra doppiamente
-    const targetBtn = e.target.closest('.open-modal');
-    if (!targetBtn && btn) return; // apri solo col bottone se presente
-    openModalForCard(card);
-  });
-  if (btn) btn.addEventListener('click', (e) => { e.stopPropagation(); openModalForCard(card); });
+// Click sulle card .case
+document.getElementById('showreel')?.addEventListener('click', e=>{
+  const card = e.target.closest('.case');
+  if (!card) return;
+  const title = card.dataset.title || 'Progetto';
+  const desc  = card.dataset.desc || '';
+  const tools = card.dataset.tools || '';
+  const note  = card.dataset.note  || '';
+  const images = (card.dataset.images || '')
+      .split('|').map(s=>s.trim()).filter(Boolean);
+  const videos = (card.dataset.videos || '')
+      .split('|').map(s=>s.trim()).filter(Boolean);
+  const items = [...images, ...videos];
+  if (!items.length) return;
+  openModal(items, title, desc, tools, note);
 });
