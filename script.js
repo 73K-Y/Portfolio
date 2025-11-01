@@ -1,4 +1,4 @@
-/* Riferimenti */
+/* util */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
@@ -8,7 +8,7 @@ const progress = document.getElementById('progress');
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* Scroll progress (leggero) */
+/* progress */
 function updateProgress(){
   const st = document.documentElement.scrollTop || document.body.scrollTop;
   const h = (document.documentElement.scrollHeight - document.documentElement.clientHeight) || 1;
@@ -17,105 +17,74 @@ function updateProgress(){
 document.addEventListener('scroll', updateProgress, {passive:true});
 updateProgress();
 
-/* Reveal on scroll (economico) */
-const revealIO = new IntersectionObserver((entries,obs)=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting) return;
-    en.target.classList.add('is-visible');
-    obs.unobserve(en.target);
-  });
+/* reveal */
+const io = new IntersectionObserver((entries,obs)=>{
+  for (const en of entries){
+    if (en.isIntersecting){ en.target.classList.add('is-visible'); obs.unobserve(en.target); }
+  }
 },{threshold:0.18});
-document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* Modal gallery con sottominiature (immagini + video) */
-function openModal(src, title, desc, extras = []) {
-  modalInner.innerHTML = '';
+/* modal gallery (immagini + video) */
+function openModal(src, title, desc, extras=[]){
+  modalInner.innerHTML='';
   modalInfo.textContent = `${title} — ${desc}`;
+  const main = document.createElement('div'); modalInner.appendChild(main);
 
-  const mainWrap = document.createElement('div');
-  modalInner.appendChild(mainWrap);
-
-  const loadMain = (url) => {
-    mainWrap.innerHTML = '';
+  const load = (url)=>{
+    main.innerHTML='';
     const isVideo = url.toLowerCase().endsWith('.mp4');
     const el = document.createElement(isVideo ? 'video' : 'img');
-    el.src = url;
-    el.style.width = '100%';
-    if (isVideo) { el.controls = true; el.autoplay = true; el.loop = true; el.playsInline = true; }
-    mainWrap.appendChild(el);
+    el.src = url; el.style.width='100%';
+    if (isVideo){ el.controls=true; el.autoplay=true; el.loop=true; el.playsInline=true; }
+    main.appendChild(el);
   };
-  loadMain(src);
+  load(src);
 
-  if (extras.length) {
+  if (extras.length){
     const bar = document.createElement('div');
-    bar.className = 'thumb-bar';
-    Object.assign(bar.style, {display:'flex',flexWrap:'wrap',gap:'8px',marginTop:'10px'});
+    bar.style.cssText='display:flex;flex-wrap:wrap;gap:8px;margin-top:10px';
     extras.forEach(u=>{
       const isVid = u.toLowerCase().endsWith('.mp4');
-      const t = document.createElement(isVid ? 'video' : 'img');
-      t.src = u;
-      if (isVid){ t.muted = true; t.loop = true; t.autoplay = true; t.playsInline = true; }
-      Object.assign(t.style, {width:'90px',height:'60px',objectFit:'cover',cursor:'pointer',borderRadius:'6px',opacity: u===src?'1':'.72'});
-      t.addEventListener('click', ()=>{
-        loadMain(u);
-        bar.querySelectorAll('img,video').forEach(n=>{ n.style.opacity='.72'; n.classList.remove('is-active'); });
-        t.style.opacity = '1'; t.classList.add('is-active');
+      const t = document.createElement(isVid?'video':'img');
+      t.src=u;
+      if (isVid){ t.muted=true; t.loop=true; t.autoplay=true; t.playsInline=true; }
+      Object.assign(t.style,{width:'90px',height:'60px',objectFit:'cover',cursor:'pointer',borderRadius:'6px',opacity:u===src?'1':'.72'});
+      t.addEventListener('click',()=>{
+        load(u);
+        bar.querySelectorAll('img,video').forEach(n=>n.style.opacity='.72');
+        t.style.opacity='1';
       });
       bar.appendChild(t);
     });
-    setTimeout(()=>{ const first = bar.querySelector('img,video'); first && first.classList.add('is-active'); },0);
     modalInner.appendChild(bar);
   }
-
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
 }
 function closeModalFn(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
 closeModal && closeModal.addEventListener('click', closeModalFn);
 backdrop && backdrop.addEventListener('click', closeModalFn);
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalFn(); });
 
-/* Helpers per gallery */
-function gatherExtras(node){
+function extrasOf(node){
   const imgs = node.dataset.images ? node.dataset.images.split('|').map(s=>s.trim()) : [];
   const vids = node.dataset.videos ? node.dataset.videos.split('|').map(s=>s.trim()) : [];
   return [...imgs, ...vids];
 }
-function openCaseSection(sec){
+function openCase(sec){
   const title = sec.dataset.title || 'Progetto';
-  const desc  = sec.dataset.desc  || '';
-  const extras = gatherExtras(sec);
+  const desc = sec.dataset.desc || '';
+  const extras = extrasOf(sec);
   const src = extras[0] || sec.dataset.src || '';
-  if(!src) return;
+  if (!src) return;
   openModal(src, title, desc, extras);
 }
-/* Bind alle case */
 document.querySelectorAll('.case').forEach(sec=>{
   const btn = sec.querySelector('.open-modal');
-  btn && btn.addEventListener('click', (e)=>{ e.stopPropagation(); openCaseSection(sec); });
-  sec.addEventListener('click', (e)=>{
-    if (e.target.closest('button, a')) return;
-    openCaseSection(sec);
+  btn && btn.addEventListener('click', e=>{ e.stopPropagation(); openCase(sec); });
+  sec.addEventListener('click', e=>{
+    if (e.target.closest('button,a')) return;
+    openCase(sec);
   });
 });
-
-/* ===== Glitch orchestrator (visibile ma leggero, no loop pesanti) ===== */
-const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (!prefersReduced) {
-  const body = document.body;
-  function burst(){
-    // piccolissimo offset per cover (CSS legge --tx/--ty)
-    body.style.setProperty('--tx', (Math.random()*2-1).toFixed(2) + 'px');
-    body.style.setProperty('--ty', (Math.random()*2-1).toFixed(2) + 'px');
-    body.classList.add('glitch-burst');
-    setTimeout(()=>{
-      body.classList.remove('glitch-burst');
-      body.style.removeProperty('--tx');
-      body.style.removeProperty('--ty');
-    }, 180); // durata burst
-  }
-  (function schedule(){
-    const next = 5000 + Math.random()*4000; // ogni 5–9s
-    setTimeout(()=>{ burst(); schedule(); }, next);
-  })();
-}
