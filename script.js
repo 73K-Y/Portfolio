@@ -89,7 +89,6 @@ function openCaseSection(sec){
   if(!src) return;
   openModal(src, title, desc, extras);
 }
-
 /* Bind alle case */
 document.querySelectorAll('.case').forEach(sec=>{
   const btn = sec.querySelector('.open-modal');
@@ -100,26 +99,23 @@ document.querySelectorAll('.case').forEach(sec=>{
   });
 });
 
-/* ===== Glitch orchestrator (burst breve, leggero) ===== */
+/* ===== Glitch orchestrator (visibile ma leggero, no loop pesanti) ===== */
 const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!prefersReduced) {
   const body = document.body;
   function burst(){
-    // random piccolo offset per le cover (CSS legge --tx/--ty)
-    const tx = (Math.random() * 2 - 1).toFixed(2) + 'px';
-    const ty = (Math.random() * 2 - 1).toFixed(2) + 'px';
-    body.style.setProperty('--tx', tx);
-    body.style.setProperty('--ty', ty);
-    body.classList.add('glitch-active');
+    // piccolissimo offset per cover (CSS legge --tx/--ty)
+    body.style.setProperty('--tx', (Math.random()*2-1).toFixed(2) + 'px');
+    body.style.setProperty('--ty', (Math.random()*2-1).toFixed(2) + 'px');
+    body.classList.add('glitch-burst');
     setTimeout(()=>{
-      body.classList.remove('glitch-active');
+      body.classList.remove('glitch-burst');
       body.style.removeProperty('--tx');
       body.style.removeProperty('--ty');
-    }, 260); // durata burst
+    }, 180); // durata burst
   }
-  // burst casuali ogni 6–10 secondi
   (function schedule(){
-    const next = 6000 + Math.random()*4000;
+    const next = 5000 + Math.random()*4000; // ogni 5–9s
     setTimeout(()=>{ burst(); schedule(); }, next);
   })();
 }
