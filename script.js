@@ -1,60 +1,28 @@
-/* Refs */
+/* Riferimenti */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
 const closeModal = document.getElementById('closeModal');
 const backdrop = document.getElementById('modalBackdrop');
 const progress = document.getElementById('progress');
-const cursorGlow = document.getElementById('cursorGlow');
 const yearSpan = document.getElementById('year');
-const perfToggle = document.getElementById('perfToggle');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* ---- Modalità ridotta: init/auto ---- */
-const mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const weakDevice =
-  (navigator.deviceMemory && navigator.deviceMemory < 4) ||
-  (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4);
-
-const savedPref = localStorage.getItem('reducedMode');
-const startReduced = savedPref === '1' || (savedPref === null && (mqReduced || weakDevice));
-if (startReduced) document.body.classList.add('reduced');
-
-function setReduced(on){
-  document.body.classList.toggle('reduced', !!on);
-  localStorage.setItem('reducedMode', on ? '1' : '0');
-}
-
-/* Toggle manuale */
-if (perfToggle){
-  perfToggle.addEventListener('click', ()=>{
-    const on = !document.body.classList.contains('reduced');
-    setReduced(on);
-  });
-}
-
-/* Cursor glow (solo se non ridotto) */
-window.addEventListener('pointermove', e=>{
-  if (!cursorGlow || document.body.classList.contains('reduced')) return;
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top  = e.clientY + 'px';
-});
-
-/* Scroll progress */
+/* Scroll progress (leggero) */
 function updateProgress(){
   const st = document.documentElement.scrollTop || document.body.scrollTop;
   const h = (document.documentElement.scrollHeight - document.documentElement.clientHeight) || 1;
-  progress && (progress.style.width = (st/h*100) + '%');
+  if (progress) progress.style.width = (st/h*100) + '%';
 }
-document.addEventListener('scroll', updateProgress);
+document.addEventListener('scroll', updateProgress, {passive:true});
 updateProgress();
 
-/* Reveal on scroll */
-const revealIO = new IntersectionObserver((entries)=>{
+/* Reveal on scroll (molto economico) */
+const revealIO = new IntersectionObserver((entries,obs)=>{
   entries.forEach(en=>{
     if(!en.isIntersecting) return;
     en.target.classList.add('is-visible');
-    revealIO.unobserve(en.target);
+    obs.unobserve(en.target);
   });
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
@@ -122,7 +90,7 @@ function openCaseSection(sec){
   openModal(src, title, desc, extras);
 }
 
-/* Bind alle case */
+/* Bind alle case (click sull’area o sul bottone) */
 document.querySelectorAll('.case').forEach(sec=>{
   const btn = sec.querySelector('.open-modal');
   btn && btn.addEventListener('click', (e)=>{ e.stopPropagation(); openCaseSection(sec); });
@@ -131,57 +99,3 @@ document.querySelectorAll('.case').forEach(sec=>{
     openCaseSection(sec);
   });
 });
-
-/* Tilt/parallax con throttle (disattivato se ridotto) */
-(function tilt(){
-  if (document.body.classList.contains('reduced')) return;
-  let ticking = false;
-  document.querySelectorAll('.case').forEach(sec=>{
-    sec.addEventListener('mousemove', (e)=>{
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(()=>{
-        const r = sec.getBoundingClientRect();
-        const cx = r.left + r.width/2, cy = r.top + r.height/2;
-        const dx = (e.clientX - cx) / (r.width/2);
-        const dy = (e.clientY - cy) / (r.height/2);
-        sec.style.setProperty('--rx', (-dy*3.5).toFixed(2) + 'deg');
-        sec.style.setProperty('--ry', ( dx*3.5).toFixed(2) + 'deg');
-        ticking = false;
-      });
-    });
-    sec.addEventListener('mouseleave', ()=>{
-      sec.style.setProperty('--rx','0deg'); sec.style.setProperty('--ry','0deg');
-    });
-  });
-})();
-
-/* Particelle: solo se non ridotto (meno numerose) */
-(function spawnParticles(){
-  if (document.body.classList.contains('reduced')) return;
-  const layer = document.getElementById('fxLayer');
-  if(!layer) return;
-  const COUNT = 16;
-  const vw = () => window.innerWidth, vh = () => window.innerHeight;
-
-  for(let i=0;i<COUNT;i++){
-    const p = document.createElement('div');
-    p.className = 'fx-particle';
-    reset(p, true);
-    layer.appendChild(p);
-    p.addEventListener('animationiteration', ()=> reset(p, false));
-  }
-  function reset(el, initial){
-    const x = Math.random() * vw();
-    const y = initial ? (Math.random() * vh()) : vh() + 40;
-    const size = 4 + Math.random()*4;
-    const dx = (Math.random()*40 - 20) + 'px';
-    const dur = (18 + Math.random()*12) + 's';
-    el.style.left = x + 'px';
-    el.style.top  = y + 'px';
-    el.style.width = size + 'px';
-    el.style.height = size + 'px';
-    el.style.setProperty('--dx', dx);
-    el.style.setProperty('--dur', dur);
-  }
-})();
