@@ -96,11 +96,10 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
 
 /* ===== Animazioni leggere ===== */
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
-/* Parallax */
+/* Parallax (immagini senza hover; solo lieve parallax) */
 const pxNodes = reduce ? [] : Array.from(document.querySelectorAll('[data-parallax]')).map(el=>{
-  return { el, speed: Math.min(0.25, Math.max(-0.25, parseFloat(el.dataset.parallax)||0.1)) };
+  return { el, speed: Math.min(0.15, Math.max(-0.15, parseFloat(el.dataset.parallax)||0.08)) };
 });
 let ticking = false;
 function parallaxRAF(){
@@ -117,31 +116,11 @@ function parallaxRAF(){
 function onScroll(){ if(!ticking){ requestAnimationFrame(parallaxRAF); ticking = true; } }
 if (pxNodes.length){ document.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
 
-/* Tilt 3D (desktop) */
-if (!reduce && !isTouch){
-  document.querySelectorAll('.tilt').forEach(card=>{
-    const max = 8;
-    let rafId = null;
-    const onMove = (e)=>{
-      const r = card.getBoundingClientRect();
-      const cx = r.left + r.width/2;
-      const cy = r.top  + r.height/2;
-      const dx = (e.clientX - cx) / (r.width/2);
-      const dy = (e.clientY - cy) / (r.height/2);
-      const rx = (-dy * max).toFixed(2);
-      const ry = ( dx * max).toFixed(2);
-      if(!rafId){
-        rafId = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; rafId=null; });
-      }
-    };
-    const reset = ()=>{ card.style.transform='rotateX(0) rotateY(0)'; };
-    card.addEventListener('mousemove', onMove);
-    card.addEventListener('mouseleave', reset);
-  });
-}
+/* DISABILITATO Tilt 3D per evitare animazioni sulle immagini */
+// (Voluto: niente rotazioni o hover sulla card)
 
-/* Bottone magnetico */
-if (!reduce && !isTouch){
+/* Bottone magnetico (resta leggero e non tocca le immagini) */
+if (!reduce){
   document.querySelectorAll('.btn.magnetic').forEach(btn=>{
     const str = 18;
     let rafId = null;

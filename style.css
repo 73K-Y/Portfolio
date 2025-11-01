@@ -10,7 +10,8 @@
 /* Reset & background */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{
-  margin:0;height:100%;font-family:Inter,system-ui,sans-serif;color:var(--white);
+  margin:0;height:100%;
+  font-family:Inter,system-ui,sans-serif;color:var(--white);
   background:
     radial-gradient(1000px 800px at 10% 10%, rgba(0,186,255,.05), transparent),
     radial-gradient(800px 600px at 90% 90%, rgba(255,255,255,.03), transparent),
@@ -39,6 +40,7 @@ a:hover{color:var(--accent);text-decoration:underline}
 .logo{width:52px;height:52px;display:grid;place-items:center;border-radius:50%;
   background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(0,0,0,.3));
   box-shadow:inset 0 1px 3px rgba(255,255,255,.1),0 0 20px var(--glow)}
+h1,h2,h3{font-family:"Space Grotesk",Inter,system-ui,sans-serif}
 h1{margin:0;font-size:20px}
 .lead{margin:0;color:var(--muted);font-size:13px}
 nav{display:flex;gap:clamp(6px,1vw,12px)}
@@ -51,7 +53,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .section{min-height:clamp(60vh,72vh,82vh);display:grid;align-items:center}
 .snap-child{scroll-snap-align:start}
 
-/* MARQUEE NUOVO */
+/* MARQUEE (senza bordi) */
 .marquee{
   position:relative;
   margin: 6px auto 0;
@@ -73,12 +75,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   right:0;
   background:linear-gradient(270deg, rgba(6,7,10,1) 0%, rgba(6,7,10,0) 100%);
 }
-.marquee__rail{
-  overflow:hidden; 
-  border-top:1px solid rgba(255,255,255,.08);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  padding-block: 8px;
-}
+.marquee__rail{overflow:hidden}
 .marquee__track{
   display:flex; gap:18px; align-items:center;
   will-change: transform;
@@ -99,7 +96,6 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   box-shadow: 0 0 0 rgba(0,186,255,0);
   transition: box-shadow .25s ease, background .25s ease, transform .25s ease;
 }
-.pill i{ opacity:.9; filter: drop-shadow(0 0 6px rgba(0,186,255,.25)); }
 .pill:hover{
   background: linear-gradient(90deg, var(--accent), #0070ff);
   border-color: transparent;
@@ -153,22 +149,17 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   position:relative;min-height:var(--case-h);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;cursor:pointer;
   border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(var(--blur));
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);
-  margin-block:clamp(6px,1vw,10px);transform-style:preserve-3d;will-change:transform
+  margin-block:clamp(6px,1vw,10px);transform-style:preserve-3d;
 }
 .case-bg{
   position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;
   filter:contrast(1.02) saturate(1.04);transform:translateZ(0);
-  transition: transform .5s cubic-bezier(.2,.65,.2,1), filter .5s ease;
-}
-.case:hover .case-bg{
-  transform: translate3d(0,-6px,0) scale(1.04);
-  filter: contrast(1.05) saturate(1.06);
+  /* NESSUNA animazione/hover sulle immagini */
 }
 .case::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.55) 78%,rgba(0,0,0,.75) 100%)}
 .case-info{
   position:relative;z-index:2;margin:clamp(8px,1.8vw,14px);padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.1);
   border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);max-width:min(760px,92%);transform:translateZ(30px);
-  transition: transform .25s ease;
 }
 .case-info h3{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
 .case-info h3.glitchable:hover{animation:glitch 120ms steps(2) 1}
