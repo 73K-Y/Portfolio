@@ -9,6 +9,7 @@
   --glow:rgba(0,186,255,.28);
   --max-w:1200px; 
   --blur:18px; 
+  /* Altezza UNICA per tutte le card (compresi i "coming soon") */
   --case-h: clamp(48vh,56vh,62vh);
   --gutter: clamp(16px, 4vw, 32px);
   color-scheme: dark;
@@ -59,7 +60,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .section{min-height:clamp(60vh,72vh,82vh);display:grid;align-items:center}
 .snap-child{scroll-snap-align:start}
 
-/* MARQUEE (loop, una sola barra; ombre laterali soft) */
+/* MARQUEE */
 .marquee{
   position:relative;
   margin: 6px auto 0;
@@ -70,44 +71,19 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .marquee::before,
 .marquee::after{
   content:"";
-  position:absolute; top:0; bottom:0;
-  width:60px;
-  pointer-events:none; z-index:2;
-  opacity:.55;
+  position:absolute; top:0; bottom:0; width:60px; pointer-events:none; z-index:2; opacity:.55;
 }
-.marquee::before{
-  left:0;
-  background:linear-gradient(90deg, rgba(6,7,10,1) 0%, rgba(6,7,10,0) 100%);
-}
-.marquee::after{
-  right:0;
-  background:linear-gradient(270deg, rgba(6,7,10,1) 0%, rgba(6,7,10,0) 100%);
-}
+.marquee::before{left:0;background:linear-gradient(90deg, rgba(6,7,10,1) 0%, rgba(6,7,10,0) 100%)}
+.marquee::after{right:0;background:linear-gradient(270deg, rgba(6,7,10,1) 0%, rgba(6,7,10,0) 100%)}
 .marquee__rail{overflow:hidden;display:flex;align-items:center;height:44px}
-.marquee__track{
-  display:flex; gap:18px; align-items:center;
-  white-space:nowrap; flex:0 0 auto;
-  will-change: transform;
-  animation: tickerMove 24s linear infinite;
-}
-@keyframes tickerMove{
-  from{ transform: translateX(0); }
-  to  { transform: translateX(-50%); }
-}
+.marquee__track{display:flex; gap:18px; white-space:nowrap; flex:0 0 auto; will-change:transform; animation:tickerMove 24s linear infinite}
+@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .pill{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 12px; border-radius:999px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.14);
-  color:var(--white);
-  font-size:14px; flex:0 0 auto;
+  display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--white);font-size:14px;flex:0 0 auto;
   transition: box-shadow .25s ease, background .25s ease, transform .25s ease;
 }
-.pill:hover{
-  background: linear-gradient(90deg, var(--accent), #0070ff);
-  border-color: transparent; box-shadow: 0 0 14px var(--glow);
-  transform: translateY(-1px);
-}
+.pill:hover{background: linear-gradient(90deg, var(--accent), #0070ff);border-color:transparent;box-shadow:0 0 14px var(--glow);transform:translateY(-1px)}
 @media (prefers-reduced-motion: reduce){ .marquee__track{ animation:none } }
 
 /* Hero */
@@ -119,24 +95,16 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   min-height:clamp(54vh,60vh,66vh)
 }
 .gradient-title{
-  background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
   text-shadow:0 0 12px rgba(0,186,255,.14)
 }
 .gradient-title:hover{animation:glitch 120ms steps(2) 1}
-@keyframes glitch{
-  0%{transform:translate3d(0,0,0)}
-  50%{transform:translate3d(1px,0,0) skewX(.3deg)}
-  100%{transform:translate3d(0,0,0)}
-}
+@keyframes glitch{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(1px,0,0) skewX(.3deg)}100%{transform:translate3d(0,0,0)}}
 .xxl{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:0 0 8px}
 .hero-sub{color:var(--muted);margin:0 0 14px}
 .cta-row{display:flex;gap:10px;margin-top:16px;margin-bottom:10px}
 .hero-chips,.chips-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.chip{
-  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);color:var(--muted);font-size:13px
-}
+.chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--muted);font-size:13px}
 .chip:hover{color:var(--white);border-color:var(--accent);box-shadow:0 0 10px var(--glow)}
 .avatar{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.2);box-shadow:0 0 20px rgba(0,186,255,.08);background:rgba(255,255,255,.04)}
 .avatar.xl.fixed-size img{display:block;max-width:100%;height:auto}
@@ -145,8 +113,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .btn{
   display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;
   border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);color:var(--white);font-weight:600;
-  text-decoration:none;cursor:pointer;
+  background:rgba(255,255,255,.06);color:var(--white);font-weight:600;text-decoration:none;cursor:pointer;
   transition:background .25s,box-shadow .25s,transform .15s
 }
 .btn:hover{background:rgba(255,255,255,.1);box-shadow:0 0 10px var(--glow)}
@@ -161,11 +128,13 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 }
 .filter-btn.active,.filter-btn:hover{background:linear-gradient(90deg,var(--accent),#0070ff);border:none}
 
-/* Case cards */
+/* Case cards — TUTTE le card hanno ora altezza identica */
 #showreel{margin-top:8px;margin-bottom:0}
 #showreel.wrap{padding-bottom:6px}
 .case{
-  position:relative;min-height:var(--case-h);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;cursor:pointer;
+  position:relative;
+  height: var(--case-h);        /* <-- PRIMA era min-height: ora altezza uniforme */
+  display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;cursor:pointer;
   border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(var(--blur));
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);
   margin-block:clamp(6px,1vw,10px);
@@ -180,8 +149,8 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 }
 .case-info{
   position:relative;z-index:2;margin:clamp(8px,1.8vw,14px);padding:10px 12px;border-radius:14px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);max-width:min(760px,92%);
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);max-width:min(760px,92%);
 }
 .case-info h3{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
 .case-info h3.glitchable:hover{animation:glitch 120ms steps(2) 1}
@@ -191,18 +160,24 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .badge.game{border-color:#3ee07740}
 .badge.viz{border-color:#00baff40}
 
-/* Coming (card teaser) */
+/* Coming (card teaser) — stessa altezza e nessun bordo extra sull’overlay */
 .coming-title{margin:0 0 10px;font-size:clamp(18px,2.4vw,22px);opacity:.9}
+.case-coming{height: var(--case-h);} /* ridondante ma esplicito */
 .case-coming .case-info{padding-bottom:12px}
+
+/* Overlay grigio (senza bordo per non “ingrassare” visivamente la card) */
 .case-coming .case-overlay{
   position:absolute;inset:0;display:grid;place-items:center;
   background:linear-gradient(180deg,rgba(20,20,22,.52) 0%,rgba(12,14,18,.62) 100%);
-  border:1px solid rgba(255,255,255,.14);color:var(--white);backdrop-filter:blur(2px);
+  /* border rimosso per uniformare la percezione della dimensione */
+  border:none;
+  color:var(--white);backdrop-filter:blur(2px);
   z-index:2;transition:opacity .25s ease,transform .25s ease
 }
 .case-coming .case-overlay .label{
   font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)
+  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18)
 }
 @media (hover:hover){
   .case-coming:hover .case-overlay{opacity:0;transform:scale(.995)}
@@ -240,10 +215,7 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
 }
 .modal img,.modal video{width:100%;border-radius:12px;margin-bottom:10px}
 .modal .info{font-size:14px;color:var(--muted);text-align:center}
-#closeModal{
-  position:absolute;right:10px;top:10px;border:none;background:rgba(0,0,0,.45);
-  color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer
-}
+#closeModal{position:absolute;right:10px;top:10px;border:none;background:rgba(0,0,0,.45);color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
 .modal-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin:6px 0 4px}
 .toolchips{display:flex;gap:6px;flex-wrap:wrap}
 .toolchips .chip{font-size:12px;padding:6px 10px}
@@ -261,9 +233,7 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
 @media (max-width:720px){
   .nav-glass{padding:8px 12px;gap:8px;flex-wrap:wrap}
   .logo{width:40px;height:40px}
-  .nav-glass nav{
-    width:100%;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px
-  }
+  .nav-glass nav{width:100%;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
   .nav-glass nav a{padding:6px 10px;font-size:13px;white-space:nowrap}
   .hero-full{min-height:clamp(56vh,62vh,68vh);padding:14px}
 }
