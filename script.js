@@ -27,7 +27,7 @@ const revealIO = new IntersectionObserver((entries,obs)=>{
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=> revealIO.observe(el));
 
-/* Modal gallery */
+/* Modal gallery con sottominiature (immagini + video) */
 function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = `${title} — ${desc}`;
