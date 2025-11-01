@@ -1,7 +1,9 @@
-/* util */
+/* refs */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
+const modalTools = document.getElementById('modalTools');
+const modalNote = document.getElementById('modalNote');
 const closeModal = document.getElementById('closeModal');
 const backdrop = document.getElementById('modalBackdrop');
 const progress = document.getElementById('progress');
@@ -25,10 +27,26 @@ const io = new IntersectionObserver((entries,obs)=>{
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* modal gallery (immagini + video) */
-function openModal(src, title, desc, extras=[]){
+/* build badges from data-cat */
+const catLabel = { game:'Game Art', viz:'3D Viz', motion:'Motion' };
+document.querySelectorAll('.case').forEach(c=>{
+  const cat = c.dataset.cat;
+  const holder = c.querySelector('.badges');
+  if (holder && cat) {
+    const b = document.createElement('span');
+    b.className = `badge ${cat}`;
+    b.textContent = catLabel[cat] || cat;
+    holder.appendChild(b);
+  }
+});
+
+/* modal gallery (immagini + video) + toolchips + note */
+function openModal(src, title, desc, extras=[], tools=[], note=''){
   modalInner.innerHTML='';
+  modalTools.innerHTML='';
+  modalNote.textContent = '';
   modalInfo.textContent = `${title} — ${desc}`;
+
   const main = document.createElement('div'); modalInner.appendChild(main);
 
   const load = (url)=>{
@@ -59,14 +77,26 @@ function openModal(src, title, desc, extras=[]){
     });
     modalInner.appendChild(bar);
   }
+
+  if (tools.length){
+    tools.forEach(t=>{
+      const chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.textContent = t.trim();
+      modalTools.appendChild(chip);
+    });
+  }
+  if (note) modalNote.textContent = note;
+
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
 }
 function closeModalFn(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
 closeModal && closeModal.addEventListener('click', closeModalFn);
 backdrop && backdrop.addEventListener('click', closeModalFn);
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalFn(); });
+document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeModalFn(); });
 
+/* helpers */
 function extrasOf(node){
   const imgs = node.dataset.images ? node.dataset.images.split('|').map(s=>s.trim()) : [];
   const vids = node.dataset.videos ? node.dataset.videos.split('|').map(s=>s.trim()) : [];
@@ -74,11 +104,13 @@ function extrasOf(node){
 }
 function openCase(sec){
   const title = sec.dataset.title || 'Progetto';
-  const desc = sec.dataset.desc || '';
+  const desc  = sec.dataset.desc  || '';
   const extras = extrasOf(sec);
   const src = extras[0] || sec.dataset.src || '';
+  const tools = (sec.dataset.tools || '').split(',').map(s=>s.trim()).filter(Boolean);
+  const note  = sec.dataset.note || '';
   if (!src) return;
-  openModal(src, title, desc, extras);
+  openModal(src, title, desc, extras, tools, note);
 }
 document.querySelectorAll('.case').forEach(sec=>{
   const btn = sec.querySelector('.open-modal');
@@ -86,5 +118,18 @@ document.querySelectorAll('.case').forEach(sec=>{
   sec.addEventListener('click', e=>{
     if (e.target.closest('button,a')) return;
     openCase(sec);
+  });
+});
+
+/* filtering */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.case').forEach(c=>{
+      const cat = c.dataset.cat;
+      c.style.display = (f==='all' || f===cat) ? '' : 'none';
+    });
   });
 });

@@ -63,14 +63,26 @@
 
     <!-- SHOWREEL -->
     <div id="showreel" class="wrap">
+      <!-- FILTRO -->
+      <div class="filterbar reveal">
+        <button class="filter-btn active" data-filter="all">Tutti</button>
+        <button class="filter-btn" data-filter="game">Game Art & Dev</button>
+        <button class="filter-btn" data-filter="viz">3D Visualization</button>
+        <button class="filter-btn" data-filter="motion">Motion</button>
+      </div>
+
       <!-- 1 -->
       <section class="case snap-child reveal"
+        data-cat="motion"
         data-title="Alan Walker Remix - Beautiful Nightmare"
         data-desc="Animazione e montaggio del remix musicale."
+        data-tools="Premiere, After Effects"
+        data-note="Ho cercato di dare respiro alle transizioni per valorizzare ritmo e texture sonore."
         data-images="assets/Screenshot 2025-10-12 224346.png"
         data-src="assets/Screenshot 2025-10-12 224346.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Alan Walker Remix</h3>
           <p>Animazione e montaggio del remix musicale.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -79,12 +91,16 @@
 
       <!-- 2 -->
       <section class="case snap-child reveal"
+        data-cat="viz"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulazione."
+        data-tools="Blender, Substance"
+        data-note="Studio di livree e materiali PBR per mantenere fedeltà al brand."
         data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png"
         data-src="assets/Screenshot 2025-10-12 204155.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Treni Trenitalia</h3>
           <p>Modellazione e texturing di treni per simulazione.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -93,27 +109,35 @@
 
       <!-- 3 -->
       <section class="case snap-child reveal"
+        data-cat="game"
         data-title="Team Treni Low Poly"
         data-desc="Asset low poly per videogioco in stile Railway Runner."
+        data-tools="Blender, Unity"
+        data-note="Palette compressa e silhouette leggibili per gameplay mobile."
         data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png"
         data-src="assets/Screenshot 2025-06-05 221951.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Team Treni Low Poly</h3>
           <p>Asset low poly per videogioco in stile Railway Runner.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
 
-      <!-- 4 (ha video) -->
+      <!-- 4 (video inclusi) -->
       <section class="case snap-child reveal"
+        data-cat="motion"
         data-title="Oblivion Hospital"
         data-desc="Animazioni 3D e rendering della struttura ospedaliera."
+        data-tools="Blender, UE5"
+        data-note="Camera lenta e luci fredde per creare tensione psicologica."
         data-images="assets/scena - background menù - ospedale.png"
         data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4"
         data-src="assets/scena - background menù - ospedale.png">
         <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Oblivion Hospital</h3>
           <p>Animazioni 3D e rendering della struttura ospedaliera.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -122,12 +146,16 @@
 
       <!-- 5 -->
       <section class="case snap-child reveal"
+        data-cat="game"
         data-title="Soldier Walker"
         data-desc="Personaggio 3D per progetto di gioco o animazione."
+        data-tools="Blender, Substance"
+        data-note="Ho lavorato sul rapporto tra placca metallica e tessuti per contrasto materico."
         data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
         data-src="assets/Screenshot 2025-10-12 205615.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Soldier Walker</h3>
           <p>Personaggio 3D per progetto di gioco o animazione.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -136,12 +164,16 @@
 
       <!-- 6 -->
       <section class="case snap-child reveal"
+        data-cat="viz"
         data-title="Salotto"
         data-desc="Render fotorealistico di un ambiente interno moderno."
+        data-tools="Blender, Cycles"
+        data-note="Key light calda e rim più freddo per dare profondità senza perdere morbidezza."
         data-images="assets/untitled_1.png"
         data-src="assets/untitled_1.png">
         <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Salotto</h3>
           <p>Render fotorealistico di un ambiente interno moderno.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -150,12 +182,16 @@
 
       <!-- 7 -->
       <section class="case snap-child reveal"
+        data-cat="viz"
         data-title="Macchina Futuristica"
         data-desc="Concept car futuristica modellata in Blender."
+        data-tools="Blender, Photoshop"
+        data-note="Linee tese e cut riflettenti: ispirazione synthwave con materiali anodizzati."
         data-images="assets/Screenshot_20251012_214749_Drive.jpg"
         data-src="assets/Screenshot_20251012_214749_Drive.jpg">
         <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Macchina Futuristica</h3>
           <p>Concept car futuristica modellata in Blender.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -164,12 +200,16 @@
 
       <!-- 8 -->
       <section class="case snap-child reveal"
+        data-cat="game"
         data-title="Città Low Poly"
         data-desc="Città stilizzata low poly con illuminazione notturna."
+        data-tools="Blender"
+        data-note="Ho puntato su volumetrie semplici + neon per una lettura immediata."
         data-images="assets/Screenshot 2025-10-12 203652.png"
         data-src="assets/Screenshot 2025-10-12 203652.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Città Low Poly</h3>
           <p>Città stilizzata low poly con illuminazione notturna.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -178,12 +218,16 @@
 
       <!-- 9 -->
       <section class="case snap-child reveal"
+        data-cat="viz"
         data-title="Pianeti"
         data-desc="Composizione spaziale con pianeti e luce volumetrica."
+        data-tools="Blender"
+        data-note="Contrasto scala-luce per senso di vastità; ho mantenuto grana sottile per atmosfera."
         data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png"
         data-src="assets/Screenshot 2025-10-12 203921.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Pianeti</h3>
           <p>Composizione spaziale con pianeti e luce volumetrica.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -192,12 +236,16 @@
 
       <!-- 10 -->
       <section class="case snap-child reveal"
+        data-cat="viz"
         data-title="Star Destroyer"
         data-desc="Modellazione navicella ispirata all’universo Star Wars."
+        data-tools="Blender, Photoshop"
+        data-note="Edge highlight e micro-bevel per dare realismo alla scala del mezzo."
         data-images="assets/Screenshot 2025-10-12 210314.png"
         data-src="assets/Screenshot 2025-10-12 210314.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
         <div class="case-info">
+          <div class="badges"></div>
           <h3 class="glitchable">Star Destroyer</h3>
           <p>Modellazione navicella ispirata all’universo Star Wars.</p>
           <button class="btn small open-modal">Apri galleria</button>
@@ -205,7 +253,7 @@
       </section>
     </div>
 
-    <!-- INFO: unico pannello con due blocchi -->
+    <!-- INFO unificata -->
     <section id="info" class="wrap section info-section snap-child reveal">
       <div class="panel info-card">
         <div class="info-grid">
@@ -250,8 +298,25 @@
       <div class="content" role="document">
         <button id="closeModal" aria-label="Chiudi">✕</button>
         <div id="modalInner"></div>
+        <div class="modal-meta">
+          <div id="modalTools" class="toolchips"></div>
+          <blockquote id="modalNote" class="author-note"></blockquote>
+        </div>
         <div class="info" id="modalInfo"></div>
       </div>
+    </div>
+
+    <!-- Firma/Watermark personale -->
+    <div class="signature" aria-hidden="true">
+      <svg viewBox="0 0 300 80">
+        <path d="M10,50 C40,10 80,70 110,30 S180,70 210,40 260,30 290,50"
+              fill="none" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="grad" x1="0" x2="1">
+            <stop offset="0" stop-color="#00baff"/><stop offset="1" stop-color="#0070ff"/>
+          </linearGradient>
+        </defs>
+      </svg>
     </div>
 
     <script src="script.js"></script>
