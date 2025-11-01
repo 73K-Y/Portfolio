@@ -1,14 +1,32 @@
+/* ====== elementi ====== */
 const projectsTrack = document.getElementById('projectsTrack');
-const projectsGrid = document.getElementById('projectsGrid') || projectsTrack; // fallback
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
 const closeModal = document.getElementById('closeModal');
 const backdrop = document.getElementById('modalBackdrop');
+const progress = document.getElementById('progress');
+const cursorGlow = document.getElementById('cursorGlow');
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* ---------- MODAL con galleria (immagini + video) ---------- */
+/* ====== cursor glow segui mouse ====== */
+window.addEventListener('pointermove', e=>{
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top  = e.clientY + 'px';
+});
+
+/* ====== progress bar scroll ====== */
+function updateProgress(){
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const h = (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+  const pct = Math.max(0, Math.min(1, scrollTop / h));
+  progress.style.width = (pct*100) + '%';
+}
+document.addEventListener('scroll', updateProgress);
+updateProgress();
+
+/* ====== MODAL con galleria (immagini + video) ====== */
 function openModal(src, title, desc, extras = []) {
   modalInner.innerHTML = '';
   modalInfo.textContent = `${title} — ${desc}`;
@@ -22,30 +40,22 @@ function openModal(src, title, desc, extras = []) {
     const el = document.createElement(isVideo ? 'video' : 'img');
     el.src = url;
     el.style.width = '100%';
-    if (isVideo) { el.controls = true; el.autoplay = true; el.loop = true; }
+    if (isVideo) { el.controls = true; el.autoplay = true; el.loop = true; el.playsInline = true; }
     mainWrap.appendChild(el);
   };
-
   loadMain(src);
 
-  // Thumbs
   if (extras.length) {
     const bar = document.createElement('div');
     bar.className = 'thumb-bar';
-    bar.style.display = 'flex';
-    bar.style.flexWrap = 'wrap';
-    bar.style.gap = '8px';
-    bar.style.marginTop = '10px';
-
-    extras.forEach(u => {
+    Object.assign(bar.style, {display:'flex',flexWrap:'wrap',gap:'8px',marginTop:'10px'});
+    extras.forEach(u=>{
       const isVid = u.toLowerCase().endsWith('.mp4');
       const t = document.createElement(isVid ? 'video' : 'img');
       t.src = u;
-      if (isVid) { t.muted = true; t.loop = true; t.autoplay = true; }
-      Object.assign(t.style, {
-        width:'90px',height:'60px',objectFit:'cover',cursor:'pointer',borderRadius:'6px',opacity: u===src?'1':'0.7'
-      });
-      t.addEventListener('click', () => {
+      if (isVid){ t.muted = true; t.loop = true; t.autoplay = true; t.playsInline = true; }
+      Object.assign(t.style, {width:'90px',height:'60px',objectFit:'cover',cursor:'pointer',borderRadius:'6px',opacity: u===src?'1':'.7'});
+      t.addEventListener('click', ()=>{
         loadMain(u);
         bar.querySelectorAll('img,video').forEach(n=>n.style.opacity='.7');
         t.style.opacity = '1';
@@ -69,7 +79,6 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(
 function showProject(card){
   const title = card.dataset.title || 'Progetto';
   const desc = card.dataset.desc || '';
-  // extras: immagini e poi video (se presenti)
   let extras = [];
   if (card.dataset.images) extras = card.dataset.images.split('|').map(s=>s.trim());
   if (card.dataset.videos) extras = [...extras, ...card.dataset.videos.split('|').map(s=>s.trim())];
@@ -77,7 +86,7 @@ function showProject(card){
   openModal(src, title, desc, extras);
 }
 
-/* ---------- Interazioni: click + tastiera ---------- */
+/* ====== Interazioni: click + tastiera ====== */
 (projectsTrack || document).addEventListener('click', e => {
   const card = e.target.closest('.project');
   if (!card) return;
@@ -92,19 +101,17 @@ function showProject(card){
   }
 });
 
-/* ---------- Reel orizzontale: drag + wheel + frecce ---------- */
+/* ====== Reel orizzontale: drag + wheel + frecce ====== */
 if (projectsTrack) {
   let isDown = false, startX = 0, scrollLeft = 0;
   projectsTrack.addEventListener('mousedown', (e)=>{ isDown=true; startX=e.pageX - projectsTrack.offsetLeft; scrollLeft=projectsTrack.scrollLeft; projectsTrack.classList.add('grabbing'); });
   window.addEventListener('mouseup', ()=>{ isDown=false; projectsTrack.classList.remove('grabbing'); });
-  projectsTrack.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - projectsTrack.offsetLeft; const walk = (x - startX)*1.2; projectsTrack.scrollLeft = scrollLeft - walk; });
-  // wheel -> scroll X
+  projectsTrack.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - projectsTrack.offsetLeft; const walk=(x-startX)*1.2; projectsTrack.scrollLeft = scrollLeft - walk; });
   projectsTrack.addEventListener('wheel', (e)=>{ if(Math.abs(e.deltaY)>Math.abs(e.deltaX)) { projectsTrack.scrollLeft += e.deltaY; e.preventDefault(); } }, {passive:false});
-  // keyboard arrows
-  projectsTrack.addEventListener('keydown',(e)=>{ if(e.key==='ArrowRight') projectsTrack.scrollBy({left:300,behavior:'smooth'}); if(e.key==='ArrowLeft') projectsTrack.scrollBy({left:-300,behavior:'smooth'}); });
+  projectsTrack.addEventListener('keydown',(e)=>{ if(e.key==='ArrowRight') projectsTrack.scrollBy({left:320,behavior:'smooth'}); if(e.key==='ArrowLeft') projectsTrack.scrollBy({left:-320,behavior:'smooth'}); });
 }
 
-/* ---------- Tilt 3D + preview video on hover ---------- */
+/* ====== Tilt 3D + preview video on hover (come nei reel) ====== */
 document.querySelectorAll('.card-3d').forEach(card=>{
   // tilt
   card.addEventListener('mousemove', (e)=>{
@@ -124,8 +131,10 @@ document.querySelectorAll('.card-3d').forEach(card=>{
       preview = document.createElement('video');
       preview.src = vids[0];
       preview.muted = true; preview.loop = true; preview.autoplay = true; preview.playsInline = true;
-      preview.style.position='absolute'; preview.style.inset='0'; preview.style.width='100%'; preview.style.height='100%';
-      preview.style.objectFit='cover'; preview.style.opacity='0'; preview.style.transition='opacity .2s ease';
+      Object.assign(preview.style,{
+        position:'absolute', inset:'0', width:'100%', height:'100%', objectFit:'cover',
+        opacity:'0', transition:'opacity .2s ease'
+      });
       card.appendChild(preview);
       requestAnimationFrame(()=> preview.style.opacity='1');
     });
@@ -136,10 +145,13 @@ document.querySelectorAll('.card-3d').forEach(card=>{
   }
 });
 
-/* ---------- Reveal on scroll ---------- */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(en=>{
-    if(en.isIntersecting){ en.target.classList.add('is-visible'); io.unobserve(en.target); }
+/* ====== Magnet buttons (micro-interaction) ====== */
+document.querySelectorAll('.magnet').forEach(btn=>{
+  btn.addEventListener('mousemove', e=>{
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width/2);
+    const y = e.clientY - (r.top + r.height/2);
+    btn.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`;
   });
-},{threshold:.2});
-document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+  btn.addEventListener('mouseleave', ()=> btn.style.transform='translate(0,0)');
+});
