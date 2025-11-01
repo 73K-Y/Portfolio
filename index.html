@@ -44,7 +44,7 @@
       </nav>
     </header>
 
-    <!-- MARQUEE breve, personale e in loop (pill ripetute una seconda volta) -->
+    <!-- MARQUEE breve, personale e in loop (pill ripetute due volte) -->
     <div class="marquee" id="topTicker" aria-label="Processo e skill">
       <div class="marquee__rail">
         <div class="marquee__track">
@@ -285,24 +285,34 @@
       </section>
     </div>
 
-    <!-- COMING SOON -->
-    <section class="wrap coming-section" aria-labelledby="comingTitle">
+    <!-- COMING SOON: card verticali come le altre, con overlay -->
+    <section class="wrap" aria-labelledby="comingTitle">
       <h3 id="comingTitle" class="coming-title">Coming soon</h3>
+    </section>
 
-      <div class="coming-grid">
-        <figure class="coming-card">
-          <img src="assets/BrainEXEMiniature.png" alt="Brain.EXE — nuovo progetto in arrivo" />
-          <figcaption class="overlay">
-            <span class="label">In arrivo</span>
-          </figcaption>
-        </figure>
+    <section class="case case-coming snap-child reveal"
+      data-cat="viz"
+      data-title="Brain.EXE"
+      data-desc="Nuovo progetto personale — teaser"
+      data-src="assets/BrainEXEMiniature.png">
+      <div class="case-bg" style="--bg:url('assets/BrainEXEMiniature.png')"></div>
+      <div class="case-overlay"><span class="label">In arrivo</span></div>
+      <div class="case-info">
+        <h3 class="glitchable">Brain.EXE</h3>
+        <p>Nuovo progetto personale — teaser.</p>
+      </div>
+    </section>
 
-        <figure class="coming-card">
-          <img src="assets/LogoTHOMODportfolio.png" alt="TOMHODA Studios — nuovo progetto in arrivo" />
-          <figcaption class="overlay">
-            <span class="label">In arrivo</span>
-          </figcaption>
-        </figure>
+    <section class="case case-coming snap-child reveal"
+      data-cat="viz"
+      data-title="TOMHODA Studios"
+      data-desc="Identità & reel — teaser"
+      data-src="assets/LogoTHOMODportfolio.png">
+      <div class="case-bg" style="--bg:url('assets/LogoTHOMODportfolio.png')"></div>
+      <div class="case-overlay"><span class="label">In arrivo</span></div>
+      <div class="case-info">
+        <h3 class="glitchable">TOMHODA Studios</h3>
+        <p>Identità & reel — teaser.</p>
       </div>
     </section>
 
