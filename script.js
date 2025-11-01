@@ -10,8 +10,9 @@ const cursorGlow = document.getElementById('cursorGlow');
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* ====== cursor glow segui mouse ====== */
+/* ====== cursor glow ====== */
 window.addEventListener('pointermove', e=>{
+  if (!cursorGlow) return;
   cursorGlow.style.left = e.clientX + 'px';
   cursorGlow.style.top  = e.clientY + 'px';
 });
@@ -21,7 +22,7 @@ function updateProgress(){
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   const h = (document.documentElement.scrollHeight - document.documentElement.clientHeight);
   const pct = Math.max(0, Math.min(1, scrollTop / h));
-  progress.style.width = (pct*100) + '%';
+  if (progress) progress.style.width = (pct*100) + '%';
 }
 document.addEventListener('scroll', updateProgress);
 updateProgress();
@@ -86,7 +87,7 @@ function showProject(card){
   openModal(src, title, desc, extras);
 }
 
-/* ====== Interazioni: click + tastiera ====== */
+/* ====== Click / Tastiera ====== */
 (projectsTrack || document).addEventListener('click', e => {
   const card = e.target.closest('.project');
   if (!card) return;
@@ -101,19 +102,43 @@ function showProject(card){
   }
 });
 
-/* ====== Reel orizzontale: drag + wheel + frecce ====== */
+/* ====== Reel orizzontale: drag + wheel + frecce + inerzia ====== */
 if (projectsTrack) {
-  let isDown = false, startX = 0, scrollLeft = 0;
-  projectsTrack.addEventListener('mousedown', (e)=>{ isDown=true; startX=e.pageX - projectsTrack.offsetLeft; scrollLeft=projectsTrack.scrollLeft; projectsTrack.classList.add('grabbing'); });
-  window.addEventListener('mouseup', ()=>{ isDown=false; projectsTrack.classList.remove('grabbing'); });
-  projectsTrack.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - projectsTrack.offsetLeft; const walk=(x-startX)*1.2; projectsTrack.scrollLeft = scrollLeft - walk; });
-  projectsTrack.addEventListener('wheel', (e)=>{ if(Math.abs(e.deltaY)>Math.abs(e.deltaX)) { projectsTrack.scrollLeft += e.deltaY; e.preventDefault(); } }, {passive:false});
-  projectsTrack.addEventListener('keydown',(e)=>{ if(e.key==='ArrowRight') projectsTrack.scrollBy({left:320,behavior:'smooth'}); if(e.key==='ArrowLeft') projectsTrack.scrollBy({left:-320,behavior:'smooth'}); });
+  let isDown=false, startX=0, scrollLeft=0, vel=0, raf=null;
+
+  const momentum = ()=>{
+    projectsTrack.scrollLeft += vel;
+    vel *= 0.94;
+    if(Math.abs(vel) > .4) raf = requestAnimationFrame(momentum);
+    else cancelAnimationFrame(raf), raf=null;
+  };
+
+  projectsTrack.addEventListener('mousedown', (e)=>{
+    isDown=true; startX=e.pageX; scrollLeft=projectsTrack.scrollLeft; cancelAnimationFrame(raf);
+  });
+  window.addEventListener('mouseup', ()=>{
+    if(!isDown) return; isDown=false; raf = requestAnimationFrame(momentum);
+  });
+  projectsTrack.addEventListener('mousemove', (e)=>{
+    if(!isDown) return;
+    const dx = e.pageX - startX;
+    projectsTrack.scrollLeft = scrollLeft - dx;
+    vel = -(dx - (scrollLeft - projectsTrack.scrollLeft));
+  });
+  projectsTrack.addEventListener('wheel', (e)=>{
+    if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+      e.preventDefault();
+      projectsTrack.scrollLeft += e.deltaY * 0.9;
+    }
+  }, {passive:false});
+  projectsTrack.addEventListener('keydown',(e)=>{
+    if(e.key==='ArrowRight') projectsTrack.scrollBy({left:320,behavior:'smooth'});
+    if(e.key==='ArrowLeft')  projectsTrack.scrollBy({left:-320,behavior:'smooth'});
+  });
 }
 
-/* ====== Tilt 3D + preview video on hover (come nei reel) ====== */
+/* ====== 3D Tilt + preview video on hover ====== */
 document.querySelectorAll('.card-3d').forEach(card=>{
-  // tilt
   card.addEventListener('mousemove', (e)=>{
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left)/r.width - .5;
@@ -122,7 +147,7 @@ document.querySelectorAll('.card-3d').forEach(card=>{
   });
   card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
 
-  // video preview se presente
+  // hover preview video se presente
   const vids = card.dataset.videos ? card.dataset.videos.split('|').map(s=>s.trim()) : [];
   if (vids.length){
     let preview;
@@ -145,13 +170,36 @@ document.querySelectorAll('.card-3d').forEach(card=>{
   }
 });
 
-/* ====== Magnet buttons (micro-interaction) ====== */
-document.querySelectorAll('.magnet').forEach(btn=>{
-  btn.addEventListener('mousemove', e=>{
-    const r = btn.getBoundingClientRect();
-    const x = e.clientX - (r.left + r.width/2);
-    const y = e.clientY - (r.top + r.height/2);
-    btn.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`;
+/* ====== STAGGER REVEAL ====== */
+const revealIO = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    const delay = parseFloat(en.target.dataset.delay || '0');
+    en.target.style.transitionDelay = `${delay}s`;
+    en.target.classList.add('is-visible');
+    revealIO.unobserve(en.target);
   });
-  btn.addEventListener('mouseleave', ()=> btn.style.transform='translate(0,0)');
-});
+},{threshold:0.18});
+document.querySelectorAll('.reveal, .card-3d, .section-title').forEach(el=> revealIO.observe(el));
+
+/* ====== Parallax leggero ====== */
+const parallaxEls = document.querySelectorAll('.parallax, .avatar.xl');
+let pxRAF = null;
+function onParallax(e){
+  if(pxRAF) return;
+  const x = (e.clientX / window.innerWidth) - 0.5;
+  const y = (e.clientY / window.innerHeight) - 0.5;
+  pxRAF = requestAnimationFrame(()=>{
+    parallaxEls.forEach(el=>{
+      el.style.transform = `translate3d(${x*8}px, ${y*6}px, 0)`;
+    });
+    pxRAF = null;
+  });
+}
+window.addEventListener('pointermove', onParallax, {passive:true});
+
+/* ====== Glitch toggle: desktop only ====== */
+const title = document.querySelector('.glitch');
+if(title && !window.matchMedia('(min-width: 900px)').matches){
+  title.classList.remove('glitch');
+}
