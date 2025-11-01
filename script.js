@@ -1,4 +1,4 @@
-/* Base */
+/* Base refs */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
@@ -10,7 +10,7 @@ const progress   = document.getElementById('progress');
 const yearSpan   = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* Progress bar */
+/* Scroll progress */
 function updateProgress(){
   const st = document.documentElement.scrollTop || document.body.scrollTop;
   const h  = (document.documentElement.scrollHeight - document.documentElement.clientHeight) || 1;
@@ -24,14 +24,14 @@ const io = new IntersectionObserver((entries,obs)=>{
 },{threshold:0.18});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* Categoria → badge */
+/* Category badges */
 const catLabel = { game:'Game Art', viz:'3D Viz', motion:'Motion' };
 document.querySelectorAll('.case').forEach(c=>{
   const holder = c.querySelector('.badges'); const cat = c.dataset.cat;
   if(holder && cat){ const b=document.createElement('span'); b.className=`badge ${cat}`; b.textContent=catLabel[cat]||cat; holder.appendChild(b); }
 });
 
-/* Modal gallery (immagini + video con thumb) */
+/* Modal gallery */
 function openModal(src, title, desc, extras=[], tools=[], note=''){
   modalInner.innerHTML=''; modalTools.innerHTML=''; modalNote.textContent=''; modalInfo.textContent = `${title} — ${desc}`;
   const main=document.createElement('div'); modalInner.appendChild(main);
@@ -84,7 +84,7 @@ document.querySelectorAll('.case').forEach(sec=>{
   sec.addEventListener('click', e=>{ if(e.target.closest('button,a')) return; openCase(sec); });
 });
 
-/* Filtri */
+/* Filters */
 document.querySelectorAll('.filter-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -94,11 +94,11 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
   });
 });
 
-/* ===== Animazioni leggere stile 495design ===== */
+/* ===== Animazioni leggere ===== */
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
-/* Parallax su [data-parallax] */
+/* Parallax */
 const pxNodes = reduce ? [] : Array.from(document.querySelectorAll('[data-parallax]')).map(el=>{
   return { el, speed: Math.min(0.25, Math.max(-0.25, parseFloat(el.dataset.parallax)||0.1)) };
 });
@@ -159,3 +159,24 @@ if (!reduce && !isTouch){
     btn.addEventListener('mouseleave', ()=>{ btn.style.transform='translate(0,0)'; });
   });
 }
+
+/* ===== Marquee loop perfetto ===== */
+(function(){
+  const rail = document.querySelector('.marquee__rail');
+  const track = document.querySelector('.marquee__track');
+  if(!rail || !track) return;
+
+  const clone = track.cloneNode(true);
+  clone.setAttribute('aria-hidden','true');
+  rail.appendChild(clone);
+
+  const checkWidth = () => {
+    const totalW = track.scrollWidth + clone.scrollWidth;
+    if(totalW < rail.offsetWidth * 2){
+      const clone2 = track.cloneNode(true);
+      clone2.setAttribute('aria-hidden','true');
+      rail.appendChild(clone2);
+    }
+  };
+  requestAnimationFrame(checkWidth);
+})();

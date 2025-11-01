@@ -6,11 +6,10 @@
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
     <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
 
-    <!-- Barra browser trasparente (Android) + dark UI hint -->
+    <!-- Barra mobile trasparente -->
     <meta name="theme-color" content="#00000000" />
     <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: light)" />
-    <!-- iOS full-bleed -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="dark light">
@@ -47,13 +46,20 @@
       </nav>
     </header>
 
-    <!-- Marquee payoff -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__inner">
-        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
-        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
-        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
-        <span>Creo mondi 3D • Game Art • Rendering • Motion • </span>
+    <!-- MARQUEE NUOVO -->
+    <div class="marquee" id="topTicker" aria-label="Payoff scorrevole">
+      <div class="marquee__rail">
+        <div class="marquee__track">
+          <span class="pill"><i>✨</i> Creo mondi 3D</span>
+          <span class="pill"><i>🎮</i> Game Art</span>
+          <span class="pill"><i>🏙️</i> 3D Visualization</span>
+          <span class="pill"><i>🎬</i> Motion</span>
+          <span class="pill"><i>🧪</i> VFX</span>
+          <span class="pill"><i>🛠️</i> Blender</span>
+          <span class="pill"><i>⚙️</i> Unreal Engine</span>
+          <span class="pill"><i>🎨</i> Substance</span>
+        </div>
+        <!-- Track clonata via JS per loop continuo -->
       </div>
     </div>
 
@@ -272,7 +278,7 @@
       </section>
     </div>
 
-    <!-- INFO (About + Contatti) -->
+    <!-- INFO -->
     <section id="info" class="wrap section info-section snap-child reveal">
       <div class="panel info-card">
         <div class="info-grid">
