@@ -1,4 +1,4 @@
-/* Base refs */
+/* Modal & base refs */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
@@ -6,17 +6,8 @@ const modalTools = document.getElementById('modalTools');
 const modalNote  = document.getElementById('modalNote');
 const closeModal = document.getElementById('closeModal');
 const backdrop   = document.getElementById('modalBackdrop');
-const progress   = document.getElementById('progress');
 const yearSpan   = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-/* Scroll progress */
-function updateProgress(){
-  const st = document.documentElement.scrollTop || document.body.scrollTop;
-  const h  = (document.documentElement.scrollHeight - document.documentElement.clientHeight) || 1;
-  if (progress) progress.style.width = (st/h*100) + '%';
-}
-document.addEventListener('scroll', updateProgress, {passive:true}); updateProgress();
 
 /* Reveal */
 const io = new IntersectionObserver((entries,obs)=>{
@@ -94,68 +85,28 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
   });
 });
 
-/* ===== Animazioni leggere ===== */
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* --- DISATTIVATE TUTTE LE ANIMAZIONI IMMAGINE --- */
+/* Niente parallax, niente tilt, niente hover sulle immagini */
 
-/* Parallax (immagini senza hover; solo lieve parallax) */
-const pxNodes = reduce ? [] : Array.from(document.querySelectorAll('[data-parallax]')).map(el=>{
-  return { el, speed: Math.min(0.15, Math.max(-0.15, parseFloat(el.dataset.parallax)||0.08)) };
-});
-let ticking = false;
-function parallaxRAF(){
-  const vh = window.innerHeight;
-  for(const n of pxNodes){
-    const r = n.el.getBoundingClientRect();
-    if (r.top < vh && r.bottom > 0){
-      const amt = (r.top - vh/2) * n.speed;
-      n.el.style.transform = `translate3d(0, ${amt.toFixed(2)}px, 0)`;
-    }
-  }
-  ticking = false;
-}
-function onScroll(){ if(!ticking){ requestAnimationFrame(parallaxRAF); ticking = true; } }
-if (pxNodes.length){ document.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
-
-/* DISABILITATO Tilt 3D per evitare animazioni sulle immagini */
-// (Voluto: niente rotazioni o hover sulla card)
-
-/* Bottone magnetico (resta leggero e non tocca le immagini) */
-if (!reduce){
-  document.querySelectorAll('.btn.magnetic').forEach(btn=>{
-    const str = 18;
-    let rafId = null;
-    btn.addEventListener('mousemove', (e)=>{
-      const r = btn.getBoundingClientRect();
-      const x = (e.clientX - (r.left + r.width/2)) / (r.width/2);
-      const y = (e.clientY - (r.top  + r.height/2)) / (r.height/2);
-      if(!rafId){
-        rafId = requestAnimationFrame(()=>{
-          btn.style.transform = `translate(${x*str}px, ${y*str}px)`;
-          rafId = null;
-        });
-      }
-    });
-    btn.addEventListener('mouseleave', ()=>{ btn.style.transform='translate(0,0)'; });
-  });
-}
-
-/* ===== Marquee loop perfetto ===== */
+/* --- Marquee loop perfetto (una sola barra) --- */
 (function(){
   const rail = document.querySelector('.marquee__rail');
   const track = document.querySelector('.marquee__track');
   if(!rail || !track) return;
 
-  const clone = track.cloneNode(true);
-  clone.setAttribute('aria-hidden','true');
-  rail.appendChild(clone);
+  // Clone 1
+  const clone1 = track.cloneNode(true);
+  clone1.setAttribute('aria-hidden','true');
+  rail.appendChild(clone1);
 
-  const checkWidth = () => {
-    const totalW = track.scrollWidth + clone.scrollWidth;
-    if(totalW < rail.offsetWidth * 2){
+  // Se necessario, clone 2 per contenuti corti
+  const ensureWidth = () => {
+    const total = Array.from(rail.children).reduce((acc,el)=>acc+el.scrollWidth,0);
+    if(total < rail.offsetWidth * 2){
       const clone2 = track.cloneNode(true);
       clone2.setAttribute('aria-hidden','true');
       rail.appendChild(clone2);
     }
   };
-  requestAnimationFrame(checkWidth);
+  requestAnimationFrame(ensureWidth);
 })();

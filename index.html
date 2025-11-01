@@ -8,8 +8,6 @@
 
     <!-- Barra mobile trasparente -->
     <meta name="theme-color" content="#00000000" />
-    <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#00000000" media="(prefers-color-scheme: light)" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="dark light">
@@ -20,8 +18,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="snap">
-    <!-- Progress bar unica -->
-    <div class="progress" id="progress"></div>
+    <!-- RIMOSSA la progress bar per evitare doppia barra -->
 
     <header class="nav-glass">
       <div class="brand">
@@ -49,7 +46,7 @@
       </nav>
     </header>
 
-    <!-- MARQUEE senza emoji, senza bordi -->
+    <!-- MARQUEE (unica barra, no emoji) -->
     <div class="marquee" id="topTicker" aria-label="Payoff scorrevole">
       <div class="marquee__rail">
         <div class="marquee__track">
@@ -62,7 +59,7 @@
           <span class="pill">Unreal Engine</span>
           <span class="pill">Substance</span>
         </div>
-        <!-- Track clonata via JS per loop continuo -->
+        <!-- La track viene clonata via JS per il loop -->
       </div>
     </div>
 
@@ -83,7 +80,7 @@
           </div>
         </div>
         <div class="hero-right">
-          <figure class="avatar xl fixed-size" data-parallax="0.08">
+          <figure class="avatar xl fixed-size">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
           </figure>
         </div>
@@ -99,7 +96,7 @@
         <button class="filter-btn" data-filter="motion">Motion</button>
       </div>
 
-      <!-- 1 -->
+      <!-- Ogni case: nessuna animazione immagine/parallax -->
       <section class="case snap-child reveal"
         data-cat="motion"
         data-title="Alan Walker Remix - Beautiful Nightmare"
@@ -108,7 +105,7 @@
         data-note="Transizioni respirate per valorizzare ritmo e texture sonore."
         data-images="assets/Screenshot 2025-10-12 224346.png"
         data-src="assets/Screenshot 2025-10-12 224346.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Alan Walker Remix</h3>
@@ -117,7 +114,6 @@
         </div>
       </section>
 
-      <!-- 2 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Treni Trenitalia"
@@ -126,7 +122,7 @@
         data-note="Livree fedeli al brand e PBR pulito."
         data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png"
         data-src="assets/Screenshot 2025-10-12 204155.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Treni Trenitalia</h3>
@@ -135,7 +131,6 @@
         </div>
       </section>
 
-      <!-- 3 -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Team Treni Low Poly"
@@ -144,7 +139,7 @@
         data-note="Palette compressa, silhouette leggibili per mobile."
         data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png"
         data-src="assets/Screenshot 2025-06-05 221951.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Team Treni Low Poly</h3>
@@ -153,7 +148,6 @@
         </div>
       </section>
 
-      <!-- 4 -->
       <section class="case snap-child reveal"
         data-cat="motion"
         data-title="Oblivion Hospital"
@@ -163,7 +157,7 @@
         data-images="assets/scena - background menù - ospedale.png"
         data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4"
         data-src="assets/scena - background menù - ospedale.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Oblivion Hospital</h3>
@@ -172,7 +166,6 @@
         </div>
       </section>
 
-      <!-- 5 -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
@@ -181,7 +174,7 @@
         data-note="Contrasto tra metalli e tessuti per varietà materica."
         data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
         data-src="assets/Screenshot 2025-10-12 205615.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Soldier Walker</h3>
@@ -190,7 +183,6 @@
         </div>
       </section>
 
-      <!-- 6 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Salotto"
@@ -199,7 +191,7 @@
         data-note="Key light calda + rim freddo per profondità."
         data-images="assets/untitled_1.png"
         data-src="assets/untitled_1.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/untitled_1.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Salotto</h3>
@@ -208,7 +200,6 @@
         </div>
       </section>
 
-      <!-- 7 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Macchina Futuristica"
@@ -217,7 +208,7 @@
         data-note="Linee tese e cut riflettenti ispirazione synthwave."
         data-images="assets/Screenshot_20251012_214749_Drive.jpg"
         data-src="assets/Screenshot_20251012_214749_Drive.jpg">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Macchina Futuristica</h3>
@@ -226,7 +217,6 @@
         </div>
       </section>
 
-      <!-- 8 -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Città Low Poly"
@@ -235,7 +225,7 @@
         data-note="Volumetrie semplici + neon per lettura immediata."
         data-images="assets/Screenshot 2025-10-12 203652.png"
         data-src="assets/Screenshot 2025-10-12 203652.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Città Low Poly</h3>
@@ -244,7 +234,6 @@
         </div>
       </section>
 
-      <!-- 9 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Pianeti"
@@ -253,7 +242,7 @@
         data-note="Contrasto scala-luce per senso di vastità."
         data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png"
         data-src="assets/Screenshot 2025-10-12 203921.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Pianeti</h3>
@@ -262,7 +251,6 @@
         </div>
       </section>
 
-      <!-- 10 -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
@@ -271,7 +259,7 @@
         data-note="Edge highlight + micro-bevel per scala credibile."
         data-images="assets/Screenshot 2025-10-12 210314.png"
         data-src="assets/Screenshot 2025-10-12 210314.png">
-        <div class="case-bg" data-parallax="0.12" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Star Destroyer</h3>
