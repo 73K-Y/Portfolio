@@ -101,23 +101,30 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 }
 
 /* Titolo hero: 2 blocchi, nessun overflow */
+/* Titolo hero: 2 righe brevi e stabili */
 .hero-title{
   margin:0 0 10px;
   line-height:1.06;
   letter-spacing:-0.015em;
-  max-width: 32ch;                 /* larghezza visiva del titolo */
-  word-break: normal;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  text-wrap: balance;
+  max-width:22ch;            /* più stretto = 2 righe sicure */
+  overflow-wrap:break-word;
+  hyphens:auto;
+  text-wrap:balance;
 }
-.hero-title .line{
-  display:block;
-  white-space:normal;               /* niente nowrap -> non sborda */
-}
+.hero-title .line{ display:block; }
 
-/* dimensione del titolo, fluida */
-.xxl{font-size:clamp(32px,4.2vw,48px)}
+/* dimensione fluida del titolo */
+.xxl{ font-size: clamp(32px, 4.2vw, 48px); }
+
+/* breakpoint: tieni 2 righe anche su schermi piccoli */
+@media (max-width: 900px){
+  .hero-title{ max-width:20ch; }
+  .xxl{ font-size: clamp(28px, 6vw, 40px); }
+}
+@media (max-width: 600px){
+  .hero-title{ max-width:18ch; }
+  .xxl{ font-size: clamp(26px, 7vw, 36px); }
+}
 
 .gradient-title{
   background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
