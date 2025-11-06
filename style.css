@@ -112,18 +112,33 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 
 /* >>> Titolo hero migliorato (righe pulite + bilanciamento) <<< */
 .hero-title{
-  max-width:18ch;            /* desktop: blocca la lunghezza riga */
   margin:0 0 10px;
   line-height:1.06;
   letter-spacing:-0.015em;
-  text-wrap:balance;         /* per browser che lo supportano */
+  /* niente max-width: lasciamo spazio alle 2 righe intere */
+  max-width: none;
+  word-break: normal;
+  overflow: visible;
+  text-wrap: balance;              /* dove supportato bilancia la riga */
 }
-.hero-title .line{display:block}
+.hero-title .line{
+  display:block;
+  white-space:nowrap;              /* la singola riga non si spezza */
+}
+.xxl{                                /* dimensione già presente: la afino */
+  font-size:clamp(34px,4.6vw,52px);
+}
 
-/* più largo su schermi medi/piccoli per evitare spezzature brutte */
-@media (max-width:1100px){ .hero-title{ max-width:22ch } }
-@media (max-width:900px){  .hero-title{ max-width:26ch; line-height:1.08 } }
-@media (max-width:600px){  .hero-title{ max-width:28ch; line-height:1.12 } }
+/* Ridimensiono su schermi medi/piccoli per tenere le 2 righe pulite */
+@media (max-width:1100px){
+  .xxl{ font-size:clamp(32px,5vw,46px); }
+}
+@media (max-width:900px){
+  .xxl{ font-size:clamp(30px,6vw,42px); }
+}
+@media (max-width:600px){
+  .xxl{ font-size:clamp(28px,7vw,38px); line-height:1.1; }
+}
 
 /* Buttons */
 .btn{
