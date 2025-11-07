@@ -14,40 +14,50 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ====== HERO: allinea le due righe e impedisci overflow ====== */
+/* ====== HERO: adatta la riga sopra e allinea quella sotto ====== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
-  const EPS     = 0.5;   // tolleranza
-  const MAX_WS  = 18;    // word-spacing max per riga sotto
-  const MAX_LS  = 0.6;   // letter-spacing +/- per rifinitura
+  const EPS       = 0.5;   // tolleranza
+  const SAFETY    = 14;    // margine di sicurezza per NON sforare
+  const MAX_WS    = 18;    // word-spacing massimo
+  const MAX_LS    = 0.6;   // letter-spacing fine
 
   const measure = el => el.getBoundingClientRect().width;
   const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
 
+  function limitBox(){
+    // usa BCR per includere sub-pixel + togli un piccolo margine
+    const w = column.getBoundingClientRect().width;
+    return Math.max(0, w - SAFETY);
+  }
+
   function tuneTop(maxBox){
-    // riduci il font-size della riga superiore se eccede la colonna
-    top.style.fontSize = ''; top.style.letterSpacing = '';
+    // reset
+    top.style.fontSize = '';
+    top.style.letterSpacing = '';
     let base = parseFloat(getComputedStyle(top).fontSize) || 32;
     let lo = 12, hi = Math.max(72, base*1.8);
+
+    // binary search su font-size finché la riga entra
     for (let i=0;i<18;i++){
       top.style.fontSize = base + 'px';
       const w = measure(top);
-      if (w <= maxBox - EPS) { lo = base; }
-      else { hi = base; }
+      if (w <= maxBox - EPS) lo = base; else hi = base;
       const next = (lo + hi) / 2;
       if (Math.abs(next - base) < 0.1) break;
       base = next;
     }
-    // micro-rifinitura se è corto/lungo di pochissimo
+
+    // rifinitura: se manca poco/avanza poco, regola letter-spacing
     const wt = measure(top);
     if (Math.abs(wt - maxBox) > EPS){
       const diff = maxBox - wt;
-      const perChar = diff / Math.max(top.textContent.length,1);
-      const ls = Math.max(-MAX_LS, Math.min(MAX_LS, perChar));
+      let ls = diff / Math.max(top.textContent.length,1);
+      ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
       top.style.letterSpacing = ls.toFixed(3) + 'px';
     }
   }
@@ -58,7 +68,7 @@ revealEls.forEach(el => io.observe(el));
     bottom.style.letterSpacing = '';
     bottom.style.wordSpacing = '';
 
-    // adatta font-size (binary search)
+    // adatta font-size alla larghezza target
     let base = parseFloat(getComputedStyle(bottom).fontSize) || 56;
     let lo = 12, hi = Math.max(110, base*2);
     for (let i=0;i<18;i++){
@@ -69,7 +79,7 @@ revealEls.forEach(el => io.observe(el));
       base = (lo + hi) / 2;
     }
 
-    // allunga con word-spacing distribuito
+    // se è ancora corta, allunga distribuendo sugli spazi
     let w = measure(bottom);
     const sp = gaps(bottom.textContent);
     if (w < target - EPS && sp > 0){
@@ -79,7 +89,7 @@ revealEls.forEach(el => io.observe(el));
       w = measure(bottom);
     }
 
-    // rifinitura fine con letter-spacing
+    // rifinitura fine
     if (Math.abs(w - target) > EPS){
       let diff = target - w;
       let ls = diff / Math.max(bottom.textContent.length,1);
@@ -89,13 +99,10 @@ revealEls.forEach(el => io.observe(el));
   }
 
   function tune(){
-    const maxBox = column.clientWidth;          // larghezza colonna sinistra
-    // 1) fai rientrare la riga superiore nella colonna
-    tuneTop(maxBox);
-
-    // 2) allinea la riga inferiore alla larghezza della superiore
+    const maxBox = limitBox();          // colonna sinistra - margine
+    tuneTop(maxBox);                    // 1) rientra la riga sopra
     const target = Math.min(measure(top), maxBox);
-    tuneBottom(target);
+    tuneBottom(target);                 // 2) allinea “È la mia firma”
   }
 
   const ro = new ResizeObserver(tune);
