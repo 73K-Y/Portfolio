@@ -1,4 +1,4 @@
-/* ====== Footer year ====== */
+/* ====== Anno footer ====== */
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
@@ -14,48 +14,33 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ====== HERO: adatta la riga sopra e allinea quella sotto ====== */
+/* ====== HERO: allinea le due righe senza sconfinare ====== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
-  const EPS       = 0.5;   // tolleranza
-  const SAFETY    = 14;    // margine di sicurezza per NON sforare
-  const MAX_WS    = 18;    // word-spacing massimo
-  const MAX_LS    = 0.6;   // letter-spacing fine
-
-  const measure = el => el.getBoundingClientRect().width;
+  const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
+  const w = el => el.getBoundingClientRect().width;
   const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
 
-  function limitBox(){
-    // usa BCR per includere sub-pixel + togli un piccolo margine
-    const w = column.getBoundingClientRect().width;
-    return Math.max(0, w - SAFETY);
-  }
+  function columnWidth() { return Math.max(0, column.getBoundingClientRect().width - SAFETY); }
 
   function tuneTop(maxBox){
-    // reset
-    top.style.fontSize = '';
-    top.style.letterSpacing = '';
+    top.style.fontSize = ''; top.style.letterSpacing = '';
     let base = parseFloat(getComputedStyle(top).fontSize) || 32;
     let lo = 12, hi = Math.max(72, base*1.8);
-
-    // binary search su font-size finché la riga entra
     for (let i=0;i<18;i++){
       top.style.fontSize = base + 'px';
-      const w = measure(top);
-      if (w <= maxBox - EPS) lo = base; else hi = base;
-      const next = (lo + hi) / 2;
-      if (Math.abs(next - base) < 0.1) break;
-      base = next;
+      const width = w(top);
+      if (width <= maxBox - EPS) lo = base; else hi = base;
+      const nxt = (lo + hi) / 2;
+      if (Math.abs(nxt - base) < 0.1) break;
+      base = nxt;
     }
-
-    // rifinitura: se manca poco/avanza poco, regola letter-spacing
-    const wt = measure(top);
-    if (Math.abs(wt - maxBox) > EPS){
-      const diff = maxBox - wt;
+    const diff = maxBox - w(top);
+    if (Math.abs(diff) > EPS){
       let ls = diff / Math.max(top.textContent.length,1);
       ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
       top.style.letterSpacing = ls.toFixed(3) + 'px';
@@ -63,35 +48,26 @@ revealEls.forEach(el => io.observe(el));
   }
 
   function tuneBottom(target){
-    // reset
-    bottom.style.fontSize = '';
-    bottom.style.letterSpacing = '';
-    bottom.style.wordSpacing = '';
-
-    // adatta font-size alla larghezza target
+    bottom.style.fontSize = ''; bottom.style.letterSpacing = ''; bottom.style.wordSpacing = '';
     let base = parseFloat(getComputedStyle(bottom).fontSize) || 56;
     let lo = 12, hi = Math.max(110, base*2);
     for (let i=0;i<18;i++){
       bottom.style.fontSize = base + 'px';
-      const w = measure(bottom);
-      if (Math.abs(w - target) <= EPS) break;
-      if (w > target) hi = base; else lo = base;
+      const width = w(bottom);
+      if (Math.abs(width - target) <= EPS) break;
+      if (width > target) hi = base; else lo = base;
       base = (lo + hi) / 2;
     }
-
-    // se è ancora corta, allunga distribuendo sugli spazi
-    let w = measure(bottom);
+    let width = w(bottom);
     const sp = gaps(bottom.textContent);
-    if (w < target - EPS && sp > 0){
-      const extra = target - w;
-      const wsPerGap = Math.min(MAX_WS, extra / sp);
-      bottom.style.wordSpacing = wsPerGap.toFixed(3) + 'px';
-      w = measure(bottom);
+    if (width < target - EPS && sp > 0){
+      const extra = target - width;
+      const perGap = Math.min(MAX_WS, extra / sp);
+      bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
+      width = w(bottom);
     }
-
-    // rifinitura fine
-    if (Math.abs(w - target) > EPS){
-      let diff = target - w;
+    const diff = target - width;
+    if (Math.abs(diff) > EPS){
       let ls = diff / Math.max(bottom.textContent.length,1);
       ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
       bottom.style.letterSpacing = ls.toFixed(3) + 'px';
@@ -99,10 +75,10 @@ revealEls.forEach(el => io.observe(el));
   }
 
   function tune(){
-    const maxBox = limitBox();          // colonna sinistra - margine
-    tuneTop(maxBox);                    // 1) rientra la riga sopra
-    const target = Math.min(measure(top), maxBox);
-    tuneBottom(target);                 // 2) allinea “È la mia firma”
+    const maxBox = columnWidth();
+    tuneTop(maxBox);
+    const target = Math.min(w(top), maxBox);
+    tuneBottom(target);
   }
 
   const ro = new ResizeObserver(tune);
@@ -110,6 +86,31 @@ revealEls.forEach(el => io.observe(el));
   window.addEventListener('load', tune, { once:true });
   tune();
 })();
+
+/* ====== Popola badge categoria & tools + descrizione ====== */
+document.querySelectorAll('.case').forEach(card=>{
+  const badges = card.querySelector('.badges');
+  const descEl = card.querySelector('.desc');
+  const cat = card.dataset.cat || '';
+  const tools = (card.dataset.tools || '')
+                .split(',').map(s=>s.trim()).filter(Boolean);
+
+  if (badges) {
+    if (cat) {
+      const b = document.createElement('span');
+      b.className = 'badge cat';
+      b.textContent = (cat === 'game' ? 'Game Art & Dev' : '3D Viz');
+      badges.appendChild(b);
+    }
+    tools.forEach(t=>{
+      const b = document.createElement('span');
+      b.className = 'badge';
+      b.textContent = t;
+      badges.appendChild(b);
+    });
+  }
+  if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
+});
 
 /* ====== Filtro categorie ====== */
 const filterBtns = document.querySelectorAll('.filter-btn');
@@ -122,6 +123,8 @@ filterBtns.forEach(btn=>{
     cases.forEach(c=>{
       c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
     });
+    // scroll lieve verso le cards
+    document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
 
@@ -174,16 +177,14 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(
 
 document.getElementById('showreel')?.addEventListener('click', e=>{
   const card = e.target.closest('.case');
-  if (!card) return;
-  const title = card.dataset.title || 'Progetto';
-  const desc  = card.dataset.desc || '';
-  const tools = card.dataset.tools || '';
-  const note  = card.dataset.note  || '';
-  const images = (card.dataset.images || '')
-    .split('|').map(s=>s.trim()).filter(Boolean);
-  const videos = (card.dataset.videos || '')
-    .split('|').map(s=>s.trim()).filter(Boolean);
-  const items = [...images, ...videos];
+  if (!card || !e.target.classList.contains('open-modal')) return;
+  const title  = card.dataset.title || 'Progetto';
+  const desc   = card.dataset.desc || '';
+  const tools  = card.dataset.tools || '';
+  const note   = card.dataset.note  || '';
+  const images = (card.dataset.images || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const videos = (card.dataset.videos || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const items  = [...images, ...videos];
   if (!items.length) return;
   openModal(items, title, desc, tools, note);
 });

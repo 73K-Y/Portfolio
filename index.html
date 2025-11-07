@@ -6,7 +6,7 @@
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
     <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
 
-    <!-- Mobile bars trasparenti -->
+    <!-- Mobile bar trasparente -->
     <meta name="theme-color" content="#00000000" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,6 +14,7 @@
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="snap">
@@ -95,15 +96,77 @@
       </section>
     </main>
 
-    <!-- SHOWREEL (lasciato come nel tuo progetto; solo struttura sintetica d’esempio) -->
+    <!-- SHOWREEL -->
     <div id="showreel" class="wrap">
-      <div class="filterbar reveal">
+      <div class="filterbar reveal" id="filters">
         <button class="filter-btn active" data-filter="all">Tutti</button>
         <button class="filter-btn" data-filter="game">Game Art &amp; Dev</button>
         <button class="filter-btn" data-filter="viz">3D Visualization</button>
       </div>
 
-      <!-- Esempio di card (ripeti le tue) -->
+      <!-- GAME ART & DEV -->
+      <section class="case snap-child reveal"
+        data-cat="game"
+        data-title="Treni Trenitalia"
+        data-desc="Modellazione e texturing di treni per simulazione."
+        data-tools="Blender, Substance"
+        data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
+        <div class="case-info">
+          <div class="badges"></div>
+          <h3 class="glitchable">Treni Trenitalia</h3>
+          <p class="desc">Modellazione e texturing di treni per simulazione.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
+
+      <section class="case snap-child reveal"
+        data-cat="game"
+        data-title="Team Treni Low Poly"
+        data-desc="Asset low poly per videogioco stile Railway Runner."
+        data-tools="Blender, Unity"
+        data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
+        <div class="case-info">
+          <div class="badges"></div>
+          <h3 class="glitchable">Team Treni Low Poly</h3>
+          <p class="desc">Asset low poly per videogioco stile Railway Runner.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
+
+      <section class="case snap-child reveal"
+        data-cat="game"
+        data-title="Oblivion Hospital"
+        data-desc="Animazioni 3D e rendering della struttura ospedaliera."
+        data-tools="Blender, UE5"
+        data-images="assets/scena - background menù - ospedale.png"
+        data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
+        <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
+        <div class="case-info">
+          <div class="badges"></div>
+          <h3 class="glitchable">Oblivion Hospital</h3>
+          <p class="desc">Animazioni 3D e rendering della struttura ospedaliera.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
+
+      <!-- 3D VIZ -->
+      <section class="case snap-child reveal"
+        data-cat="viz"
+        data-title="Alan Walker"
+        data-desc="Animazione e montaggio del remix “Beautiful Nightmare”."
+        data-tools="Premiere, After Effects"
+        data-images="assets/Screenshot 2025-10-12 224346.png">
+        <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+        <div class="case-info">
+          <div class="badges"></div>
+          <h3 class="glitchable">Alan Walker</h3>
+          <p class="desc">Animazione e montaggio del remix “Beautiful Nightmare”.</p>
+          <button class="btn small open-modal">Apri galleria</button>
+        </div>
+      </section>
+
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Wars"
@@ -114,11 +177,10 @@
         <div class="case-info">
           <div class="badges"></div>
           <h3 class="glitchable">Star Wars</h3>
-          <p>Navicella ispirata all’universo Star Wars.</p>
+          <p class="desc">Navicella ispirata all’universo Star Wars.</p>
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
-      <!-- ...le altre tue sezioni rimangono uguali -->
     </div>
 
     <!-- INFO -->
@@ -166,10 +228,12 @@
       <div class="content" role="document">
         <button id="closeModal" aria-label="Chiudi">✕</button>
         <div id="modalInner"></div>
+
         <div class="modal-meta">
           <div id="modalTools" class="toolchips"></div>
           <blockquote id="modalNote" class="author-note"></blockquote>
         </div>
+
         <div class="info" id="modalInfo"></div>
       </div>
     </div>
