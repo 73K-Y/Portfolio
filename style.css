@@ -9,7 +9,6 @@
   --glow:rgba(0,186,255,.28);
   --max-w:1200px;
   --blur:18px;
-  /* altezza unica per TUTTE le card (incluse coming) */
   --case-h: clamp(48vh,56vh,62vh);
   --gutter: clamp(16px, 4vw, 32px);
   color-scheme: dark;
@@ -86,7 +85,8 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .pill:hover{background: linear-gradient(90deg, var(--accent), #0070ff);border-color:transparent;box-shadow:0 0 14px var(--glow);transform:translateY(-1px)}
 @media (prefers-reduced-motion: reduce){ .marquee__track{ animation:none } }
 
-/* Hero */
+/* ================= HERO ================= */
+/* griglia con colonna sinistra un po' più larga per ospitare 2 righe */
 .hero-full{
   display:grid;
   grid-template-columns:minmax(420px,1.05fr) minmax(340px,.95fr);
@@ -99,27 +99,29 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 8px 40px rgba(0,0,0,.55),0 0 20px rgba(0,186,255,.08);
   min-height:clamp(54vh,60vh,66vh)
 }
-/* limite safe alla colonna sinistra dell'hero (evita sconfinamenti) */
-.hero-left{ max-width:min(680px,48vw); }
+.hero-left{ max-width:min(740px,50vw); }
 .hero-right{ min-width:0; overflow:hidden; }
 
-/* Titolo hero: 2 righe stabili */
+/* Titolo in 2 righe fisse */
 .hero-title{
   margin:0 0 10px;
-  line-height:1.06;
+  line-height:1.05;
   letter-spacing:-0.015em;
-  max-width:22ch;           /* due righe comode */
-  overflow-wrap:break-word;
-  hyphens:auto;
+  max-width:32ch;            /* abbastanza largo per evitare 3 righe */
+  overflow-wrap:normal;
   text-wrap:balance;
 }
-.hero-title .line{ display:block; }
+.hero-title .line{
+  display:block;
+  white-space:nowrap;        /* blocca la riga su una sola linea */
+}
 
-/* dimensione fluida del titolo */
-.xxl{ font-size: clamp(32px, 4.2vw, 48px); }
+/* dimensione fluida */
+.xxl{ font-size:clamp(30px,3.8vw,46px); }
 
 .gradient-title{
-  background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
   text-shadow:0 0 12px rgba(0,186,255,.14)
 }
 .gradient-title:hover{animation:glitch 120ms steps(2) 1}
@@ -152,7 +154,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 }
 .filter-btn.active,.filter-btn:hover{background:linear-gradient(90deg,var(--accent),#0070ff);border:none}
 
-/* Case cards — altezza/larghezza uniformi */
+/* Case cards */
 #showreel{margin-top:8px;margin-bottom:0}
 #showreel.wrap{padding-bottom:6px}
 .case{
@@ -177,7 +179,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .badge.game{border-color:#3ee07740}
 .badge.viz{border-color:#00baff40}
 
-/* --- COMING SOON: allineamento e dimensioni identiche --- */
+/* COMING SOON */
 .coming-section{
   max-width: var(--max-w);
   margin-inline: auto;
@@ -255,16 +257,16 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
 
 /* Responsive */
 @media (max-width: 1100px){
-  .hero-left{ max-width: min(620px, 52vw); }
-  .hero-title{ max-width: 30ch; }
-  .xxl{ font-size: clamp(30px, 4.8vw, 44px); }
+  .hero-left{ max-width:min(660px,52vw); }
+  .hero-title{ max-width:30ch; }
+  .xxl{ font-size:clamp(28px,4.6vw,42px); }
 }
 @media (max-width: 900px){
   .hero-full{grid-template-columns:1fr}
   .info-grid{grid-template-columns:1fr}
-  .hero-left{ max-width: 100%; }
-  .hero-title{ max-width: 28ch; }
-  .xxl{ font-size: clamp(28px, 6vw, 40px); }
+  .hero-left{ max-width:100%; }
+  .hero-title{ max-width:28ch; }
+  .xxl{ font-size:clamp(26px,6vw,38px); }
 }
 @media (max-width:720px){
   .nav-glass{padding:8px 12px;gap:8px;flex-wrap:wrap}
@@ -274,8 +276,8 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
   .hero-full{min-height:clamp(56vh,62vh,68vh);padding:14px}
 }
 @media (max-width:600px){
-  .hero-title{ max-width: 26ch; line-height:1.08; }
-  .xxl{ font-size: clamp(26px, 7vw, 36px); }
+  .hero-title{ max-width:26ch; line-height:1.06; }
+  .xxl{ font-size:clamp(24px,7vw,34px); }
 }
 
 /* Reduced motion */
