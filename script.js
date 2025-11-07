@@ -21,34 +21,62 @@ revealEls.forEach(el => io.observe(el));
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
+  const EPS = 0.5;                     // tolleranza sub-pixel
+  const MAX_WS = 18;                   // word-spacing max (px) per gap
+  const MAX_LS = 0.6;                  // letter-spacing +/- (px) limite
+
   function measure(el){ return el.getBoundingClientRect().width; }
+  function countSpaces(text){ return (text.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0); }
 
   function tune() {
     // reset
-    bottom.style.fontSize = '';
+    bottom.style.fontSize      = '';
     bottom.style.letterSpacing = '';
+    bottom.style.wordSpacing   = '';
 
-    const maxBox = column.clientWidth; // mai oltre il box sinistro
+    // misure target
+    const maxBox = column.clientWidth;           // non superare la colonna
     const target = Math.min(measure(top), maxBox);
 
-    // Binary search sulla font-size
+    // dimensione di base della riga sotto (parto dalla CSS)
     let base = parseFloat(getComputedStyle(bottom).fontSize) || 48;
-    let lo = 12, hi = Math.max(96, base * 2);
+
+    // se siamo più lunghi del target, riduciamo con binary search sul font-size
+    let lo = 12, hi = Math.max(96, base*2);
     for (let i=0; i<18; i++){
       bottom.style.fontSize = base + 'px';
       const w = measure(bottom);
-      if (Math.abs(w - target) < 0.8) break;
+      if (Math.abs(w - target) <= EPS) break;
       if (w > target) { hi = base; } else { lo = base; }
       base = (lo + hi) / 2;
     }
 
+    // raffinatura con spaziature
+    const gaps = countSpaces(bottom.textContent); // numero spazi totali
+    let w = measure(bottom);
+
+    if (w < target - EPS && gaps > 0){
+      // allungare con word-spacing distribuito
+      let extra = target - w;                      // px da recuperare
+      let wsPerGap = Math.min(MAX_WS, extra / gaps);
+      bottom.style.wordSpacing = wsPerGap.toFixed(3) + 'px';
+      w = measure(bottom);
+    }
+
     // micro-finitura con letter-spacing
-    const w = measure(bottom);
-    let diff = target - w;                 // positivo = corto
-    const n = Math.max(bottom.textContent.length, 1);
-    let spacing = diff / n;                // px/char
-    spacing = Math.max(-0.6, Math.min(0.6, spacing));
-    if (Math.abs(diff) > 0.2) bottom.style.letterSpacing = spacing.toFixed(3) + 'px';
+    if (Math.abs(w - target) > EPS){
+      let diff = target - w;                       // positivo = corto
+      let ls = diff / Math.max(bottom.textContent.length,1);
+      ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
+      bottom.style.letterSpacing = ls.toFixed(3) + 'px';
+      w = measure(bottom);
+    }
+
+    // ultimo ritocco, se ancora oltre di poco, ritocchiamo 1% font-size
+    if (w > target + EPS){
+      const cur = parseFloat(getComputedStyle(bottom).fontSize);
+      bottom.style.fontSize = (cur * 0.99) + 'px';
+    }
   }
 
   const ro = new ResizeObserver(() => tune());

@@ -77,19 +77,47 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 /* Colonna sinistra con limite sicuro */
 .hero-left{ max-width: min(680px, 48vw); }
 
-/* Titolo: una riga per blocco (come nello screenshot) */
-.hero-title{ margin:0 0 10px; line-height:1.06; letter-spacing:-0.015em; position:relative }
-.hero-title .line{ display:block; white-space:nowrap }
+/* === HERO title: due righe come nel mock === */
+.hero-title{
+  margin:0 0 8px;
+  line-height:1.04;
+  letter-spacing:0;                /* reset pulito */
+  position:relative;
+}
+.hero-title .line{
+  display:block;
+  white-space:nowrap;              /* una riga fissa */
+}
 
-/* dimensioni di base (lo script le adatta) */
-.hero-title .top{    font-size: clamp(26px, 3.8vw, 38px); }
-.hero-title .bottom{ font-size: clamp(34px, 6.0vw, 64px); }
+/* dimensioni base (JS le rifinirà) */
+.hero-title .top{    font-size: clamp(24px, 3.6vw, 36px); }
+.hero-title .bottom{ font-size: clamp(38px, 6.2vw, 68px); }
 
-/* Gradiente testo */
+/* niente alone alla fine della riga superiore */
+.hero-title .top{ text-shadow:none; }
+
+/* la riga inferiore va misurata e spaziata: serve inline-block */
+.hero-title .bottom{
+  display:inline-block;
+  line-height:1.02;
+  margin-top:6px;
+}
+
+/* Gradiente testo rimane */
 .gradient-title{
   background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 12px rgba(0,186,255,.14)
+  text-shadow:0 0 10px rgba(0,186,255,.10); /* più leggero per evitare macchie */
+}
+
+/* Colonna sinistra: limite sicuro per non invadere la foto */
+.hero-left{ max-width: min(680px, 48vw); }
+
+/* piccoli aggiustamenti di responsive */
+@media (max-width: 1020px){
+  .hero-left{ max-width: min(620px, 52vw); }
+  .hero-title .top{    font-size: clamp(22px, 4.2vw, 32px); }
+  .hero-title .bottom{ font-size: clamp(32px, 6.0vw, 60px); }
 }
 
 /* Resto hero */
