@@ -90,62 +90,72 @@ document.getElementById('showreel')?.addEventListener('click', e=>{
   openModal(items, title, desc, tools, note);
 });
 
-// === HERO: adatta la seconda riga alla larghezza della prima ===
+// === HERO: adatta la seconda riga (È la mia firma) alla larghezza della prima ===
 (function fitHero() {
-  const top = document.getElementById('heroTop');
-  const bottom = document.getElementById('heroBottom');
-  const container = document.querySelector('.hero-left');
-  if (!top || !bottom || !container) return;
+  const top     = document.getElementById('heroTop');
+  const bottom  = document.getElementById('heroBottom');
+  const column  = document.querySelector('.hero-left');
+  if (!top || !bottom || !column) return;
 
-  let baseSizeBottom = parseFloat(getComputedStyle(bottom).fontSize); // valore CSS
-  let ticking = false;
+  function measure(el){
+    // Forza misure precise senza layout strani
+    const prev = el.style.letterSpacing;
+    el.style.letterSpacing = ''; // reset
+    const w = el.getBoundingClientRect().width;
+    el.style.letterSpacing = prev;
+    return w;
+  }
 
-  function adjust() {
-    const maxWidth = container.clientWidth;      // non superare il box di sinistra
-    const target   = top.getBoundingClientRect().width;   // larghezza riga 1
-    let size       = baseSizeBottom;
+  function tune() {
+    // reset per partire dal CSS
+    bottom.style.fontSize      = '';
+    bottom.style.letterSpacing = '';
+
+    const maxBox = column.clientWidth;       // non oltre il box sinistro
+    const target = Math.min(measure(top), maxBox);
+
+    // 1) Binary-approach sulla font-size per avvicinarci rapidamente
+    let size = parseFloat(getComputedStyle(bottom).fontSize);
+    let minS = 12, maxS = Math.max(96, size * 2);
+    for (let i=0;i<18;i++){
+      bottom.style.fontSize = size + 'px';
+      let w = measure(bottom);
+
+      if (w > maxBox) {           // se usciamo dal box: abbassa
+        maxS = size;
+        size = (minS + maxS) / 2;
+        continue;
+      }
+
+      const diff = target - w;
+      if (Math.abs(diff) < 1.0) break; // ci basta 1px
+
+      if (diff > 0) {              // troppo corto -> alza
+        minS = size;
+      } else {                     // troppo lungo -> abbassa
+        maxS = size;
+      }
+      size = (minS + maxS) / 2;
+    }
     bottom.style.fontSize = size + 'px';
 
-    // se supera il box, riduci
-    if (bottom.getBoundingClientRect().width > maxWidth) {
-      while (bottom.getBoundingClientRect().width > maxWidth && size > 12) {
-        size -= 1;
-        bottom.style.fontSize = size + 'px';
-      }
-    }
-
-    // allinea alla larghezza della riga 1 (entro tolleranza)
-    const tolerance = 6; // px
-    let w = bottom.getBoundingClientRect().width;
-    if (w < target - tolerance) {
-      while (w < target - tolerance && size < baseSizeBottom * 1.4 && w < maxWidth) {
-        size += 0.8;
-        bottom.style.fontSize = size + 'px';
-        w = bottom.getBoundingClientRect().width;
-      }
-    } else if (w > target + tolerance) {
-      while (w > target + tolerance && size > 12) {
-        size -= 0.8;
-        bottom.style.fontSize = size + 'px';
-        w = bottom.getBoundingClientRect().width;
-      }
+    // 2) Micro-finitura con letter-spacing per colmare < 1px–3px
+    let w = measure(bottom);
+    let diff = target - w;               // positivo = corto
+    const n = Math.max(bottom.textContent.length, 1);
+    // calcolo spacing per distribuire l'errore sui caratteri
+    let spacing = diff / n;              // px/char
+    // limiti di sicurezza
+    spacing = Math.max(-0.6, Math.min(0.6, spacing));
+    // applica solo se serve
+    if (Math.abs(diff) > 0.2) {
+      bottom.style.letterSpacing = spacing.toFixed(3) + 'px';
     }
   }
 
-  function onResize() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      // reset alla dimensione CSS di base prima di ricalcolare
-      bottom.style.fontSize = '';
-      baseSizeBottom = parseFloat(getComputedStyle(bottom).fontSize);
-      adjust();
-      ticking = false;
-    });
-  }
-
-  // inizializza
-  window.addEventListener('load', onResize, { once: true });
-  window.addEventListener('resize', onResize);
-  onResize();
+  // init + resize
+  const ro = new ResizeObserver(() => tune());
+  ro.observe(document.body);
+  window.addEventListener('load', tune, { once:true });
+  tune();
 })();

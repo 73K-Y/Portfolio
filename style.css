@@ -75,15 +75,33 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   min-height:clamp(54vh,60vh,66vh)
 }
 
-/* Limite sicuro per NON sforare sull'immagine */
-.hero-left{max-width:min(680px,48vw)}
+/* Hero: colonna sinistra con limite sicuro (non invade l'immagine) */
+.hero-left{ max-width: min(680px, 48vw); }
 
-/* Titolo: 2 righe. La seconda è volutamente più grande. */
-.hero-title{margin:0 0 10px;line-height:1.06;letter-spacing:-0.015em;overflow-wrap:break-word;hyphens:auto;text-wrap:balance;position:relative}
-.hero-title::after{content:"";position:absolute;inset:-6px -10px;pointer-events:none;background:radial-gradient(500px 180px at 0% 100%, rgba(0,186,255,.12), transparent);filter:blur(20px);opacity:.7}
-.hero-title .line{display:block;max-width:36ch}
-.hero-title .top{font-size:clamp(26px,4.2vw,40px)}
-.hero-title .bottom{font-size:clamp(30px,4.9vw,48px)}
+/* Titolo: 2 righe, ognuna su una sola riga, niente wrapping */
+.hero-title{
+  margin:0 0 10px;
+  line-height:1.06;
+  letter-spacing:-0.015em;
+  position:relative;
+}
+.hero-title .line{
+  display:block;
+  white-space:nowrap;      /* <- niente a capo */
+}
+
+/* grandezze di base; lo script le adatterà */
+.hero-title .top{    font-size: clamp(26px, 4.2vw, 40px); }
+.hero-title .bottom{ font-size: clamp(30px, 4.9vw, 48px); }
+
+/* leggero glow coerente con lo stile */
+.hero-title::after{
+  content:"";
+  position:absolute; inset:-6px -10px;
+  pointer-events:none;
+  background:radial-gradient(500px 180px at 0% 100%, rgba(0,186,255,.12), transparent);
+  filter:blur(20px); opacity:.7;
+}
 
 /* Gradient text */
 .gradient-title{background:linear-gradient(90deg,#bfe9ff 0%,#00baff 40%,#0070ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 12px rgba(0,186,255,.14)}
