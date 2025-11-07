@@ -1,8 +1,8 @@
-/* ====== Anno footer ====== */
+/* Footer year */
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* ====== Reveal on scroll ====== */
+/* Reveal on scroll */
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -14,89 +14,83 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ====== HERO: allinea le due righe senza sconfinare ====== */
+/* ===== HERO: allinea e mantieni grande ===== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
+  // dimensioni minime: evitiamo che diventi "minuscolo"
+  const MIN_TOP = 28;      // px
+  const MIN_BOTTOM = 48;   // px
+
   const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
   const w = el => el.getBoundingClientRect().width;
   const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
+  const colW = () => Math.max(0, column.getBoundingClientRect().width - SAFETY);
 
-  function columnWidth() { return Math.max(0, column.getBoundingClientRect().width - SAFETY); }
+  function polyfit(el, target, minPx, maxGrow){
+    el.style.fontSize = '';
+    el.style.letterSpacing = '';
+    el.style.wordSpacing = '';
 
-  function tuneTop(maxBox){
-    top.style.fontSize = ''; top.style.letterSpacing = '';
-    let base = parseFloat(getComputedStyle(top).fontSize) || 32;
-    let lo = 12, hi = Math.max(72, base*1.8);
+    let base = Math.max(minPx, parseFloat(getComputedStyle(el).fontSize) || minPx);
+    let lo = minPx, hi = Math.max(base*maxGrow, base + 40);
+
     for (let i=0;i<18;i++){
-      top.style.fontSize = base + 'px';
-      const width = w(top);
-      if (width <= maxBox - EPS) lo = base; else hi = base;
-      const nxt = (lo + hi) / 2;
-      if (Math.abs(nxt - base) < 0.1) break;
-      base = nxt;
-    }
-    const diff = maxBox - w(top);
-    if (Math.abs(diff) > EPS){
-      let ls = diff / Math.max(top.textContent.length,1);
-      ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
-      top.style.letterSpacing = ls.toFixed(3) + 'px';
-    }
-  }
-
-  function tuneBottom(target){
-    bottom.style.fontSize = ''; bottom.style.letterSpacing = ''; bottom.style.wordSpacing = '';
-    let base = parseFloat(getComputedStyle(bottom).fontSize) || 56;
-    let lo = 12, hi = Math.max(110, base*2);
-    for (let i=0;i<18;i++){
-      bottom.style.fontSize = base + 'px';
-      const width = w(bottom);
+      el.style.fontSize = base + 'px';
+      const width = w(el);
       if (Math.abs(width - target) <= EPS) break;
       if (width > target) hi = base; else lo = base;
-      base = (lo + hi) / 2;
-    }
-    let width = w(bottom);
-    const sp = gaps(bottom.textContent);
-    if (width < target - EPS && sp > 0){
-      const extra = target - width;
-      const perGap = Math.min(MAX_WS, extra / sp);
-      bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
-      width = w(bottom);
-    }
-    const diff = target - width;
-    if (Math.abs(diff) > EPS){
-      let ls = diff / Math.max(bottom.textContent.length,1);
-      ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
-      bottom.style.letterSpacing = ls.toFixed(3) + 'px';
+      const next = (lo + hi) / 2;
+      if (Math.abs(next - base) < 0.1) break;
+      base = next;
     }
   }
 
   function tune(){
-    const maxBox = columnWidth();
-    tuneTop(maxBox);
+    const maxBox = colW();
+    // 1) riga sopra -> riempi la colonna ma non sotto MIN_TOP
+    polyfit(top, maxBox, MIN_TOP, 2.2);
+
+    // 2) riga sotto -> match lunghezza della riga sopra
     const target = Math.min(w(top), maxBox);
-    tuneBottom(target);
+    polyfit(bottom, target, MIN_BOTTOM, 2.4);
+
+    // 3) se dopo il fit è leggermente corta, usa spazi/parziale letter-spacing
+    let width = w(bottom);
+    const need = target - width;
+    if (need > EPS){
+      const sp = gaps(bottom.textContent);
+      if (sp > 0){
+        const perGap = Math.min(MAX_WS, need / sp);
+        bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
+      } else {
+        let ls = need / Math.max(bottom.textContent.length,1);
+        ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
+        bottom.style.letterSpacing = ls.toFixed(3) + 'px';
+      }
+    }
   }
 
   const ro = new ResizeObserver(tune);
   ro.observe(document.body);
+  window.addEventListener('resize', tune);
   window.addEventListener('load', tune, { once:true });
+  setTimeout(()=>document.fonts?.ready.then(tune), 0);
   tune();
 })();
 
-/* ====== Popola badge categoria & tools + descrizione ====== */
+/* ===== Badge categoria + tools + desc ===== */
 document.querySelectorAll('.case').forEach(card=>{
   const badges = card.querySelector('.badges');
   const descEl = card.querySelector('.desc');
-  const cat = card.dataset.cat || '';
-  const tools = (card.dataset.tools || '')
-                .split(',').map(s=>s.trim()).filter(Boolean);
+  const cat = (card.dataset.cat || '').trim();
+  const tools = (card.dataset.tools || '').split(',').map(s=>s.trim()).filter(Boolean);
 
   if (badges) {
-    if (cat) {
+    if (cat){
       const b = document.createElement('span');
       b.className = 'badge cat';
       b.textContent = (cat === 'game' ? 'Game Art & Dev' : '3D Viz');
@@ -112,23 +106,32 @@ document.querySelectorAll('.case').forEach(card=>{
   if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
 });
 
-/* ====== Filtro categorie ====== */
+/* ===== Filtro categorie (classe .is-hidden) ===== */
 const filterBtns = document.querySelectorAll('.filter-btn');
-const cases = document.querySelectorAll('.case');
+const cards = Array.from(document.querySelectorAll('.case'));
+
+function applyFilter(key){
+  const cat = (key || 'all').trim();
+  cards.forEach(c=>{
+    const cc = (c.dataset.cat || '').trim();
+    if (cat === 'all' || cc === cat) c.classList.remove('is-hidden');
+    else c.classList.add('is-hidden');
+  });
+}
+
 filterBtns.forEach(btn=>{
   btn.addEventListener('click', ()=>{
     filterBtns.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    const cat = btn.dataset.filter;
-    cases.forEach(c=>{
-      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
-    });
-    // scroll lieve verso le cards
+    applyFilter(btn.dataset.filter);
     document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
 
-/* ====== Modal immagini/video ====== */
+// assicura che all'avvio "Tutti" mostri TUTTO
+applyFilter('all');
+
+/* ===== Modal ===== */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
