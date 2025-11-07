@@ -85,7 +85,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .pill:hover{background: linear-gradient(90deg, var(--accent), #0070ff);border-color:transparent;box-shadow:0 0 14px var(--glow);transform:translateY(-1px)}
 @media (prefers-reduced-motion: reduce){ .marquee__track{ animation:none } }
 
-/* ================= HERO ================= */
+/* ====== HERO ====== */
 .hero-full{
   display:grid;
   grid-template-columns:minmax(420px,1.02fr) minmax(360px,.98fr);
@@ -101,39 +101,54 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 
 .hero-left{
   max-width:min(700px,48vw);
-  z-index:1;                 /* evita che “sparisca” dietro alla foto */
+  z-index:1;                 /* non finisce dietro la foto */
 }
-
 .hero-right{ min-width:0; overflow:hidden; }
 
-/* Titolo in 2 righe fisse e più piccolo */
+/* Titolo in 2 righe: top più piccola, bottom più grande */
 .hero-title{
-  margin:0 0 10px;
-  line-height:1.05;
+  margin:0 0 12px;
+  line-height:1.06;
   letter-spacing:-0.015em;
-  max-width:26ch;            /* più stretto -> 2 righe */
+  max-width:26ch;            /* 2 righe sicure */
   text-wrap:balance;
 }
 .hero-title .line{ display:block; white-space:nowrap; }
 
-/* dimensione ridotta (~20%) */
-.xxl{ font-size:clamp(24px,3.0vw,36px); }
+/* linea 1 (più piccola) */
+.hero-title .line--top{
+  font-size:clamp(20px,2.6vw,32px);
+  font-weight:700;
+  filter:drop-shadow(0 0 8px rgba(0,186,255,.12));
+}
+/* linea 2 (più grande e d'impatto) */
+.hero-title .line--bottom{
+  font-size:clamp(26px,3.4vw,40px);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  background:linear-gradient(90deg,#c7eeff 0%,#00baff 45%,#0070ff 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 0 12px rgba(0,186,255,.16);
+}
 
-/* breakpoint: mantieni 2 righe e piccolo */
+/* mantieni 2 righe anche al ridursi della viewport */
 @media (max-width:1100px){
   .hero-left{ max-width:min(640px,52vw); }
   .hero-title{ max-width:26ch; }
-  .xxl{ font-size:clamp(22px,3.6vw,34px); }
+  .hero-title .line--top{   font-size:clamp(19px,3.2vw,30px); }
+  .hero-title .line--bottom{font-size:clamp(24px,4.0vw,38px); }
 }
 @media (max-width:900px){
   .hero-full{ grid-template-columns:1fr; }
   .hero-left{ max-width:100%; }
   .hero-title{ max-width:24ch; }
-  .xxl{ font-size:clamp(22px,5.2vw,32px); }
+  .hero-title .line--top{   font-size:clamp(18px,4.8vw,28px); }
+  .hero-title .line--bottom{font-size:clamp(22px,6.0vw,34px); }
 }
 @media (max-width:600px){
   .hero-title{ max-width:22ch; line-height:1.06; }
-  .xxl{ font-size:clamp(20px,6.2vw,30px); }
+  .hero-title .line--top{   font-size:clamp(17px,5.8vw,26px); }
+  .hero-title .line--bottom{font-size:clamp(20px,7.2vw,30px); }
 }
 
 .gradient-title{

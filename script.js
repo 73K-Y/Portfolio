@@ -91,3 +91,56 @@ document.getElementById('showreel')?.addEventListener('click', e=>{
   if (!items.length) return;
   openModal(items, title, desc, tools, note);
 });
+
+/* === BADGES auto dai data-tools === */
+document.querySelectorAll('.case').forEach(card=>{
+  const tools = (card.dataset.tools || '').split(',').map(s=>s.trim()).filter(Boolean);
+  const box = card.querySelector('.badges');
+  if (box && tools.length){
+    box.innerHTML = '';
+    tools.forEach(t=>{
+      const b = document.createElement('span');
+      b.className = 'badge ' + (card.dataset.cat === 'game' ? 'game' : 'viz');
+      b.textContent = t;
+      box.appendChild(b);
+    });
+  }
+});
+
+/* === Ripple leggerissimo sui .btn === */
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.btn');
+  if(!btn) return;
+  const r = document.createElement('span');
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  r.style.position='absolute';
+  r.style.inset='0';
+  r.style.borderRadius='inherit';
+  r.style.pointerEvents='none';
+  r.style.maskImage = 'radial-gradient(circle at '+(e.clientX-rect.left)+'px '+(e.clientY-rect.top)+'px, rgba(0,0,0,1) 0, rgba(0,0,0,0) '+(size/2)+'px)';
+  r.style.background='rgba(255,255,255,.18)';
+  r.style.opacity='0';
+  r.style.transition='opacity .45s ease';
+  btn.style.position='relative';
+  btn.appendChild(r);
+  requestAnimationFrame(()=>{ r.style.opacity='1'; });
+  setTimeout(()=>{ r.style.opacity='0'; setTimeout(()=>r.remove(),300); },120);
+});
+
+/* === Apri le .case anche da tastiera === */
+document.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const focus = document.activeElement;
+  const card = focus?.closest?.('.case');
+  if(!card) return;
+  e.preventDefault();
+  const title = card.dataset.title || 'Progetto';
+  const desc  = card.dataset.desc || '';
+  const tools = card.dataset.tools || '';
+  const note  = card.dataset.note  || '';
+  const images = (card.dataset.images || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const videos = (card.dataset.videos || '').split('|').map(s=>s.trim()).filter(Boolean);
+  const items = [...images, ...videos];
+  if(items.length) openModal(items, title, desc, tools, note);
+});
