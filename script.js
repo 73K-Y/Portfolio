@@ -14,72 +14,91 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ====== HERO: fai “È la mia firma” lungo quanto la riga sopra ====== */
+/* ====== HERO: allinea le due righe e impedisci overflow ====== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
-  const EPS = 0.5;                     // tolleranza sub-pixel
-  const MAX_WS = 18;                   // word-spacing max (px) per gap
-  const MAX_LS = 0.6;                  // letter-spacing +/- (px) limite
+  const EPS     = 0.5;   // tolleranza
+  const MAX_WS  = 18;    // word-spacing max per riga sotto
+  const MAX_LS  = 0.6;   // letter-spacing +/- per rifinitura
 
-  function measure(el){ return el.getBoundingClientRect().width; }
-  function countSpaces(text){ return (text.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0); }
+  const measure = el => el.getBoundingClientRect().width;
+  const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
 
-  function tune() {
+  function tuneTop(maxBox){
+    // riduci il font-size della riga superiore se eccede la colonna
+    top.style.fontSize = ''; top.style.letterSpacing = '';
+    let base = parseFloat(getComputedStyle(top).fontSize) || 32;
+    let lo = 12, hi = Math.max(72, base*1.8);
+    for (let i=0;i<18;i++){
+      top.style.fontSize = base + 'px';
+      const w = measure(top);
+      if (w <= maxBox - EPS) { lo = base; }
+      else { hi = base; }
+      const next = (lo + hi) / 2;
+      if (Math.abs(next - base) < 0.1) break;
+      base = next;
+    }
+    // micro-rifinitura se è corto/lungo di pochissimo
+    const wt = measure(top);
+    if (Math.abs(wt - maxBox) > EPS){
+      const diff = maxBox - wt;
+      const perChar = diff / Math.max(top.textContent.length,1);
+      const ls = Math.max(-MAX_LS, Math.min(MAX_LS, perChar));
+      top.style.letterSpacing = ls.toFixed(3) + 'px';
+    }
+  }
+
+  function tuneBottom(target){
     // reset
-    bottom.style.fontSize      = '';
+    bottom.style.fontSize = '';
     bottom.style.letterSpacing = '';
-    bottom.style.wordSpacing   = '';
+    bottom.style.wordSpacing = '';
 
-    // misure target
-    const maxBox = column.clientWidth;           // non superare la colonna
-    const target = Math.min(measure(top), maxBox);
-
-    // dimensione di base della riga sotto (parto dalla CSS)
-    let base = parseFloat(getComputedStyle(bottom).fontSize) || 48;
-
-    // se siamo più lunghi del target, riduciamo con binary search sul font-size
-    let lo = 12, hi = Math.max(96, base*2);
-    for (let i=0; i<18; i++){
+    // adatta font-size (binary search)
+    let base = parseFloat(getComputedStyle(bottom).fontSize) || 56;
+    let lo = 12, hi = Math.max(110, base*2);
+    for (let i=0;i<18;i++){
       bottom.style.fontSize = base + 'px';
       const w = measure(bottom);
       if (Math.abs(w - target) <= EPS) break;
-      if (w > target) { hi = base; } else { lo = base; }
+      if (w > target) hi = base; else lo = base;
       base = (lo + hi) / 2;
     }
 
-    // raffinatura con spaziature
-    const gaps = countSpaces(bottom.textContent); // numero spazi totali
+    // allunga con word-spacing distribuito
     let w = measure(bottom);
-
-    if (w < target - EPS && gaps > 0){
-      // allungare con word-spacing distribuito
-      let extra = target - w;                      // px da recuperare
-      let wsPerGap = Math.min(MAX_WS, extra / gaps);
+    const sp = gaps(bottom.textContent);
+    if (w < target - EPS && sp > 0){
+      const extra = target - w;
+      const wsPerGap = Math.min(MAX_WS, extra / sp);
       bottom.style.wordSpacing = wsPerGap.toFixed(3) + 'px';
       w = measure(bottom);
     }
 
-    // micro-finitura con letter-spacing
+    // rifinitura fine con letter-spacing
     if (Math.abs(w - target) > EPS){
-      let diff = target - w;                       // positivo = corto
+      let diff = target - w;
       let ls = diff / Math.max(bottom.textContent.length,1);
       ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
       bottom.style.letterSpacing = ls.toFixed(3) + 'px';
-      w = measure(bottom);
-    }
-
-    // ultimo ritocco, se ancora oltre di poco, ritocchiamo 1% font-size
-    if (w > target + EPS){
-      const cur = parseFloat(getComputedStyle(bottom).fontSize);
-      bottom.style.fontSize = (cur * 0.99) + 'px';
     }
   }
 
-  const ro = new ResizeObserver(() => tune());
+  function tune(){
+    const maxBox = column.clientWidth;          // larghezza colonna sinistra
+    // 1) fai rientrare la riga superiore nella colonna
+    tuneTop(maxBox);
+
+    // 2) allinea la riga inferiore alla larghezza della superiore
+    const target = Math.min(measure(top), maxBox);
+    tuneBottom(target);
+  }
+
+  const ro = new ResizeObserver(tune);
   ro.observe(document.body);
   window.addEventListener('load', tune, { once:true });
   tune();

@@ -89,9 +89,21 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   white-space:nowrap;              /* una riga fissa */
 }
 
-/* dimensioni base (JS le rifinirà) */
-.hero-title .top{    font-size: clamp(24px, 3.6vw, 36px); }
-.hero-title .bottom{ font-size: clamp(38px, 6.2vw, 68px); }
+/* --- HERO title: righe singole che non debordano --- */
+.hero-title .top,
+.hero-title .bottom{
+  display:inline-block;
+  white-space:nowrap;
+  max-width:100%;
+  overflow:clip;         /* evita che sporga nella colonna della foto */
+  text-overflow:clip;
+}
+
+/* limite sicuro della colonna sinistra */
+.hero-left{
+  max-width: min(680px, 48vw);
+  overflow: visible;     /* ok, ma le linee hanno overflow:clip */
+}
 
 /* niente alone alla fine della riga superiore */
 .hero-title .top{ text-shadow:none; }
