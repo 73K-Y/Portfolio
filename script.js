@@ -14,15 +14,17 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ===== HERO: allinea le due righe senza rimpicciolire troppo ===== */
+/* ===== HERO fit (desktop/tablet). Su mobile (<600px) lascio al CSS per stabilità. ===== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
-  const MIN_TOP = 30;      // px
-  const MIN_BOTTOM = 54;   // px
+  function isMobile(){ return window.matchMedia('(max-width: 600px)').matches; }
+
+  const MIN_TOP = 30;
+  const MIN_BOTTOM = 54;
   const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
 
   const w = el => el.getBoundingClientRect().width;
@@ -30,7 +32,8 @@ revealEls.forEach(el => io.observe(el));
   const colW = () => Math.max(0, column.getBoundingClientRect().width - SAFETY);
 
   function binaryFit(el, target, minPx, grow=2.2){
-    el.style.fontSize = ''; el.style.letterSpacing = ''; el.style.wordSpacing = '';
+    el.style.wordSpacing = '';
+    el.style.letterSpacing = '';
     let base = Math.max(minPx, parseFloat(getComputedStyle(el).fontSize) || minPx);
     let lo = minPx, hi = Math.max(base*grow, base + 48);
     for (let i=0;i<18;i++){
@@ -45,16 +48,18 @@ revealEls.forEach(el => io.observe(el));
   }
 
   function tune(){
+    if (isMobile()){
+      // reset eventuali spatolature JS su mobile
+      [top, bottom].forEach(el=>{
+        el.style.fontSize=''; el.style.wordSpacing=''; el.style.letterSpacing='';
+      });
+      return;
+    }
     const maxBox = colW();
-
-    // 1) Riga superiore: entra nella colonna ma non scende sotto MIN_TOP
     binaryFit(top, maxBox, MIN_TOP, 2.2);
-
-    // 2) Riga inferiore: stessa lunghezza apparente della riga sopra
     const target = Math.min(w(top), maxBox);
     binaryFit(bottom, target, MIN_BOTTOM, 2.4);
 
-    // 3) rifinitura: se corta, distribuisci sugli spazi/lettere
     let width = w(bottom);
     const need = target - width;
     if (need > EPS){
@@ -104,7 +109,7 @@ document.querySelectorAll('.case').forEach(card=>{
 
 /* ===== Filtro categorie ===== */
 const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = Array.from(document.querySelectorAll('.case')); // solo i progetti (non i coming soon)
+const cards = Array.from(document.querySelectorAll('.case'));
 
 function applyFilter(key){
   const cat = (key || 'all').trim();
@@ -123,7 +128,6 @@ filterBtns.forEach(btn=>{
     document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
-// all'avvio mostra davvero TUTTI
 applyFilter('all');
 
 /* ===== Modal ===== */
