@@ -75,10 +75,19 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .btn.primary{background:linear-gradient(90deg,var(--accent),#0070ff);border:none;box-shadow:0 0 16px var(--glow)}
 .btn.small{padding:8px 12px;font-size:13px}
 
-/* Filterbar più ariosa */
-.filterbar{display:flex;flex-wrap:wrap;gap:12px 14px;margin:20px 0 8px;padding:6px 2px}
-.filter-btn{padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--white);cursor:pointer;font-weight:700}
-.filter-btn.active,.filter-btn:hover{background:linear-gradient(90deg,var(--accent),#0070ff);border:none}
+/* Filterbar più spaziosa */
+.filterbar{
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin: 12px 0 14px;            /* più aria sopra/sotto */
+}
+.filter-btn{
+  padding:10px 14px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06); color:#fff; cursor:pointer
+}
+.filter-btn.active,.filter-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#0070ff);border:none
+}
 
 /* Cards */
 #showreel{margin-top:4px;margin-bottom:0}

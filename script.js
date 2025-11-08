@@ -21,11 +21,11 @@ revealEls.forEach(el => io.observe(el));
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
-  // dimensioni minime: evitiamo che diventi "minuscolo"
-  const MIN_TOP = 28;      // px
-  const MIN_BOTTOM = 48;   // px
+  // limiti minimi più generosi per evitare rimpicciolimenti
+  const MIN_TOP = 34;      // px
+  const MIN_BOTTOM = 64;   // px
 
-  const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
+  const EPS = 0.5, SAFETY = 12;
   const w = el => el.getBoundingClientRect().width;
   const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
   const colW = () => Math.max(0, column.getBoundingClientRect().width - SAFETY);
@@ -36,7 +36,7 @@ revealEls.forEach(el => io.observe(el));
     el.style.wordSpacing = '';
 
     let base = Math.max(minPx, parseFloat(getComputedStyle(el).fontSize) || minPx);
-    let lo = minPx, hi = Math.max(base*maxGrow, base + 40);
+    let lo = minPx, hi = Math.max(base*maxGrow, base + 48);
 
     for (let i=0;i<18;i++){
       el.style.fontSize = base + 'px';
@@ -51,24 +51,24 @@ revealEls.forEach(el => io.observe(el));
 
   function tune(){
     const maxBox = colW();
-    // 1) riga sopra -> riempi la colonna ma non sotto MIN_TOP
+    // 1) riga sopra: riempi colonna ma non scendere sotto MIN_TOP
     polyfit(top, maxBox, MIN_TOP, 2.2);
 
-    // 2) riga sotto -> match lunghezza della riga sopra
+    // 2) riga sotto: match larghezza esatta della riga sopra
     const target = Math.min(w(top), maxBox);
     polyfit(bottom, target, MIN_BOTTOM, 2.4);
 
-    // 3) se dopo il fit è leggermente corta, usa spazi/parziale letter-spacing
+    // 3) rifinitura a spazi/lettere se resta leggermente corta
     let width = w(bottom);
     const need = target - width;
     if (need > EPS){
       const sp = gaps(bottom.textContent);
       if (sp > 0){
-        const perGap = Math.min(MAX_WS, need / sp);
+        const perGap = Math.min(18, need / sp);
         bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
       } else {
         let ls = need / Math.max(bottom.textContent.length,1);
-        ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
+        ls = Math.max(-0.6, Math.min(0.6, ls));
         bottom.style.letterSpacing = ls.toFixed(3) + 'px';
       }
     }
@@ -78,22 +78,24 @@ revealEls.forEach(el => io.observe(el));
   ro.observe(document.body);
   window.addEventListener('resize', tune);
   window.addEventListener('load', tune, { once:true });
-  setTimeout(()=>document.fonts?.ready.then(tune), 0);
+  // dopo che i font sono pronti
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(tune);
   tune();
 })();
 
 /* ===== Badge categoria + tools + desc ===== */
-document.querySelectorAll('.case').forEach(card=>{
+document.querySelectorAll('#showreel .case').forEach(card=>{
   const badges = card.querySelector('.badges');
   const descEl = card.querySelector('.desc');
-  const cat = (card.dataset.cat || '').trim();
+  const cat = (card.dataset.cat || '').trim();          // game | viz
   const tools = (card.dataset.tools || '').split(',').map(s=>s.trim()).filter(Boolean);
 
   if (badges) {
+    badges.innerHTML = ''; // evita duplicazioni in hot-reload
     if (cat){
       const b = document.createElement('span');
-      b.className = 'badge cat';
-      b.textContent = (cat === 'game' ? 'Game Art & Dev' : '3D Viz');
+      b.className = 'badge cat ' + (cat==='game'?'game':'viz');
+      b.textContent = (cat === 'game' ? 'Game Art & Dev' : '3D Visualization');
       badges.appendChild(b);
     }
     tools.forEach(t=>{
@@ -103,19 +105,22 @@ document.querySelectorAll('.case').forEach(card=>{
       badges.appendChild(b);
     });
   }
-  if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
+  if (descEl && !descEl.textContent.trim() && card.dataset.desc) {
+    descEl.textContent = card.dataset.desc;
+  }
 });
 
-/* ===== Filtro categorie (classe .is-hidden) ===== */
+/* ===== Filtro categorie ===== */
 const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = Array.from(document.querySelectorAll('.case'));
+// filtra SOLO le card del #showreel
+const cards = Array.from(document.querySelectorAll('#showreel .case'));
 
 function applyFilter(key){
-  const cat = (key || 'all').trim();
+  const cat = (key || 'all').trim(); // all | game | viz
   cards.forEach(c=>{
     const cc = (c.dataset.cat || '').trim();
-    if (cat === 'all' || cc === cat) c.classList.remove('is-hidden');
-    else c.classList.add('is-hidden');
+    // usa style.display per evitare dipendenza da CSS .is-hidden
+    c.style.display = (cat==='all' || cc===cat) ? '' : 'none';
   });
 }
 
@@ -128,7 +133,7 @@ filterBtns.forEach(btn=>{
   });
 });
 
-// assicura che all'avvio "Tutti" mostri TUTTO
+// all'avvio mostra davvero TUTTO
 applyFilter('all');
 
 /* ===== Modal ===== */
@@ -157,7 +162,7 @@ function openModal(items, title, desc, tools, note){
   });
 
   if (tools) {
-    tools.split(',').map(s=>s.trim()).forEach(t=>{
+    tools.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>{
       const span = document.createElement('span');
       span.className = 'chip';
       span.textContent = t;
@@ -169,18 +174,20 @@ function openModal(items, title, desc, tools, note){
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
 }
+
 function closeModalFn(){
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden','true');
   modalInner.innerHTML = '';
 }
+
 if (closeModal) closeModal.addEventListener('click', closeModalFn);
 document.getElementById('modalBackdrop')?.addEventListener('click', closeModalFn);
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
 document.getElementById('showreel')?.addEventListener('click', e=>{
   const card = e.target.closest('.case');
-  if (!card || !e.target.classList.contains('open-modal')) return;
+  if (!card || !e.target.classList.contains('open-modal')) return; // apri solo dal bottone
   const title  = card.dataset.title || 'Progetto';
   const desc   = card.dataset.desc || '';
   const tools  = card.dataset.tools || '';
