@@ -13,7 +13,7 @@
   color-scheme: dark;
 }
 
-/* Reset + bg */
+/* Reset + background */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{
   margin:0;height:100%;
@@ -61,7 +61,11 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .marquee__rail{overflow:hidden;display:flex;align-items:center;height:44px}
 .marquee__track{display:flex;gap:18px;white-space:nowrap;flex:0 0 auto;will-change:transform;animation:tickerMove 24s linear infinite}
 @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--white);font-size:14px;flex:0 0 auto;transition: box-shadow .25s ease, background .25s ease, transform .25s ease}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--white);font-size:14px;flex:0 0 auto;
+  transition: box-shadow .25s ease, background .25s ease, transform .25s ease;
+}
 .pill:hover{background: linear-gradient(90deg, var(--accent), #0070ff);border-color:transparent;box-shadow:0 0 14px var(--glow);transform:translateY(-1px)}
 @media (prefers-reduced-motion: reduce){ .marquee__track{ animation:none } }
 
@@ -102,7 +106,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .filter-btn{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--white);cursor:pointer}
 .filter-btn.active,.filter-btn:hover{background:linear-gradient(90deg,var(--accent),#0070ff);border:none}
 
-/* Cards */
+/* Cards (showreel) */
 #showreel{margin-top:8px;margin-bottom:0}
 #showreel.wrap{padding-bottom:6px}
 .case{position:relative;height:var(--case-h);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;cursor:pointer;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(var(--blur));box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);margin-block:clamp(6px,1vw,10px)}
@@ -116,8 +120,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .badge{font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35)}
 .badge.cat{border-color:#00baff66}
 
-/* Coming soon */
-/* Coming soon */
+/* COMING SOON (stesse dimensioni / layout) */
 .coming-section{
   max-width: var(--max-w);
   margin-inline: auto;
@@ -130,8 +133,6 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   grid-template-columns:1fr;
   gap:clamp(6px,1vw,10px);
 }
-
-/* Card */
 .case-coming{
   position:relative;
   width:100%;
@@ -148,23 +149,25 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   margin-block:clamp(6px,1vw,10px);
 }
 
-/* Stato di base: blur visibile e label centrata */
+/* Base: blur visibile e label centrata */
 .case-coming .case-bg{
-  filter: contrast(1.02) saturate(1.04) blur(6px);
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  filter: blur(6px) contrast(1.02) saturate(1.04);
   -webkit-filter: blur(6px) contrast(1.02) saturate(1.04);
   transition: filter .35s ease, -webkit-filter .35s ease, transform .35s ease;
 }
 
 .case-coming .case-overlay{
+  position:absolute; inset:0; z-index:2;
   display:grid; place-items:center;
-  position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(10,12,16,.35) 0%, rgba(10,12,16,.55) 100%);
+  background: linear-gradient(180deg, rgba(10,12,16,.35) 0%, rgba(10,12,16,.55) 100%);
   backdrop-filter: blur(4px) saturate(1.05);
   -webkit-backdrop-filter: blur(4px) saturate(1.05);
-  color:#fff; z-index:2;
-  transition: opacity .25s ease, background .25s ease, backdrop-filter .25s ease, -webkit-backdrop-filter .25s ease;
+  color:#fff;
+  transition: opacity .25s ease, background .25s ease,
+              backdrop-filter .25s ease, -webkit-backdrop-filter .25s ease;
 }
-
 .case-coming .case-overlay .label{
   font-weight:700; letter-spacing:.08em; text-transform:uppercase;
   padding:8px 12px; border-radius:999px;
@@ -173,25 +176,57 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   transition: opacity .25s ease, transform .25s ease;
 }
 
-/* Hover: togli blur completamente e nascondi la label */
+/* Hover: immagine nitida + sparisce ogni overlay/blur */
 @media (hover:hover){
   .case-coming:hover .case-bg{
-    filter: blur(0px) contrast(1.06) saturate(1.06) !important;
-    -webkit-filter: blur(0px) contrast(1.06) saturate(1.06) !important;
+    filter: blur(0) contrast(1.06) saturate(1.06) !important;
+    -webkit-filter: blur(0) contrast(1.06) saturate(1.06) !important;
     transform:none;
+  }
+  .case-coming:hover .case-overlay{
+    opacity:0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
   .case-coming:hover .case-overlay .label{
     opacity:0; transform: translateY(6px);
   }
-  /* se vuoi far sparire l’intero overlay, sblocca questa riga: */
-  /* .case-coming:hover .case-overlay{ opacity:0; } */
 }
 
-/* Info */
+/* Info dei Coming soon: più bassa e compatta */
+.case-coming .case-info{
+  position:absolute;
+  left: clamp(8px, 1.6vw, 14px);
+  right: clamp(8px, 1.6vw, 14px);
+  bottom: clamp(8px, 1.2vw, 12px);
+  margin:0;
+  padding:8px 10px;
+  border-radius:12px;
+  background: rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index:3;
+  max-width: none;
+}
+.case-coming .case-info h4,
+.case-coming .case-info .coming-title{
+  margin:0 0 2px;
+  font-size: clamp(16px, 2.8vw, 20px);
+}
+.case-coming .case-info p{
+  margin:0;
+  color:var(--muted);
+  font-size: clamp(12px, 2.2vw, 14px);
+}
+
+/* Info (About + Contact) */
 .info-section{min-height:auto;padding-top:8px;padding-bottom:8px}
 .info-card{border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(var(--blur));box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 8px 28px rgba(0,0,0,.42),0 0 16px rgba(0,186,255,.06);padding:14px}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .info-block{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.info-block h4{margin:0 0 8px}
 .info-block .muted{color:var(--muted);margin:0}
 .contact-list{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:6px}
 .contact-list li{display:flex;gap:8px;align-items:baseline}
@@ -216,7 +251,7 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
 .toolchips .chip{font-size:12px;padding:6px 10px}
 .author-note{margin:0;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
 
-/* Reveal */
+/* Reveal on scroll */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .reveal.is-visible{opacity:1;transform:none}
 
@@ -236,6 +271,8 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
   .nav-glass nav a{padding:6px 10px;font-size:13px;white-space:nowrap}
   .hero-full{min-height:clamp(56vh,62vh,68vh);padding:14px}
 }
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   .marquee__track{ animation:none }
   .reveal{transition:none}
