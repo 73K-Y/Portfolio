@@ -29,13 +29,14 @@ a:hover{color:var(--accent);text-decoration:underline}
 
 /* Header glass */
 .nav-glass{
-  width:100%;max-width:var(--max-w);position:sticky;top:env(safe-area-inset-top, 0) + 8px;z-index:10;
+  width:100%;max-width:var(--max-w);
+  position:sticky;top:calc(env(safe-area-inset-top, 0px) + 8px);z-index:10;
   display:flex;align-items:center;justify-content:space-between;gap:clamp(8px,1.5vw,18px);
   padding:12px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);
   backdrop-filter:blur(var(--blur));box-shadow:0 10px 40px rgba(0,0,0,.35);margin:16px auto 8px
 }
 .brand{
-  display:grid; grid-template-columns:auto 1fr; align-items:center; gap:12px; min-width:0;
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;min-width:0;
 }
 .logo{
   width:52px;height:52px;display:grid;place-items:center;border-radius:50%;
@@ -127,7 +128,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .badge{font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35)}
 .badge.cat{border-color:#00baff66}
 
-/* COMING SOON – desktop base */
+/* COMING SOON – identico su desktop e mobile */
 .coming-section{max-width: var(--max-w);margin-inline: auto;padding-inline: var(--gutter);margin-top:8px;margin-bottom:0}
 .coming-grid{display:grid;grid-template-columns:1fr;gap:clamp(6px,1vw,10px)}
 .case-coming{
@@ -137,28 +138,29 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);
   overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;margin-block:clamp(6px,1vw,10px)
 }
+/* sfocatura sempre visibile */
 .case-coming .case-bg{
   position:absolute;inset:0;background-size:cover;background-position:center;
-  filter: blur(6px) contrast(1.02) saturate(1.04);
-  -webkit-filter: blur(6px) contrast(1.02) saturate(1.04);
-  transition: filter .35s ease, -webkit-filter .35s ease, transform .35s ease;
+  filter: blur(10px) contrast(1.02) saturate(1.04) !important;
+  -webkit-filter: blur(10px) contrast(1.02) saturate(1.04) !important;
+  transition: filter .35s ease, -webkit-filter .35s ease;
 }
+/* overlay con etichetta centrata sempre visibile */
 .case-coming .case-overlay{
-  position:absolute;inset:0;z-index:2;display:grid;place-items:center;
-  background: linear-gradient(180deg, rgba(10,12,16,.35) 0%, rgba(10,12,16,.55) 100%);
-  backdrop-filter: blur(4px) saturate(1.05);
-  -webkit-backdrop-filter: blur(4px) saturate(1.05);
+  position:absolute;inset:0;z-index:2;display:grid !important;place-items:center;
+  background: linear-gradient(180deg, rgba(10,12,16,.35) 0%, rgba(10,12,16,.55) 100%) !important;
+  backdrop-filter: blur(4px) saturate(1.05) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(1.05) !important;
   color:#fff;transition: opacity .25s ease, background .25s ease, backdrop-filter .25s ease, -webkit-backdrop-filter .25s ease;
 }
 .case-coming .case-overlay .label{
-  font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;
-  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);transition: opacity .25s ease, transform .25s ease
+  font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)
 }
 /* Hover desktop: immagine nitida + overlay sparisce */
 @media (hover:hover){
   .case-coming:hover .case-bg{ filter:blur(0) contrast(1.06) saturate(1.06)!important; -webkit-filter:blur(0) contrast(1.06) saturate(1.06)!important }
   .case-coming:hover .case-overlay{ opacity:0!important; background:transparent!important; backdrop-filter:none!important; -webkit-backdrop-filter:none!important }
-  .case-coming:hover .case-overlay .label{opacity:0;transform:translateY(6px)}
 }
 /* Info Coming soon (più bassa) */
 .case-coming .case-info{
@@ -226,14 +228,24 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
   .avatar.xl.fixed-size img{ width:min(84vw,420px); margin:6px auto 0; display:block; height:auto }
   .filterbar{ gap:8px; }
   .case-info{ margin:8px; }
-  /* Coming soon: stessa resa ma senza blur/overlay su touch */
-  .case-coming .case-bg{ filter:none !important; -webkit-filter:none !important }
-  .case-coming .case-overlay{ display:none !important }
+  /* >>> Coming soon: mantieni blur + overlay anche su mobile <<< */
+  .case-coming .case-bg{
+    filter: blur(10px) contrast(1.02) saturate(1.04) !important;
+    -webkit-filter: blur(10px) contrast(1.02) saturate(1.04) !important;
+  }
+  .case-coming .case-overlay{
+    display:grid !important;
+    opacity:1 !important;
+    background: linear-gradient(180deg, rgba(10,12,16,.35) 0%, rgba(10,12,16,.55) 100%) !important;
+  }
 }
+
 @media (prefers-reduced-motion: reduce){
   .marquee__track{ animation:none }
   .reveal{transition:none}
 }
+
+/* Stato “peek” via JS opzionale (tocco prolungato) */
 .case-coming.peek .case-bg{
   filter: blur(0) contrast(1.06) saturate(1.06) !important;
   -webkit-filter: blur(0) contrast(1.06) saturate(1.06) !important;
