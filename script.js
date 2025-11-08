@@ -190,3 +190,9 @@ document.getElementById('showreel')?.addEventListener('click', e=>{
   if (!items.length) return;
   openModal(items, title, desc, tools, note);
 });
+
+document.querySelectorAll('.case-coming').forEach(card=>{
+  card.addEventListener('touchstart', ()=> card.classList.add('peek'), {passive:true});
+  card.addEventListener('touchend',   ()=> card.classList.remove('peek'));
+  card.addEventListener('touchcancel',()=> card.classList.remove('peek'));
+});
