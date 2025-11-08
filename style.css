@@ -196,11 +196,17 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 }
 .coming-title{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
 
-/* Hover: un filo più di blur e micro-zoom */
+/* Hover: rimuovi blur quando il cursore è sulla card */
 @media (hover:hover){
   .case-coming:hover .case-bg{
-    transform:scale(1.02);
-    filter:contrast(1.05) saturate(1.06) blur(3px);
+    transform:none;                          /* niente micro-zoom */
+    filter:contrast(1.04) saturate(1.06) blur(0px); /* ← blur off */
+  }
+  /* opzionale: alleggerisci un pelo l’overlay al passaggio */
+  .case-coming:hover .case-overlay{
+    background:linear-gradient(180deg, rgba(10,12,16,.28) 0%, rgba(10,12,16,.42) 100%);
+    backdrop-filter: blur(3px) saturate(1.05);
+    -webkit-backdrop-filter: blur(3px) saturate(1.05);
   }
 }
 
