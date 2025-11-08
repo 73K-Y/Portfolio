@@ -117,6 +117,7 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
 .badge.cat{border-color:#00baff66}
 
 /* Coming soon */
+/* Coming soon */
 .coming-section{
   max-width: var(--max-w);
   margin-inline: auto;
@@ -124,24 +125,83 @@ nav a:hover{color:var(--white);background:rgba(255,255,255,.06);box-shadow:0 0 1
   margin-top: 8px;
   margin-bottom: 0;
 }
-.coming-grid{display:grid;grid-template-columns:1fr;gap:clamp(6px,1vw,10px)}
+.coming-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(6px,1vw,10px);
+}
+
+/* Card */
 .case-coming{
-  position:relative;width:100%;height: var(--case-h);
-  border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
+  position:relative;
+  width:100%;
+  height: var(--case-h);
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);
   backdrop-filter:blur(var(--blur));
   box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 26px rgba(0,0,0,.42),0 0 14px rgba(0,186,255,.06);
-  overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;margin-block:clamp(6px,1vw,10px)
+  overflow:hidden;
+  isolation:isolate;
+  display:flex;
+  align-items:flex-end;
+  margin-block:clamp(6px,1vw,10px);
 }
-.case-coming .case-bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;filter:contrast(1.02) saturate(1.04)}
-.case-coming .case-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,12,16,.35) 0%, rgba(10,12,16,.62) 100%);pointer-events:none}
+
+/* Background + sfocatura */
+.case-coming .case-bg{
+  position:absolute; inset:0;
+  background-image:var(--bg);
+  background-size:cover; background-position:center;
+  filter:contrast(1.02) saturate(1.04) blur(1.6px); /* <— blur di base */
+  transition:transform .35s ease, filter .35s ease, opacity .35s ease;
+}
+
+/* Overlay centrata + blur */
+.case-coming .case-overlay{
+  position:absolute; inset:0;
+  display:grid; place-items:center;            /* <— centra il contenuto */
+  background:linear-gradient(180deg, rgba(10,12,16,.40) 0%, rgba(10,12,16,.62) 100%);
+  backdrop-filter: blur(6px) saturate(1.05);   /* <— blur vero sopra l’immagine */
+  -webkit-backdrop-filter: blur(6px) saturate(1.05);
+  z-index:2;
+  border:none;
+  color:var(--white);
+}
+
+/* Pill “In arrivo” */
 .case-coming .case-overlay .label{
-  position:absolute;top:12px;left:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter: blur(2px)
+  display:inline-block;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:8px 14px;
+  border-radius:999px;
+  background: rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35), 0 0 18px rgba(0,186,255,.18);
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
 }
-.case-coming .case-info{position:relative;z-index:2;margin:clamp(8px,1.8vw,14px);padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);max-width:min(760px,92%)}
+
+/* Info box */
+.case-coming .case-info{
+  position:relative; z-index:3;
+  margin:clamp(8px,1.8vw,14px);
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  max-width:min(760px,92%);
+}
 .coming-title{margin:0 0 4px;font-size:clamp(18px,3.2vw,26px)}
+
+/* Hover: un filo più di blur e micro-zoom */
 @media (hover:hover){
-  .case-coming:hover .case-overlay{ background:linear-gradient(180deg, rgba(10,12,16,.25) 0%, rgba(10,12,16,.5) 100%) }
+  .case-coming:hover .case-bg{
+    transform:scale(1.02);
+    filter:contrast(1.05) saturate(1.06) blur(3px);
+  }
 }
 
 /* Info */
