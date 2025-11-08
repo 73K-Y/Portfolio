@@ -14,30 +14,25 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ===== HERO: allinea e mantieni grande ===== */
+/* ===== HERO: allinea le due righe senza rimpicciolire troppo ===== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
   const column = document.querySelector('.hero-left');
   if (!top || !bottom || !column) return;
 
-  // limiti minimi più generosi per evitare rimpicciolimenti
-  const MIN_TOP = 34;      // px
-  const MIN_BOTTOM = 64;   // px
+  const MIN_TOP = 30;      // px
+  const MIN_BOTTOM = 54;   // px
+  const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
 
-  const EPS = 0.5, SAFETY = 12;
   const w = el => el.getBoundingClientRect().width;
   const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
   const colW = () => Math.max(0, column.getBoundingClientRect().width - SAFETY);
 
-  function polyfit(el, target, minPx, maxGrow){
-    el.style.fontSize = '';
-    el.style.letterSpacing = '';
-    el.style.wordSpacing = '';
-
+  function binaryFit(el, target, minPx, grow=2.2){
+    el.style.fontSize = ''; el.style.letterSpacing = ''; el.style.wordSpacing = '';
     let base = Math.max(minPx, parseFloat(getComputedStyle(el).fontSize) || minPx);
-    let lo = minPx, hi = Math.max(base*maxGrow, base + 48);
-
+    let lo = minPx, hi = Math.max(base*grow, base + 48);
     for (let i=0;i<18;i++){
       el.style.fontSize = base + 'px';
       const width = w(el);
@@ -51,24 +46,25 @@ revealEls.forEach(el => io.observe(el));
 
   function tune(){
     const maxBox = colW();
-    // 1) riga sopra: riempi colonna ma non scendere sotto MIN_TOP
-    polyfit(top, maxBox, MIN_TOP, 2.2);
 
-    // 2) riga sotto: match larghezza esatta della riga sopra
+    // 1) Riga superiore: entra nella colonna ma non scende sotto MIN_TOP
+    binaryFit(top, maxBox, MIN_TOP, 2.2);
+
+    // 2) Riga inferiore: stessa lunghezza apparente della riga sopra
     const target = Math.min(w(top), maxBox);
-    polyfit(bottom, target, MIN_BOTTOM, 2.4);
+    binaryFit(bottom, target, MIN_BOTTOM, 2.4);
 
-    // 3) rifinitura a spazi/lettere se resta leggermente corta
+    // 3) rifinitura: se corta, distribuisci sugli spazi/lettere
     let width = w(bottom);
     const need = target - width;
     if (need > EPS){
       const sp = gaps(bottom.textContent);
       if (sp > 0){
-        const perGap = Math.min(18, need / sp);
+        const perGap = Math.min(MAX_WS, need / sp);
         bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
       } else {
         let ls = need / Math.max(bottom.textContent.length,1);
-        ls = Math.max(-0.6, Math.min(0.6, ls));
+        ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
         bottom.style.letterSpacing = ls.toFixed(3) + 'px';
       }
     }
@@ -78,24 +74,22 @@ revealEls.forEach(el => io.observe(el));
   ro.observe(document.body);
   window.addEventListener('resize', tune);
   window.addEventListener('load', tune, { once:true });
-  // dopo che i font sono pronti
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(tune);
+  setTimeout(()=>document.fonts?.ready.then(tune), 0);
   tune();
 })();
 
-/* ===== Badge categoria + tools + desc ===== */
-document.querySelectorAll('#showreel .case').forEach(card=>{
+/* ===== Badge categoria + tools + descrizione ===== */
+document.querySelectorAll('.case').forEach(card=>{
   const badges = card.querySelector('.badges');
   const descEl = card.querySelector('.desc');
-  const cat = (card.dataset.cat || '').trim();          // game | viz
+  const cat = (card.dataset.cat || '').trim();
   const tools = (card.dataset.tools || '').split(',').map(s=>s.trim()).filter(Boolean);
 
   if (badges) {
-    badges.innerHTML = ''; // evita duplicazioni in hot-reload
     if (cat){
       const b = document.createElement('span');
-      b.className = 'badge cat ' + (cat==='game'?'game':'viz');
-      b.textContent = (cat === 'game' ? 'Game Art & Dev' : '3D Visualization');
+      b.className = 'badge cat';
+      b.textContent = (cat === 'game' ? 'Game Art & Dev' : '3D Viz');
       badges.appendChild(b);
     }
     tools.forEach(t=>{
@@ -105,22 +99,19 @@ document.querySelectorAll('#showreel .case').forEach(card=>{
       badges.appendChild(b);
     });
   }
-  if (descEl && !descEl.textContent.trim() && card.dataset.desc) {
-    descEl.textContent = card.dataset.desc;
-  }
+  if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
 });
 
 /* ===== Filtro categorie ===== */
 const filterBtns = document.querySelectorAll('.filter-btn');
-// filtra SOLO le card del #showreel
-const cards = Array.from(document.querySelectorAll('#showreel .case'));
+const cards = Array.from(document.querySelectorAll('.case')); // solo i progetti (non i coming soon)
 
 function applyFilter(key){
-  const cat = (key || 'all').trim(); // all | game | viz
+  const cat = (key || 'all').trim();
   cards.forEach(c=>{
     const cc = (c.dataset.cat || '').trim();
-    // usa style.display per evitare dipendenza da CSS .is-hidden
-    c.style.display = (cat==='all' || cc===cat) ? '' : 'none';
+    if (cat === 'all' || cc === cat) c.classList.remove('is-hidden');
+    else c.classList.add('is-hidden');
   });
 }
 
@@ -132,8 +123,7 @@ filterBtns.forEach(btn=>{
     document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
-
-// all'avvio mostra davvero TUTTO
+// all'avvio mostra davvero TUTTI
 applyFilter('all');
 
 /* ===== Modal ===== */
@@ -162,7 +152,7 @@ function openModal(items, title, desc, tools, note){
   });
 
   if (tools) {
-    tools.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>{
+    tools.split(',').map(s=>s.trim()).forEach(t=>{
       const span = document.createElement('span');
       span.className = 'chip';
       span.textContent = t;
@@ -174,20 +164,18 @@ function openModal(items, title, desc, tools, note){
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
 }
-
 function closeModalFn(){
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden','true');
   modalInner.innerHTML = '';
 }
-
 if (closeModal) closeModal.addEventListener('click', closeModalFn);
 document.getElementById('modalBackdrop')?.addEventListener('click', closeModalFn);
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
 document.getElementById('showreel')?.addEventListener('click', e=>{
   const card = e.target.closest('.case');
-  if (!card || !e.target.classList.contains('open-modal')) return; // apri solo dal bottone
+  if (!card || !e.target.classList.contains('open-modal')) return;
   const title  = card.dataset.title || 'Progetto';
   const desc   = card.dataset.desc || '';
   const tools  = card.dataset.tools || '';

@@ -4,15 +4,65 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
-    <meta name="description" content="Portfolio 3D — game art, rendering, motion.">
+    <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
+    <meta name="theme-color" content="#00000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="color-scheme" content="dark light">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
+
   <body class="snap">
+    <!-- NAV -->
+    <header class="nav-glass">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)"/>
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="#00a6ff" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="#0066cc" stop-opacity="0.8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <h1 id="name">Tommy Raffaello Hodoroaba</h1>
+          <p class="lead">3D Digital Artist & Game Developer</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#hero">Home</a>
+        <a href="#showreel">Progetti</a>
+        <a href="#info">Info</a>
+        <a href="#contact">Contatti</a>
+      </nav>
+    </header>
 
-    <!-- NAV + MARQUEE identici alla tua versione -->
+    <!-- MARQUEE -->
+    <div class="marquee" aria-label="Processo e skill">
+      <div class="marquee__rail">
+        <div class="marquee__track">
+          <span class="pill">Alan Walker freelancer (dal 2019)</span>
+          <span class="pill">ITS AR/VR &amp; Game Dev</span>
+          <span class="pill">Blender • UE5 • Maya • Unity</span>
+          <span class="pill">Fotogrammetria</span>
+          <span class="pill">Topology pulita</span>
+          <span class="pill">UV • Texel density</span>
+          <span class="pill">PBR lookdev</span>
+          <span class="pill">Rigging base</span>
+          <span class="pill">Lighting realtime</span>
+          <span class="pill">Python • C • C# • C++ • Lua</span>
+          <span class="pill">AE • Premiere • Photoshop</span>
+          <span class="pill">Git / Perforce</span>
+          <span class="pill">QA su device</span>
+        </div>
+      </div>
+    </div>
 
-    <!-- HERO (lasciato uguale) -->
+    <!-- HERO -->
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
@@ -20,16 +70,20 @@
             <span id="heroTop" class="line top gradient-title">La precisione non è un dettaglio</span>
             <span id="heroBottom" class="line bottom gradient-title">È la mia firma</span>
           </h2>
+
           <p class="hero-sub">Asset, ambienti, VFX e motion per videogiochi e brand.</p>
           <div class="cta-row">
             <a class="btn primary" href="#showreel">Guarda i progetti</a>
             <a class="btn" href="#contact">Contattami</a>
           </div>
           <div class="hero-chips">
-            <span class="chip">Blender</span><span class="chip">Unreal Engine</span>
-            <span class="chip">Substance</span><span class="chip">C# / C++</span>
+            <span class="chip">Blender</span>
+            <span class="chip">Unreal Engine</span>
+            <span class="chip">Substance</span>
+            <span class="chip">C# / C++</span>
           </div>
         </div>
+
         <div class="hero-right">
           <figure class="avatar xl fixed-size">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
@@ -40,7 +94,7 @@
 
     <!-- SHOWREEL -->
     <div id="showreel" class="wrap">
-      <div class="filterbar reveal" id="filters">
+      <div id="filters" class="filterbar reveal">
         <button class="filter-btn active" data-filter="all">Tutti</button>
         <button class="filter-btn" data-filter="game">Game Art &amp; Dev</button>
         <button class="filter-btn" data-filter="viz">3D Visualization</button>
@@ -52,8 +106,8 @@
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulazione."
         data-tools="Blender, Substance"
-        data-note="Livree fedeli al brand e PBR pulito."
-        data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png">
+        data-images="assets/Screenshot 2025-10-12 204155.png|assets/Screenshot 2025-10-12 204346.png"
+        data-src="assets/Screenshot 2025-10-12 204155.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -68,8 +122,8 @@
         data-title="Team Treni Low Poly"
         data-desc="Asset low poly per videogioco stile Railway Runner."
         data-tools="Blender, Unity"
-        data-note="Palette compressa, silhouette leggibili per mobile."
-        data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png">
+        data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 004528.png"
+        data-src="assets/Screenshot 2025-06-05 221951.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -84,9 +138,9 @@
         data-title="Oblivion Hospital"
         data-desc="Animazioni 3D e rendering della struttura ospedaliera."
         data-tools="Blender, UE5"
-        data-note="Luci fredde e camera lenta per tensione psicologica."
         data-images="assets/scena - background menù - ospedale.png"
-        data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
+        data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4"
+        data-src="assets/scena - background menù - ospedale.png">
         <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -102,8 +156,8 @@
         data-title="Alan Walker"
         data-desc="Animazione e montaggio del remix “Beautiful Nightmare”."
         data-tools="Premiere, After Effects"
-        data-note="Transizioni respirate per valorizzare ritmo e texture sonore."
-        data-images="assets/Screenshot 2025-10-12 224346.png">
+        data-images="assets/Screenshot 2025-10-12 224346.png"
+        data-src="assets/Screenshot 2025-10-12 224346.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -118,8 +172,8 @@
         data-title="Soldier Walker"
         data-desc="Personaggio 3D, studio materiali e posing."
         data-tools="Blender, Substance"
-        data-note="Contrasto tra metalli e tessuti per varietà materica."
-        data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg">
+        data-images="assets/Screenshot 2025-10-12 205615.png|assets/Untitled.png|assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
+        data-src="assets/Screenshot 2025-10-12 205615.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 205615.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -134,8 +188,8 @@
         data-title="Salotto"
         data-desc="Render fotorealistico interno moderno."
         data-tools="Blender, Cycles"
-        data-note="Key light calda + rim freddo per profondità."
-        data-images="assets/untitled_1.png">
+        data-images="assets/untitled_1.png"
+        data-src="assets/untitled_1.png">
         <div class="case-bg" style="--bg:url('assets/untitled_1.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -150,8 +204,8 @@
         data-title="Macchina Futuristica"
         data-desc="Concept car futuristica."
         data-tools="Blender, Photoshop"
-        data-note="Linee tese e cut riflettenti ispirazione synthwave."
-        data-images="assets/Screenshot_20251012_214749_Drive.jpg">
+        data-images="assets/Screenshot_20251012_214749_Drive.jpg"
+        data-src="assets/Screenshot_20251012_214749_Drive.jpg">
         <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -166,8 +220,8 @@
         data-title="Città Low Poly"
         data-desc="Città low poly con luci notturne."
         data-tools="Blender"
-        data-note="Volumetrie semplici + neon per lettura immediata."
-        data-images="assets/Screenshot 2025-10-12 203652.png">
+        data-images="assets/Screenshot 2025-10-12 203652.png"
+        data-src="assets/Screenshot 2025-10-12 203652.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -182,8 +236,8 @@
         data-title="Pianeti"
         data-desc="Composizione spaziale con luce volumetrica."
         data-tools="Blender"
-        data-note="Contrasto scala-luce per senso di vastità."
-        data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png">
+        data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png"
+        data-src="assets/Screenshot 2025-10-12 203921.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -198,8 +252,8 @@
         data-title="Star Wars"
         data-desc="Navicella ispirata all’universo Star Wars."
         data-tools="Blender, Photoshop"
-        data-note="Edge highlight + micro-bevel per scala credibile."
-        data-images="assets/Screenshot 2025-10-12 210314.png">
+        data-images="assets/Screenshot 2025-10-12 210314.png"
+        data-src="assets/Screenshot 2025-10-12 210314.png">
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
@@ -210,24 +264,76 @@
       </section>
     </div>
 
-    <!-- COMING SOON (resta fuori dal filtro) -->
-    <section class="coming-section wrap reveal">
-      <h3 style="margin:8px 0 6px">Coming soon</h3>
+    <!-- COMING SOON -->
+    <section class="coming-section wrap reveal" id="coming">
+      <h3 class="glitchable" style="margin:8px 0 10px">Coming soon</h3>
       <div class="coming-grid">
         <article class="case-coming" data-title="Brain.exe">
           <div class="case-bg" style="--bg:url('assets/BrainEXEMiniature.png')"></div>
-          <div class="case-overlay" aria-hidden="true"><span class="label">In arrivo</span></div>
+          <div class="case-overlay"><span class="label">In arrivo</span></div>
           <div class="case-info"><h4 class="coming-title">Brain.exe</h4></div>
         </article>
+
         <article class="case-coming" data-title="TOMHODA Studios">
           <div class="case-bg" style="--bg:url('assets/LogoTHOMODportfolio.png')"></div>
-          <div class="case-overlay" aria-hidden="true"><span class="label">In arrivo</span></div>
+          <div class="case-overlay"><span class="label">In arrivo</span></div>
           <div class="case-info"><h4 class="coming-title">TOMHODA Studios</h4></div>
         </article>
       </div>
     </section>
 
-    <!-- INFO + FOOTER + MODAL (come prima) -->
+    <!-- INFO -->
+    <section id="info" class="wrap section info-section snap-child reveal">
+      <div class="panel info-card">
+        <div class="info-grid">
+          <div class="info-block">
+            <h4>About</h4>
+            <p class="muted">
+              Sono uno studente ITS con esperienza in asset 3D, materiali PBR, animazioni e game development.
+              Amo il design creativo e la sperimentazione tecnica.
+            </p>
+            <div class="chips-row">
+              <span class="chip">Blender</span>
+              <span class="chip">Unreal Engine</span>
+              <span class="chip">Substance</span>
+              <span class="chip">C# / C++</span>
+            </div>
+          </div>
+
+          <div id="contact" class="info-block">
+            <h4>Contatti</h4>
+            <ul class="contact-list">
+              <li><span>Email:</span> <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a></li>
+              <li><span>Tel:</span> +39 3925649950</li>
+              <li><span>Città:</span> Torino, Italia</li>
+            </ul>
+            <div class="links-split">
+              <a href="TommyRaffaelloHodoroabaCVEuropass.pdf" target="_blank">Scarica CV (PDF)</a>
+              <span class="dot">•</span>
+              <a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="wrap footer-tight">
+      <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal" role="dialog" aria-hidden="true">
+      <div class="backdrop" id="modalBackdrop"></div>
+      <div class="content" role="document">
+        <button id="closeModal" aria-label="Chiudi">✕</button>
+        <div id="modalInner"></div>
+        <div class="modal-meta">
+          <div id="modalTools" class="toolchips"></div>
+          <blockquote id="modalNote" class="author-note"></blockquote>
+        </div>
+        <div class="info" id="modalInfo"></div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
