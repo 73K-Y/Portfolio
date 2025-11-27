@@ -304,3 +304,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+document.getElementById('bot-icon').addEventListener('click', () => {
+  const bot = document.getElementById('__appCarrierLoader__');
+  if (bot) {
+    bot.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Se il bot ha una funzione pubblica per aprirlo:
+    // bot.openBot(); 
+  }
+});
