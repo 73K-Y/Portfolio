@@ -416,10 +416,10 @@
               return;
             }
             // Se il bot espone una funzione globale per aprirlo, la chiamiamo
-            if (typeof window.__appCarrierInit === 'function') {
-              window.__appCarrierInit();
+            if (typeof window.NOME_FUNZIONE === 'function') {
+                window.NOME_FUNZIONE();
             } else {
-              console.warn("Funzione __appCarrierInit non definita — verifica il loader.");
+                console.warn("Funzione bot non trovata.");
             }
           });
         }
