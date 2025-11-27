@@ -378,18 +378,52 @@
     <!-- JS -->
     <script src="script.js"></script>
 
-    <!-- Contenitore per il bot -->
+    <!-- Contenitore per il bot (opzionale, se richiesto) -->
     <div id="aimage-bot-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
-    <div id="bot-icon">🤖</div>
+    <!-- Icona cliccabile per aprire il bot -->
+    <div id="bot-icon" aria-label="Apri chat bot" role="button">🤖</div>
 
     <script>
-    (function() {
-      const botScript = document.getElementById('__appCarrierLoader__');
-      botScript.addEventListener('load', () => {
-        console.log('Bot loaded!');
-        // A questo punto il bot dovrebbe iniziare a funzionare
-      });
-    })();
+      (function() {
+        // 1) Crea lo script del bot
+        const s = document.createElement('script');
+        s.id = "__appCarrierLoader__";
+        s.defer = true;
+        // Usa protocollo https in modo esplicito
+        s.src = "https://aimage.tm.arch01.xyz/carrier/loader.js?t=" + new Date().toISOString();
+        s.dataset.botIdentifier = "yodabothmmmmm-692031dd5d2cd0cceeba5f25";
+
+        // Stato di caricamento
+        let botReady = false;
+
+        s.addEventListener('load', () => {
+          console.log("Bot loader caricato ✔️");
+          botReady = true;
+        });
+
+        s.addEventListener('error', () => {
+          console.error("Errore nel caricamento del bot loader.");
+        });
+
+        document.body.appendChild(s);
+
+        // 2) Aggiungi handler al click del bottone
+        const botIcon = document.getElementById('bot-icon');
+        if (botIcon) {
+          botIcon.addEventListener('click', () => {
+            if (!botReady) {
+              console.warn("Bot non ancora pronto: attendi un attimo...");
+              return;
+            }
+            // Se il bot espone una funzione globale per aprirlo, la chiamiamo
+            if (typeof window.__appCarrierInit === 'function') {
+              window.__appCarrierInit();
+            } else {
+              console.warn("Funzione __appCarrierInit non definita — verifica il loader.");
+            }
+          });
+        }
+      })();
     </script>
   </body>
 </html>
