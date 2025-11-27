@@ -8,6 +8,7 @@
 
     <!-- Mobile bars trasparenti -->
     <meta name="theme-color" content="#00000000" />
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="dark light">
@@ -381,31 +382,27 @@
     <script src="script.js"></script>
 
     <!-- BOT SCRIPT -->
-    <script defer id="__appCarrierLoader__" 
-    src="//aimage.tm.arch01.xyz/carrier/loader.js?t=2025-11-27T12:25:21.807+00:00" 
-    data-bot-identifier="yodabothmmmmm-692031dd5d2cd0cceeba5f25"></script>
-
-    <script defer id="__appCarrierLoader__" 
-    src="//aimage.tm.arch01.xyz/carrier/loader.js?t=2025-11-27T12:25:21.807+00:00" 
-    data-bot-identifier="yodabothmmmmm-692031dd5d2cd0cceeba5f25"></script>
+    <script defer 
+        id="__appCarrierLoader__"
+        src="//aimage.tm.arch01.xyz/carrier/loader.js?t=2025-11-27T12:25:21.807+00:00"
+        data-bot-identifier="yodabothmmmmm-692031dd5d2cd0cceeba5f25">
+    </script>
 
     <script>
     const botIcon = document.getElementById('bot-icon');
     let botReady = false;
 
-    // Quando lo script esterno è completamente caricato
+    // Segue correttamente il caricamento dello script
     document.getElementById('__appCarrierLoader__').addEventListener('load', () => {
         botReady = true;
         console.log("Bot script pronto ✅");
     });
 
-    // Click handler sicuro
     botIcon.addEventListener('click', () => {
         if (botReady && typeof window.__appCarrierInit === 'function') {
-            window.__appCarrierInit(); // Avvia il bot
+            window.__appCarrierInit();
         } else {
             console.warn("Bot non pronto, riprova tra 1 secondo...");
-            // Retry automatico
             const retry = setInterval(() => {
                 if (typeof window.__appCarrierInit === 'function') {
                     clearInterval(retry);
