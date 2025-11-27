@@ -378,20 +378,18 @@
     <!-- JS -->
     <script src="script.js"></script>
 
-    <!-- Inizio Chatbot Aimage -->
-    <div id="aimage-bot-container"></div>
+    <!-- Contenitore per il bot -->
+    <div id="aimage-bot-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
 
     <script>
-      // Crea e carica dinamicamente lo script del bot con timestamp aggiornato
-      (function() {
-        const s = document.createElement('script');
-        s.id = "__appCarrierLoader__";
-        s.defer = true;
-        // Timestamp dinamico per sempre avere l'ultima versione del loader
-        s.src = `//aimage.tm.arch01.xyz/carrier/loader.js?t=${new Date().toISOString()}`;
-        s.dataset.botIdentifier = "yodabothmmmmm-692031dd5d2cd0cceeba5f25";
-        document.body.appendChild(s);
-      })();
+    (function() {
+      const s = document.createElement('script');
+      s.id = "__appCarrierLoader__";
+      s.defer = true;
+      s.src = `//aimage.tm.arch01.xyz/carrier/loader.js?t=${new Date().toISOString()}`;
+      s.dataset.botIdentifier = "yodabothmmmmm-692031dd5d2cd0cceeba5f25";
+      document.body.appendChild(s);
+    })();
     </script>
   </body>
 </html>
