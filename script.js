@@ -313,3 +313,14 @@ document.getElementById('bot-icon').addEventListener('click', () => {
     // bot.openBot(); 
   }
 });
+
+// BOT icon click
+const botIcon = document.getElementById('bot-icon');
+botIcon.addEventListener('click', () => {
+  const loader = document.getElementById('__appCarrierLoader__');
+  if (loader && typeof window.__appCarrierInit === 'function') {
+    window.__appCarrierInit(); // avvia il bot
+  } else {
+    console.warn("Bot script non ancora caricato.");
+  }
+});
