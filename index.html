@@ -384,46 +384,49 @@
     <div id="bot-icon" aria-label="Apri chat bot" role="button">🤖</div>
 
     <script>
-      (function() {
-        // 1) Crea lo script del bot
-        const s = document.createElement('script');
-        s.id = "__appCarrierLoader__";
-        s.defer = true;
-        // Usa protocollo https in modo esplicito
-        s.src = "https://aimage.tm.arch01.xyz/carrier/loader.js?t=" + new Date().toISOString();
-        s.dataset.botIdentifier = "yodabothmmmmm-692031dd5d2cd0cceeba5f25";
+      // Variabili di stato
+      let botReady = false;
 
-        // Stato di caricamento
-        let botReady = false;
-
-        s.addEventListener('load', () => {
+      // Caricamento del bot
+      const script = document.createElement('script');
+      script.src = "https://cdn.jsdelivr.net/gh/ilCodiceDelBot/loader.js"; // sostituisci con il tuo URL reale
+      script.onload = () => {
           console.log("Bot loader caricato ✔️");
           botReady = true;
-        });
+      };
+      document.head.appendChild(script);
 
-        s.addEventListener('error', () => {
-          console.error("Errore nel caricamento del bot loader.");
-        });
+      // Aggiungi l'icona del bot (puoi personalizzare HTML/CSS)
+      const botIcon = document.createElement('div');
+      botIcon.id = 'bot-icon';
+      botIcon.style.position = 'fixed';
+      botIcon.style.bottom = '20px';
+      botIcon.style.right = '20px';
+      botIcon.style.width = '60px';
+      botIcon.style.height = '60px';
+      botIcon.style.borderRadius = '50%';
+      botIcon.style.backgroundColor = '#007bff';
+      botIcon.style.cursor = 'pointer';
+      botIcon.style.display = 'flex';
+      botIcon.style.alignItems = 'center';
+      botIcon.style.justifyContent = 'center';
+      botIcon.style.color = '#fff';
+      botIcon.style.fontSize = '30px';
+      botIcon.innerText = '💬';
+      document.body.appendChild(botIcon);
 
-        document.body.appendChild(s);
-
-        // 2) Aggiungi handler al click del bottone
-        const botIcon = document.getElementById('bot-icon');
-        if (botIcon) {
-          botIcon.addEventListener('click', () => {
-            if (!botReady) {
+      // Click sull'icona del bot
+      botIcon.addEventListener('click', () => {
+          if (!botReady) {
               console.warn("Bot non ancora pronto: attendi un attimo...");
               return;
-            }
-            // Se il bot espone una funzione globale per aprirlo, la chiamiamo
-            if (typeof window.NOME_FUNZIONE === 'function') {
-                window.NOME_FUNZIONE();
-            } else {
-                console.warn("Funzione bot non trovata.");
-            }
-          });
-        }
-      })();
+          }
+          if (typeof window.__appCarrierOpen__ === 'function') {
+              window.__appCarrierOpen__();
+          } else {
+              console.warn("Funzione bot non trovata.");
+          }
+      });
     </script>
   </body>
 </html>
