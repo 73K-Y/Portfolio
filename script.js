@@ -309,20 +309,30 @@ const botIcon = document.getElementById('bot-icon');
 
 if (botIcon) {
   botIcon.addEventListener('click', () => {
-    const botScript = document.getElementById('__appCarrierLoader__');
+    let botScript = document.getElementById('__appCarrierLoader__');
 
-    if (botScript && !botScript.dataset.loaded) {
-      botScript.addEventListener('load', () => {
+    if (!botScript) {
+      // crea e carica lo script se non esiste
+      botScript = document.createElement('script');
+      botScript.id = '__appCarrierLoader__';
+      botScript.src = 'URL_DEL_BOT.js'; // sostituisci
+      botScript.onload = () => {
         console.log("Bot script caricato ✅");
         if (typeof window.__appCarrierInit === 'function') {
           window.__appCarrierInit();
         }
-      });
-      botScript.dataset.loaded = "true";
+      };
+      document.body.appendChild(botScript);
     } else if (typeof window.__appCarrierInit === 'function') {
+      // se già pronto
       window.__appCarrierInit();
     } else {
-      console.warn("Bot script non pronto.");
+      // se lo script esiste ma non è ancora pronto
+      botScript.addEventListener('load', () => {
+        if (typeof window.__appCarrierInit === 'function') {
+          window.__appCarrierInit();
+        }
+      }, { once: true });
     }
   });
 }
