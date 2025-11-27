@@ -392,5 +392,27 @@
       document.body.appendChild(s);
     })();
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const botIcon = document.getElementById("bot-icon");
+
+        botIcon.addEventListener("click", function() {
+          const iframe = document.querySelector("#chat-widget-iframe-69282eabb087f0ecb8e94a58");
+          if (!iframe) return;
+
+          // toggle classe open
+          iframe.classList.toggle("open");
+          
+          // opzionale: ingrandisci al centro se vuoi effetto lightbox
+          if (iframe.classList.contains("open")) {
+            iframe.style.width = "400px";
+            iframe.style.height = "600px";
+          } else {
+            iframe.style.width = "60px";
+            iframe.style.height = "60px";
+          }
+        });
+      });
+    </script>
   </body>
 </html>
