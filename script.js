@@ -307,23 +307,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const botIcon = document.getElementById('bot-icon');
 
-botIcon.addEventListener('click', () => {
-  const botScript = document.getElementById('__appCarrierLoader__');
+if (botIcon) {
+  botIcon.addEventListener('click', () => {
+    const botScript = document.getElementById('__appCarrierLoader__');
 
-  // Controlla se lo script è già caricato
-  if (botScript && !botScript.dataset.loaded) {
-    // Aggiungi listener load
-    botScript.addEventListener('load', () => {
-      console.log("Bot script caricato ✅");
-      if (typeof window.__appCarrierInit === 'function') {
-        window.__appCarrierInit();
-      }
-    });
-    botScript.dataset.loaded = "true";
-  } else if (typeof window.__appCarrierInit === 'function') {
-    // Se già caricato, avvia direttamente
-    window.__appCarrierInit();
-  } else {
-    console.warn("Bot script non pronto.");
-  }
-});
+    if (botScript && !botScript.dataset.loaded) {
+      botScript.addEventListener('load', () => {
+        console.log("Bot script caricato ✅");
+        if (typeof window.__appCarrierInit === 'function') {
+          window.__appCarrierInit();
+        }
+      });
+      botScript.dataset.loaded = "true";
+    } else if (typeof window.__appCarrierInit === 'function') {
+      window.__appCarrierInit();
+    } else {
+      console.warn("Bot script non pronto.");
+    }
+  });
+}
