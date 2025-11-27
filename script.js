@@ -309,30 +309,12 @@ const botIcon = document.getElementById('bot-icon');
 
 if (botIcon) {
   botIcon.addEventListener('click', () => {
-    let botScript = document.getElementById('__appCarrierLoader__');
-
-    if (!botScript) {
-      // crea e carica lo script se non esiste
-      botScript = document.createElement('script');
-      botScript.id = '__appCarrierLoader__';
-      botScript.src = 'URL_DEL_BOT.js'; // sostituisci
-      botScript.onload = () => {
-        console.log("Bot script caricato ✅");
-        if (typeof window.__appCarrierInit === 'function') {
-          window.__appCarrierInit();
-        }
-      };
-      document.body.appendChild(botScript);
-    } else if (typeof window.__appCarrierInit === 'function') {
-      // se già pronto
-      window.__appCarrierInit();
+    if (!botReady) return console.warn("Bot non ancora pronto");
+    // Chiama la funzione corretta esposta dal loader
+    if (typeof window.__appCarrierOpen === 'function') {
+        window.__appCarrierOpen();
     } else {
-      // se lo script esiste ma non è ancora pronto
-      botScript.addEventListener('load', () => {
-        if (typeof window.__appCarrierInit === 'function') {
-          window.__appCarrierInit();
-        }
-      }, { once: true });
+        console.warn("Funzione bot non trovata.");
     }
   });
 }
