@@ -305,22 +305,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-document.getElementById('bot-icon').addEventListener('click', () => {
-  const bot = document.getElementById('__appCarrierLoader__');
-  if (bot) {
-    bot.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Se il bot ha una funzione pubblica per aprirlo:
-    // bot.openBot(); 
-  }
-});
-
-// BOT icon click
 const botIcon = document.getElementById('bot-icon');
+
 botIcon.addEventListener('click', () => {
-  const loader = document.getElementById('__appCarrierLoader__');
-  if (loader && typeof window.__appCarrierInit === 'function') {
-    window.__appCarrierInit(); // avvia il bot
+  const botScript = document.getElementById('__appCarrierLoader__');
+
+  // Controlla se lo script è già caricato
+  if (botScript && !botScript.dataset.loaded) {
+    // Aggiungi listener load
+    botScript.addEventListener('load', () => {
+      console.log("Bot script caricato ✅");
+      if (typeof window.__appCarrierInit === 'function') {
+        window.__appCarrierInit();
+      }
+    });
+    botScript.dataset.loaded = "true";
+  } else if (typeof window.__appCarrierInit === 'function') {
+    // Se già caricato, avvia direttamente
+    window.__appCarrierInit();
   } else {
-    console.warn("Bot script non ancora caricato.");
+    console.warn("Bot script non pronto.");
   }
 });
