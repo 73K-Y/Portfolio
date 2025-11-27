@@ -384,5 +384,28 @@
     <script defer id="__appCarrierLoader__" 
     src="//aimage.tm.arch01.xyz/carrier/loader.js?t=2025-11-27T12:25:21.807+00:00" 
     data-bot-identifier="yodabothmmmmm-692031dd5d2cd0cceeba5f25"></script>
+
+    <script>
+    let botReady = false;
+
+    // Quando lo script esterno è completamente caricato
+    document.getElementById('__appCarrierLoader__').addEventListener('load', () => {
+        botReady = true;
+        console.log("Bot script pronto ✅");
+    });
+
+    document.getElementById('bot-icon').addEventListener('click', () => {
+        if (botReady && typeof window.__appCarrierInit === 'function') {
+            window.__appCarrierInit(); // Avvia il bot
+        } else {
+            console.warn("Bot non pronto, riprova tra 1 secondo...");
+            setTimeout(() => {
+                if (typeof window.__appCarrierInit === 'function') {
+                    window.__appCarrierInit();
+                }
+            }, 1000);
+        }
+    });
+    </script>
   </body>
 </html>
