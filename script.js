@@ -293,3 +293,14 @@ document.querySelectorAll('.case-coming').forEach(card=>{
   card.addEventListener('touchend',   ()=> card.classList.remove('peek'));
   card.addEventListener('touchcancel',()=> card.classList.remove('peek'));
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const botEl = document.getElementById('__appCarrierLoader__');
+  if (botEl) {
+    botEl.addEventListener('load', () => {
+      botEl.style.opacity = 0;
+      botEl.style.transition = 'opacity 0.6s ease-in-out';
+      botEl.style.opacity = 1;
+    });
+  }
+});
