@@ -379,49 +379,28 @@
     <script src="script.js"></script>
 
     <script>
-      // Variabili di stato
-      let botReady = false;
+      // Aggiorna l'anno del footer
+      const yearSpan = document.getElementById('year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // Caricamento del bot
-      const script = document.createElement('script');
-      script.src = "https://cdn.jsdelivr.net/gh/ilCodiceDelBot/loader.js"; // sostituisci con il tuo URL reale
-      script.onload = () => {
-          console.log("Bot loader caricato ✔️");
-          botReady = true;
-      };
-      document.head.appendChild(script);
-
-      // Aggiungi l'icona del bot (puoi personalizzare HTML/CSS)
-      const botIcon = document.createElement('div');
-      botIcon.id = 'bot-icon';
-      botIcon.style.position = 'fixed';
-      botIcon.style.bottom = '20px';
-      botIcon.style.right = '20px';
-      botIcon.style.width = '60px';
-      botIcon.style.height = '60px';
-      botIcon.style.borderRadius = '50%';
-      botIcon.style.backgroundColor = '#007bff';
-      botIcon.style.cursor = 'pointer';
-      botIcon.style.display = 'flex';
-      botIcon.style.alignItems = 'center';
-      botIcon.style.justifyContent = 'center';
-      botIcon.style.color = '#fff';
-      botIcon.style.fontSize = '30px';
-      botIcon.innerText = '💬';
-      document.body.appendChild(botIcon);
-
-      // Click sull'icona del bot
-      botIcon.addEventListener('click', () => {
-          if (!botReady) {
-              console.warn("Bot non ancora pronto: attendi un attimo...");
-              return;
-          }
-          if (typeof window.__appCarrierOpen__ === 'function') {
-              window.__appCarrierOpen__();
-          } else {
-              console.warn("Funzione bot non trovata.");
-          }
+      // Filtro categorie
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = Array.from(document.querySelectorAll('.case'));
+      function applyFilter(key){
+        const cat = (key || 'all').trim();
+        cards.forEach(c=>{
+          const cc = (c.dataset.cat || '').trim();
+          c.classList.toggle('is-hidden', cat !== 'all' && cc !== cat);
+        });
+      }
+      filterBtns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          filterBtns.forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          applyFilter(btn.dataset.filter);
+        });
       });
+      applyFilter('all');
     </script>
   </body>
 </html>
