@@ -375,42 +375,23 @@
       </div>
     </div>
 
-    <!-- BOT ICON -->
-    <div id="bot-icon">💬</div>
-
     <!-- JS -->
     <script src="script.js"></script>
 
-    <!-- BOT SCRIPT -->
-    <script defer 
-        id="__appCarrierLoader__"
-        src="//aimage.tm.arch01.xyz/carrier/loader.js?t=2025-11-27T12:25:21.807+00:00"
-        data-bot-identifier="yodabothmmmmm-692031dd5d2cd0cceeba5f25">
-    </script>
+    <!-- Inizio Chatbot Aimage -->
+    <div id="aimage-bot-container"></div>
 
     <script>
-    const botIcon = document.getElementById('bot-icon');
-    let botReady = false;
-
-    // Segue correttamente il caricamento dello script
-    document.getElementById('__appCarrierLoader__').addEventListener('load', () => {
-        botReady = true;
-        console.log("Bot script pronto ✅");
-    });
-
-    botIcon.addEventListener('click', () => {
-        if (botReady && typeof window.__appCarrierInit === 'function') {
-            window.__appCarrierInit();
-        } else {
-            console.warn("Bot non pronto, riprova tra 1 secondo...");
-            const retry = setInterval(() => {
-                if (typeof window.__appCarrierInit === 'function') {
-                    clearInterval(retry);
-                    window.__appCarrierInit();
-                }
-            }, 1000);
-        }
-    });
+      // Crea e carica dinamicamente lo script del bot con timestamp aggiornato
+      (function() {
+        const s = document.createElement('script');
+        s.id = "__appCarrierLoader__";
+        s.defer = true;
+        // Timestamp dinamico per sempre avere l'ultima versione del loader
+        s.src = `//aimage.tm.arch01.xyz/carrier/loader.js?t=${new Date().toISOString()}`;
+        s.dataset.botIdentifier = "yodabothmmmmm-692031dd5d2cd0cceeba5f25";
+        document.body.appendChild(s);
+      })();
     </script>
   </body>
 </html>
