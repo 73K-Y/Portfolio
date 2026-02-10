@@ -2,19 +2,12 @@
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-/* =========================
-   Marquee seamless loop
-   (duplica il contenuto così -50% funziona sempre)
-   ========================= */
+/* Marquee seamless loop (duplica contenuto per -50%) */
 (function initMarquee(){
   const track = document.getElementById('marqueeTrack');
-  if (!track) return;
-
-  // Se già duplicato, non rifare
-  if (track.dataset.duped === '1') return;
-
+  if (!track || track.dataset.duped === '1') return;
   const original = track.innerHTML;
-  track.innerHTML = original + original; // duplico
+  track.innerHTML = original + original;
   track.dataset.duped = '1';
 })();
 
@@ -29,74 +22,6 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
-
-/* ===== HERO fit (desktop/tablet). Su mobile (<600px) lascio al CSS ===== */
-(function fitHero() {
-  const top    = document.getElementById('heroTop');
-  const bottom = document.getElementById('heroBottom');
-  const column = document.querySelector('.hero-left');
-  if (!top || !bottom || !column) return;
-
-  function isMobile(){ return window.matchMedia('(max-width: 600px)').matches; }
-
-  const MIN_TOP = 30;
-  const MIN_BOTTOM = 54;
-  const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
-
-  const w = el => el.getBoundingClientRect().width;
-  const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
-  const colW = () => Math.max(0, column.getBoundingClientRect().width - SAFETY);
-
-  function binaryFit(el, target, minPx, grow=2.2){
-    el.style.wordSpacing = '';
-    el.style.letterSpacing = '';
-    let base = Math.max(minPx, parseFloat(getComputedStyle(el).fontSize) || minPx);
-    let lo = minPx, hi = Math.max(base*grow, base + 48);
-    for (let i=0;i<18;i++){
-      el.style.fontSize = base + 'px';
-      const width = w(el);
-      if (Math.abs(width - target) <= EPS) break;
-      if (width > target) hi = base; else lo = base;
-      const next = (lo + hi) / 2;
-      if (Math.abs(next - base) < 0.1) break;
-      base = next;
-    }
-  }
-
-  function tune(){
-    if (isMobile()){
-      [top, bottom].forEach(el=>{
-        el.style.fontSize=''; el.style.wordSpacing=''; el.style.letterSpacing='';
-      });
-      return;
-    }
-    const maxBox = colW();
-    binaryFit(top, maxBox, MIN_TOP, 2.2);
-    const target = Math.min(w(top), maxBox);
-    binaryFit(bottom, target, MIN_BOTTOM, 2.4);
-
-    let width = w(bottom);
-    const need = target - width;
-    if (need > EPS){
-      const sp = gaps(bottom.textContent);
-      if (sp > 0){
-        const perGap = Math.min(MAX_WS, need / sp);
-        bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
-      } else {
-        let ls = need / Math.max(bottom.textContent.length,1);
-        ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
-        bottom.style.letterSpacing = ls.toFixed(3) + 'px';
-      }
-    }
-  }
-
-  const ro = new ResizeObserver(tune);
-  ro.observe(document.body);
-  window.addEventListener('resize', tune);
-  window.addEventListener('load', tune, { once:true });
-  setTimeout(()=>document.fonts?.ready?.then(tune), 0);
-  tune();
-})();
 
 /* ===== Badge categoria + tools + descrizione ===== */
 document.querySelectorAll('.case').forEach(card=>{
@@ -125,7 +50,6 @@ document.querySelectorAll('.case').forEach(card=>{
 /* ===== Filtro categorie ===== */
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cards = Array.from(document.querySelectorAll('.case'));
-
 function applyFilter(key){
   const cat = (key || 'all').trim();
   cards.forEach(c=>{
@@ -140,6 +64,7 @@ filterBtns.forEach(btn=>{
     btn.classList.add('active');
     applyFilter(btn.dataset.filter);
     document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
+    glitchBurst(140);
   });
 });
 applyFilter('all');
@@ -158,11 +83,12 @@ function closeModalFn(){
   modal.setAttribute('aria-hidden','true');
   if (modalInner) modalInner.innerHTML = '';
 }
-closeModal?.addEventListener('click', closeModalFn);
-document.getElementById('modalBackdrop')?.addEventListener('click', closeModalFn);
+
+closeModal?.addEventListener('click', () => { closeModalFn(); glitchBurst(120); });
+document.getElementById('modalBackdrop')?.addEventListener('click', () => { closeModalFn(); glitchBurst(120); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
-/* ===== Modal Gallery (slider fluido) ===== */
+/* ===== Modal Gallery ===== */
 function openModal(items, title, desc, tools, note){
   if (!modal || !modalInner || !modalInfo || !modalTools || !modalNote) return;
 
@@ -184,17 +110,11 @@ function openModal(items, title, desc, tools, note){
 
     if (src.toLowerCase().endsWith('.mp4')) {
       const v = document.createElement('video');
-      v.src = src;
-      v.controls = true;
-      v.playsInline = true;
-      v.style.maxHeight='80vh';
+      v.src = src; v.controls = true; v.playsInline = true; v.style.maxHeight='80vh';
       slide.appendChild(v);
     } else {
       const img = document.createElement('img');
-      img.src = src;
-      img.loading = 'lazy';
-      img.alt = title || 'media';
-      img.style.maxHeight = '80vh';
+      img.src = src; img.loading = 'lazy'; img.alt = title || 'media'; img.style.maxHeight='80vh';
       slide.appendChild(img);
     }
     track.appendChild(slide);
@@ -212,12 +132,9 @@ function openModal(items, title, desc, tools, note){
   if (tools) {
     tools.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>{
       const span = document.createElement('span');
-      span.className = 'chip';
-      span.textContent = t;
-      modalTools.appendChild(span);
+      span.className = 'chip'; span.textContent = t; modalTools.appendChild(span);
     });
   }
-
   if (note) modalNote.textContent = note;
   modalInfo.textContent = title + (desc ? ' — ' + desc : '');
 
@@ -237,8 +154,7 @@ function openModal(items, title, desc, tools, note){
 
   let isDown=false, startX=0, startLeft=0;
   const onDown = (e) => {
-    isDown = true;
-    track.classList.add('grabbing');
+    isDown = true; track.classList.add('grabbing');
     startX = (e.touches? e.touches[0].clientX : e.clientX);
     startLeft = track.scrollLeft;
   };
@@ -249,8 +165,7 @@ function openModal(items, title, desc, tools, note){
   };
   const onUp = () => {
     if (!isDown) return;
-    isDown=false;
-    track.classList.remove('grabbing');
+    isDown=false; track.classList.remove('grabbing');
     goTo(indexFromScroll());
   };
 
@@ -261,15 +176,8 @@ function openModal(items, title, desc, tools, note){
   track.addEventListener('touchmove', onMove, {passive:true});
   track.addEventListener('touchend', onUp);
 
-  prev.addEventListener('click', ()=> goTo(indexFromScroll()-1));
-  next.addEventListener('click', ()=> goTo(indexFromScroll()+1));
-
-  const onKey = (e)=>{
-    if (!modal.classList.contains('open')) return;
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(indexFromScroll()-1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(indexFromScroll()+1); }
-  };
-  document.addEventListener('keydown', onKey);
+  prev.addEventListener('click', ()=> { goTo(indexFromScroll()-1); glitchBurst(90); });
+  next.addEventListener('click', ()=> { goTo(indexFromScroll()+1); glitchBurst(90); });
 
   let rafId=null;
   const onScroll = ()=>{
@@ -281,19 +189,7 @@ function openModal(items, title, desc, tools, note){
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
   updateCounter();
-
-  // cleanup semplice quando chiudi
-  const cleanup = ()=>{
-    document.removeEventListener('keydown', onKey);
-    track.removeEventListener('scroll', onScroll);
-  };
-  const obs = new MutationObserver(()=>{
-    if (!modal.classList.contains('open')) {
-      cleanup();
-      obs.disconnect();
-    }
-  });
-  obs.observe(modal, { attributes:true, attributeFilter:['class'] });
+  glitchBurst(180);
 }
 
 /* Open modal on button */
@@ -324,38 +220,47 @@ document.querySelectorAll('.case-coming').forEach(card=>{
 });
 
 /* =========================
-   COMIC TILT / PARALLAX
+   GLITCH BURSTS (core)
    ========================= */
-(function comicTilt(){
-  const els = document.querySelectorAll('.case, .case-coming');
-  const hasHover = window.matchMedia('(hover:hover)').matches;
-  if (!hasHover) return;
+let glitchLock = false;
+function glitchBurst(ms=140){
+  if (glitchLock) return;
+  glitchLock = true;
+  document.body.classList.add('glitch-burst');
+  window.setTimeout(()=>{
+    document.body.classList.remove('glitch-burst');
+    glitchLock = false;
+  }, ms);
+}
 
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+/* random bursts (stutter irregular) */
+(function randomGlitch(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
 
-  els.forEach(el => {
-    el.addEventListener('mousemove', (e) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;
-      const py = (e.clientY - r.top) / r.height;
-
-      const tiltX = clamp((0.5 - py) * 8, -8, 8);
-      const tiltY = clamp((px - 0.5) * 10, -10, 10);
-
-      el.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
-    });
-    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
-  });
+  function schedule(){
+    const t = 900 + Math.random() * 3800; // 0.9s .. 4.7s
+    window.setTimeout(()=>{
+      glitchBurst(120 + Math.random()*140);
+      if (Math.random() < 0.28) window.setTimeout(()=>glitchBurst(90), 110);
+      schedule();
+    }, t);
+  }
+  schedule();
 })();
 
-/* =========================
-   FIX: botReady undefined + click bot (se presente)
-   ========================= */
-if (typeof window.botReady === 'undefined') window.botReady = true;
+/* burst su hover/click di elementi chiave */
+document.querySelectorAll('.glitch-card, .btn, nav a, .pill, .glitch').forEach(el=>{
+  el.addEventListener('mouseenter', ()=> glitchBurst(90));
+  el.addEventListener('click', ()=> glitchBurst(120));
+});
 
+/* FIX botReady */
+if (typeof window.botReady === 'undefined') window.botReady = true;
 const botIcon = document.getElementById('bot-icon');
 if (botIcon) {
   botIcon.addEventListener('click', () => {
+    glitchBurst(160);
     if (!window.botReady) return console.warn("Bot non ancora pronto");
     if (typeof window.__appCarrierOpen === 'function') window.__appCarrierOpen();
     else console.warn("Funzione bot non trovata.");

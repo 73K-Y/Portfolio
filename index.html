@@ -20,12 +20,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="snap">
+  <body class="snap glitch-mode">
 
-    <!-- FX layers (decorative) -->
+    <!-- FX layers -->
     <div class="fx-halftone" aria-hidden="true"></div>
     <div class="fx-grain" aria-hidden="true"></div>
     <div class="fx-chromatic" aria-hidden="true"></div>
+    <div class="fx-scanlines" aria-hidden="true"></div>
+    <div class="fx-noise" aria-hidden="true"></div>
 
     <!-- NAV -->
     <header class="nav-glass">
@@ -42,7 +44,7 @@
           </svg>
         </div>
         <div>
-          <h1 id="name">Tommy Raffaello Hodoroaba</h1>
+          <h1 id="name" class="glitch" data-text="Tommy Raffaello Hodoroaba">Tommy Raffaello Hodoroaba</h1>
           <p class="lead">3D Digital Artist & Game Developer</p>
         </div>
       </div>
@@ -79,8 +81,19 @@
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
           <h2 class="hero-title">
-            <span id="heroTop" class="line top gradient-title" data-shadow="La precisione non è un dettaglio">La precisione non è un dettaglio</span>
-            <span id="heroBottom" class="line bottom gradient-title" data-shadow="È la mia firma">È la mia firma</span>
+            <span
+              id="heroTop"
+              class="line top gradient-title glitch"
+              data-text="La precisione non è un dettaglio"
+              data-shadow="La precisione non è un dettaglio"
+            >La precisione non è un dettaglio</span>
+
+            <span
+              id="heroBottom"
+              class="line bottom gradient-title glitch"
+              data-text="È la mia firma"
+              data-shadow="È la mia firma"
+            >È la mia firma</span>
           </h2>
 
           <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.</p>
@@ -102,16 +115,14 @@
 
     <!-- SHOWREEL -->
     <div id="showreel" class="wrap">
-      <!-- Filtro categorie -->
       <div id="filters" class="filterbar reveal">
         <button class="filter-btn active" data-filter="all">Tutti</button>
         <button class="filter-btn" data-filter="game">Game Art & Dev</button>
         <button class="filter-btn" data-filter="viz">3D Visualization</button>
       </div>
 
-      <!-- === PROGETTI === -->
-
-      <section class="case snap-child reveal"
+      <!-- PROGETTI -->
+      <section class="case glitch-card snap-child reveal"
         data-cat="game"
         data-title="2084 - Aetalya Chronicles"
         data-desc="Texturing ambientale e di props pixellated."
@@ -127,7 +138,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="viz"
         data-title="Alan Walker Remix — Beautiful Nightmare Remix Music Video"
         data-desc="Animazione e montaggio visualizer del remix musicale."
@@ -143,7 +154,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="game"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulatori."
@@ -159,7 +170,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="game"
         data-title="Treni/Tram Torino lowpoly"
         data-desc="Asset low poly per videogioco stile Railway Runner."
@@ -175,7 +186,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="game"
         data-title="Ambientazione e meccaniche - Oblivion Hospital"
         data-desc="Animazioni 3D e rendering di meccaniche per gioco Oblivion Hospital."
@@ -192,7 +203,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
         data-desc="Personaggio 3D, studio materiali e posing."
@@ -208,7 +219,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="game"
         data-title="Lego Mario"
         data-desc="Statuina Lego Mario."
@@ -224,7 +235,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="viz"
         data-title="Città Low Poly"
         data-desc="Città low poly in viewport per video musicale"
@@ -240,7 +251,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="viz"
         data-title="Mini Appartamento e Aula Studio"
         data-desc="Mini render di un appartamento e di un'aula di studio in viewport per corso di level design"
@@ -256,7 +267,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="viz"
         data-title="Lowpoly Planets"
         data-desc="Pianeti lowpoly per video musicale."
@@ -272,7 +283,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
         data-desc="Nave imperiale dell’universo Star Wars."
@@ -288,7 +299,7 @@
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section class="case glitch-card snap-child reveal"
         data-cat="viz"
         data-title="Statuina Baby Yoda"
         data-desc="Statuina scannerizzata dell’universo Star Wars."
@@ -307,15 +318,15 @@
 
     <!-- COMING SOON -->
     <section class="coming-section wrap reveal">
-      <h3 class="glitchable" style="margin:8px 0 6px">Coming soon</h3>
+      <h3 class="glitch" data-text="Coming soon">Coming soon</h3>
       <div class="coming-grid">
-        <article class="case-coming" data-title="Brain.exe">
+        <article class="case-coming glitch-card" data-title="Brain.exe">
           <div class="case-bg" style="--bg:url('assets/BrainEXEMiniature.png')"></div>
           <div class="case-overlay" aria-hidden="true"><span class="label">In arrivo</span></div>
           <div class="case-info"><h4 class="coming-title">Brain.exe</h4></div>
         </article>
 
-        <article class="case-coming" data-title="TOMHODA Studios">
+        <article class="case-coming glitch-card" data-title="TOMHODA Studios">
           <div class="case-bg" style="--bg:url('assets/LogoTHOMODportfolio.png')"></div>
           <div class="case-overlay" aria-hidden="true"><span class="label">In arrivo</span></div>
           <div class="case-info"><h4 class="coming-title">TOMHODA Studios</h4></div>
@@ -328,14 +339,14 @@
       <div class="panel info-card">
         <div class="info-grid">
           <div class="info-block">
-            <h4>About</h4>
+            <h4 class="glitch" data-text="About">About</h4>
             <p class="muted">
               Sono uno studente ITS con esperienza in asset 3D, materiali PBR, animazioni e game development.
               Amo il design creativo e la sperimentazione tecnica.
             </p>
           </div>
           <div id="contact" class="info-block">
-            <h4>Contatti</h4>
+            <h4 class="glitch" data-text="Contatti">Contatti</h4>
             <ul class="contact-list">
               <li><span>Email:</span> <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a></li>
               <li><span>Tel:</span> +39 3925649950</li>
@@ -370,7 +381,6 @@
       </div>
     </div>
 
-    <!-- JS -->
     <script src="script.js"></script>
   </body>
 </html>
