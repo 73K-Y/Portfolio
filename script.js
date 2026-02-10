@@ -2,6 +2,22 @@
 const yearSpan = document.getElementById('year');
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
+/* =========================
+   Marquee seamless loop
+   (duplica il contenuto così -50% funziona sempre)
+   ========================= */
+(function initMarquee(){
+  const track = document.getElementById('marqueeTrack');
+  if (!track) return;
+
+  // Se già duplicato, non rifare
+  if (track.dataset.duped === '1') return;
+
+  const original = track.innerHTML;
+  track.innerHTML = original + original; // duplico
+  track.dataset.duped = '1';
+})();
+
 /* Reveal on scroll */
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
@@ -14,7 +30,7 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ===== HERO fit (desktop/tablet). Su mobile (<600px) lascio al CSS per stabilità. ===== */
+/* ===== HERO fit (desktop/tablet). Su mobile (<600px) lascio al CSS ===== */
 (function fitHero() {
   const top    = document.getElementById('heroTop');
   const bottom = document.getElementById('heroBottom');
@@ -78,7 +94,7 @@ revealEls.forEach(el => io.observe(el));
   ro.observe(document.body);
   window.addEventListener('resize', tune);
   window.addEventListener('load', tune, { once:true });
-  setTimeout(()=>document.fonts?.ready.then(tune), 0);
+  setTimeout(()=>document.fonts?.ready?.then(tune), 0);
   tune();
 })();
 
@@ -118,7 +134,6 @@ function applyFilter(key){
     else c.classList.add('is-hidden');
   });
 }
-
 filterBtns.forEach(btn=>{
   btn.addEventListener('click', ()=>{
     filterBtns.forEach(b=>b.classList.remove('active'));
@@ -138,21 +153,23 @@ const modalNote = document.getElementById('modalNote');
 const closeModal = document.getElementById('closeModal');
 
 function closeModalFn(){
+  if (!modal) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden','true');
-  modalInner.innerHTML = '';
+  if (modalInner) modalInner.innerHTML = '';
 }
-if (closeModal) closeModal.addEventListener('click', closeModalFn);
+closeModal?.addEventListener('click', closeModalFn);
 document.getElementById('modalBackdrop')?.addEventListener('click', closeModalFn);
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
 /* ===== Modal Gallery (slider fluido) ===== */
 function openModal(items, title, desc, tools, note){
+  if (!modal || !modalInner || !modalInfo || !modalTools || !modalNote) return;
+
   modalInner.innerHTML = '';
   modalTools.innerHTML = '';
   modalNote.textContent = '';
 
-  // Build gallery structure
   const gallery = document.createElement('div');
   gallery.className = 'gallery';
 
@@ -161,24 +178,28 @@ function openModal(items, title, desc, tools, note){
   track.setAttribute('role','region');
   track.setAttribute('aria-label','Galleria immagini');
 
-  // Slides
   items.forEach(src=>{
     const slide = document.createElement('div');
     slide.className = 'slide';
-    if (src.endsWith('.mp4')) {
+
+    if (src.toLowerCase().endsWith('.mp4')) {
       const v = document.createElement('video');
-      v.src = src; v.controls = true; v.playsInline = true; v.style.maxHeight='80vh';
+      v.src = src;
+      v.controls = true;
+      v.playsInline = true;
+      v.style.maxHeight='80vh';
       slide.appendChild(v);
     } else {
       const img = document.createElement('img');
-      img.src = src; img.loading = 'lazy'; img.alt = title || 'media';
+      img.src = src;
+      img.loading = 'lazy';
+      img.alt = title || 'media';
       img.style.maxHeight = '80vh';
       slide.appendChild(img);
     }
     track.appendChild(slide);
   });
 
-  // Nav + counter
   const nav = document.createElement('div'); nav.className = 'gallery-nav';
   const prev = document.createElement('button'); prev.className = 'gallery-btn prev'; prev.innerHTML = '‹';
   const next = document.createElement('button'); next.className = 'gallery-btn next'; next.innerHTML = '›';
@@ -188,18 +209,18 @@ function openModal(items, title, desc, tools, note){
   gallery.appendChild(track); gallery.appendChild(nav); gallery.appendChild(counter);
   modalInner.appendChild(gallery);
 
-  // Tools chips
   if (tools) {
     tools.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>{
       const span = document.createElement('span');
-      span.className = 'chip'; span.textContent = t; modalTools.appendChild(span);
+      span.className = 'chip';
+      span.textContent = t;
+      modalTools.appendChild(span);
     });
   }
 
   if (note) modalNote.textContent = note;
   modalInfo.textContent = title + (desc ? ' — ' + desc : '');
 
-  // Helpers
   const slides = Array.from(track.children);
   const slideW = () => track.getBoundingClientRect().width;
   const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
@@ -207,7 +228,6 @@ function openModal(items, title, desc, tools, note){
   const goTo = i => track.scrollTo({ left: clamp(i,0,slides.length-1)*slideW(), behavior:'smooth' });
   const updateCounter = () => { counter.textContent = `${indexFromScroll()+1} / ${slides.length}`; };
 
-  // Wheel -> scorrimento orizzontale (trackpad)
   track.addEventListener('wheel', (e)=>{
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       e.preventDefault();
@@ -215,10 +235,10 @@ function openModal(items, title, desc, tools, note){
     }
   }, { passive:false });
 
-  // Drag/Swipe
   let isDown=false, startX=0, startLeft=0;
   const onDown = (e) => {
-    isDown = true; track.classList.add('grabbing');
+    isDown = true;
+    track.classList.add('grabbing');
     startX = (e.touches? e.touches[0].clientX : e.clientX);
     startLeft = track.scrollLeft;
   };
@@ -229,9 +249,11 @@ function openModal(items, title, desc, tools, note){
   };
   const onUp = () => {
     if (!isDown) return;
-    isDown=false; track.classList.remove('grabbing');
+    isDown=false;
+    track.classList.remove('grabbing');
     goTo(indexFromScroll());
   };
+
   track.addEventListener('mousedown', onDown);
   track.addEventListener('mousemove', onMove);
   window.addEventListener('mouseup', onUp);
@@ -239,11 +261,9 @@ function openModal(items, title, desc, tools, note){
   track.addEventListener('touchmove', onMove, {passive:true});
   track.addEventListener('touchend', onUp);
 
-  // Bottoni
   prev.addEventListener('click', ()=> goTo(indexFromScroll()-1));
   next.addEventListener('click', ()=> goTo(indexFromScroll()+1));
 
-  // Tastiera
   const onKey = (e)=>{
     if (!modal.classList.contains('open')) return;
     if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(indexFromScroll()-1); }
@@ -251,7 +271,6 @@ function openModal(items, title, desc, tools, note){
   };
   document.addEventListener('keydown', onKey);
 
-  // Aggiorna contatore in scroll
   let rafId=null;
   const onScroll = ()=>{
     if (rafId) cancelAnimationFrame(rafId);
@@ -259,23 +278,32 @@ function openModal(items, title, desc, tools, note){
   };
   track.addEventListener('scroll', onScroll);
 
-  // Apri modale
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
   updateCounter();
 
-  // Cleanup quando chiudi
+  // cleanup semplice quando chiudi
   const cleanup = ()=>{
     document.removeEventListener('keydown', onKey);
     track.removeEventListener('scroll', onScroll);
   };
-  modal.addEventListener('transitionend', ()=>{ if(!modal.classList.contains('open')) cleanup(); }, { once:true });
+  const obs = new MutationObserver(()=>{
+    if (!modal.classList.contains('open')) {
+      cleanup();
+      obs.disconnect();
+    }
+  });
+  obs.observe(modal, { attributes:true, attributeFilter:['class'] });
 }
 
 /* Open modal on button */
 document.getElementById('showreel')?.addEventListener('click', e=>{
+  const btn = e.target.closest('.open-modal');
+  if (!btn) return;
+
   const card = e.target.closest('.case');
-  if (!card || !e.target.classList.contains('open-modal')) return;
+  if (!card) return;
+
   const title  = card.dataset.title || 'Progetto';
   const desc   = card.dataset.desc || '';
   const tools  = card.dataset.tools || '';
@@ -284,37 +312,52 @@ document.getElementById('showreel')?.addEventListener('click', e=>{
   const videos = (card.dataset.videos || '').split('|').map(s=>s.trim()).filter(Boolean);
   const items  = [...images, ...videos];
   if (!items.length) return;
+
   openModal(items, title, desc, tools, note);
 });
 
-/* Coming soon: “peek” su touch (opzionale, usa le classi già in CSS) */
+/* Coming soon: peek su touch */
 document.querySelectorAll('.case-coming').forEach(card=>{
   card.addEventListener('touchstart', ()=> card.classList.add('peek'), {passive:true});
   card.addEventListener('touchend',   ()=> card.classList.remove('peek'));
   card.addEventListener('touchcancel',()=> card.classList.remove('peek'));
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const botEl = document.getElementById('__appCarrierLoader__');
-  if (botEl) {
-    botEl.addEventListener('load', () => {
-      botEl.style.opacity = 0;
-      botEl.style.transition = 'opacity 0.6s ease-in-out';
-      botEl.style.opacity = 1;
+/* =========================
+   COMIC TILT / PARALLAX
+   ========================= */
+(function comicTilt(){
+  const els = document.querySelectorAll('.case, .case-coming');
+  const hasHover = window.matchMedia('(hover:hover)').matches;
+  if (!hasHover) return;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  els.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+
+      const tiltX = clamp((0.5 - py) * 8, -8, 8);
+      const tiltY = clamp((px - 0.5) * 10, -10, 10);
+
+      el.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
     });
-  }
-});
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+})();
+
+/* =========================
+   FIX: botReady undefined + click bot (se presente)
+   ========================= */
+if (typeof window.botReady === 'undefined') window.botReady = true;
 
 const botIcon = document.getElementById('bot-icon');
-
 if (botIcon) {
   botIcon.addEventListener('click', () => {
-    if (!botReady) return console.warn("Bot non ancora pronto");
-    // Chiama la funzione corretta esposta dal loader
-    if (typeof window.__appCarrierOpen === 'function') {
-        window.__appCarrierOpen();
-    } else {
-        console.warn("Funzione bot non trovata.");
-    }
+    if (!window.botReady) return console.warn("Bot non ancora pronto");
+    if (typeof window.__appCarrierOpen === 'function') window.__appCarrierOpen();
+    else console.warn("Funzione bot non trovata.");
   });
 }

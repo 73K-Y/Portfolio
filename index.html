@@ -8,19 +8,24 @@
 
     <!-- Mobile bars trasparenti -->
     <meta name="theme-color" content="#00000000" />
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="color-scheme" content="dark light">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="color-scheme" content="dark light" />
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body class="snap">
+
+    <!-- FX layers (decorative) -->
+    <div class="fx-halftone" aria-hidden="true"></div>
+    <div class="fx-grain" aria-hidden="true"></div>
+    <div class="fx-chromatic" aria-hidden="true"></div>
 
     <!-- NAV -->
     <header class="nav-glass">
@@ -51,7 +56,7 @@
     <!-- MARQUEE -->
     <div class="marquee" aria-label="Processo e skill">
       <div class="marquee__rail">
-        <div class="marquee__track">
+        <div class="marquee__track" id="marqueeTrack">
           <span class="pill">Alan Walker freelancer (dal 2019)</span>
           <span class="pill">ITS AR/VR &amp; Game Dev</span>
           <span class="pill">Blender • UE5 • Maya • Unity</span>
@@ -74,15 +79,19 @@
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
           <h2 class="hero-title">
-            <span id="heroTop" class="line top gradient-title">La precisione non è un dettaglio</span>
-            <span id="heroBottom" class="line bottom gradient-title">È la mia firma</span>
+            <span id="heroTop" class="line top gradient-title" data-shadow="La precisione non è un dettaglio">La precisione non è un dettaglio</span>
+            <span id="heroBottom" class="line bottom gradient-title" data-shadow="È la mia firma">È la mia firma</span>
           </h2>
+
           <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.</p>
+          <p class="hero-tag">Available for freelance • Game Art • 3D Viz</p>
+
           <div class="cta-row">
             <a class="btn primary" href="#showreel">Guarda i progetti</a>
             <a class="btn" href="#contact">Contattami</a>
           </div>
         </div>
+
         <div class="hero-right">
           <figure class="avatar xl fixed-size">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
@@ -102,7 +111,6 @@
 
       <!-- === PROGETTI === -->
 
-      <!-- 2084 - Aetalya Chronicles -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="2084 - Aetalya Chronicles"
@@ -119,11 +127,10 @@
         </div>
       </section>
 
-      <!-- Alan Walker Remix -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Alan Walker Remix — Beautiful Nightmare Remix Music Video"
-        data-desc="Animazione e montaggio viasualizer del remix musicale."
+        data-desc="Animazione e montaggio visualizer del remix musicale."
         data-tools="Premiere, After Effects, Blender"
         data-images="assets/Screenshot 2025-10-12 224346.png"
         data-src="assets/Screenshot 2025-10-12 224346.png">
@@ -136,7 +143,6 @@
         </div>
       </section>
 
-      <!-- Treni Trenitalia -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Treni Trenitalia"
@@ -153,7 +159,6 @@
         </div>
       </section>
 
-      <!-- Team Treni Low Poly -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Treni/Tram Torino lowpoly"
@@ -170,7 +175,6 @@
         </div>
       </section>
 
-      <!-- Oblivion Hospital -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Ambientazione e meccaniche - Oblivion Hospital"
@@ -188,7 +192,6 @@
         </div>
       </section>
 
-      <!-- Soldier Walker -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
@@ -205,7 +208,6 @@
         </div>
       </section>
 
-      <!-- Statuina Lego Mario -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Lego Mario"
@@ -222,7 +224,6 @@
         </div>
       </section>
 
-      <!-- Città Low Poly -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Città Low Poly"
@@ -239,7 +240,6 @@
         </div>
       </section>
 
-      <!-- Mini Appartamento -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Mini Appartamento e Aula Studio"
@@ -256,7 +256,6 @@
         </div>
       </section>
 
-      <!-- Pianeti -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Lowpoly Planets"
@@ -273,7 +272,6 @@
         </div>
       </section>
 
-      <!-- Star Wars / Star Destroyer -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
@@ -290,7 +288,6 @@
         </div>
       </section>
 
-      <!-- Star Wars / Statuina Baby Yoda -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Statuina Baby Yoda"
@@ -306,8 +303,6 @@
           <button class="btn small open-modal">Apri galleria</button>
         </div>
       </section>
-
-      <!-- === /PROGETTI === -->
     </div>
 
     <!-- COMING SOON -->
@@ -347,9 +342,9 @@
               <li><span>Città:</span> Torino, Italia</li>
             </ul>
             <div class="links-split">
-              <a href="TommyRaffaelloHodoroabaCVEuropassNuovo.pdf" target="_blank">Scarica CV (PDF)</a>
+              <a href="TommyRaffaelloHodoroabaCVEuropassNuovo.pdf" target="_blank" rel="noopener">Scarica CV (PDF)</a>
               <span class="dot">•</span>
-              <a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a>
+              <a href="https://www.youtube.com/@Tek-Y" target="_blank" rel="noopener">YouTube: Tek-Y</a>
             </div>
           </div>
         </div>
@@ -377,35 +372,5 @@
 
     <!-- JS -->
     <script src="script.js"></script>
-
-    <!-- Contenitore per il bot (opzionale, se richiesto)
-    <div id="aimage-bot-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
-
-    <div id="bot-icon" aria-label="Apri chat bot" role="button">🤖</div>
-
-    <script>
-      // Aggiorna l'anno del footer
-      const yearSpan = document.getElementById('year');
-      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-      // Filtro categorie
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const cards = Array.from(document.querySelectorAll('.case'));
-      function applyFilter(key){
-        const cat = (key || 'all').trim();
-        cards.forEach(c=>{
-          const cc = (c.dataset.cat || '').trim();
-          c.classList.toggle('is-hidden', cat !== 'all' && cc !== cat);
-        });
-      }
-      filterBtns.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          filterBtns.forEach(b=>b.classList.remove('active'));
-          btn.classList.add('active');
-          applyFilter(btn.dataset.filter);
-        });
-      });
-      applyFilter('all');
-    </script>-->
   </body>
 </html>
