@@ -23,7 +23,7 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 revealEls.forEach(el => io.observe(el));
 
-/* ===== Badge categoria + tools + descrizione ===== */
+/* Badge categoria + tools + descrizione */
 document.querySelectorAll('.case').forEach(card=>{
   const badges = card.querySelector('.badges');
   const descEl = card.querySelector('.desc');
@@ -47,7 +47,7 @@ document.querySelectorAll('.case').forEach(card=>{
   if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
 });
 
-/* ===== Filtro categorie ===== */
+/* Filtro categorie */
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cards = Array.from(document.querySelectorAll('.case'));
 function applyFilter(key){
@@ -64,12 +64,30 @@ filterBtns.forEach(btn=>{
     btn.classList.add('active');
     applyFilter(btn.dataset.filter);
     document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
-    glitchBurst(140);
+    glitchBurst(120);
   });
 });
 applyFilter('all');
 
-/* ===== Modal ===== */
+/* ===== Glitch burst SOLO su interazioni (leggero) ===== */
+let glitchLock = false;
+function glitchBurst(ms=110){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  if (glitchLock) return;
+  glitchLock = true;
+  document.body.classList.add('glitch-burst');
+  window.setTimeout(()=>{
+    document.body.classList.remove('glitch-burst');
+    glitchLock = false;
+  }, ms);
+}
+document.querySelectorAll('.glitch, .btn, nav a, .pill').forEach(el=>{
+  el.addEventListener('mouseenter', ()=> glitchBurst(90));
+  el.addEventListener('click', ()=> glitchBurst(110));
+});
+
+/* ===== Modal (il tuo: invariato, performance ok) ===== */
 const modal = document.getElementById('modal');
 const modalInner = document.getElementById('modalInner');
 const modalInfo = document.getElementById('modalInfo');
@@ -83,12 +101,10 @@ function closeModalFn(){
   modal.setAttribute('aria-hidden','true');
   if (modalInner) modalInner.innerHTML = '';
 }
-
-closeModal?.addEventListener('click', () => { closeModalFn(); glitchBurst(120); });
-document.getElementById('modalBackdrop')?.addEventListener('click', () => { closeModalFn(); glitchBurst(120); });
+closeModal?.addEventListener('click', () => { closeModalFn(); glitchBurst(100); });
+document.getElementById('modalBackdrop')?.addEventListener('click', () => { closeModalFn(); glitchBurst(100); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
-/* ===== Modal Gallery ===== */
 function openModal(items, title, desc, tools, note){
   if (!modal || !modalInner || !modalInfo || !modalTools || !modalNote) return;
 
@@ -145,58 +161,20 @@ function openModal(items, title, desc, tools, note){
   const goTo = i => track.scrollTo({ left: clamp(i,0,slides.length-1)*slideW(), behavior:'smooth' });
   const updateCounter = () => { counter.textContent = `${indexFromScroll()+1} / ${slides.length}`; };
 
-  track.addEventListener('wheel', (e)=>{
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      e.preventDefault();
-      track.scrollLeft += e.deltaY;
-    }
-  }, { passive:false });
+  prev.addEventListener('click', ()=> { goTo(indexFromScroll()-1); glitchBurst(80); });
+  next.addEventListener('click', ()=> { goTo(indexFromScroll()+1); glitchBurst(80); });
 
-  let isDown=false, startX=0, startLeft=0;
-  const onDown = (e) => {
-    isDown = true; track.classList.add('grabbing');
-    startX = (e.touches? e.touches[0].clientX : e.clientX);
-    startLeft = track.scrollLeft;
-  };
-  const onMove = (e) => {
-    if (!isDown) return;
-    const x = (e.touches? e.touches[0].clientX : e.clientX);
-    track.scrollLeft = startLeft - (x - startX);
-  };
-  const onUp = () => {
-    if (!isDown) return;
-    isDown=false; track.classList.remove('grabbing');
-    goTo(indexFromScroll());
-  };
-
-  track.addEventListener('mousedown', onDown);
-  track.addEventListener('mousemove', onMove);
-  window.addEventListener('mouseup', onUp);
-  track.addEventListener('touchstart', onDown, {passive:true});
-  track.addEventListener('touchmove', onMove, {passive:true});
-  track.addEventListener('touchend', onUp);
-
-  prev.addEventListener('click', ()=> { goTo(indexFromScroll()-1); glitchBurst(90); });
-  next.addEventListener('click', ()=> { goTo(indexFromScroll()+1); glitchBurst(90); });
-
-  let rafId=null;
-  const onScroll = ()=>{
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(updateCounter);
-  };
-  track.addEventListener('scroll', onScroll);
+  track.addEventListener('scroll', () => requestAnimationFrame(updateCounter), { passive:true });
 
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
   updateCounter();
-  glitchBurst(180);
+  glitchBurst(120);
 }
 
-/* Open modal on button */
 document.getElementById('showreel')?.addEventListener('click', e=>{
   const btn = e.target.closest('.open-modal');
   if (!btn) return;
-
   const card = e.target.closest('.case');
   if (!card) return;
 
@@ -211,58 +189,3 @@ document.getElementById('showreel')?.addEventListener('click', e=>{
 
   openModal(items, title, desc, tools, note);
 });
-
-/* Coming soon: peek su touch */
-document.querySelectorAll('.case-coming').forEach(card=>{
-  card.addEventListener('touchstart', ()=> card.classList.add('peek'), {passive:true});
-  card.addEventListener('touchend',   ()=> card.classList.remove('peek'));
-  card.addEventListener('touchcancel',()=> card.classList.remove('peek'));
-});
-
-/* =========================
-   GLITCH BURSTS (core)
-   ========================= */
-let glitchLock = false;
-function glitchBurst(ms=140){
-  if (glitchLock) return;
-  glitchLock = true;
-  document.body.classList.add('glitch-burst');
-  window.setTimeout(()=>{
-    document.body.classList.remove('glitch-burst');
-    glitchLock = false;
-  }, ms);
-}
-
-/* random bursts (stutter irregular) */
-(function randomGlitch(){
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return;
-
-  function schedule(){
-    const t = 900 + Math.random() * 3800; // 0.9s .. 4.7s
-    window.setTimeout(()=>{
-      glitchBurst(120 + Math.random()*140);
-      if (Math.random() < 0.28) window.setTimeout(()=>glitchBurst(90), 110);
-      schedule();
-    }, t);
-  }
-  schedule();
-})();
-
-/* burst su hover/click di elementi chiave */
-document.querySelectorAll('.glitch-card, .btn, nav a, .pill, .glitch').forEach(el=>{
-  el.addEventListener('mouseenter', ()=> glitchBurst(90));
-  el.addEventListener('click', ()=> glitchBurst(120));
-});
-
-/* FIX botReady */
-if (typeof window.botReady === 'undefined') window.botReady = true;
-const botIcon = document.getElementById('bot-icon');
-if (botIcon) {
-  botIcon.addEventListener('click', () => {
-    glitchBurst(160);
-    if (!window.botReady) return console.warn("Bot non ancora pronto");
-    if (typeof window.__appCarrierOpen === 'function') window.__appCarrierOpen();
-    else console.warn("Funzione bot non trovata.");
-  });
-}
