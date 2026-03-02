@@ -91,7 +91,7 @@ html,body{
 }
 .glitchable::before{
   transform: translateX(calc(var(--g-shift) * -1));
-  text-shadow: 2px 0 0 rgba(0,229,255,.78);
+  text-shadow: 2px 0 0 #0070ff;
 }
 .glitchable::after{
   transform: translateX(var(--g-shift));
