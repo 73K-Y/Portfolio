@@ -40,10 +40,9 @@ function glitchBurst(ms = 110){
 }
 
 (() => {
-  const targets = document.querySelectorAll('.glitchable, .btn, nav a, .pill');
+  const targets = document.querySelectorAll('.glitchable, .btn, nav a');
   targets.forEach(el => {
-    el.addEventListener('mouseenter', () => glitchBurst(80), { passive: true });
-    el.addEventListener('click', () => glitchBurst(110), { passive: true });
+    el.addEventListener('click', () => glitchBurst(120), { passive: true });
   });
 })();
 
