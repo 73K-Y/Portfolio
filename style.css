@@ -19,7 +19,7 @@
   --gutter: clamp(16px, 4vw, 32px);
 
   /* performance knobs */
-  --blur: 10px;     /* ↓ rispetto a prima */
+  --blur: 6px;     /* ↓ rispetto a prima */
   --shadow: 0 10px 30px rgba(0,0,0,.35);
 
   --case-h: clamp(48vh,56vh,62vh);
@@ -618,7 +618,7 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
   .hero-left{ max-width: 100%; }
 }
 @media (max-width: 600px){
-  :root{ --case-h: clamp(42vh, 52vh, 58vh); --blur: 8px; }
+  :root{ --case-h: clamp(42vh, 52vh, 58vh); --blur: 4px; }
   .nav-glass{flex-direction:column;align-items:stretch;gap:10px;padding:10px 12px; margin-bottom:clamp(28px,6vw,56px)}
   .brand{grid-template-columns:auto 1fr;gap:10px}
   .logo{width:40px;height:40px}
@@ -641,4 +641,22 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
   body.glitch-burst .glitchable::after{ animation:none; }
   .pit-led{ animation:none; }
   .marquee__track{ animation:none; }
+}
+
+/* ===== PERFORMANCE MODE: no-blur (Chrome friendly) ===== */
+body.no-blur .nav-glass,
+body.no-blur .hero-full,
+body.no-blur .case,
+body.no-blur .info-card,
+body.no-blur .modal{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* (opzionale) alleggerisci anche ombre/glow */
+body.no-blur .nav-glass,
+body.no-blur .hero-full,
+body.no-blur .case,
+body.no-blur .info-card{
+  box-shadow: 0 8px 22px rgba(0,0,0,.30) !important;
 }

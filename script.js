@@ -1,3 +1,17 @@
+/* ===== Auto performance switch (rispetta override manuale) ===== */
+(() => {
+  // Se tu metti "no-blur" a mano nell'HTML, non faccio nulla.
+  if (document.body.classList.contains('no-blur')) return;
+
+  const isMobile = window.matchMedia('(max-width: 600px)').matches;
+  const lowCPU = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+  const saveData = (navigator.connection && navigator.connection.saveData);
+
+  if (isMobile || lowCPU || saveData) {
+    document.body.classList.add('no-blur');
+  }
+})();
+
 /* ========= Footer year ========= */
 (() => {
   const yearSpan = document.getElementById('year');
