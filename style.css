@@ -1,6 +1,7 @@
 :root{
   --bg:#06070a;
-  --accent:#00baff;
+  --accent:#00baff;         /* primary */
+  --accent2:#ff2a2a;        /* racing red */
 
   /* motorsport layer */
   --racing-red:#ff2a2a;
@@ -12,15 +13,16 @@
   --glass:rgba(255,255,255,.06);
   --glass-border:rgba(255,255,255,.16);
 
-  --glow:rgba(0,186,255,.22);
-  --glow-red:rgba(255,42,42,.14);
+  /* limita glow */
+  --glow:rgba(0,186,255,.18);
+  --glow-red:rgba(255,42,42,.10);
 
   --max-w:1200px;
   --gutter: clamp(16px, 4vw, 32px);
 
   /* performance knobs */
   --blur: 6px;     /* ↓ rispetto a prima */
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --shadow: 0 10px 26px rgba(0,0,0,.34); 
 
   --case-h: clamp(48vh,56vh,62vh);
 
@@ -30,6 +32,9 @@
   --g-shift: 2px;
 
   color-scheme: dark;
+
+  /* opzionale: un "highlight" neutro */
+  --hi: rgba(255,255,255,.10);
 }
 
 /* Reset */
@@ -189,7 +194,7 @@ nav a::after{
   height:2px;
   background: linear-gradient(90deg, transparent, var(--racing-red), transparent);
   opacity:0; transform:translateY(2px);
-  transition: .18s ease;
+   transition: opacity .16s ease, transform .16s ease; 
 }
 nav a:hover::after{ opacity:1; transform:none; }
 
@@ -210,7 +215,7 @@ nav a:hover::after{ opacity:1; transform:none; }
 .marquee__track{
   display:flex;gap:14px;white-space:nowrap;flex:0 0 auto;
   will-change:transform;
-  animation:tickerMove 22s linear infinite;
+   animation: tickerMove 30s linear infinite; 
 }
 @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .pill{
@@ -323,9 +328,9 @@ nav a:hover::after{ opacity:1; transform:none; }
   background:rgba(255,255,255,.06);
   color:var(--white);font-weight:600;
   cursor:pointer;
-  transition:background .2s, transform .12s;
+  transition: background .18s ease, transform .12s ease, border-color .18s ease;
 }
-.btn:hover{background:rgba(255,255,255,.095); transform: translateY(-1px); }
+.btn:hover{ transform: translateY(-1px); }
 .btn.primary{
   background:linear-gradient(90deg,var(--accent),#0070ff);
   border:none;
@@ -344,7 +349,8 @@ nav a:hover::after{ opacity:1; transform:none; }
   cursor:pointer;
 }
 .filter-btn.active,.filter-btn:hover{
-  background:linear-gradient(90deg,var(--racing-red),#ff7a00);
+  background: linear-gradient(90deg, var(--accent2), rgba(255,42,42,.65));
+  border: none;
   border:none;
 }
 
@@ -360,7 +366,7 @@ nav a:hover::after{ opacity:1; transform:none; }
   border-radius:20px;
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.14);
-  box-shadow: 0 8px 24px rgba(0,0,0,.38);
+  box-shadow: 0 10px 26px rgba(0,0,0,.34); 
   margin-block:clamp(6px,1vw,10px)
 }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
@@ -605,7 +611,11 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
 }
 
 /* Reveal */
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+.reveal{
+  opacity:0;
+  transform:translateY(14px);
+  transition: opacity .48s ease, transform .48s ease;
+}
 .reveal.is-visible{opacity:1;transform:none}
 
 /* =========================================================
@@ -639,7 +649,7 @@ footer.wrap{padding-top:6px;padding-bottom:8px;margin-top:4px}
   .reveal{transition:none}
   body.glitch-burst .glitchable::before,
   body.glitch-burst .glitchable::after{ animation:none; }
-  .pit-led{ animation:none; }
+  .pit-led{ animation: ledPulse 1.8s ease-in-out infinite; }
   .marquee__track{ animation:none; }
 }
 
@@ -659,4 +669,9 @@ body.no-blur .hero-full,
 body.no-blur .case,
 body.no-blur .info-card{
   box-shadow: 0 8px 22px rgba(0,0,0,.30) !important;
+}
+
+.case, .case-coming{
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
 }
