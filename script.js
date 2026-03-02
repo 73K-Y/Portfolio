@@ -176,15 +176,6 @@ function glitchBurst(ms = 110){
   });
 })();
 
-/* ========= Auto-number cards (così non devi mettere data-no a mano) ========= */
-(() => {
-  document.querySelectorAll('.case').forEach((card,i)=>{
-    const info = card.querySelector('.case-info');
-    if (!info) return;
-    info.dataset.no = String(i+1).padStart(2,'0');
-  });
-})();
-
 /* ========= Filtro categorie ========= */
 (() => {
   const filterBtns = document.querySelectorAll('.filter-btn');
