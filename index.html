@@ -21,7 +21,6 @@
   </head>
 
   <body class="snap">
-
     <!-- NAV -->
     <header class="nav-glass">
       <div class="brand">
@@ -36,11 +35,17 @@
             </defs>
           </svg>
         </div>
-        <div>
-          <h1 id="name" class="glitchable">Tommy Raffaello Hodoroaba</h1>
+
+        <div class="brand-text">
+          <div class="name-row">
+            <h1 id="name" class="glitchable">Tommy Raffaello Hodoroaba</h1>
+            <span class="pit-led" aria-hidden="true"></span>
+          </div>
           <p class="lead">3D Digital Artist & Game Developer</p>
+          <p class="nav-hud" aria-hidden="true">PIT WALL • TELEMETRY ONLINE</p>
         </div>
       </div>
+
       <nav>
         <a href="#hero">Home</a>
         <a href="#showreel">Progetti</a>
@@ -52,19 +57,13 @@
     <div class="marquee" aria-label="Processo e skill">
       <div class="marquee__rail">
         <div class="marquee__track" id="marqueeTrack">
-          <span class="pill">Alan Walker freelancer (dal 2019)</span>
+          <span class="pill">S1 0:29.812 • S2 0:24.112 • S3 0:33.040</span>
+          <span class="pill">LAP 01/58 • DELTA -0.183</span>
           <span class="pill">ITS AR/VR &amp; Game Dev</span>
           <span class="pill">Blender • UE5 • Maya • Unity</span>
-          <span class="pill">Fotogrammetria</span>
-          <span class="pill">Topology pulita</span>
-          <span class="pill">UV • Texel density</span>
-          <span class="pill">PBR lookdev</span>
-          <span class="pill">Rigging base</span>
-          <span class="pill">Lighting realtime</span>
+          <span class="pill">PBR lookdev • Lighting realtime</span>
           <span class="pill">Python • C • C# • C++ • Lua</span>
-          <span class="pill">AE • Premiere • Photoshop</span>
-          <span class="pill">Git / Perforce</span>
-          <span class="pill">QA su device</span>
+          <span class="pill">Git / Perforce • QA su device</span>
         </div>
       </div>
     </div>
@@ -77,12 +76,23 @@
             <span id="heroTop" class="line top gradient-title glitchable">La precisione non è un dettaglio</span>
             <span id="heroBottom" class="line bottom gradient-title glitchable">È la mia firma</span>
           </h2>
+
           <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.</p>
+
           <div class="cta-row">
             <a class="btn primary" href="#showreel">Guarda i progetti</a>
             <a class="btn" href="#contact">Contattami</a>
           </div>
+
+          <div class="lapbar" aria-label="Indicatori stile F1">
+            <span class="lap">LAP 01</span>
+            <span class="sector s1">S1</span>
+            <span class="sector s2">S2</span>
+            <span class="sector s3">S3</span>
+            <span class="delta">DELTA -0.183</span>
+          </div>
         </div>
+
         <div class="hero-right">
           <figure class="avatar xl fixed-size">
             <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
@@ -102,7 +112,6 @@
 
       <!-- === PROGETTI === -->
 
-      <!-- 2084 - Aetalya Chronicles -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="2084 - Aetalya Chronicles"
@@ -119,7 +128,6 @@
         </div>
       </section>
 
-      <!-- Alan Walker Remix -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Alan Walker Remix — Beautiful Nightmare Remix Music Video"
@@ -136,7 +144,6 @@
         </div>
       </section>
 
-      <!-- Treni Trenitalia -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Treni Trenitalia"
@@ -153,7 +160,6 @@
         </div>
       </section>
 
-      <!-- Team Treni Low Poly -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Treni/Tram Torino lowpoly"
@@ -170,7 +176,6 @@
         </div>
       </section>
 
-      <!-- Oblivion Hospital -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Ambientazione e meccaniche - Oblivion Hospital"
@@ -188,7 +193,6 @@
         </div>
       </section>
 
-      <!-- Soldier Walker -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
@@ -205,7 +209,6 @@
         </div>
       </section>
 
-      <!-- Statuina Lego Mario -->
       <section class="case snap-child reveal"
         data-cat="game"
         data-title="Lego Mario"
@@ -222,7 +225,6 @@
         </div>
       </section>
 
-      <!-- Città Low Poly -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Città Low Poly"
@@ -239,7 +241,6 @@
         </div>
       </section>
 
-      <!-- Mini Appartamento -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Mini Appartamento e Aula Studio"
@@ -256,7 +257,6 @@
         </div>
       </section>
 
-      <!-- Pianeti -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Lowpoly Planets"
@@ -273,7 +273,6 @@
         </div>
       </section>
 
-      <!-- Star Wars / Star Destroyer -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
@@ -290,7 +289,6 @@
         </div>
       </section>
 
-      <!-- Star Wars / Statuina Baby Yoda -->
       <section class="case snap-child reveal"
         data-cat="viz"
         data-title="Statuina Baby Yoda"
@@ -309,6 +307,8 @@
 
       <!-- === /PROGETTI === -->
     </div>
+
+    <div class="checkered-divider" aria-hidden="true"></div>
 
     <!-- COMING SOON -->
     <section class="coming-section wrap reveal">
@@ -347,9 +347,9 @@
               <li><span>Città:</span> Torino, Italia</li>
             </ul>
             <div class="links-split">
-              <a href="TommyRaffaelloHodoroabaCVEuropassNuovo.pdf" target="_blank">Scarica CV (PDF)</a>
+              <a href="TommyRaffaelloHodoroabaCVEuropassNuovo.pdf" target="_blank" rel="noopener">Scarica CV (PDF)</a>
               <span class="dot">•</span>
-              <a href="https://www.youtube.com/@Tek-Y" target="_blank">YouTube: Tek-Y</a>
+              <a href="https://www.youtube.com/@Tek-Y" target="_blank" rel="noopener">YouTube: Tek-Y</a>
             </div>
           </div>
         </div>
@@ -376,6 +376,6 @@
     </div>
 
     <!-- JS -->
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
   </body>
 </html>
