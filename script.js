@@ -30,8 +30,10 @@ let glitchLock = false;
 function glitchBurst(ms = 100) {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || glitchLock) return;
+
   glitchLock = true;
   document.body.classList.add("glitch-burst");
+
   window.setTimeout(() => {
     document.body.classList.remove("glitch-burst");
     glitchLock = false;
@@ -40,9 +42,7 @@ function glitchBurst(ms = 100) {
 
 (() => {
   const targets = document.querySelectorAll(".glitchable, nav a, .btn, .filter-btn");
-  targets.forEach((el) => {
-    el.addEventListener("click", () => glitchBurst(90), { passive: true });
-  });
+  targets.forEach((el) => el.addEventListener("click", () => glitchBurst(90), { passive: true }));
 })();
 
 /* ========= Marquee seamless loop (duplica una volta) ========= */
@@ -152,8 +152,8 @@ function glitchBurst(ms = 100) {
     document.body.style.overflow = "";
   }
 
-  closeModal?.addEventListener("click", closeModalFn, { passive: true });
-  backdrop?.addEventListener("click", closeModalFn, { passive: true });
+  closeModal?.addEventListener("click", () => { closeModalFn(); glitchBurst(70); }, { passive: true });
+  backdrop?.addEventListener("click", () => { closeModalFn(); glitchBurst(70); }, { passive: true });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModalFn();
   });
@@ -164,7 +164,6 @@ function glitchBurst(ms = 100) {
     modalNote.textContent = "";
     modalInfo.textContent = title + (desc ? " — " + desc : "");
 
-    // Tools chips
     if (tools) {
       tools
         .split(",")
@@ -179,7 +178,6 @@ function glitchBurst(ms = 100) {
     }
     if (note) modalNote.textContent = note;
 
-    // Gallery DOM
     const gallery = document.createElement("div");
     gallery.className = "gallery";
 
@@ -232,17 +230,16 @@ function glitchBurst(ms = 100) {
     gallery.appendChild(nav);
     modalInner.appendChild(gallery);
 
-    // Nav logic
     const slides = Array.from(track.children);
     const slideW = () => track.getBoundingClientRect().width;
     const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
     const indexFromScroll = () => Math.round(track.scrollLeft / Math.max(slideW(), 1));
-    const goTo = (i) => track.scrollTo({ left: clamp(i, 0, slides.length - 1) * slideW(), behavior: "smooth" });
+    const goTo = (i) =>
+      track.scrollTo({ left: clamp(i, 0, slides.length - 1) * slideW(), behavior: "smooth" });
 
-    prev.addEventListener("click", () => goTo(indexFromScroll() - 1), { passive: true });
-    next.addEventListener("click", () => goTo(indexFromScroll() + 1), { passive: true });
+    prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); glitchBurst(60); }, { passive: true });
+    next.addEventListener("click", () => { goTo(indexFromScroll() + 1); glitchBurst(60); }, { passive: true });
 
-    // Arrow keys
     const onKey = (e) => {
       if (!modal.classList.contains("open")) return;
       if (e.key === "ArrowLeft") {
@@ -256,7 +253,7 @@ function glitchBurst(ms = 100) {
     };
     document.addEventListener("keydown", onKey);
 
-    // Drag (mouse + touch) stabile
+    // Drag (mouse + touch)
     let isDown = false;
     let startX = 0;
     let startLeft = 0;
@@ -291,14 +288,12 @@ function glitchBurst(ms = 100) {
     track.addEventListener("touchmove", onMove, { passive: true });
     track.addEventListener("touchend", onUp, { passive: true });
 
-    // Open
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     glitchBurst(90);
   }
 
-  // Delegation: open modal
   document.getElementById("showreel")?.addEventListener(
     "click",
     (e) => {
