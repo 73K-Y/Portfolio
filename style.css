@@ -503,22 +503,37 @@ nav a:hover::after{ opacity:1; transform:none; }
   }
 }
 
-/* ===== Coming glow per-card (compatibile, senza color-mix) ===== */
+/* ===== Coming glow per-card (più espanso + colori più visibili) ===== */
 .case-coming.glow-blue  { --coming-glow: 0, 51, 153; }   /* #003399 */
 .case-coming.glow-red   { --coming-glow: 115, 10, 10; }  /* #730a0a */
 .case-coming.glow-white { --coming-glow: 241, 245, 251; }/* bianco UI */
 
 @media (hover:hover){
   .case-coming:hover{
-    transform: translateY(-2px);
-    border-color: rgba(var(--coming-glow), .45);
+    transform: translateY(-3px);
+
+    /* bordo più evidente */
+    border-color: rgba(var(--coming-glow), .85);
+
+    /* glow molto più grande + più “saturo” */
     box-shadow:
-      0 10px 28px rgba(0,0,0,.42),
-      0 0 28px rgba(var(--coming-glow), .28),
-      0 0 56px rgba(var(--coming-glow), .16);
+      0 16px 42px rgba(0,0,0,.55),              /* profondità */
+      0 0 45px rgba(var(--coming-glow), .55),   /* glow medio */
+      0 0 95px rgba(var(--coming-glow), .35),   /* glow grande */
+      0 0 160px rgba(var(--coming-glow), .20);  /* alone enorme */
+
+    /* piccolo boost generale */
+    filter: saturate(1.12);
   }
+
   .case-coming:hover .case-info{
-    border-color: rgba(var(--coming-glow), .30);
+    border-color: rgba(var(--coming-glow), .60);
+  }
+
+  /* label più leggibile su glow forte */
+  .case-coming:hover .case-overlay .label{
+    border-color: rgba(var(--coming-glow), .55);
+    box-shadow: 0 0 26px rgba(var(--coming-glow), .35);
   }
 }
 
