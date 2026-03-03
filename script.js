@@ -1,6 +1,5 @@
 /* ===== Auto performance switch (rispetta override manuale) ===== */
 (() => {
-  // Se tu metti "no-blur" a mano nell'HTML, non faccio nulla.
   if (document.body.classList.contains('no-blur')) return;
 
   const isMobile = window.matchMedia('(max-width: 600px)').matches;
@@ -40,9 +39,9 @@ function glitchBurst(ms = 110){
 }
 
 (() => {
-  const targets = document.querySelectorAll('.glitchable, .btn, nav a');
+  const targets = document.querySelectorAll('.glitchable, nav a, .btn');
   targets.forEach(el => {
-    el.addEventListener('click', () => glitchBurst(120), { passive: true });
+    el.addEventListener('click', () => glitchBurst(110), { passive: true });
   });
 })();
 
@@ -70,86 +69,6 @@ function glitchBurst(ms = 110){
   revealEls.forEach(el => io.observe(el));
 })();
 
-/* ========= HERO fit (ottimizzato: no ResizeObserver sul body) ========= */
-(() => {
-  const top    = document.getElementById('heroTop');
-  const bottom = document.getElementById('heroBottom');
-  const column = document.querySelector('.hero-left');
-  if (!top || !bottom || !column) return;
-
-  const isMobile = () => window.matchMedia('(max-width: 600px)').matches;
-
-  const MIN_TOP = 30;
-  const MIN_BOTTOM = 54;
-  const EPS = 0.5, SAFETY = 12, MAX_WS = 18, MAX_LS = 0.6;
-
-  const w = el => el.getBoundingClientRect().width;
-  const gaps = txt => (txt.match(/\s+/g)||[]).reduce((a,s)=>a+s.length,0);
-  const colW = () => Math.max(0, column.getBoundingClientRect().width - SAFETY);
-
-  function binaryFit(el, target, minPx, grow=2.2){
-    el.style.wordSpacing = '';
-    el.style.letterSpacing = '';
-    let base = Math.max(minPx, parseFloat(getComputedStyle(el).fontSize) || minPx);
-    let lo = minPx, hi = Math.max(base*grow, base + 48);
-    for (let i=0;i<16;i++){
-      el.style.fontSize = base + 'px';
-      const width = w(el);
-      if (Math.abs(width - target) <= EPS) break;
-      if (width > target) hi = base; else lo = base;
-      const next = (lo + hi) / 2;
-      if (Math.abs(next - base) < 0.12) break;
-      base = next;
-    }
-  }
-
-  let raf = 0;
-  function tune(){
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      raf = 0;
-
-      if (isMobile()){
-        [top, bottom].forEach(el=>{
-          el.style.fontSize=''; el.style.wordSpacing=''; el.style.letterSpacing='';
-        });
-        return;
-      }
-
-      const maxBox = colW();
-      binaryFit(top, maxBox, MIN_TOP, 2.2);
-
-      const target = Math.min(w(top), maxBox);
-      binaryFit(bottom, target, MIN_BOTTOM, 2.4);
-
-      // micro fill con word spacing/letter spacing (solo se serve)
-      let width = w(bottom);
-      const need = target - width;
-      if (need > EPS){
-        const sp = gaps(bottom.textContent);
-        if (sp > 0){
-          const perGap = Math.min(MAX_WS, need / sp);
-          bottom.style.wordSpacing = perGap.toFixed(3) + 'px';
-        } else {
-          let ls = need / Math.max(bottom.textContent.length,1);
-          ls = Math.max(-MAX_LS, Math.min(MAX_LS, ls));
-          bottom.style.letterSpacing = ls.toFixed(3) + 'px';
-        }
-      }
-    });
-  }
-
-  window.addEventListener('resize', tune, { passive: true });
-  window.addEventListener('load', tune, { once:true });
-
-  // fonts ready (una volta)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(tune).catch(()=>{});
-  }
-
-  tune();
-})();
-
 /* ========= Badge categoria + tools + descrizione ========= */
 (() => {
   document.querySelectorAll('.case').forEach(card=>{
@@ -159,6 +78,7 @@ function glitchBurst(ms = 110){
     const tools = (card.dataset.tools || '').split(',').map(s=>s.trim()).filter(Boolean);
 
     if (badges) {
+      badges.innerHTML = '';
       if (cat){
         const b = document.createElement('span');
         b.className = 'badge cat';
@@ -196,14 +116,14 @@ function glitchBurst(ms = 110){
       btn.classList.add('active');
       applyFilter(btn.dataset.filter);
       document.getElementById('filters')?.scrollIntoView({behavior:'smooth', block:'start'});
-      glitchBurst(110);
-    });
+      glitchBurst(100);
+    }, { passive: true });
   });
 
   applyFilter('all');
 })();
 
-/* ========= Modal ========= */
+/* ========= Modal (galleria più leggera, senza numeri/counter) ========= */
 (() => {
   const modal = document.getElementById('modal');
   const modalInner = document.getElementById('modalInner');
@@ -221,8 +141,8 @@ function glitchBurst(ms = 110){
     modalInner.innerHTML = '';
   }
 
-  closeModal?.addEventListener('click', ()=>{ closeModalFn(); glitchBurst(80); }, { passive: true });
-  backdrop?.addEventListener('click', ()=>{ closeModalFn(); glitchBurst(80); }, { passive: true });
+  closeModal?.addEventListener('click', ()=>{ closeModalFn(); glitchBurst(70); }, { passive: true });
+  backdrop?.addEventListener('click', ()=>{ closeModalFn(); glitchBurst(70); }, { passive: true });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModalFn(); });
 
   function openModal(items, title, desc, tools, note){
@@ -263,12 +183,11 @@ function glitchBurst(ms = 110){
     });
 
     const nav = document.createElement('div'); nav.className = 'gallery-nav';
-    const prev = document.createElement('button'); prev.className = 'gallery-btn prev'; prev.innerHTML = '‹';
-    const next = document.createElement('button'); next.className = 'gallery-btn next'; next.innerHTML = '›';
-    const counter = document.createElement('div'); counter.className = 'gallery-counter';
+    const prev = document.createElement('button'); prev.className = 'gallery-btn prev'; prev.type = 'button'; prev.innerHTML = '‹';
+    const next = document.createElement('button'); next.className = 'gallery-btn next'; next.type = 'button'; next.innerHTML = '›';
 
     nav.appendChild(prev); nav.appendChild(next);
-    gallery.appendChild(track); gallery.appendChild(nav); gallery.appendChild(counter);
+    gallery.appendChild(track); gallery.appendChild(nav);
     modalInner.appendChild(gallery);
 
     if (tools) {
@@ -288,17 +207,8 @@ function glitchBurst(ms = 110){
     const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
     const indexFromScroll = () => Math.round(track.scrollLeft / Math.max(slideW(), 1));
     const goTo = i => track.scrollTo({ left: clamp(i,0,slides.length-1)*slideW(), behavior:'smooth' });
-    const updateCounter = () => { counter.textContent = `${indexFromScroll()+1} / ${slides.length}`; };
 
-    // wheel -> scorre orizzontale (solo quando necessario)
-    track.addEventListener('wheel', (e)=>{
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        track.scrollLeft += e.deltaY;
-      }
-    }, { passive:false });
-
-    // drag (mouse/touch)
+    // drag (mouse/touch) leggero
     let isDown=false, startX=0, startLeft=0;
 
     const onDown = (e) => {
@@ -317,34 +227,27 @@ function glitchBurst(ms = 110){
       goTo(indexFromScroll());
     };
 
-    track.addEventListener('mousedown', onDown);
-    track.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
+    track.addEventListener('mousedown', onDown, { passive:true });
+    track.addEventListener('mousemove', onMove, { passive:true });
+    window.addEventListener('mouseup', onUp, { passive:true, once:true });
+
     track.addEventListener('touchstart', onDown, {passive:true});
     track.addEventListener('touchmove', onMove, {passive:true});
-    track.addEventListener('touchend', onUp);
+    track.addEventListener('touchend', onUp, {passive:true});
 
-    prev.addEventListener('click', ()=> { goTo(indexFromScroll()-1); glitchBurst(70); });
-    next.addEventListener('click', ()=> { goTo(indexFromScroll()+1); glitchBurst(70); });
+    prev.addEventListener('click', ()=> { goTo(indexFromScroll()-1); glitchBurst(60); }, { passive:true });
+    next.addEventListener('click', ()=> { goTo(indexFromScroll()+1); glitchBurst(60); }, { passive:true });
 
     const onKey = (e)=>{
       if (!modal.classList.contains('open')) return;
       if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(indexFromScroll()-1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); goTo(indexFromScroll()+1); }
     };
-    document.addEventListener('keydown', onKey);
-
-    let rafId=0;
-    const onScroll = ()=>{
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(()=>{ rafId=0; updateCounter(); });
-    };
-    track.addEventListener('scroll', onScroll, { passive:true });
+    document.addEventListener('keydown', onKey, { passive:false });
 
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
-    updateCounter();
-    glitchBurst(110);
+    glitchBurst(90);
   }
 
   /* Open modal on button (delegation) */
@@ -365,13 +268,12 @@ function glitchBurst(ms = 110){
     if (!items.length) return;
 
     openModal(items, title, desc, tools, note);
-  });
+  }, { passive:true });
 
-  /* Coming soon: “peek” su touch */
+  /* Coming soon: peek su touch */
   document.querySelectorAll('.case-coming').forEach(card=>{
     card.addEventListener('touchstart', ()=> card.classList.add('peek'), {passive:true});
-    card.addEventListener('touchend',   ()=> card.classList.remove('peek'));
-    card.addEventListener('touchcancel',()=> card.classList.remove('peek'));
+    card.addEventListener('touchend',   ()=> card.classList.remove('peek'), {passive:true});
+    card.addEventListener('touchcancel',()=> card.classList.remove('peek'), {passive:true});
   });
-
 })();

@@ -13,6 +13,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="color-scheme" content="dark light">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -24,16 +28,8 @@
     <!-- NAV -->
     <header class="nav-glass">
       <div class="brand">
-        <a class="logo" aria-label="Torna su" aria-hidden="false">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#g)"/>
-            <defs>
-              <linearGradient id="g" x1="0" x2="1">
-                <stop offset="0" stop-color="#00a6ff" stop-opacity="0.9"/>
-                <stop offset="1" stop-color="#0066cc" stop-opacity="0.8"/>
-              </linearGradient>
-            </defs>
-          </svg>
+        <a class="logo" href="#hero" aria-label="Torna su">
+          <img src="assets/logo.png" alt="TOMHODA logo" width="44" height="44" decoding="async">
         </a>
 
         <div class="brand-text">
@@ -69,30 +65,45 @@
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
+          <div class="hero-hud">
+            <span class="hud-tag">PIT WALL</span>
+            <span class="hud-dot" aria-hidden="true"></span>
+            <span class="hud-tag muted">TELEMETRY ONLINE</span>
+          </div>
+
           <h2 class="hero-title">
-            <span id="heroTop" class="line top gradient-title glitchable">La precisione non è un dettaglio</span>
-            <span id="heroBottom" class="line bottom gradient-title glitchable">È la mia firma</span>
+            <span id="heroTop" class="line top glitchable">La precisione non è un dettaglio</span>
+            <span id="heroBottom" class="line bottom glitchable">È la mia firma</span>
           </h2>
 
-          <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.</p>
+          <p class="hero-sub">
+            Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.
+          </p>
 
           <div class="cta-row">
             <a class="btn primary" href="#showreel">Guarda i progetti</a>
             <a class="btn" href="#contact">Contattami</a>
           </div>
 
-          <div class="lapbar lapbar-lite" aria-label="Indicatori stile F1">
-            <span class="lap">LAP 01</span>
-            <span class="sector s1">S1</span>
-            <span class="sector s2">S2</span>
-            <span class="sector s3">S3</span>
-            <span class="delta">DELTA -0.183</span>
+          <div class="telemetry-strip" aria-label="Indicatori stile F1">
+            <span class="t-item lap">LAP 01</span>
+            <span class="t-item s1">S1</span>
+            <span class="t-item s2">S2</span>
+            <span class="t-item s3">S3</span>
+            <span class="t-item delta">DELTA -0.183</span>
           </div>
         </div>
 
         <div class="hero-right">
-          <figure class="avatar xl fixed-size">
-            <img src="assets/PicsArt_03-10-10.43.55.jpg" alt="Ritratto di Tommy Raffaello Hodoroaba">
+          <figure class="portrait">
+            <img src="assets/PicsArt_03-10-10.43.55.jpg"
+                 alt="Ritratto di Tommy Raffaello Hodoroaba"
+                 loading="eager"
+                 decoding="async">
+            <figcaption class="portrait-cap" aria-hidden="true">
+              <span class="cap-l">CAM 07</span>
+              <span class="cap-r">LIVE</span>
+            </figcaption>
           </figure>
         </div>
       </section>
