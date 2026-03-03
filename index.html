@@ -8,20 +8,23 @@
 
     <!-- Mobile bars trasparenti -->
     <meta name="theme-color" content="#00000000" />
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="color-scheme" content="dark light">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="color-scheme" content="dark light" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo.png">
-    <link rel="apple-touch-icon" href="assets/logo.png">
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="apple-touch-icon" href="assets/logo.png" />
 
     <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body class="snap">
@@ -29,7 +32,7 @@
     <header class="nav-glass">
       <div class="brand">
         <a class="logo" href="#hero" aria-label="Torna su">
-          <img src="assets/logo.png" alt="TOMHODA logo" width="44" height="44" decoding="async">
+          <img src="assets/logo.png" alt="TOMHODA logo" width="44" height="44" decoding="async" />
         </a>
 
         <div class="brand-text">
@@ -37,14 +40,14 @@
             <h1 id="name" class="glitchable">Tommy Raffaello Hodoroaba</h1>
             <span class="pit-led" aria-hidden="true"></span>
           </div>
-          <p class="lead">3D Digital Artist & Game Developer</p>
+          <p class="lead">3D Digital Artist &amp; Game Developer</p>
           <p class="nav-hud" aria-hidden="true">PIT WALL • TELEMETRY ONLINE</p>
         </div>
       </div>
 
       <nav>
         <a href="#showreel">Progetti</a>
-        <a href="#info">Info & Contatti</a>
+        <a href="#info">Info &amp; Contatti</a>
       </nav>
     </header>
 
@@ -65,9 +68,9 @@
     <main id="hero" class="wrap">
       <section class="section hero-full snap-child reveal">
         <div class="hero-left">
-          <div class="hero-hud">
+          <div class="hero-hud" aria-hidden="true">
             <span class="hud-tag">PIT WALL</span>
-            <span class="hud-dot" aria-hidden="true"></span>
+            <span class="hud-dot"></span>
             <span class="hud-tag muted">TELEMETRY ONLINE</span>
           </div>
 
@@ -76,9 +79,7 @@
             <span id="heroBottom" class="line bottom glitchable">È la mia firma</span>
           </h2>
 
-          <p class="hero-sub">
-            Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.
-          </p>
+          <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand.</p>
 
           <div class="cta-row">
             <a class="btn primary" href="#showreel">Guarda i progetti</a>
@@ -96,10 +97,12 @@
 
         <div class="hero-right">
           <figure class="portrait">
-            <img src="assets/PicsArt_03-10-10.43.55.jpg"
-                 alt="Ritratto di Tommy Raffaello Hodoroaba"
-                 loading="eager"
-                 decoding="async">
+            <img
+              src="assets/PicsArt_03-10-10.43.55.jpg"
+              alt="Ritratto di Tommy Raffaello Hodoroaba"
+              loading="eager"
+              decoding="async"
+            />
             <figcaption class="portrait-cap" aria-hidden="true">
               <span class="cap-l">CAM 07</span>
               <span class="cap-r">LIVE</span>
@@ -111,208 +114,229 @@
 
     <!-- SHOWREEL -->
     <div id="showreel" class="wrap">
-      <!-- Filtro categorie -->
       <div id="filters" class="filterbar reveal">
-        <button class="filter-btn active" data-filter="all">Tutti</button>
-        <button class="filter-btn" data-filter="game">Game Art & Dev</button>
-        <button class="filter-btn" data-filter="viz">3D Visualization</button>
+        <button class="filter-btn active" data-filter="all" type="button">Tutti</button>
+        <button class="filter-btn" data-filter="game" type="button">Game Art &amp; Dev</button>
+        <button class="filter-btn" data-filter="viz" type="button">3D Visualization</button>
       </div>
 
       <!-- === PROGETTI === -->
-
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="game"
         data-title="2084 - Aetalya Chronicles"
         data-desc="Texturing ambientale e di props pixellated."
         data-tools="Photoshop"
         data-images="assets/hud office left.png|assets/hud front office.png|assets/hud terminal office.png"
-        data-src="assets/hud office left.png">
+        data-src="assets/hud office left.png"
+      >
         <div class="case-bg" style="--bg:url('assets/hud office left.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>2084 - Aetalya Chronicles</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="viz"
         data-title="Alan Walker Remix — Beautiful Nightmare Remix Music Video"
         data-desc="Animazione e montaggio viasualizer del remix musicale."
         data-tools="Premiere, After Effects, Blender"
         data-images="assets/Screenshot 2025-10-12 224346.png"
-        data-src="assets/Screenshot 2025-10-12 224346.png">
+        data-src="assets/Screenshot 2025-10-12 224346.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Alan Walker - Beautiful Nightmare Remix</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="game"
         data-title="Treni Trenitalia"
         data-desc="Modellazione e texturing di treni per simulatori."
         data-tools="Blender, Substance"
         data-images="assets/Screenshot 2025-10-12 204155.png|assets/regfront.png|assets/regback.png|assets/regside.png|assets/regunder.png|assets/Screenshot 2025-10-12 204343.png|assets/Screenshot 2025-10-12 204346.png"
-        data-src="assets/Screenshot 2025-10-12 204155.png">
+        data-src="assets/Screenshot 2025-10-12 204155.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Treni Trenitalia</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="game"
         data-title="Treni/Tram Torino lowpoly"
         data-desc="Asset low poly per videogioco stile Railway Runner."
         data-tools="Blender, Unity"
         data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 0049.png|assets/Screenshot 2025-06-06 00465349.png|assets/Screenshot 2025-10-12 346.png"
-        data-src="assets/Screenshot 2025-06-05 221951.png">
+        data-src="assets/Screenshot 2025-06-05 221951.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Treni/Tram Torino lowpoly</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="game"
         data-title="Ambientazione e meccaniche - Oblivion Hospital"
         data-desc="Animazioni 3D e rendering di meccaniche per gioco Oblivion Hospital."
         data-tools="Blender, Unreal Engine"
         data-images="assets/scena - background menù - ospedale.png"
         data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4"
-        data-src="assets/scena - background menù - ospedale.png">
+        data-src="assets/scena - background menù - ospedale.png"
+      >
         <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Oblivion Hospital</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="game"
         data-title="Soldier Walker"
         data-desc="Personaggio 3D, studio materiali e posing."
         data-tools="Blender, Substance, Photoshop"
         data-images="assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg|assets/Untitled.png|assets/Screenshot 2025-10-12 205615.png"
-        data-src="assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg">
+        data-src="assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg"
+      >
         <div class="case-bg" style="--bg:url('assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Soldier Walker</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="game"
         data-title="Lego Mario"
         data-desc="Statuina Lego Mario."
         data-tools="Blender"
         data-images="assets/UntitledMario.png"
-        data-src="assets/UntitledMario.png">
+        data-src="assets/UntitledMario.png"
+      >
         <div class="case-bg" style="--bg:url('assets/UntitledMario.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Lego Mario</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="viz"
         data-title="Città Low Poly"
         data-desc="Città low poly in viewport per video musicale"
         data-tools="Blender"
         data-images="assets/Screenshot 2025-10-12 203652.png"
-        data-src="assets/Screenshot 2025-10-12 203652.png">
+        data-src="assets/Screenshot 2025-10-12 203652.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Città Low Poly</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="viz"
         data-title="Mini Appartamento e Aula Studio"
         data-desc="Mini render di un appartamento e di un'aula di studio in viewport per corso di level design"
         data-tools="Blender"
         data-images="assets/Screenshot 2025-07-04 1448315.png|assets/Screenshot 2025-07-04 144835.png|assets/Screenshot 2025-07-04 1446835.png|assets/Screenshot 2025-07-04 1444835.png|assets/Screenshot 2025-07-04 1448735.png"
-        data-src="assets/Screenshot 2025-07-04 1448315.png">
+        data-src="assets/Screenshot 2025-07-04 1448315.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-07-04 1448315.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Mini Appartamento e Aula Studio</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="viz"
         data-title="Lowpoly Planets"
         data-desc="Pianeti lowpoly per video musicale."
         data-tools="Blender"
         data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png"
-        data-src="assets/Screenshot 2025-10-12 203921.png">
+        data-src="assets/Screenshot 2025-10-12 203921.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Lowpoly Planet</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="viz"
         data-title="Star Destroyer"
         data-desc="Nave imperiale dell’universo Star Wars."
         data-tools="Blender, Photoshop"
         data-images="assets/Screenshot 2025-10-12 210314.png"
-        data-src="assets/Screenshot 2025-10-12 210314.png">
+        data-src="assets/Screenshot 2025-10-12 210314.png"
+      >
         <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Star Destroyer</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
 
-      <section class="case snap-child reveal"
+      <section
+        class="case snap-child reveal"
         data-cat="viz"
         data-title="Statuina Baby Yoda"
         data-desc="Statuina scannerizzata dell’universo Star Wars."
         data-tools="Blender, Maya, Photoshop"
         data-images="assets/babyyodafront.png|assets/babyyodafrontUV.png|assets/babyyodaside.png|assets/babyyodasideUV.png|assets/babyyodaback.png|assets/babyyodabackUV.png"
-        data-src="assets/babyyodafront.png">
+        data-src="assets/babyyodafront.png"
+      >
         <div class="case-bg" style="--bg:url('assets/babyyodafront.png')"></div>
         <div class="case-info">
           <div class="badges"></div>
           <h3>Statuina Baby Yoda</h3>
           <p class="desc"></p>
-          <button class="btn small open-modal">Apri galleria</button>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
-
       <!-- === /PROGETTI === -->
     </div>
 
@@ -347,6 +371,7 @@
               Amo il design creativo e la sperimentazione tecnica.
             </p>
           </div>
+
           <div id="contact" class="info-block">
             <h4>Contatti</h4>
             <ul class="contact-list">
@@ -354,6 +379,7 @@
               <li><span>Tel:</span> +39 3925649950</li>
               <li><span>Città:</span> Torino, Italia</li>
             </ul>
+
             <div class="links-split">
               <a href="TommyRaffaelloHodoroabaCVEuropassNuovo.pdf" target="_blank" rel="noopener">Scarica CV (PDF)</a>
               <span class="dot">•</span>
@@ -372,13 +398,17 @@
     <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
-      <div class="content" role="document">
-        <button id="closeModal" aria-label="Chiudi">✕</button>
+
+      <div class="content" role="document" aria-label="Galleria progetto">
+        <button id="closeModal" aria-label="Chiudi" type="button">✕</button>
+
         <div id="modalInner"></div>
+
         <div class="modal-meta">
           <div id="modalTools" class="toolchips"></div>
           <blockquote id="modalNote" class="author-note"></blockquote>
         </div>
+
         <div class="info" id="modalInfo"></div>
       </div>
     </div>
