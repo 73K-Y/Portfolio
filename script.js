@@ -1,14 +1,10 @@
 /* ===== Auto performance switch ===== */
 (() => {
   if (document.body.classList.contains("no-blur")) return;
-
   const isMobile = window.matchMedia("(max-width: 600px)").matches;
   const lowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
   const saveData = navigator.connection && navigator.connection.saveData;
-
-  if (isMobile || lowCPU || saveData) {
-    document.body.classList.add("no-blur");
-  }
+  if (isMobile || lowCPU || saveData) { document.body.classList.add("no-blur"); }
 })();
 
 /* ========= Footer year ========= */
@@ -21,7 +17,6 @@
 (() => {
   const revealEls = document.querySelectorAll(".reveal");
   if (!revealEls.length) return;
-
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
@@ -29,10 +24,8 @@
         e.target.classList.add("is-visible");
         io.unobserve(e.target);
       });
-    },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
   );
-
   revealEls.forEach((el) => io.observe(el));
 })();
 
@@ -50,10 +43,7 @@
     const badges = card.querySelector(".badges");
     const descEl = card.querySelector(".desc");
     const cat = (card.dataset.cat || "").trim();
-    const tools = (card.dataset.tools || "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const tools = (card.dataset.tools || "").split(",").map((s) => s.trim()).filter(Boolean);
 
     if (badges) {
       badges.innerHTML = "";
@@ -70,7 +60,6 @@
         badges.appendChild(b);
       });
     }
-
     if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
   });
 })();
@@ -90,22 +79,18 @@
   }
 
   filterBtns.forEach((btn) => {
-    btn.addEventListener(
-      "click",
-      () => {
+    btn.addEventListener("click", () => {
         filterBtns.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         applyFilter(btn.dataset.filter);
         document.getElementById("filters")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      },
-      { passive: true }
+      }, { passive: true }
     );
   });
-
   applyFilter("all");
 })();
 
-/* ========= Modal ========= */
+/* ========= Modal & Gallery ========= */
 (() => {
   const modal = document.getElementById("modal");
   const modalInner = document.getElementById("modalInner");
@@ -124,11 +109,9 @@
     document.body.style.overflow = "";
   }
 
-  closeModal?.addEventListener("click", () => { closeModalFn(); }, { passive: true });
-  backdrop?.addEventListener("click", () => { closeModalFn(); }, { passive: true });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModalFn();
-  });
+  closeModal?.addEventListener("click", closeModalFn, { passive: true });
+  backdrop?.addEventListener("click", closeModalFn, { passive: true });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModalFn(); });
 
   function openModal(items, title, desc, tools, note) {
     modalInner.innerHTML = "";
@@ -137,16 +120,11 @@
     modalInfo.textContent = title + (desc ? " — " + desc : "");
 
     if (tools) {
-      tools
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .forEach((t) => {
+      tools.split(",").map((s) => s.trim()).filter(Boolean).forEach((t) => {
           const span = document.createElement("span");
-          span.className = "chip";
-          span.textContent = t;
+          span.className = "chip"; span.textContent = t;
           modalTools.appendChild(span);
-        });
+      });
     }
     if (note) modalNote.textContent = note;
 
@@ -156,7 +134,6 @@
     const track = document.createElement("div");
     track.className = "gallery-track";
     track.setAttribute("role", "region");
-    track.setAttribute("aria-label", "Galleria immagini");
 
     items.forEach((src) => {
       const slide = document.createElement("div");
@@ -164,96 +141,71 @@
 
       if (src.toLowerCase().endsWith(".mp4")) {
         const v = document.createElement("video");
-        v.src = src;
-        v.controls = true;
-        v.playsInline = true;
-        v.preload = "metadata";
-        v.style.maxHeight = "80vh";
+        v.src = src; v.controls = true; v.playsInline = true; v.preload = "metadata"; v.style.maxHeight = "80vh";
         slide.appendChild(v);
       } else {
         const img = document.createElement("img");
-        img.src = src;
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.alt = title || "media";
-        img.style.maxHeight = "80vh";
+        img.src = src; img.loading = "lazy"; img.decoding = "async"; img.alt = title || "media"; img.style.maxHeight = "80vh";
         slide.appendChild(img);
       }
       track.appendChild(slide);
     });
 
-    const nav = document.createElement("div");
-    nav.className = "gallery-nav";
-
-    const prev = document.createElement("button");
-    prev.className = "gallery-btn prev";
-    prev.type = "button";
-    prev.innerHTML = "‹";
-
-    const next = document.createElement("button");
-    next.className = "gallery-btn next";
-    next.type = "button";
-    next.innerHTML = "›";
-
-    nav.appendChild(prev);
-    nav.appendChild(next);
-
     gallery.appendChild(track);
-    gallery.appendChild(nav);
     modalInner.appendChild(gallery);
 
     const slides = Array.from(track.children);
-    const slideW = () => track.getBoundingClientRect().width;
-    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-    const indexFromScroll = () => Math.round(track.scrollLeft / Math.max(slideW(), 1));
-    const goTo = (i) =>
-      track.scrollTo({ left: clamp(i, 0, slides.length - 1) * slideW(), behavior: "smooth" });
+    const slideW = () => track.getBoundingClientRect().width || 1;
+    const indexFromScroll = () => Math.round(track.scrollLeft / slideW());
+    const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * slideW(), behavior: "smooth" });
 
-    prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
-    next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
+    // Gestione Frecce (solo se più di un elemento)
+    if (items.length > 1) {
+      const nav = document.createElement("div");
+      nav.className = "gallery-nav";
+
+      const prev = document.createElement("button");
+      prev.className = "gallery-btn prev"; prev.innerHTML = "‹";
+      
+      const next = document.createElement("button");
+      next.className = "gallery-btn next"; next.innerHTML = "›";
+
+      nav.appendChild(prev);
+      nav.appendChild(next);
+      gallery.appendChild(nav);
+
+      const updateArrows = () => {
+        const idx = indexFromScroll();
+        prev.style.opacity = idx === 0 ? "0" : "1";
+        prev.style.pointerEvents = idx === 0 ? "none" : "auto";
+        
+        next.style.opacity = idx === slides.length - 1 ? "0" : "1";
+        next.style.pointerEvents = idx === slides.length - 1 ? "none" : "auto";
+      };
+
+      prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
+      next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
+
+      // Aggiorna le frecce quando la galleria scorre
+      track.addEventListener('scroll', updateArrows, { passive: true });
+      
+      // Ritardo per assicurarsi che i width siano caricati e controllare subito
+      setTimeout(updateArrows, 50);
+    }
 
     const onKey = (e) => {
       if (!modal.classList.contains("open")) return;
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        goTo(indexFromScroll() - 1);
-      }
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        goTo(indexFromScroll() + 1);
-      }
+      if (e.key === "ArrowLeft") { e.preventDefault(); goTo(indexFromScroll() - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); goTo(indexFromScroll() + 1); }
     };
     document.addEventListener("keydown", onKey);
 
-    let isDown = false;
-    let startX = 0;
-    let startLeft = 0;
-
-    const getX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
-
-    const onDown = (e) => {
-      isDown = true;
-      track.classList.add("grabbing");
-      startX = getX(e);
-      startLeft = track.scrollLeft;
-    };
-
-    const onMove = (e) => {
-      if (!isDown) return;
-      const x = getX(e);
-      track.scrollLeft = startLeft - (x - startX);
-    };
-
-    const onUp = () => {
-      if (!isDown) return;
-      isDown = false;
-      track.classList.remove("grabbing");
-      goTo(indexFromScroll());
-    };
-
-    track.addEventListener("mousedown", onDown);
-    track.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
+    // Solo tocco (rimosso drag da mouse per PC)
+    let isDown = false; let startX = 0; let startLeft = 0;
+    const getX = (e) => e.touches[0].clientX;
+    const onDown = (e) => { isDown = true; startX = getX(e); startLeft = track.scrollLeft; };
+    const onMove = (e) => { if (!isDown) return; const x = getX(e); track.scrollLeft = startLeft - (x - startX); };
+    const onUp = () => { if (!isDown) return; isDown = false; goTo(indexFromScroll()); };
 
     track.addEventListener("touchstart", onDown, { passive: true });
     track.addEventListener("touchmove", onMove, { passive: true });
@@ -264,27 +216,20 @@
     document.body.style.overflow = "hidden";
   }
 
-  document.getElementById("showreel")?.addEventListener(
-    "click",
-    (e) => {
+  document.getElementById("showreel")?.addEventListener("click", (e) => {
       const btn = e.target.closest(".open-modal");
       if (!btn) return;
-
       const card = e.target.closest(".case");
       if (!card) return;
-
       const title = card.dataset.title || "Progetto";
       const desc = card.dataset.desc || "";
       const tools = card.dataset.tools || "";
       const note = card.dataset.note || "";
-
       const images = (card.dataset.images || "").split("|").map((s) => s.trim()).filter(Boolean);
       const videos = (card.dataset.videos || "").split("|").map((s) => s.trim()).filter(Boolean);
       const items = [...images, ...videos];
       if (!items.length) return;
-
       openModal(items, title, desc, tools, note);
-    },
-    { passive: true }
+    }, { passive: true }
   );
 })();
