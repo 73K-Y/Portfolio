@@ -10,12 +10,6 @@
   --max-w: 1200px;
   --gutter: clamp(16px, 4vw, 32px);
   --case-h: clamp(48vh, 56vh, 62vh);
-  
-  /* === NUOVI COLORI PER EFFETTO RETRO (Giallo/Arancione - image_51eba3.png) === */
-  --retro-yellow: #fffd01;
-  --retro-orange: #ff4000;
-  --retro-aura: rgba(255, 253, 1, 0.7); /* Alone luminoso giallo morbido */
-  
   color-scheme: dark;
 }
 
@@ -155,45 +149,27 @@ nav a:hover { color: var(--red); }
   z-index: 3; /* Sopra a testo outline e retro image */
 }
 
-/* === LIVEL 1: Contenitore Foto Ritratto Retro (image_51eba3.png) === */
+/* === LIVEL 1: Contenitore Foto Ritratto Retro ... === */
 .hero-back-wrapper {
   position: absolute;
   bottom: 0; height: 95%; /* Copre l'area dell'immagine principale */
   display: flex; justify-content: center; align-items: flex-end;
   z-index: 1; /* Sotto l'immagine principale e testo outline */
-  
-  /* Alone Luminoso Giallo (image_51eba3.png) - Crea l'alone morbido all'esterno */
-  filter: drop-shadow(0 0 30px var(--retro-aura));
 }
 
-/* Targetta l'immagine scontornata 'retro.png' per crearne la silhouette bianca */
+/* Targetta l'immagine scontornata 'retro.png' ... */
 .hero-back-wrapper .hero-subject.back {
   position: static; /* Si posiziona all'interno del wrapper flex */
-  
-  /* Trasforma l'immagine scontornata in una silhouette bianca brillante */
-  filter: grayscale(1) brightness(0) invert(1);
+  /* (Rimosso filtri per mostrare l'immagine originale come in Immagine 2) */
 }
 
-/* Applica il gradiente Verticale Giallo/Arancione SOPRA la silhouette bianca */
-.hero-back-wrapper::after {
-  content: "";
-  position: absolute;
-  inset: 0; /* Copre l'intera area del wrapper */
-  
-  /* Gradiente verticale Giallo -> Arancione (image_51eba3.png) */
-  background: linear-gradient(to top, var(--retro-orange) 0%, var(--retro-yellow) 60%, transparent 100%);
-  
-  /* FONDAMENTALE: Modalità di fusione che mantiene il background scuro, colorando solo la silhouette bianca */
-  mix-blend-mode: screen; 
-  pointer-events: none;
-}
+/* (Rimosso pseudo-elemento ::after e il relativo gradiente) */
 
 /* Nomi che "tagliano" le spalle (Sempre in primo piano) */
 .hero-name {
   position: absolute;
   bottom: 12%;
   z-index: 10; /* Sopra a tutto l'stack delle immagini */
-  /* (Resto invariato) */
 }
 .hero-name.left {
   left: 5%;
