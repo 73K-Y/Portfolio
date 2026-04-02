@@ -36,6 +36,14 @@
   revealEls.forEach((el) => io.observe(el));
 })();
 
+/* ========= Marquee seamless loop (duplica una volta) ========= */
+(() => {
+  const track = document.getElementById("marqueeTrack");
+  if (!track || track.dataset.duped === "1") return;
+  track.innerHTML = track.innerHTML + track.innerHTML;
+  track.dataset.duped = "1";
+})();
+
 /* ========= Badge categoria + tools + descrizione ========= */
 (() => {
   document.querySelectorAll(".case").forEach((card) => {

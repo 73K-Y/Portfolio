@@ -14,7 +14,7 @@
   color-scheme: dark;
 }
 
-/* Reset & Base */
+/* Reset & Base (Lasciati invariati) */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body {
   margin: 0; padding: 0;
@@ -30,7 +30,7 @@ html, body {
 a { color: var(--white); text-decoration: none; transition: 0.2s; }
 a:hover { color: var(--red); }
 
-/* Layout Utilities */
+/* Layout Utilities (Lasciati invariati) */
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: clamp(16px,4vw,32px) var(--gutter); }
 .snap { scroll-snap-type: y mandatory; }
 .section { min-height: clamp(60vh, 72vh, 82vh); display: grid; align-items: center; }
@@ -40,7 +40,7 @@ a:hover { color: var(--red); }
 .script-text { font-family: 'Caveat', cursive; font-weight: 700; color: var(--white); }
 .heavy-text { font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
 
-/* Nav */
+/* Nav (Lasciati invariati) */
 .nav-glass {
   position: sticky; top: 10px; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
@@ -59,7 +59,7 @@ a:hover { color: var(--red); }
 nav a { font-weight: 600; font-size: 14px; padding: 6px 12px; text-transform: uppercase; letter-spacing: 1px; }
 nav a:hover { color: var(--red); }
 
-/* Marquee */
+/* Marquee (Lasciati invariati) */
 .marquee {
   background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red);
   padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px);
@@ -72,7 +72,7 @@ nav a:hover { color: var(--red); }
 /* ============================ */
 /* NUOVA HERO BANNER STRATIFICATA */
 /* ============================ */
-.hero-banner {
+.hero-full {
   position: relative;
   width: 100%;
   min-height: 70vh;
@@ -82,14 +82,14 @@ nav a:hover { color: var(--red); }
   flex-direction: column;
   padding: 40px 20px;
   
-  /* Sfondo rosso profondo con gradiente radiale per dare profondità */
+  /* Sfondo rosso profondo con gradiente radiale */
   background: radial-gradient(circle at center, #9e0b0f 0%, #4a0000 100%);
   border: 1px solid var(--glass-border);
   box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
-/* Griglia verticale stile editoriale */
-.hero-banner::before {
+/* Griglia verticale sovrapposta */
+.hero-full::before {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 25% 100%; /* divide lo spazio in 4 colonne */
@@ -110,7 +110,7 @@ nav a:hover { color: var(--red); }
 .hero-deco.bl { bottom: 25px; left: 25px; }
 .hero-deco.br { bottom: 25px; right: 25px; font-size: 1.5rem; }
 
-/* Wrapper della composizione (Testo Outline + Immagine + Nome) */
+/* Wrapper della composizione Visiva (z-index layering) */
 .hero-visual {
   position: relative;
   flex-grow: 1;
@@ -121,7 +121,7 @@ nav a:hover { color: var(--red); }
   width: 100%;
 }
 
-/* Scritta gigante in sfondo (TOMMY) */
+/* Testo gigante Outline (dietro a tutto) */
 .bg-outline-text {
   position: absolute;
   top: 50%; left: 50%;
@@ -137,7 +137,7 @@ nav a:hover { color: var(--red); }
   pointer-events: none;
 }
 
-/* Immagine ritratto */
+/* Immagine ritratto b/n sfuocata in basso */
 .subject-wrapper {
   position: relative;
   z-index: 2;
@@ -148,13 +148,13 @@ nav a:hover { color: var(--red); }
   max-width: 100%;
   height: clamp(300px, 50vh, 500px);
   object-fit: cover;
-  /* Maschera sfumata in basso se non è un PNG perfetto */
+  filter: grayscale(1) contrast(1.1); /* Trasforma l'immagine in b/n */
+  /* Maschera sfumata in basso per fusione */
   mask-image: linear-gradient(to top, transparent 0%, black 15%);
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
-  filter: contrast(1.1);
 }
 
-/* Nomi sovrapposti */
+/* Nomi sovrapposti in primo piano */
 .fg-name {
   position: absolute;
   bottom: 10%;
