@@ -104,21 +104,14 @@ a:hover { color: var(--red); }
 .btn.outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
 .btn.outline:hover { background: var(--white); color: #000; }
 
-/* NUOVO MARQUEE - Loop Perfetto CSS */
-.marquee { 
-  background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); 
-  padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px); 
-  overflow: hidden; display: flex; white-space: nowrap;
-}
+/* Marquee Loop */
+.marquee { background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px); overflow: hidden; display: flex; white-space: nowrap; }
 .marquee-content { display: flex; animation: scroll 20s linear infinite; }
-.marquee-group { display: flex; gap: 40px; padding-right: 40px; } /* padding-right = gap, essenziale per il loop */
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* Essendoci 2 gruppi, traslando del 50% ricomincia perfettamente */
-}
+.marquee-group { display: flex; gap: 40px; padding-right: 40px; }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 .pill { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
 
-/* Showreel */
+/* Filtri e Case (Showreel) */
 .filterbar { display: flex; gap: 10px; margin-bottom: 20px; }
 .filter-btn { background: var(--panel-bg); border: 1px solid var(--glass-border); color: var(--white); padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; }
 .filter-btn.active, .filter-btn:hover { background: var(--red); border-color: var(--red); }
@@ -136,29 +129,54 @@ a:hover { color: var(--red); }
 .badge { font-size: 10px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
 .badge.cat { border-color: var(--red); color: var(--red); }
 
-/* Coming Soon Mobile / PC Logic */
+/* Coming Soon Mobile/PC Logic */
 .coming-section { margin-top: 40px; margin-bottom: 40px; }
 .coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .case-coming { position: relative; border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
-/* Mobile default */
 .case-coming { height: var(--case-h); }
 .case-coming .pc-bg { display: none; }
 .case-coming .mobile-bg { display: block; position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) opacity(0.2); z-index: 0; }
+
 .case-coming .case-overlay { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); }
 .case-coming .label { background: var(--red); color: white; padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; transform: rotate(-5deg); box-shadow: 0 4px 15px rgba(217,4,41,0.4); }
 .case-coming .case-info { position: relative; z-index: 2; width: 100%; text-align: center; margin-bottom: 10px; }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
 
-/* Graphic Resume */
-.graphic-resume-panel { background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; position: relative; overflow: hidden; margin-top: 60px; }
+/* ========================================================= */
+/* GRAPHIC RESUME (INFO & ABOUT) - FIX SOVRAPPOSIZIONE HELLO */
+/* ========================================================= */
+.graphic-resume-panel { 
+  background: var(--panel-bg); 
+  border: 1px solid var(--glass-border); 
+  /* PADDING ENORME AL TOP PER DARE SPAZIO ALL'ETICHETTA HELLO */
+  padding: 160px 40px 40px 40px; 
+  border-radius: 12px; 
+  position: relative; 
+  overflow: hidden; 
+  margin-top: 40px; 
+}
 .graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); }
-.hello-tag { position: absolute; top: -15px; left: 40px; transform: rotate(-5deg); background: var(--red); border-radius: 8px; width: 140px; text-align: center; box-shadow: 2px 4px 10px rgba(0,0,0,0.5); z-index: 3; border: 2px solid white; }
+
+/* Etichetta posizionata rigidamente dentro il padding-top */
+.hello-tag { 
+  position: absolute; 
+  top: 30px; 
+  left: 40px; 
+  transform: rotate(-5deg); 
+  background: var(--red); 
+  border-radius: 8px; 
+  width: 140px; 
+  text-align: center; 
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.5); 
+  z-index: 3; 
+  border: 2px solid white; 
+}
 .hello-top { background: var(--red); padding: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 22px; line-height: 1; border-top-left-radius: 6px; border-top-right-radius: 6px; }
 .hello-top span { font-size: 10px; font-weight: 500; letter-spacing: 1px; }
 .hello-bottom { background: white; color: black; font-family: 'Caveat', cursive; font-size: 30px; padding: 5px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
 
-/* Margine top per NON SOVRAPPORSI ALLA TARGHETTA */
-.resume-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; position: relative; z-index: 2; margin-top: 80px; }
+/* Grid del curriculum sganciata dall'etichetta (nessun margine, usa il padding) */
+.resume-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; position: relative; z-index: 2; margin-top: 0; }
 .red-badge { background: var(--red); display: inline-block; padding: 4px 10px; margin: 0 0 15px 0; font-family: 'Space Grotesk', sans-serif; font-size: 14px; border-radius: 2px; text-transform: uppercase; letter-spacing: 1px; }
 .resume-item { margin-bottom: 15px; border-left: 1px solid var(--glass-border); padding-left: 15px; position: relative; }
 .resume-item::before { content: ""; position: absolute; left: -3px; top: 5px; width: 5px; height: 5px; background: var(--red); border-radius: 50%; }
@@ -188,16 +206,18 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 .gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: 0; }
 .gallery-track::-webkit-scrollbar { display: none; }
 .gallery-track { -ms-overflow-style: none; scrollbar-width: none; }
+
 .slide { flex: 0 0 100%; scroll-snap-align: center; }
 .slide img, .slide video { width: 100%; border-radius: 4px; }
 
-/* Tasti freccia laterali per galleria pc */
+.gallery-nav { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
 .gallery-btn { 
   position: absolute; top: 50%; transform: translateY(-50%); 
   background: var(--red); color: white; border: none; 
-  padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 10;
+  padding: 10px 15px; border-radius: 4px; cursor: pointer; pointer-events: auto; 
   font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  display: none; /* gestito in JS */
+  transition: 0.3s opacity;
+  display: none;
 }
 .gallery-btn.prev { left: 10px; }
 .gallery-btn.next { right: 10px; }
@@ -205,25 +225,23 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 
 /* PC e MEDIA QUERIES */
 @media (min-width: 769px) {
-  /* PC: Niente scroll manuale nella galleria, usa solo i bottoni */
   .gallery-track { overflow-x: hidden; scroll-behavior: smooth; }
-  /* PC: Coming Soon in 16:9 con Immagine PC */
   .case-coming { height: auto; aspect-ratio: 16 / 9; }
   .case-coming .pc-bg { display: block; position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) opacity(0.2); z-index: 0; }
   .case-coming .mobile-bg { display: none; }
 }
 
 @media (max-width: 768px) {
-  /* Mobile: Nascondi frecce per la gallery, fa lo swipe nativo */
   .gallery-btn { display: none !important; }
-
   .hero-back-wrapper { transform: translateX(-50%) scale(1.4); }
   .hero-bg-text { font-size: clamp(60px, 30vw, 150px); }
   .hero-name { bottom: 5%; }
   .hero-name.left { font-size: 40px; left: 0; }
   .hero-name.right { font-size: 30px; right: 0; }
-  .hello-tag { left: 20px; transform: scale(0.8) rotate(-5deg); top: -20px; }
-  .graphic-resume-panel { padding: 40px 20px 20px 20px; }
-  .resume-grid { margin-top: 60px; }
+  
+  /* Correzione SPAZIATURA HELLO su Mobile */
+  .graphic-resume-panel { padding: 140px 20px 20px 20px; }
+  .hello-tag { left: 20px; top: 20px; transform: scale(0.85) rotate(-5deg); }
+  
   .cta-row { flex-direction: column; }
 }
