@@ -122,68 +122,103 @@ a:hover { color: var(--red); }
 .badge { font-size: 10px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
 .badge.cat { border-color: var(--red); color: var(--red); }
 
-/* Coming Soon */
+/* ========================================================= */
+/* COMING SOON - FIX CENTRATURA ED EFFETTO HOVER/ANTEPRIMA   */
+/* ========================================================= */
 .coming-section { margin-top: 40px; margin-bottom: 40px; }
 .coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.case-coming { position: relative; border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
+.case-coming { 
+  position: relative; border-radius: 8px; overflow: hidden; 
+  border: 1px dashed var(--glass-border); display: flex; 
+  align-items: center; /* CENTRATURA PERFETTA DEL BADGE ROSSO */
+  justify-content: center; padding: 20px; cursor: default;
+}
 .case-coming { height: var(--case-h); }
 .case-coming .pc-bg { display: none; }
-.case-coming .mobile-bg { display: block; position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) opacity(0.2); z-index: 0; }
-.case-coming .case-overlay { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); }
-.case-coming .label { background: var(--red); color: white; padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; transform: rotate(-5deg); box-shadow: 0 4px 15px rgba(217,4,41,0.4); }
-.case-coming .case-info { position: relative; z-index: 2; width: 100%; text-align: center; margin-bottom: 10px; }
-.case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
+
+/* Immagini sfocate di base */
+.case-coming .pc-bg, .case-coming .mobile-bg { 
+  position: absolute; inset: 0; background-size: cover; background-position: center; 
+  filter: blur(8px) brightness(0.7) contrast(1.02); /* Sfocata e un po' scura */
+  -webkit-filter: blur(8px) brightness(0.7) contrast(1.02);
+  z-index: 0; transition: filter 0.4s ease, transform 0.4s ease; 
+}
+.case-coming .mobile-bg { display: block; }
+
+.case-coming .case-overlay { 
+  position: absolute; inset: 0; z-index: 1; display: flex; 
+  align-items: center; justify-content: center; 
+  background: rgba(0,0,0,0.4); transition: opacity 0.4s ease; 
+}
+.case-coming .label { 
+  background: var(--red); color: white; padding: 8px 16px; 
+  font-family: 'Space Grotesk', sans-serif; font-weight: 900; 
+  text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; 
+  transform: rotate(-5deg); box-shadow: 0 4px 15px rgba(217,4,41,0.4); 
+}
+
+/* Titolo in basso scorporato per non rovinare il centro */
+.case-coming .case-info { 
+  position: absolute; z-index: 2; bottom: 20px; left: 0; right: 0; 
+  text-align: center; transition: opacity 0.4s ease; pointer-events: none; 
+}
+.case-coming .coming-title { 
+  margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; 
+  text-transform: uppercase; color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+}
+
+/* HOVER: Rimuove sfocatura, ingrandisce immagine e nasconde le scritte */
+@media (hover: hover) {
+  .case-coming:hover .pc-bg, .case-coming:hover .mobile-bg {
+    filter: blur(0) brightness(1) contrast(1.05); /* Ritorna nitida e chiara */
+    -webkit-filter: blur(0) brightness(1) contrast(1.05);
+    transform: scale(1.05);
+  }
+  .case-coming:hover .case-overlay,
+  .case-coming:hover .case-info {
+    opacity: 0; /* Fa sparire l'etichetta e il titolo per godersi l'immagine */
+  }
+}
 
 /* ========================================================= */
-/* GRAPHIC RESUME (INFO & ABOUT) - FIX POSIZIONAMENTO POSTIT */
+/* GRAPHIC RESUME (INFO & ABOUT)                             */
 /* ========================================================= */
 .graphic-resume-panel { 
   background: var(--panel-bg); 
   border: 1px solid var(--glass-border); 
-  padding: 60px 40px 40px 60px; /* Manteniamo il padding sinistro originale a 60px */
+  padding: 60px 40px 40px 60px; 
   border-radius: 12px; 
   position: relative; 
-  overflow: visible; /* IMPORTANTE: Permette al post-it di sbordare! */
-  margin-top: 60px; /* Spazio per non toccare le grid sopra */
+  overflow: visible; 
+  margin-top: 80px; /* Spazio aumentato in alto */
 }
 .graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); border-radius: inherit; }
 
 /* Post-It "ABOUT Me" */
 .about-postit { 
   position: absolute; 
-  top: -50px;       /* Sporge fuori dal bordo in alto */
-  
-  /* ======================================================== */
-  /* FIX: VALORE NEGATIVO PER FAR SBORDARE A SINISTRA        */
-  /* ======================================================== */
-  left: -40px;      /* Tiriamo il Post-it FUORI dal pannello */
-  /* ======================================================== */
-  
+  top: -45px;       
+  left: -40px;      
   transform: rotate(-5deg); 
   background: var(--red); 
   border-radius: 8px; 
   width: 140px; 
   text-align: center; 
-  box-shadow: -4px 6px 15px rgba(0,0,0,0.6); /* Ombra accentuata a sinistra */
-  z-index: 10;      /* Sempre sopra */
+  box-shadow: -4px 6px 15px rgba(0,0,0,0.6); 
+  z-index: 10;      
   border: 2px solid white; 
 }
 .about-top { background: var(--red); padding: 12px 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 20px; line-height: 1; border-top-left-radius: 6px; border-top-right-radius: 6px; color: white; text-transform: uppercase; }
 .about-bottom { background: white; color: black; font-family: 'Caveat', cursive; font-size: 34px; padding: 5px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
 
-/* 3 Colonne */
 .resume-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; position: relative; z-index: 2; margin-top: 0; }
-
-/* Titoli / Badge */
 .red-badge { background: var(--red); display: inline-block; padding: 6px 12px; margin: 0 0 20px 0; font-family: 'Space Grotesk', sans-serif; font-size: 14px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-/* Elementi di esperienza */
 .resume-item { margin-bottom: 20px; border-left: 1px solid var(--glass-border); padding-left: 15px; position: relative; }
 .resume-item::before { content: ""; position: absolute; left: -4px; top: 5px; width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
 .resume-item strong { display: block; font-size: 15px; color: var(--white); margin-bottom: 4px; }
 .resume-item span { display: block; font-size: 13px; color: var(--muted); font-style: italic; }
 
-/* Skills e Contatti */
 .skills-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
 .skills-list span { font-size: 12px; border: 1px solid var(--glass-border); padding: 6px 12px; border-radius: 4px; color: var(--white); }
 
@@ -192,22 +227,20 @@ a:hover { color: var(--red); }
 .contact-row span:first-child { color: var(--muted); }
 .contact-row a, .contact-row span:last-child { color: var(--white); text-align: right; }
 
-/* Bottone Full-Width SCARICA CV */
 .btn-download { display: block; width: 100%; text-align: center; background: var(--red); color: white; padding: 14px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 15px rgba(193, 18, 31, 0.4); transition: 0.2s; border: none; cursor: pointer; }
 .btn-download:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(193, 18, 31, 0.7); color: white; }
 
-/* Box Software Nero */
 .software-list { list-style: none; padding: 20px; margin: 0; background: #000; border-radius: 8px; border: 1px solid var(--glass-border); }
 .software-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 16px; font-size: 15px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
 .software-list li:last-child { margin-bottom: 0; }
 .num { color: var(--white); width: 20px; text-align: right; font-size: 14px; opacity: 0.7;}
 .sw-icon-img { width: 24px; height: 24px; object-fit: contain; }
 
-/* Reveal & Modal Gallery */
 .reveal { opacity: 0; transform: translateY(20px); transition: 0.5s; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--glass-border); }
 
+/* Modal Gallery */
 .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
 .modal.open { display: flex; }
 .modal .backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.9); }
@@ -218,7 +251,6 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 .slide { flex: 0 0 100%; scroll-snap-align: center; }
 .slide img, .slide video { width: 100%; border-radius: 4px; }
 
-/* Tasti freccia laterali per galleria pc */
 .gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--red); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 10; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: none; }
 .gallery-btn.prev { left: 10px; }
 .gallery-btn.next { right: 10px; }
@@ -228,7 +260,7 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 @media (min-width: 900px) {
   .gallery-track { overflow-x: hidden; scroll-behavior: smooth; }
   .case-coming { height: auto; aspect-ratio: 16 / 9; }
-  .case-coming .pc-bg { display: block; position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) opacity(0.2); z-index: 0; }
+  .case-coming .pc-bg { display: block; }
   .case-coming .mobile-bg { display: none; }
 }
 
@@ -240,19 +272,10 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
   .hero-name.left { font-size: 40px; left: 0; }
   .hero-name.right { font-size: 30px; right: 0; }
   
-  /* Correzione SPAZIATURA su Mobile */
   .resume-grid { grid-template-columns: 1fr; }
-  .graphic-resume-panel { padding: 80px 20px 20px 20px; }
+  .graphic-resume-panel { padding: 80px 20px 20px 20px; margin-top: 60px; }
   
-  /* ========================================================= */
-  /* FIX MOBILE: MENO SBORDATURA PER EVITARE TAGLI             */
-  /* ========================================================= */
-  .about-postit { 
-    left: -10px; /* Sbordatura minima su mobile */
-    top: -20px; 
-    transform: scale(0.85) rotate(-5deg); 
-  }
-  /* ========================================================= */
+  .about-postit { left: -10px; top: -35px; transform: scale(0.85) rotate(-5deg); }
   
   .cta-row { flex-direction: column; }
 }
