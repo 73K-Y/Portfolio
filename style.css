@@ -137,28 +137,36 @@ a:hover { color: var(--red); }
 /* ========================================================= */
 /* GRAPHIC RESUME (INFO & ABOUT) - FIX POSIZIONAMENTO POSTIT */
 /* ========================================================= */
-@media (max-width: 900px) {
-  .gallery-btn { display: none !important; }
-  .hero-back-wrapper { transform: translateX(-50%) scale(1.4); }
-  .hero-bg-text { font-size: clamp(60px, 30vw, 150px); }
-  .hero-name { bottom: 5%; }
-  .hero-name.left { font-size: 40px; left: 0; }
-  .hero-name.right { font-size: 30px; right: 0; }
+.graphic-resume-panel { 
+  background: var(--panel-bg); 
+  border: 1px solid var(--glass-border); 
+  padding: 60px 40px 40px 60px; /* Manteniamo il padding sinistro originale a 60px */
+  border-radius: 12px; 
+  position: relative; 
+  overflow: visible; /* IMPORTANTE: Permette al post-it di sbordare! */
+  margin-top: 60px; /* Spazio per non toccare le grid sopra */
+}
+.graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); border-radius: inherit; }
+
+/* Post-It "ABOUT Me" */
+.about-postit { 
+  position: absolute; 
+  top: 20px;       /* Sporge fuori dal bordo in alto */
   
-  /* Correzione SPAZIATURA su Mobile */
-  .resume-grid { grid-template-columns: 1fr; }
-  .graphic-resume-panel { padding: 80px 20px 20px 20px; margin-top: 60px; }
+  /* ======================================================== */
+  /* FIX: VALORE NEGATIVO PER FAR SBORDARE A SINISTRA        */
+  /* ======================================================== */
+  left: -40px;      /* Tiriamo il Post-it FUORI dal pannello */
+  /* ======================================================== */
   
-  /* ========================================================= */
-  /* FIX MOBILE: Alzato il post-it anche qui */
-  /* ========================================================= */
-  .about-postit { 
-    left: -10px; 
-    top: -35px; /* Alzato su mobile (prima era -20px) */
-    transform: scale(0.85) rotate(-5deg); 
-  }
-  
-  .cta-row { flex-direction: column; }
+  transform: rotate(-5deg); 
+  background: var(--red); 
+  border-radius: 8px; 
+  width: 140px; 
+  text-align: center; 
+  box-shadow: -4px 6px 15px rgba(0,0,0,0.6); /* Ombra accentuata a sinistra */
+  z-index: 10;      /* Sempre sopra */
+  border: 2px solid white; 
 }
 .about-top { background: var(--red); padding: 12px 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 20px; line-height: 1; border-top-left-radius: 6px; border-top-right-radius: 6px; color: white; text-transform: uppercase; }
 .about-bottom { background: white; color: black; font-family: 'Caveat', cursive; font-size: 34px; padding: 5px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
