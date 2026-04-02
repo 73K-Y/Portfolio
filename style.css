@@ -39,9 +39,7 @@ a:hover { color: var(--red); }
 .heavy-text { font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
 
 /* Nav */
-.nav-wrapper {
-  position: absolute; width: 100%; z-index: 100; top: 0; padding: 16px var(--gutter);
-}
+.nav-wrapper { position: absolute; width: 100%; z-index: 100; top: 0; padding: 16px var(--gutter); }
 .nav-glass {
   display: flex; justify-content: space-between; align-items: center;
   padding: 12px 20px; border-radius: 8px;
@@ -59,7 +57,9 @@ a:hover { color: var(--red); }
 nav a { font-weight: 600; font-size: 14px; padding: 6px 12px; text-transform: uppercase; letter-spacing: 1px; }
 nav a:hover { color: var(--red); }
 
-/* HERO FULLSCREEN */
+/* ========================================= */
+/* HERO FULLSCREEN                           */
+/* ========================================= */
 .hero-fullscreen {
   position: relative;
   width: 100%;
@@ -81,51 +81,53 @@ nav a:hover { color: var(--red); }
   z-index: 1; pointer-events: none;
 }
 
-/* Bagliore arancione dietro */
+/* Bagliore arancione (spostato leggermente per combaciare) */
 .hero-glow {
   position: absolute;
-  top: 30%; left: 20%;
+  top: 30%; left: 30%; /* Centrato un po' più verso la 'O' e la 'M' */
   width: 400px; height: 400px;
-  background: rgba(255, 180, 0, 0.4); 
+  background: rgba(255, 180, 0, 0.45); 
   filter: blur(100px);
   border-radius: 50%;
   z-index: 2; pointer-events: none;
 }
 
-/* ======================================================== */
-/* IMMAGINE RETRO (Ingrandita enormemente)                  */
-/* ======================================================== */
+/* ========================================= */
+/* IMMAGINE RETRO (Scala ridotta a 1.65)     */
+/* ========================================= */
 .hero-back-wrapper {
   position: absolute;
-  bottom: -5%; /* Lievemente più in basso per compensare la scala */
+  bottom: 0%;
   left: 50%;
-  height: 100%;
+  height: 95%; /* Stessa altezza base dell'immagine frontale */
   
-  /* SCALA GIGANTE: 2.4 volte la sua dimensione originale */
-  transform: translateX(-65%) scale(2.4);
+  /* Scala ridotta per combaciare con l'immagine di referenza 2 (da 2.4 a 1.65) */
+  /* Lo spostamento a sinistra (-60%) centra la nuca dietro la 'O' e 'M' */
+  transform: translateX(-60%) scale(1.65);
   transform-origin: bottom center;
   z-index: 3;
   pointer-events: none;
   
-  /* Sfocatura morbida e colori caldi per fonderla con lo sfondo */
-  filter: blur(16px) sepia(0.5) saturate(1.5) brightness(1.1) hue-rotate(-10deg) opacity(0.85);
+  /* Filtri per sfocatura e tinta */
+  filter: blur(14px) sepia(0.4) saturate(1.8) brightness(1.2) hue-rotate(-5deg) opacity(0.8);
 }
 .hero-back-wrapper .hero-subject.back {
   height: 100%;
   object-fit: contain;
   display: block;
 }
-/* ======================================================== */
+/* ========================================= */
 
-/* Testo Gigante Outline in Sfondo */
+/* Testo Gigante Outline "TOMMY" */
 .hero-bg-text {
   position: absolute;
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  top: 48%; /* Leggermente più in alto per lasciare respiro ai nomi sotto */
+  left: 50%; transform: translate(-50%, -50%);
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(100px, 25vw, 400px);
+  font-size: clamp(100px, 22vw, 350px); /* Ridotto leggermente per far leggere meglio i bordi laterali */
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 2px rgba(255,255,255,0.7);
+  -webkit-text-stroke: 2px rgba(255,255,255,0.6);
   z-index: 4;
   white-space: nowrap;
   letter-spacing: 0.05em;
@@ -188,26 +190,26 @@ nav a:hover { color: var(--red); }
 .hero-deco.bl { bottom: 40px; left: 40px; }
 .hero-deco.br { bottom: 40px; right: 40px; font-size: 1.8rem; }
 
-/* Sezione inferiore (Call to Action) */
+/* ========================================= */
+/* ALTRE SEZIONI                             */
+/* ========================================= */
+
 .hero-footer { text-align: center; padding: 40px 20px 20px 20px; background: var(--bg); }
 .hero-sub { color: var(--white); font-size: clamp(14px, 2vw, 16px); max-width: 600px; margin: 0 auto 20px auto; opacity: 0.9; }
 .cta-row { display: flex; gap: 15px; justify-content: center; }
 
-/* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
 .btn.primary { background: var(--red); color: white; border: none; box-shadow: 0 4px 15px rgba(217,4,41,0.4); }
 .btn.primary:hover { background: var(--dark-red); transform: translateY(-2px); }
 .btn.outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
 .btn.outline:hover { background: var(--white); color: #000; }
 
-/* Marquee */
 .marquee { background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px); }
 .marquee__rail { overflow: hidden; display: flex; }
 .marquee__track { display: flex; gap: 40px; white-space: nowrap; animation: tickerMove 20s linear infinite; }
 @keyframes tickerMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .pill { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
 
-/* Showreel & Cards */
 .filterbar { display: flex; gap: 10px; margin-bottom: 20px; }
 .filter-btn { background: var(--panel-bg); border: 1px solid var(--glass-border); color: var(--white); padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; }
 .filter-btn.active, .filter-btn:hover { background: var(--red); border-color: var(--red); }
@@ -225,7 +227,6 @@ nav a:hover { color: var(--red); }
 .badge { font-size: 10px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
 .badge.cat { border-color: var(--red); color: var(--red); }
 
-/* Coming Soon */
 .coming-section { margin-top: 40px; margin-bottom: 40px; }
 .coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .case-coming { position: relative; height: var(--case-h); border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
@@ -235,7 +236,6 @@ nav a:hover { color: var(--red); }
 .case-coming .case-info { position: relative; z-index: 2; width: 100%; text-align: center; margin-bottom: 10px; }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
 
-/* Graphic Resume */
 .graphic-resume-panel { background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; position: relative; overflow: hidden; }
 .graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); }
 .hello-tag { position: absolute; top: -10px; left: 40px; transform: rotate(-5deg); background: var(--red); border-radius: 8px; width: 140px; text-align: center; box-shadow: 2px 4px 10px rgba(0,0,0,0.5); z-index: 3; border: 2px solid white; }
@@ -254,10 +254,10 @@ nav a:hover { color: var(--red); }
 .contact-list li { margin-bottom: 8px; display: flex; justify-content: space-between; border-bottom: 1px dashed var(--glass-border); padding-bottom: 4px; }
 .contact-list span { color: var(--muted); }
 
-/* Modal & Utilities */
 .reveal { opacity: 0; transform: translateY(20px); transition: 0.5s; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--glass-border); }
+
 .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
 .modal.open { display: flex; }
 .modal .backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.9); }
@@ -269,9 +269,12 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 
 /* Responsive */
 @media (max-width: 768px) {
-  /* Su mobile aggiustiamo i riposizionamenti laterali mantenendo la scala enorme */
+  /* Su mobile aggiustiamo i riposizionamenti */
   .hero-back-wrapper {
-    transform: translateX(-55%) scale(2.0);
+    transform: translateX(-50%) scale(1.4);
+  }
+  .hero-bg-text {
+    font-size: clamp(60px, 20vw, 150px);
   }
   .hero-name { bottom: 5%; }
   .hero-name.left { font-size: 40px; left: 0; }
