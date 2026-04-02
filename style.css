@@ -98,8 +98,8 @@ nav a:hover { color: var(--red); }
 .hero-back-wrapper {
   position: absolute;
   bottom: 0%;
-  left: 40%;
-  height: 40%; /* Stessa altezza base dell'immagine frontale */
+  left: 35%;
+  height: 45%; /* Stessa altezza base dell'immagine frontale */
   
   /* Scala ridotta per combaciare con l'immagine di referenza 2 (da 2.4 a 1.65) */
   /* Lo spostamento a sinistra (-60%) centra la nuca dietro la 'O' e 'M' */
