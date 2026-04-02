@@ -10,10 +10,16 @@
   --max-w: 1200px;
   --gutter: clamp(16px, 4vw, 32px);
   --case-h: clamp(48vh, 56vh, 62vh);
+  
+  /* === NUOVI COLORI PER EFFETTO RETRO (Giallo/Arancione - image_51eba3.png) === */
+  --retro-yellow: #fffd01;
+  --retro-orange: #ff4000;
+  --retro-aura: rgba(255, 253, 1, 0.7); /* Alone luminoso giallo morbido */
+  
   color-scheme: dark;
 }
 
-/* Reset & Base */
+/* Reset & Base (Lasciati invariati) */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body {
   margin: 0; padding: 0;
@@ -29,16 +35,16 @@ html, body {
 a { color: var(--white); text-decoration: none; transition: 0.2s; }
 a:hover { color: var(--red); }
 
-/* Layout Utilities */
+/* Layout Utilities (Lasciati invariati) */
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: clamp(16px,4vw,32px) var(--gutter); }
 .snap { scroll-snap-type: y mandatory; }
 .section { min-height: clamp(60vh, 72vh, 82vh); display: grid; align-items: center; }
 
-/* Typography */
+/* Typography (Lasciati invariati) */
 .script-text { font-family: 'Caveat', cursive; font-weight: 700; color: var(--white); }
 .heavy-text { font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
 
-/* Nav */
+/* Nav (Lasciati invariati) */
 .nav-wrapper {
   position: absolute; width: 100%; z-index: 100; top: 0; padding: 16px var(--gutter);
 }
@@ -59,9 +65,7 @@ a:hover { color: var(--red); }
 nav a { font-weight: 600; font-size: 14px; padding: 6px 12px; text-transform: uppercase; letter-spacing: 1px; }
 nav a:hover { color: var(--red); }
 
-/* ============================ */
-/* HERO FULLSCREEN (Stile Immagine 2) */
-/* ============================ */
+/* HERO FULLSCREEN (Immagine 2 - Lasciati invariati) */
 .hero-fullscreen {
   position: relative;
   width: 100%;
@@ -75,7 +79,7 @@ nav a:hover { color: var(--red); }
   padding-top: 100px; /* Spazio per la nav */
 }
 
-/* Griglia Verticale */
+/* Griglia Verticale (Lasciati invariati) */
 .hero-grid {
   position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
@@ -83,7 +87,7 @@ nav a:hover { color: var(--red); }
   z-index: 1; pointer-events: none;
 }
 
-/* Bagliore arancione dietro la lettera 'O' */
+/* Bagliore arancione dietro la lettera 'O' (Lasciati invariati) */
 .hero-glow {
   position: absolute;
   top: 40%; left: 25%;
@@ -95,7 +99,7 @@ nav a:hover { color: var(--red); }
   z-index: 1; pointer-events: none;
 }
 
-/* Testo Gigante Outline in Sfondo */
+/* Testo Gigante Outline in Sfondo (Lasciati invariati) */
 .hero-bg-text {
   position: absolute;
   top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -110,7 +114,7 @@ nav a:hover { color: var(--red); }
   pointer-events: none;
 }
 
-/* Numeri e Dettagli agli angoli */
+/* Numeri e Dettagli agli angoli (Lasciati invariati) */
 .hero-deco {
   position: absolute;
   font-family: 'Space Grotesk', sans-serif;
@@ -124,7 +128,7 @@ nav a:hover { color: var(--red); }
 .hero-deco.bl { bottom: 40px; left: 40px; }
 .hero-deco.br { bottom: 40px; right: 40px; font-size: 1.8rem; }
 
-/* Contenitore Immagine e Testi Sovrapposti */
+/* Contenitore Immagine e Testi Sovrapposti (Aggiornato per z-index) */
 .hero-composition {
   position: relative;
   height: 100%;
@@ -136,20 +140,60 @@ nav a:hover { color: var(--red); }
   z-index: 3;
 }
 
-/* Foto Ritratto Scontornata */
+/* Proprietà comuni per le immagini ritratto */
 .hero-subject {
   height: 95%; /* Sfiora il margine superiore, tocca quello inferiore */
   object-fit: contain;
-  position: relative;
-  z-index: 3;
+  position: absolute; /* Fondamentale per la sovrapposizione esatta */
+  bottom: 0;
   pointer-events: none;
 }
 
-/* Nomi che "tagliano" le spalle */
+/* === LIVEL 2: Foto Ritratto Principale (Fronte) === */
+.hero-subject.front {
+  position: relative; /* Occupa lo spazio nel layout flex, le altre si sovrappongono */
+  z-index: 3; /* Sopra a testo outline e retro image */
+}
+
+/* === LIVEL 1: Contenitore Foto Ritratto Retro (image_51eba3.png) === */
+.hero-back-wrapper {
+  position: absolute;
+  bottom: 0; height: 95%; /* Copre l'area dell'immagine principale */
+  display: flex; justify-content: center; align-items: flex-end;
+  z-index: 1; /* Sotto l'immagine principale e testo outline */
+  
+  /* Alone Luminoso Giallo (image_51eba3.png) - Crea l'alone morbido all'esterno */
+  filter: drop-shadow(0 0 30px var(--retro-aura));
+}
+
+/* Targetta l'immagine scontornata 'retro.png' per crearne la silhouette bianca */
+.hero-back-wrapper .hero-subject.back {
+  position: static; /* Si posiziona all'interno del wrapper flex */
+  
+  /* Trasforma l'immagine scontornata in una silhouette bianca brillante */
+  filter: grayscale(1) brightness(0) invert(1);
+}
+
+/* Applica il gradiente Verticale Giallo/Arancione SOPRA la silhouette bianca */
+.hero-back-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* Copre l'intera area del wrapper */
+  
+  /* Gradiente verticale Giallo -> Arancione (image_51eba3.png) */
+  background: linear-gradient(to top, var(--retro-orange) 0%, var(--retro-yellow) 60%, transparent 100%);
+  
+  /* FONDAMENTALE: Modalità di fusione che mantiene il background scuro, colorando solo la silhouette bianca */
+  mix-blend-mode: screen; 
+  pointer-events: none;
+}
+
+/* Nomi che "tagliano" le spalle (Sempre in primo piano) */
 .hero-name {
   position: absolute;
   bottom: 12%;
-  z-index: 4;
+  z-index: 10; /* Sopra a tutto l'stack delle immagini */
+  /* (Resto invariato) */
 }
 .hero-name.left {
   left: 5%;
@@ -164,7 +208,7 @@ nav a:hover { color: var(--red); }
   text-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
-/* Sezione inferiore (Call to Action) */
+/* Call to Action superiore (Sezione inferiore - Lasciata invariata) */
 .hero-footer {
   text-align: center;
   padding: 40px 20px 20px 20px;
@@ -176,7 +220,7 @@ nav a:hover { color: var(--red); }
 }
 .cta-row { display: flex; gap: 15px; justify-content: center; }
 
-/* Buttons */
+/* Buttons (Lasciati invariati) */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 12px 24px; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
@@ -188,7 +232,7 @@ nav a:hover { color: var(--red); }
 .btn.outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
 .btn.outline:hover { background: var(--white); color: #000; }
 
-/* Marquee */
+/* Marquee (Lasciati invariati) */
 .marquee {
   background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red);
   padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px);
@@ -198,12 +242,10 @@ nav a:hover { color: var(--red); }
 @keyframes tickerMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .pill { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
 
-/* Filters */
+/* (Resto del CSS per Showreel, Coming Soon, Info, Modal lasciati invariati) */
 .filterbar { display: flex; gap: 10px; margin-bottom: 20px; }
 .filter-btn { background: var(--panel-bg); border: 1px solid var(--glass-border); color: var(--white); padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; }
 .filter-btn.active, .filter-btn:hover { background: var(--red); border-color: var(--red); }
-
-/* Showreel Cards */
 .case { position: relative; height: var(--case-h); border-radius: 8px; overflow: hidden; margin-bottom: 15px; cursor: pointer; border: 1px solid var(--glass-border); transition: 0.3s; }
 .case:hover { border-color: var(--red); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(217,4,41,0.2); }
 .case.is-hidden { display: none; }
@@ -214,13 +256,9 @@ nav a:hover { color: var(--red); }
 .case-info h3 { margin: 0 0 5px; font-family: 'Space Grotesk', sans-serif; font-size: 24px; text-transform: uppercase; }
 .btn.small { padding: 6px 12px; font-size: 11px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); }
 .case:hover .btn.small { background: var(--red); border-color: var(--red); }
-
-/* Badges */
 .badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
 .badge { font-size: 10px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
 .badge.cat { border-color: var(--red); color: var(--red); }
-
-/* Coming Soon */
 .coming-section { margin-top: 40px; margin-bottom: 40px; }
 .coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .case-coming { position: relative; height: var(--case-h); border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
@@ -229,8 +267,6 @@ nav a:hover { color: var(--red); }
 .case-coming .label { background: var(--red); color: white; padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; transform: rotate(-5deg); box-shadow: 0 4px 15px rgba(217,4,41,0.4); }
 .case-coming .case-info { position: relative; z-index: 2; width: 100%; text-align: center; margin-bottom: 10px; }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
-
-/* Graphic Resume */
 .graphic-resume-panel { background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; position: relative; overflow: hidden; }
 .graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); }
 .hello-tag { position: absolute; top: -10px; left: 40px; transform: rotate(-5deg); background: var(--red); border-radius: 8px; width: 140px; text-align: center; box-shadow: 2px 4px 10px rgba(0,0,0,0.5); z-index: 3; border: 2px solid white; }
@@ -248,12 +284,20 @@ nav a:hover { color: var(--red); }
 .contact-list { list-style: none; padding: 0; margin: 0; font-size: 14px; }
 .contact-list li { margin-bottom: 8px; display: flex; justify-content: space-between; border-bottom: 1px dashed var(--glass-border); padding-bottom: 4px; }
 .contact-list span { color: var(--muted); }
-
-/* Modal & Utilities */
+.software-list { list-style: none; padding: 0; margin: 0; background: #000; padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border); }
+.software-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+.software-list li:last-child { margin-bottom: 0; }
+.num { color: var(--red); width: 20px; text-align: right; }
+.sw-icon { width: 28px; height: 28px; display: grid; place-items: center; font-size: 12px; border-radius: 4px; color: white; }
+.sw-icon.bl { background: #e87d0d; }
+.sw-icon.ue { background: #333; border: 1px solid white; }
+.sw-icon.pr { background: #ea77ff; color: black; }
+.sw-icon.ae { background: #9999ff; color: black; }
+.sw-icon.ps { background: #31a8ff; color: black; }
+.sw-icon.pt { background: #ff4f4f; }
 .reveal { opacity: 0; transform: translateY(20px); transition: 0.5s; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--glass-border); }
-
 .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
 .modal.open { display: flex; }
 .modal .backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.9); }
@@ -263,7 +307,7 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 .slide img, .slide video { width: 100%; border-radius: 4px; }
 #closeModal { position: absolute; top: -40px; right: 0; background: var(--red); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
 
-/* Responsive Adjustments */
+/* Responsive (Invariati) */
 @media (max-width: 768px) {
   .hero-name { bottom: 5%; }
   .hero-name.left { font-size: 40px; left: 0; }
