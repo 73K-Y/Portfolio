@@ -98,7 +98,7 @@ nav a:hover { color: var(--red); }
 .hero-back-wrapper {
   position: absolute;
   bottom: 0%;
-  left: 30%;
+  left: 40%;
   height: 40%; /* Stessa altezza base dell'immagine frontale */
   
   /* Scala ridotta per combaciare con l'immagine di referenza 2 (da 2.4 a 1.65) */
