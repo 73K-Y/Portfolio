@@ -17,24 +17,56 @@
   </head>
 
   <body class="snap">
-    <header class="nav-glass">
-      <div class="brand">
-        <a class="logo" href="#hero" aria-label="Torna su">
-          <img src="assets/logo.png" alt="TOMHODA logo" width="44" height="44" decoding="async" />
-        </a>
-        <div class="brand-text">
-          <div class="name-row">
-            <h1 id="name">Tommy R. Hodoroaba</h1>
+    
+    <div class="nav-wrapper">
+      <header class="nav-glass">
+        <div class="brand">
+          <a class="logo" href="#hero" aria-label="Torna su">
+            <img src="assets/logo.png" alt="TOMHODA logo" width="44" height="44" decoding="async" />
+          </a>
+          <div class="brand-text">
+            <div class="name-row">
+              <h1 id="name">Tommy R. Hodoroaba</h1>
+            </div>
+            <p class="lead">3D Digital Artist &amp; Game Developer</p>
           </div>
-          <p class="lead">3D Digital Artist &amp; Game Developer</p>
         </div>
+
+        <nav>
+          <a href="#showreel">Progetti</a>
+          <a href="#info">About Me</a>
+        </nav>
+      </header>
+    </div>
+
+    <section id="hero" class="hero-fullscreen">
+      
+      <div class="hero-grid"></div>
+      <div class="hero-glow"></div>
+
+      <div class="hero-deco tl">95</div>
+      <div class="hero-deco bl">95</div>
+      <div class="hero-deco br">✦</div>
+
+      <div class="hero-bg-text">TOMMY</div>
+
+      <div class="hero-composition">
+        <div class="hero-name left script-text">Raffaello</div>
+        
+        <img src="assets/fronte.png" class="hero-subject" alt="Tommy Raffaello" loading="eager" />
+        
+        <div class="hero-name right heavy-text">HODOROABA</div>
       </div>
 
-      <nav>
-        <a href="#showreel">Progetti</a>
-        <a href="#info">About Me</a>
-      </nav>
-    </header>
+    </section>
+
+    <div class="hero-footer wrap">
+      <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand. La precisione non è un dettaglio, è la mia firma.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#showreel">Guarda i progetti</a>
+        <a class="btn outline" href="#contact">Contattami</a>
+      </div>
+    </div>
 
     <div class="marquee" aria-label="Processo e skill">
       <div class="marquee__rail">
@@ -47,35 +79,6 @@
         </div>
       </div>
     </div>
-
-    <main id="hero" class="wrap">
-      <section class="hero-full snap-child reveal">
-        <div class="hero-deco tl">95</div>
-        <div class="hero-deco bl">95</div>
-        <div class="hero-deco br">✦</div>
-
-        <div class="hero-visual">
-          <div class="bg-outline-text">TOMMY</div>
-          
-          <div class="subject-wrapper">
-            <img src="assets/PicsArt_03-10-10.43.55.jpg" class="subject-img" alt="Tommy Raffaello" loading="eager" decoding="async" />
-          </div>
-
-          <div class="fg-name">
-            <span class="script-text">Raffaello</span>
-            <span class="heavy-text">HODOROABA</span>
-          </div>
-        </div>
-
-        <div class="hero-bottom-content">
-          <p class="hero-sub">Asset, Ambienti, VFX e Motion per videogiochi, simulatori e brand. La precisione non è un dettaglio, è la mia firma.</p>
-          <div class="cta-row">
-            <a class="btn primary" href="#showreel">Guarda i progetti</a>
-            <a class="btn outline" href="#contact">Contattami</a>
-          </div>
-        </div>
-      </section>
-    </main>
 
     <div id="showreel" class="wrap">
       <div id="filters" class="filterbar reveal">
@@ -93,17 +96,28 @@
           <button class="btn small open-modal" type="button">Apri galleria</button>
         </div>
       </section>
-      </div>
+
+      <section class="case snap-child reveal" data-cat="game" data-title="Ambientazione e meccaniche - Oblivion Hospital" data-desc="Animazioni 3D e rendering di meccaniche per gioco Oblivion Hospital." data-tools="Blender, Unreal Engine" data-images="assets/scena - background menù - ospedale.png" data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
+        <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
+        <div class="case-info">
+          <div class="badges"></div>
+          <h3>Oblivion Hospital</h3>
+          <p class="desc"></p>
+          <button class="btn small open-modal" type="button">Apri galleria</button>
+        </div>
+      </section>
+
+    </div>
 
     <section class="coming-section wrap reveal">
       <h3 class="script-text" style="font-size:2rem; margin-bottom: 20px;">Coming soon...</h3>
       <div class="coming-grid">
-        <article class="case-coming glow-red" data-title="Synclife Dynamics">
+        <article class="case-coming" data-title="Synclife Dynamics">
           <div class="case-bg" style="--bg:url('assets/synclife dynamics demo.png')"></div>
           <div class="case-overlay" aria-hidden="true"><span class="label">In arrivo</span></div>
           <div class="case-info"><h4 class="coming-title">Synclife Dynamics</h4></div>
         </article>
-        </div>
+      </div>
     </section>
 
     <section id="info" class="wrap section info-section snap-child reveal">
@@ -112,7 +126,36 @@
           <div class="hello-top">HELLO<br><span>my name is</span></div>
           <div class="hello-bottom">Tommy</div>
         </div>
+
+        <div class="resume-grid">
+          <div class="resume-col">
+            <h4 class="red-badge">EXPERIENCE</h4>
+            <div class="resume-item">
+              <strong>(2023-2026) Graphic & 3D Freelance</strong>
+              <span>Editor, Graphic Design, Motion Graphic, Videography</span>
+            </div>
+            <h4 class="red-badge" style="margin-top:20px;">EDUCATION</h4>
+            <div class="resume-item">
+              <strong>(2021-2024) ITS AR/VR & Game Dev</strong>
+              <span>Sviluppo Videogiochi e Realtà Virtuale</span>
+            </div>
+          </div>
+
+          <div class="resume-col">
+            <h4 class="red-badge">SKILLS</h4>
+            <div class="skills-list">
+              <span>3D Modeling</span><span>PBR Texturing</span>
+              <span>Motion Graphic</span><span>Digital Imaging</span>
+            </div>
+
+            <h4 class="red-badge" id="contact" style="margin-top:20px;">CONTACTS</h4>
+            <ul class="contact-list">
+              <li><span>Email:</span> <a href="mailto:raffaelprivate@gmail.com">raffaelprivate@gmail.com</a></li>
+              <li><span>Tel:</span> +39 3925649950</li>
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
 
     <footer class="wrap footer-tight">
