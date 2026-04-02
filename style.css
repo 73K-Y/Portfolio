@@ -135,82 +135,47 @@ a:hover { color: var(--red); }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
 
 /* ========================================================= */
-/* GRAPHIC RESUME (INFO / ABOUT ME)                          */
+/* GRAPHIC RESUME (INFO & ABOUT) - FIX POSIZIONAMENTO POSTIT */
 /* ========================================================= */
-
-/* Contenitore Pannello */
 .graphic-resume-panel { 
   background: var(--panel-bg); 
   border: 1px solid var(--glass-border); 
-  padding: 60px 40px 40px 60px; /* Padding sx e alto molto ampi per incastrare il postit */
+  padding: 60px 40px 40px 60px; /* Manteniamo il padding sinistro originale a 60px */
   border-radius: 12px; 
   position: relative; 
   overflow: visible; /* IMPORTANTE: Permette al post-it di sbordare! */
   margin-top: 60px; /* Spazio per non toccare le grid sopra */
 }
-.graphic-resume-panel::before { 
-  content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; 
-  background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); 
-  border-radius: inherit;
-}
+.graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); border-radius: inherit; }
 
 /* Post-It "ABOUT Me" */
 .about-postit { 
   position: absolute; 
   top: -20px;       /* Sporge fuori dal bordo in alto */
-  left: 20px;       /* Sporge dal bordo a sinistra */
+  
+  /* ======================================================== */
+  /* FIX: VALORE NEGATIVO PER FAR SBORDARE A SINISTRA        */
+  /* ======================================================== */
+  left: -40px;      /* Tiriamo il Post-it FUORI dal pannello */
+  /* ======================================================== */
+  
   transform: rotate(-5deg); 
   background: var(--red); 
   border-radius: 8px; 
   width: 140px; 
   text-align: center; 
-  box-shadow: -4px 6px 15px rgba(0,0,0,0.6); 
+  box-shadow: -4px 6px 15px rgba(0,0,0,0.6); /* Ombra accentuata a sinistra */
   z-index: 10;      /* Sempre sopra */
   border: 2px solid white; 
 }
-.about-top { 
-  background: var(--red); 
-  padding: 12px 10px; 
-  font-family: 'Space Grotesk', sans-serif; 
-  font-weight: 900; 
-  font-size: 20px; 
-  line-height: 1; 
-  border-top-left-radius: 6px; 
-  border-top-right-radius: 6px; 
-  color: white; 
-  text-transform: uppercase;
-}
-.about-bottom { 
-  background: white; 
-  color: black; 
-  font-family: 'Caveat', cursive; 
-  font-size: 34px; 
-  padding: 5px; 
-  border-bottom-left-radius: 6px; 
-  border-bottom-right-radius: 6px; 
-}
+.about-top { background: var(--red); padding: 12px 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 20px; line-height: 1; border-top-left-radius: 6px; border-top-right-radius: 6px; color: white; text-transform: uppercase; }
+.about-bottom { background: white; color: black; font-family: 'Caveat', cursive; font-size: 34px; padding: 5px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
 
 /* 3 Colonne */
-.resume-grid { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr; 
-  gap: 40px; 
-  position: relative; 
-  z-index: 2; 
-}
+.resume-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; position: relative; z-index: 2; margin-top: 0; }
 
 /* Titoli / Badge */
-.red-badge { 
-  background: var(--red); 
-  display: inline-block; 
-  padding: 6px 12px; 
-  margin: 0 0 20px 0; 
-  font-family: 'Space Grotesk', sans-serif; 
-  font-size: 14px; 
-  border-radius: 4px; 
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
-}
+.red-badge { background: var(--red); display: inline-block; padding: 6px 12px; margin: 0 0 20px 0; font-family: 'Space Grotesk', sans-serif; font-size: 14px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
 /* Elementi di esperienza */
 .resume-item { margin-bottom: 20px; border-left: 1px solid var(--glass-border); padding-left: 15px; position: relative; }
@@ -228,21 +193,11 @@ a:hover { color: var(--red); }
 .contact-row a, .contact-row span:last-child { color: var(--white); text-align: right; }
 
 /* Bottone Full-Width SCARICA CV */
-.btn-download {
-  display: block; width: 100%; text-align: center;
-  background: var(--red); color: white; padding: 14px;
-  border-radius: 6px; font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-  box-shadow: 0 0 15px rgba(193, 18, 31, 0.4);
-  transition: 0.2s; border: none; cursor: pointer;
-}
+.btn-download { display: block; width: 100%; text-align: center; background: var(--red); color: white; padding: 14px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 15px rgba(193, 18, 31, 0.4); transition: 0.2s; border: none; cursor: pointer; }
 .btn-download:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(193, 18, 31, 0.7); color: white; }
 
 /* Box Software Nero */
-.software-list { 
-  list-style: none; padding: 20px; margin: 0; 
-  background: #000; border-radius: 8px; border: 1px solid var(--glass-border); 
-}
+.software-list { list-style: none; padding: 20px; margin: 0; background: #000; border-radius: 8px; border: 1px solid var(--glass-border); }
 .software-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 16px; font-size: 15px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
 .software-list li:last-child { margin-bottom: 0; }
 .num { color: var(--white); width: 20px; text-align: right; font-size: 14px; opacity: 0.7;}
@@ -264,13 +219,7 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 .slide img, .slide video { width: 100%; border-radius: 4px; }
 
 /* Tasti freccia laterali per galleria pc */
-.gallery-btn { 
-  position: absolute; top: 50%; transform: translateY(-50%); 
-  background: var(--red); color: white; border: none; 
-  padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 10;
-  font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  display: none; 
-}
+.gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--red); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 10; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: none; }
 .gallery-btn.prev { left: 10px; }
 .gallery-btn.next { right: 10px; }
 #closeModal { position: absolute; top: -40px; right: 0; background: var(--red); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
@@ -291,10 +240,19 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
   .hero-name.left { font-size: 40px; left: 0; }
   .hero-name.right { font-size: 30px; right: 0; }
   
-  /* Correzione SPAZIATURA HELLO su Mobile (Si impila una colonna sotto l'altra) */
+  /* Correzione SPAZIATURA su Mobile */
   .resume-grid { grid-template-columns: 1fr; }
   .graphic-resume-panel { padding: 80px 20px 20px 20px; }
-  .about-postit { left: 10px; top: -20px; transform: scale(0.9) rotate(-5deg); }
+  
+  /* ========================================================= */
+  /* FIX MOBILE: MENO SBORDATURA PER EVITARE TAGLI             */
+  /* ========================================================= */
+  .about-postit { 
+    left: -10px; /* Sbordatura minima su mobile */
+    top: -20px; 
+    transform: scale(0.85) rotate(-5deg); 
+  }
+  /* ========================================================= */
   
   .cta-row { flex-direction: column; }
 }
