@@ -29,14 +29,6 @@
   revealEls.forEach((el) => io.observe(el));
 })();
 
-/* ========= Marquee seamless loop ========= */
-(() => {
-  const track = document.getElementById("marqueeTrack");
-  if (!track || track.dataset.duped === "1") return;
-  track.innerHTML = track.innerHTML + track.innerHTML;
-  track.dataset.duped = "1";
-})();
-
 /* ========= Badge categoria + tools + descrizione ========= */
 (() => {
   document.querySelectorAll(".case").forEach((card) => {
@@ -90,7 +82,7 @@
   applyFilter("all");
 })();
 
-/* ========= Modal & Gallery ========= */
+/* ========= Modal & Gallery NATIVA SENZA NAVBAR SOTTO ========= */
 (() => {
   const modal = document.getElementById("modal");
   const modalInner = document.getElementById("modalInner");
@@ -159,38 +151,30 @@
     const indexFromScroll = () => Math.round(track.scrollLeft / slideW());
     const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * slideW(), behavior: "smooth" });
 
-    // Gestione Frecce (solo se più di un elemento)
-    if (items.length > 1) {
-      const nav = document.createElement("div");
-      nav.className = "gallery-nav";
-
+    // Gestione Frecce per PC: compaiono SOLO SE CI SONO PIÙ FOTO e nascondono in modo intelligente
+    const isPC = window.matchMedia("(min-width: 769px)").matches;
+    
+    if (items.length > 1 && isPC) {
       const prev = document.createElement("button");
       prev.className = "gallery-btn prev"; prev.innerHTML = "‹";
       
       const next = document.createElement("button");
       next.className = "gallery-btn next"; next.innerHTML = "›";
 
-      nav.appendChild(prev);
-      nav.appendChild(next);
-      gallery.appendChild(nav);
+      gallery.appendChild(prev);
+      gallery.appendChild(next);
 
       const updateArrows = () => {
         const idx = indexFromScroll();
-        prev.style.opacity = idx === 0 ? "0" : "1";
-        prev.style.pointerEvents = idx === 0 ? "none" : "auto";
-        
-        next.style.opacity = idx === slides.length - 1 ? "0" : "1";
-        next.style.pointerEvents = idx === slides.length - 1 ? "none" : "auto";
+        prev.style.display = idx === 0 ? "none" : "block"; // Se è la prima, via la sinistra
+        next.style.display = idx === slides.length - 1 ? "none" : "block"; // Se è l'ultima, via la destra
       };
 
       prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
       next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
 
-      // Aggiorna le frecce quando la galleria scorre
       track.addEventListener('scroll', updateArrows, { passive: true });
-      
-      // Ritardo per assicurarsi che i width siano caricati e controllare subito
-      setTimeout(updateArrows, 50);
+      setTimeout(updateArrows, 50); // Inizializza subito
     }
 
     const onKey = (e) => {
@@ -200,16 +184,8 @@
     };
     document.addEventListener("keydown", onKey);
 
-    // Solo tocco (rimosso drag da mouse per PC)
-    let isDown = false; let startX = 0; let startLeft = 0;
-    const getX = (e) => e.touches[0].clientX;
-    const onDown = (e) => { isDown = true; startX = getX(e); startLeft = track.scrollLeft; };
-    const onMove = (e) => { if (!isDown) return; const x = getX(e); track.scrollLeft = startLeft - (x - startX); };
-    const onUp = () => { if (!isDown) return; isDown = false; goTo(indexFromScroll()); };
-
-    track.addEventListener("touchstart", onDown, { passive: true });
-    track.addEventListener("touchmove", onMove, { passive: true });
-    track.addEventListener("touchend", onUp, { passive: true });
+    // Su mobile lo swipe è nativo (CSS overflow-x: auto + scroll-snap) quindi ho rimosso il custom touch JS.
+    // Nessuna navbar sotto o roba che interrompe la visione!
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
