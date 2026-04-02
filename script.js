@@ -1,4 +1,4 @@
-/* ===== Auto performance switch (rispetta override manuale) ===== */
+/* ===== Auto performance switch ===== */
 (() => {
   if (document.body.classList.contains("no-blur")) return;
 
@@ -15,42 +15,6 @@
 (() => {
   const yearSpan = document.getElementById("year");
   if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
-})();
-
-/* ========= Auto setup glitchable (data-text) ========= */
-(() => {
-  document.querySelectorAll(".glitchable").forEach((el) => {
-    const txt = (el.textContent || "").trim();
-    if (!el.dataset.text && txt) el.dataset.text = txt;
-  });
-})();
-
-/* ========= Glitch burst (solo click) ========= */
-let glitchLock = false;
-function glitchBurst(ms = 100) {
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce || glitchLock) return;
-
-  glitchLock = true;
-  document.body.classList.add("glitch-burst");
-
-  window.setTimeout(() => {
-    document.body.classList.remove("glitch-burst");
-    glitchLock = false;
-  }, ms);
-}
-
-(() => {
-  const targets = document.querySelectorAll(".glitchable, nav a, .btn, .filter-btn");
-  targets.forEach((el) => el.addEventListener("click", () => glitchBurst(90), { passive: true }));
-})();
-
-/* ========= Marquee seamless loop (duplica una volta) ========= */
-(() => {
-  const track = document.getElementById("marqueeTrack");
-  if (!track || track.dataset.duped === "1") return;
-  track.innerHTML = track.innerHTML + track.innerHTML;
-  track.dataset.duped = "1";
 })();
 
 /* ========= Reveal on scroll ========= */
@@ -133,7 +97,7 @@ function glitchBurst(ms = 100) {
   applyFilter("all");
 })();
 
-/* ========= Modal (galleria più leggera, senza numeri/counter) ========= */
+/* ========= Modal ========= */
 (() => {
   const modal = document.getElementById("modal");
   const modalInner = document.getElementById("modalInner");
@@ -152,8 +116,8 @@ function glitchBurst(ms = 100) {
     document.body.style.overflow = "";
   }
 
-  closeModal?.addEventListener("click", () => { closeModalFn(); glitchBurst(70); }, { passive: true });
-  backdrop?.addEventListener("click", () => { closeModalFn(); glitchBurst(70); }, { passive: true });
+  closeModal?.addEventListener("click", () => { closeModalFn(); }, { passive: true });
+  backdrop?.addEventListener("click", () => { closeModalFn(); }, { passive: true });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModalFn();
   });
@@ -237,8 +201,8 @@ function glitchBurst(ms = 100) {
     const goTo = (i) =>
       track.scrollTo({ left: clamp(i, 0, slides.length - 1) * slideW(), behavior: "smooth" });
 
-    prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); glitchBurst(60); }, { passive: true });
-    next.addEventListener("click", () => { goTo(indexFromScroll() + 1); glitchBurst(60); }, { passive: true });
+    prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
+    next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
 
     const onKey = (e) => {
       if (!modal.classList.contains("open")) return;
@@ -291,7 +255,6 @@ function glitchBurst(ms = 100) {
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    glitchBurst(90);
   }
 
   document.getElementById("showreel")?.addEventListener(

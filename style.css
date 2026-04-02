@@ -21,7 +21,6 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--white);
   background-color: var(--bg);
-  /* Effetto griglia stile cutting mat (Immagine 3) */
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -138,21 +137,74 @@ nav a:hover { color: var(--red); }
 }
 .case:hover { border-color: var(--red); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(217,4,41,0.2); }
 .case.is-hidden { display: none; }
-.case-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: 0.4s; filter: contrast(1.1); }
+
+.case-bg { 
+  position: absolute; inset: 0; 
+  background-image: var(--bg); 
+  background-size: cover; background-position: center; 
+  transition: 0.4s; filter: contrast(1.1); 
+  z-index: 0;
+}
 .case:hover .case-bg { transform: scale(1.05); }
-.case::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); }
+
+.case::after { 
+  content: ""; position: absolute; inset: 0; 
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); 
+  z-index: 1; pointer-events: none;
+}
 
 .case-info { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 2; }
 .case-info h3 { margin: 0 0 5px; font-family: 'Space Grotesk', sans-serif; font-size: 24px; text-transform: uppercase; }
 .btn.small { padding: 6px 12px; font-size: 11px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); }
 .case:hover .btn.small { background: var(--red); border-color: var(--red); }
 
-/* Graphic Resume / About Section (Immagine 2) */
+/* Badges Showreel */
+.badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.badge {
+  font-size: 10px; padding: 4px 8px; border-radius: 4px;
+  border: 1px solid var(--glass-border); background: rgba(0,0,0,0.8);
+  font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px;
+}
+.badge.cat { border-color: var(--red); color: var(--red); }
+
+/* Coming Soon */
+.coming-section { margin-top: 40px; margin-bottom: 40px; }
+.coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.case-coming {
+  position: relative; height: var(--case-h); border-radius: 8px;
+  overflow: hidden; border: 1px dashed var(--glass-border);
+  display: flex; align-items: flex-end; justify-content: center; padding: 20px;
+}
+
+.case-coming .case-bg {
+  position: absolute; inset: 0; background-image: var(--bg); 
+  background-size: cover; background-position: center;
+  filter: grayscale(1) opacity(0.2); z-index: 0;
+}
+
+.case-coming .case-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.6);
+}
+
+.case-coming .label {
+  background: var(--red); color: white; padding: 8px 16px;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 2px; border-radius: 4px;
+  transform: rotate(-5deg); box-shadow: 0 4px 15px rgba(217,4,41,0.4);
+}
+
+.case-coming .case-info { position: relative; z-index: 2; width: 100%; text-align: center; margin-bottom: 10px; }
+.case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
+
+
+/* Graphic Resume / About Section */
 .graphic-resume-panel {
   background: var(--panel-bg); border: 1px solid var(--glass-border);
   padding: 40px; border-radius: 12px; position: relative; overflow: hidden;
 }
-/* Shutter texture background effect inside panel */
 .graphic-resume-panel::before {
   content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none;
   background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px);
@@ -193,7 +245,7 @@ nav a:hover { color: var(--red); }
 .sw-icon.ps { background: #31a8ff; color: black; }
 .sw-icon.pt { background: #ff4f4f; }
 
-/* Modal & Utility preesistenti invariate per mantenere compatibilità JS */
+/* General Utilities & Modal */
 .reveal { opacity: 0; transform: translateY(20px); transition: 0.5s; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--glass-border); }
@@ -207,6 +259,7 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 .slide img, .slide video { width: 100%; border-radius: 4px; }
 #closeModal { position: absolute; top: -40px; right: 0; background: var(--red); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
 
+/* Responsive */
 @media (max-width: 768px) {
   .hero-full { grid-template-columns: 1fr; }
   .hello-tag { left: 20px; transform: scale(0.8) rotate(-5deg); }
