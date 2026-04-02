@@ -13,7 +13,7 @@
   color-scheme: dark;
 }
 
-/* Reset & Base (Lasciati invariati) */
+/* Reset & Base */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body {
   margin: 0; padding: 0;
@@ -29,19 +29,17 @@ html, body {
 a { color: var(--white); text-decoration: none; transition: 0.2s; }
 a:hover { color: var(--red); }
 
-/* Layout Utilities (Lasciati invariati) */
+/* Layout Utilities */
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: clamp(16px,4vw,32px) var(--gutter); }
 .snap { scroll-snap-type: y mandatory; }
 .section { min-height: clamp(60vh, 72vh, 82vh); display: grid; align-items: center; }
 
-/* Typography (Lasciati invariati) */
+/* Typography */
 .script-text { font-family: 'Caveat', cursive; font-weight: 700; color: var(--white); }
 .heavy-text { font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
 
-/* Nav (Lasciati invariati) */
-.nav-wrapper {
-  position: absolute; width: 100%; z-index: 100; top: 0; padding: 16px var(--gutter);
-}
+/* Nav */
+.nav-wrapper { position: absolute; width: 100%; z-index: 100; top: 0; padding: 16px var(--gutter); }
 .nav-glass {
   display: flex; justify-content: space-between; align-items: center;
   padding: 12px 20px; border-radius: 8px;
@@ -59,41 +57,66 @@ a:hover { color: var(--red); }
 nav a { font-weight: 600; font-size: 14px; padding: 6px 12px; text-transform: uppercase; letter-spacing: 1px; }
 nav a:hover { color: var(--red); }
 
-/* HERO FULLSCREEN (Immagine 2 - Lasciati invariati) */
+
+/* ========================================= */
+/* HERO FULLSCREEN (Stratificazione Esatta)  */
+/* ========================================= */
+
 .hero-fullscreen {
   position: relative;
   width: 100%;
-  height: 85vh; /* Altezza schermo */
+  height: 85vh;
   min-height: 600px;
+  /* Sfondo rosso Base */
   background: radial-gradient(circle at center, #ba0c14 0%, #4a0000 100%);
   display: flex;
-  align-items: flex-end; /* La foto poggia in basso */
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding-top: 100px; /* Spazio per la nav */
+  padding-top: 100px;
 }
 
-/* Griglia Verticale (Lasciati invariati) */
+/* LIVELLO 1: Griglia Verticale */
 .hero-grid {
   position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
-  background-size: 25% 100%; /* Divide in 4 colonne esatte */
+  background: linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 25% 100%;
   z-index: 1; pointer-events: none;
 }
 
-/* Bagliore arancione dietro la lettera 'O' (Lasciati invariati) */
+/* LIVELLO 2: Bagliore Giallo/Arancione */
 .hero-glow {
   position: absolute;
-  top: 40%; left: 25%;
-  width: 350px; height: 350px;
-  background: #ff5e00;
-  filter: blur(90px);
+  top: 30%; left: 20%;
+  width: 400px; height: 400px;
+  background: rgba(255, 180, 0, 0.4); 
+  filter: blur(100px);
   border-radius: 50%;
-  opacity: 0.6;
-  z-index: 1; pointer-events: none;
+  z-index: 2; pointer-events: none;
 }
 
-/* Testo Gigante Outline in Sfondo (Lasciati invariati) */
+/* LIVELLO 3: Immagine Retro Sfocata (Dietro TOMMY) */
+.hero-back-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 95%;
+  /* Spostata a sx (-75%) e ingrandita (1.3x) */
+  transform: translateX(-75%) scale(1.3);
+  transform-origin: bottom center;
+  z-index: 3;
+  pointer-events: none;
+  
+  /* L'effetto magia: Sfocatura + Tinta calda giallo/arancio + Leggera Trasparenza */
+  filter: blur(12px) sepia(0.5) saturate(1.5) brightness(1.1) hue-rotate(-10deg) opacity(0.8);
+}
+.hero-back-wrapper .hero-subject.back {
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* LIVELLO 4: Testo Outline "TOMMY" (Sopra il Retro, Sotto il Fronte) */
 .hero-bg-text {
   position: absolute;
   top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -102,74 +125,39 @@ nav a:hover { color: var(--red); }
   font-weight: 900;
   color: transparent;
   -webkit-text-stroke: 2px rgba(255,255,255,0.7);
-  z-index: 2;
+  z-index: 4;
   white-space: nowrap;
   letter-spacing: 0.05em;
   pointer-events: none;
 }
 
-/* Numeri e Dettagli agli angoli (Lasciati invariati) */
-.hero-deco {
-  position: absolute;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: white;
-  z-index: 10;
-  letter-spacing: 2px;
-}
-.hero-deco.tl { top: 40px; left: 40px; }
-.hero-deco.bl { bottom: 40px; left: 40px; }
-.hero-deco.br { bottom: 40px; right: 40px; font-size: 1.8rem; }
-
-/* Contenitore Immagine e Testi Sovrapposti (Aggiornato per z-index) */
+/* LIVELLO 5: Immagine Frontale e Nomi (Davanti a tutto) */
 .hero-composition {
   position: relative;
   height: 100%;
   width: 100%;
-  max-width: 1200px; /* Mantiene la composizione compatta su schermi enormi */
+  max-width: 1200px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  z-index: 3;
+  z-index: 5;
 }
 
-/* Proprietà comuni per le immagini ritratto */
-.hero-subject {
-  height: 95%; /* Sfiora il margine superiore, tocca quello inferiore */
-  object-fit: contain;
-  position: absolute; /* Fondamentale per la sovrapposizione esatta */
-  bottom: 0;
-  pointer-events: none;
-}
-
-/* === LIVEL 2: Foto Ritratto Principale (Fronte) === */
 .hero-subject.front {
-  position: relative; /* Occupa lo spazio nel layout flex, le altre si sovrappongono */
-  z-index: 3; /* Sopra a testo outline e retro image */
+  height: 95%;
+  object-fit: contain;
+  position: relative;
+  z-index: 6; /* Assicuriamo stia in primo piano rispetto al wrapper */
+  pointer-events: none;
+  /* Sfumatura nera in basso per fondersi col footer */
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+  mask-image: linear-gradient(to top, transparent 0%, black 15%);
 }
 
-/* === LIVEL 1: Contenitore Foto Ritratto Retro ... === */
-.hero-back-wrapper {
-  position: absolute;
-  bottom: 0; height: 95%; /* Copre l'area dell'immagine principale */
-  display: flex; justify-content: center; align-items: flex-end;
-  z-index: 1; /* Sotto l'immagine principale e testo outline */
-}
-
-/* Targetta l'immagine scontornata 'retro.png' ... */
-.hero-back-wrapper .hero-subject.back {
-  position: static; /* Si posiziona all'interno del wrapper flex */
-  /* (Rimosso filtri per mostrare l'immagine originale come in Immagine 2) */
-}
-
-/* (Rimosso pseudo-elemento ::after e il relativo gradiente) */
-
-/* Nomi che "tagliano" le spalle (Sempre in primo piano) */
 .hero-name {
   position: absolute;
   bottom: 12%;
-  z-index: 10; /* Sopra a tutto l'stack delle immagini */
+  z-index: 10;
 }
 .hero-name.left {
   left: 5%;
@@ -184,41 +172,39 @@ nav a:hover { color: var(--red); }
   text-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
-/* Call to Action superiore (Sezione inferiore - Lasciata invariata) */
-.hero-footer {
-  text-align: center;
-  padding: 40px 20px 20px 20px;
-  background: var(--bg); /* Si fonde col resto del sito */
+/* Numerini Angolari */
+.hero-deco {
+  position: absolute; font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900; font-size: 1.2rem; color: white; z-index: 10; letter-spacing: 2px;
 }
-.hero-sub {
-  color: var(--white); font-size: clamp(14px, 2vw, 16px);
-  max-width: 600px; margin: 0 auto 20px auto; opacity: 0.9;
-}
+.hero-deco.tl { top: 40px; left: 40px; }
+.hero-deco.bl { bottom: 40px; left: 40px; }
+.hero-deco.br { bottom: 40px; right: 40px; font-size: 1.8rem; }
+
+
+/* ========================================= */
+/* ELEMENTI SOTTO LA HERO                    */
+/* ========================================= */
+
+.hero-footer { text-align: center; padding: 40px 20px 20px 20px; background: var(--bg); }
+.hero-sub { color: var(--white); font-size: clamp(14px, 2vw, 16px); max-width: 600px; margin: 0 auto 20px auto; opacity: 0.9; }
 .cta-row { display: flex; gap: 15px; justify-content: center; }
 
-/* Buttons (Lasciati invariati) */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 12px 24px; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
-  text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;
-  cursor: pointer; transition: 0.2s;
-}
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
 .btn.primary { background: var(--red); color: white; border: none; box-shadow: 0 4px 15px rgba(217,4,41,0.4); }
 .btn.primary:hover { background: var(--dark-red); transform: translateY(-2px); }
 .btn.outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
 .btn.outline:hover { background: var(--white); color: #000; }
 
-/* Marquee (Lasciati invariati) */
-.marquee {
-  background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red);
-  padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px);
-}
+/* Marquee */
+.marquee { background: var(--dark-red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 10px 0; transform: rotate(-1deg); margin: 40px -10px; width: calc(100% + 20px); }
 .marquee__rail { overflow: hidden; display: flex; }
 .marquee__track { display: flex; gap: 40px; white-space: nowrap; animation: tickerMove 20s linear infinite; }
 @keyframes tickerMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .pill { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
 
-/* (Resto del CSS per Showreel, Coming Soon, Info, Modal lasciati invariati) */
+/* Resto delle card (Invariati) */
 .filterbar { display: flex; gap: 10px; margin-bottom: 20px; }
 .filter-btn { background: var(--panel-bg); border: 1px solid var(--glass-border); color: var(--white); padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; }
 .filter-btn.active, .filter-btn:hover { background: var(--red); border-color: var(--red); }
@@ -235,6 +221,8 @@ nav a:hover { color: var(--red); }
 .badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
 .badge { font-size: 10px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
 .badge.cat { border-color: var(--red); color: var(--red); }
+
+/* Coming Soon (Invariati) */
 .coming-section { margin-top: 40px; margin-bottom: 40px; }
 .coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .case-coming { position: relative; height: var(--case-h); border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
@@ -243,6 +231,8 @@ nav a:hover { color: var(--red); }
 .case-coming .label { background: var(--red); color: white; padding: 8px 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; transform: rotate(-5deg); box-shadow: 0 4px 15px rgba(217,4,41,0.4); }
 .case-coming .case-info { position: relative; z-index: 2; width: 100%; text-align: center; margin-bottom: 10px; }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; color: var(--muted); }
+
+/* Graphic Resume (Invariati) */
 .graphic-resume-panel { background: var(--panel-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; position: relative; overflow: hidden; }
 .graphic-resume-panel::before { content: ""; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.8) 4px, rgba(0,0,0,0.8) 8px); }
 .hello-tag { position: absolute; top: -10px; left: 40px; transform: rotate(-5deg); background: var(--red); border-radius: 8px; width: 140px; text-align: center; box-shadow: 2px 4px 10px rgba(0,0,0,0.5); z-index: 3; border: 2px solid white; }
@@ -255,22 +245,8 @@ nav a:hover { color: var(--red); }
 .resume-item::before { content: ""; position: absolute; left: -3px; top: 5px; width: 5px; height: 5px; background: var(--red); border-radius: 50%; }
 .resume-item strong { display: block; font-size: 14px; color: var(--white); margin-bottom: 4px; }
 .resume-item span { display: block; font-size: 13px; color: var(--muted); font-style: italic; }
-.skills-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-.skills-list span { font-size: 12px; border: 1px solid var(--glass-border); padding: 4px 8px; border-radius: 4px; }
-.contact-list { list-style: none; padding: 0; margin: 0; font-size: 14px; }
-.contact-list li { margin-bottom: 8px; display: flex; justify-content: space-between; border-bottom: 1px dashed var(--glass-border); padding-bottom: 4px; }
-.contact-list span { color: var(--muted); }
-.software-list { list-style: none; padding: 0; margin: 0; background: #000; padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border); }
-.software-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
-.software-list li:last-child { margin-bottom: 0; }
-.num { color: var(--red); width: 20px; text-align: right; }
-.sw-icon { width: 28px; height: 28px; display: grid; place-items: center; font-size: 12px; border-radius: 4px; color: white; }
-.sw-icon.bl { background: #e87d0d; }
-.sw-icon.ue { background: #333; border: 1px solid white; }
-.sw-icon.pr { background: #ea77ff; color: black; }
-.sw-icon.ae { background: #9999ff; color: black; }
-.sw-icon.ps { background: #31a8ff; color: black; }
-.sw-icon.pt { background: #ff4f4f; }
+
+/* Modal & Utilities (Invariati) */
 .reveal { opacity: 0; transform: translateY(20px); transition: 0.5s; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--glass-border); }
@@ -283,8 +259,12 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 .slide img, .slide video { width: 100%; border-radius: 4px; }
 #closeModal { position: absolute; top: -40px; right: 0; background: var(--red); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
 
-/* Responsive (Invariati) */
+/* Responsive */
 @media (max-width: 768px) {
+  /* Su mobile aggiustiamo i riposizionamenti laterali */
+  .hero-back-wrapper {
+    transform: translateX(-50%) scale(1.4);
+  }
   .hero-name { bottom: 5%; }
   .hero-name.left { font-size: 40px; left: 0; }
   .hero-name.right { font-size: 30px; right: 0; }
