@@ -151,7 +151,7 @@ a:hover { color: var(--red); }
 /* Post-It "ABOUT Me" */
 .about-postit { 
   position: absolute; 
-  top: 20px;       /* Sporge fuori dal bordo in alto */
+  top: 50px;       /* Sporge fuori dal bordo in alto */
   
   /* ======================================================== */
   /* FIX: VALORE NEGATIVO PER FAR SBORDARE A SINISTRA        */
