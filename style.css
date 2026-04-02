@@ -73,7 +73,6 @@ nav a:hover { color: var(--red); }
   padding-top: 100px;
 }
 
-/* Griglia Verticale */
 .hero-grid {
   position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
@@ -81,10 +80,9 @@ nav a:hover { color: var(--red); }
   z-index: 1; pointer-events: none;
 }
 
-/* Bagliore arancione (spostato leggermente per combaciare) */
 .hero-glow {
   position: absolute;
-  top: 30%; left: 30%; /* Centrato un po' più verso la 'O' e la 'M' */
+  top: 30%; left: 30%;
   width: 400px; height: 400px;
   background: rgba(255, 180, 0, 0.45); 
   filter: blur(100px);
@@ -93,22 +91,21 @@ nav a:hover { color: var(--red); }
 }
 
 /* ========================================= */
-/* IMMAGINE RETRO (Scala ridotta a 1.65)     */
+/* IMMAGINE RETRO (Scala Correta)            */
 /* ========================================= */
 .hero-back-wrapper {
   position: absolute;
-  bottom: 0%;
-  left: 35%;
-  height: 45%; /* Stessa altezza base dell'immagine frontale */
+  bottom: 0;
+  left: 50%;
+  height: 95%; /* Mantiene la stessa base della foto frontale */
   
-  /* Scala ridotta per combaciare con l'immagine di referenza 2 (da 2.4 a 1.65) */
-  /* Lo spostamento a sinistra (-60%) centra la nuca dietro la 'O' e 'M' */
-  transform: translateX(-60%) scale(1.65);
+  /* Scala ridotta per avere le spalle appena visibili dietro la scritta */
+  transform: translateX(-55%) scale(1.25);
   transform-origin: bottom center;
   z-index: 3;
   pointer-events: none;
   
-  /* Filtri per sfocatura e tinta */
+  /* Filtri sfocatura e tinta */
   filter: blur(14px) sepia(0.4) saturate(1.8) brightness(1.2) hue-rotate(-5deg) opacity(0.8);
 }
 .hero-back-wrapper .hero-subject.back {
@@ -116,15 +113,14 @@ nav a:hover { color: var(--red); }
   object-fit: contain;
   display: block;
 }
-/* ========================================= */
 
 /* Testo Gigante Outline "TOMMY" */
 .hero-bg-text {
   position: absolute;
-  top: 48%; /* Leggermente più in alto per lasciare respiro ai nomi sotto */
+  top: 48%;
   left: 50%; transform: translate(-50%, -50%);
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(100px, 22vw, 350px); /* Ridotto leggermente per far leggere meglio i bordi laterali */
+  font-size: clamp(100px, 22vw, 350px); 
   font-weight: 900;
   color: transparent;
   -webkit-text-stroke: 2px rgba(255,255,255,0.6);
@@ -178,17 +174,13 @@ nav a:hover { color: var(--red); }
 
 /* Numeri e Dettagli agli angoli */
 .hero-deco {
-  position: absolute;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: white;
-  z-index: 10;
-  letter-spacing: 2px;
+  position: absolute; font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900; font-size: 1.2rem; color: white; z-index: 10; letter-spacing: 2px;
 }
 .hero-deco.tl { top: 40px; left: 40px; }
 .hero-deco.bl { bottom: 40px; left: 40px; }
 .hero-deco.br { bottom: 40px; right: 40px; font-size: 1.8rem; }
+
 
 /* ========================================= */
 /* ALTRE SEZIONI                             */
@@ -253,11 +245,21 @@ nav a:hover { color: var(--red); }
 .contact-list { list-style: none; padding: 0; margin: 0; font-size: 14px; }
 .contact-list li { margin-bottom: 8px; display: flex; justify-content: space-between; border-bottom: 1px dashed var(--glass-border); padding-bottom: 4px; }
 .contact-list span { color: var(--muted); }
+.software-list { list-style: none; padding: 0; margin: 0; background: #000; padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border); }
+.software-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+.software-list li:last-child { margin-bottom: 0; }
+.num { color: var(--red); width: 20px; text-align: right; }
+.sw-icon { width: 28px; height: 28px; display: grid; place-items: center; font-size: 12px; border-radius: 4px; color: white; }
+.sw-icon.bl { background: #e87d0d; }
+.sw-icon.ue { background: #333; border: 1px solid white; }
+.sw-icon.pr { background: #ea77ff; color: black; }
+.sw-icon.ae { background: #9999ff; color: black; }
+.sw-icon.ps { background: #31a8ff; color: black; }
+.sw-icon.pt { background: #ff4f4f; }
 
 .reveal { opacity: 0; transform: translateY(20px); transition: 0.5s; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--glass-border); }
-
 .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
 .modal.open { display: flex; }
 .modal .backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.9); }
@@ -269,13 +271,8 @@ footer { text-align: center; padding: 20px 0; font-size: 12px; color: var(--mute
 
 /* Responsive */
 @media (max-width: 768px) {
-  /* Su mobile aggiustiamo i riposizionamenti */
-  .hero-back-wrapper {
-    transform: translateX(-50%) scale(1.4);
-  }
-  .hero-bg-text {
-    font-size: clamp(60px, 30vw, 150px);
-  }
+  .hero-back-wrapper { transform: translateX(-50%) scale(1.1); }
+  .hero-bg-text { font-size: clamp(60px, 30vw, 150px); }
   .hero-name { bottom: 5%; }
   .hero-name.left { font-size: 40px; left: 0; }
   .hero-name.right { font-size: 30px; right: 0; }

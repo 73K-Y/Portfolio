@@ -36,7 +36,7 @@
   revealEls.forEach((el) => io.observe(el));
 })();
 
-/* ========= Marquee seamless loop (duplica una volta) ========= */
+/* ========= Marquee seamless loop ========= */
 (() => {
   const track = document.getElementById("marqueeTrack");
   if (!track || track.dataset.duped === "1") return;
@@ -225,7 +225,6 @@
     };
     document.addEventListener("keydown", onKey);
 
-    // Drag (mouse + touch)
     let isDown = false;
     let startX = 0;
     let startLeft = 0;
