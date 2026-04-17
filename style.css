@@ -58,10 +58,10 @@ a:hover { color: var(--blue-light); }
 .profile-main-title { font-size: clamp(3rem, 6vw, 5rem); font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -2px; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
 .glow-script { font-family: 'Caveat', cursive; font-weight: 400; color: var(--blue-light); text-shadow: 0 0 20px var(--blue-glow); font-size: 1.2em; display: inline-block; transform: translateY(5px); }
 
-/* Allineamento: Start non fa "allungare" i blocchi a dismisura */
+/* FIX BUCO: align-items: start impedisce che le colonne si allunghino. height: max-content mantiene i blocchi vicini. */
 .profile-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
-.profile-content { grid-column: 1; grid-row: 1; display: block; }
-.profile-sidebar { grid-column: 2; grid-row: 1; display: block; }
+.profile-content { grid-column: 1; grid-row: 1; height: max-content; }
+.profile-sidebar { grid-column: 2; grid-row: 1; height: max-content; }
 
 /* SIDEBAR (Foto, Skills, Software, Lingue, Interessi) */
 .profile-pic-container { position: relative; width: 180px; height: 180px; margin-bottom: 30px; }
@@ -104,7 +104,7 @@ a:hover { color: var(--blue-light); }
 .btn-download:hover { background: var(--blue-light); color: var(--bg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
 
 /* ========================================================= */
-/* GALLERY GRID (FIX SEPARAZIONE: Utilizzo attributo data)   */
+/* GALLERY GRID (BENTO BOX DINAMICO)                         */
 /* ========================================================= */
 .filterbar { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
 .filter-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-gray); padding: 8px 20px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
@@ -117,7 +117,7 @@ a:hover { color: var(--blue-light); }
   grid-auto-flow: dense; 
 }
 
-/* Stile base per tutte le card (Mobile) */
+/* Stile base per tutte le card */
 .case { 
   position: relative; 
   height: 280px; 
@@ -129,10 +129,8 @@ a:hover { color: var(--blue-light); }
   grid-column: span 12; 
 }
 
-/* Griglia Bento Asimmetrica per Desktop (> 900px) */
-/* Usa l'attributo generato dal JS in tempo reale [data-bento] */
 @media (min-width: 900px) {
-  .case { height: 350px; } /* Altezza universale previene completamente i buchi e gli sballamenti! */
+  .case { height: 350px; } /* Altezza universale previene i buchi verticali */
   
   .case[data-bento="1"] { grid-column: span 8; } 
   .case[data-bento="2"] { grid-column: span 4; } 
@@ -141,7 +139,7 @@ a:hover { color: var(--blue-light); }
   .case[data-bento="4"] { grid-column: span 4; }
   .case[data-bento="5"] { grid-column: span 4; }
   
-  .case[data-bento="6"] { grid-column: span 12; height: 450px; } /* Il bannerone si adatta */
+  .case[data-bento="6"] { grid-column: span 12; height: 450px; } 
   
   .case[data-bento="7"] { grid-column: span 5; } 
   .case[data-bento="8"] { grid-column: span 7; } 
@@ -172,7 +170,6 @@ a:hover { color: var(--blue-light); }
   display: flex; align-items: center; justify-content: center; padding: 20px; cursor: default; height: 250px; 
 }
 
-/* Su Desktop forziamo 3 colonne esatte e l'aspect-ratio 16:9 */
 @media (min-width: 900px) {
   .coming-grid { grid-template-columns: repeat(3, 1fr); }
   .case-coming { height: auto; aspect-ratio: 16 / 9; }
@@ -204,15 +201,14 @@ a:hover { color: var(--blue-light); }
 footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text-gray); border-top: 1px solid var(--glass-border); margin-top: 40px;}
 
 /* ========================================================= */
-/* RESPONSIVE F-PATTERN E MOBILE FIX                         */
+/* RESPONSIVE F-PATTERN - MOBILE FIX ORDINE NATURALE         */
 /* ========================================================= */
 @media (max-width: 900px) {
-  /* Usiamo Flexbox per forzare la foto sopra il testo */
-  .profile-grid { display: flex; flex-direction: column; gap: 50px; }
+  .profile-grid { grid-template-columns: 1fr; gap: 50px; }
   
-  /* L'ordine Flex costringe la Sidebar ad apparire prima! */
-  .profile-sidebar { order: 1; width: 100%; }
-  .profile-content { order: 2; width: 100%; }
+  /* ORDINE CORRETTO: Prima Colonna Sinistra (About/Exp), poi Destra (Foto/Skills) */
+  .profile-content { grid-column: 1; grid-row: 1; }
+  .profile-sidebar { grid-column: 1; grid-row: 2; }
   
   .profile-block { margin-bottom: 40px; } 
   .exp-item { grid-template-columns: 1fr; gap: 8px; margin-bottom: 30px; padding-bottom: 25px; } 
