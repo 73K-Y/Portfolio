@@ -65,11 +65,8 @@
     const cat = (key || "all").trim();
     cards.forEach((c) => {
       const cc = (c.dataset.cat || "").trim();
-      if (cat === "all" || cc === cat) {
-        c.style.display = ""; // Ripristina il display di default per la griglia
-      } else {
-        c.style.display = "none";
-      }
+      if (cat === "all" || cc === cat) c.classList.remove("is-hidden");
+      else c.classList.add("is-hidden");
     });
   }
 
@@ -85,7 +82,7 @@
   applyFilter("all");
 })();
 
-/* ========= Modal & Gallery NATIVA ========= */
+/* ========= Modal & Gallery NATIVA SENZA NAVBAR SOTTO ========= */
 (() => {
   const modal = document.getElementById("modal");
   const modalInner = document.getElementById("modalInner");
@@ -154,6 +151,7 @@
     const indexFromScroll = () => Math.round(track.scrollLeft / slideW());
     const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * slideW(), behavior: "smooth" });
 
+    // Gestione Frecce per PC: compaiono SOLO SE CI SONO PIÙ FOTO e nascondono in modo intelligente
     const isPC = window.matchMedia("(min-width: 769px)").matches;
     
     if (items.length > 1 && isPC) {
@@ -168,15 +166,15 @@
 
       const updateArrows = () => {
         const idx = indexFromScroll();
-        prev.style.display = idx === 0 ? "none" : "grid"; 
-        next.style.display = idx === slides.length - 1 ? "none" : "grid"; 
+        prev.style.display = idx === 0 ? "none" : "block"; // Se è la prima, via la sinistra
+        next.style.display = idx === slides.length - 1 ? "none" : "block"; // Se è l'ultima, via la destra
       };
 
       prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
       next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
 
       track.addEventListener('scroll', updateArrows, { passive: true });
-      setTimeout(updateArrows, 50); 
+      setTimeout(updateArrows, 50); // Inizializza subito
     }
 
     const onKey = (e) => {
@@ -185,6 +183,9 @@
       if (e.key === "ArrowRight") { e.preventDefault(); goTo(indexFromScroll() + 1); }
     };
     document.addEventListener("keydown", onKey);
+
+    // Su mobile lo swipe è nativo (CSS overflow-x: auto + scroll-snap) quindi ho rimosso il custom touch JS.
+    // Nessuna navbar sotto o roba che interrompe la visione!
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
