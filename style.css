@@ -59,7 +59,7 @@ a:hover { color: var(--blue-light); }
 .profile-main-title { font-size: clamp(3rem, 6vw, 5rem); font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -2px; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
 .glow-script { font-family: 'Caveat', cursive; font-weight: 400; color: var(--blue-light); text-shadow: 0 0 20px var(--blue-glow); font-size: 1.2em; display: inline-block; transform: translateY(5px); }
 
-/* Inversione colonne per lettura ottimale ATS: Esperienza sx, Skills dx */
+/* Inversione colonne per desktop: Esperienza a sx, Skills/Foto a dx */
 .profile-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
 .profile-content { grid-column: 1; grid-row: 1; }
 .profile-sidebar { grid-column: 2; grid-row: 1; }
@@ -108,22 +108,18 @@ a:hover { color: var(--blue-light); }
 .btn-download:hover { background: var(--blue-light); color: var(--bg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
 
 /* ========================================================= */
-/* GALLERY GRID (BENTO BOX) & FILTERS                        */
+/* GALLERY GRID (BENTO BOX ASIMMETRICO) & FILTERS            */
 /* ========================================================= */
 .filterbar { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
 .filter-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-gray); padding: 8px 20px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
 .filter-btn.active, .filter-btn:hover { background: var(--blue-glow); color: var(--white); border-color: var(--blue-glow); }
 
-.gallery-grid { 
-  display: grid; 
-  grid-template-columns: repeat(12, 1fr); 
-  gap: 20px; 
-}
+.gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
 
 /* Stile base per tutte le card (Mobile) */
 .case { 
   position: relative; 
-  height: 350px; 
+  height: 300px; 
   border-radius: 8px; 
   overflow: hidden; 
   cursor: pointer; 
@@ -132,24 +128,31 @@ a:hover { color: var(--blue-light); }
   grid-column: span 12; 
 }
 
-/* Layout Asimmetrico (Bento Box) per Desktop (> 900px) */
+/* Griglia Bento ultra-dinamica per Desktop (> 900px) */
 @media (min-width: 900px) {
-  .case { height: auto; aspect-ratio: 16 / 9; }
+  .case { height: auto; }
   
-  .case:nth-child(1) { grid-column: span 12; aspect-ratio: auto; height: 500px; } 
-  .case:nth-child(2) { grid-column: span 6; }
-  .case:nth-child(3) { grid-column: span 6; }
-  .case:nth-child(4) { grid-column: span 8; } 
-  .case:nth-child(5) { grid-column: span 4; } 
-  .case:nth-child(6) { grid-column: span 4; } 
-  .case:nth-child(7) { grid-column: span 4; } 
-  .case:nth-child(8) { grid-column: span 4; } 
-  .case:nth-child(n+9) { grid-column: span 6; } 
+  /* Rompiamo la monotonia con formati disparati! */
+  .case:nth-child(1) { grid-column: span 12; aspect-ratio: 21 / 9; } /* Hero Project: Super Wide */
+  .case:nth-child(2) { grid-column: span 7; aspect-ratio: 4 / 3; }  /* Grande a sx */
+  .case:nth-child(3) { grid-column: span 5; aspect-ratio: 1 / 1; }  /* Quadrato a dx */
+  
+  .case:nth-child(4) { grid-column: span 4; aspect-ratio: 1 / 1; }  /* Tre in fila */
+  .case:nth-child(5) { grid-column: span 4; aspect-ratio: 1 / 1; }
+  .case:nth-child(6) { grid-column: span 4; aspect-ratio: 1 / 1; }
+  
+  .case:nth-child(7) { grid-column: span 8; aspect-ratio: 16 / 9; } /* Molto largo a sx */
+  .case:nth-child(8) { grid-column: span 4; aspect-ratio: 9 / 16; } /* Verticale a dx */
+  
+  .case:nth-child(9) { grid-column: span 6; aspect-ratio: 16 / 9; } /* Classico a metà */
+  .case:nth-child(10) { grid-column: span 6; aspect-ratio: 16 / 9; }
+  
+  .case:nth-child(n+11) { grid-column: span 4; aspect-ratio: 4 / 3; } /* Restanti */
 }
 
 .case.is-hidden { display: none; }
 .case-bg { position: absolute; inset: 0; background-image: var(--bg); background-size: cover; background-position: center; transition: 0.6s ease; filter: brightness(0.6) contrast(1.1); z-index: 0; }
-.case:hover { border-color: var(--blue-glow); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(30, 80, 255, 0.2); }
+.case:hover { border-color: var(--blue-glow); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(30, 80, 255, 0.2); z-index: 5; }
 .case:hover .case-bg { transform: scale(1.05); filter: brightness(1); }
 .case::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(2,4,10,0.95) 0%, rgba(2,4,10,0) 60%); z-index: 1; pointer-events: none; }
 .case-info { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 2; }
@@ -160,23 +163,11 @@ a:hover { color: var(--blue-light); }
 /* COMING SOON FIX                                           */
 /* ========================================================= */
 .coming-section { margin-top: 60px; margin-bottom: 60px; }
-.coming-grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  gap: 20px; 
-}
+.coming-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 
 .case-coming { 
-  position: relative; 
-  border-radius: 8px; 
-  overflow: hidden; 
-  border: 1px dashed var(--glass-border); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  padding: 20px; 
-  cursor: default; 
-  height: 250px; 
+  position: relative; border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); 
+  display: flex; align-items: center; justify-content: center; padding: 20px; cursor: default; height: 250px; 
 }
 
 @media (min-width: 900px) {
@@ -184,27 +175,9 @@ a:hover { color: var(--blue-light); }
 }
 
 .case-coming .pc-bg { display: none; }
-.case-coming .pc-bg, .case-coming .mobile-bg { 
-  position: absolute; 
-  inset: 0; 
-  background-size: cover; 
-  background-position: center; 
-  filter: blur(10px) brightness(0.5); 
-  z-index: 0; 
-  transition: 0.6s ease; 
-}
+.case-coming .pc-bg, .case-coming .mobile-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(10px) brightness(0.5); z-index: 0; transition: 0.6s ease; }
 .case-coming .mobile-bg { display: block; }
-
-.case-coming .case-overlay { 
-  position: absolute; 
-  inset: 0; 
-  z-index: 1; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  background: rgba(0,0,0,0.4); 
-  transition: 0.4s ease; 
-}
+.case-coming .case-overlay { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); transition: 0.4s ease; }
 .case-coming .label { background: var(--white); color: var(--bg); padding: 6px 14px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; font-size: 12px; }
 .case-coming .case-info { position: absolute; z-index: 2; bottom: 20px; left: 0; right: 0; text-align: center; pointer-events: none; }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; text-transform: uppercase; color: var(--text-gray); }
@@ -227,13 +200,17 @@ a:hover { color: var(--blue-light); }
 footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text-gray); border-top: 1px solid var(--glass-border); margin-top: 40px;}
 
 /* ========================================================= */
-/* RESPONSIVE F-PATTERN                                      */
+/* RESPONSIVE F-PATTERN (Identico visivamente ma impilato)   */
 /* ========================================================= */
 @media (max-width: 900px) {
-  .profile-grid { grid-template-columns: 1fr; gap: 40px; }
-  /* Su mobile forziamo l'ordine: Foto (sidebar) prima di Experience (content) */
-  .profile-sidebar { grid-column: 1; grid-row: 1; }
-  .profile-content { grid-column: 1; grid-row: 2; }
+  .profile-grid { 
+    grid-template-columns: 1fr; 
+    gap: 40px; 
+  }
+  
+  /* Rimuovo le restrizioni rigide, lascio impilare in modo naturale (Foto/Skills prima, poi Esperienza) */
+  .profile-sidebar { grid-column: auto; grid-row: auto; }
+  .profile-content { grid-column: auto; grid-row: auto; }
   
   .exp-item { grid-template-columns: 1fr; gap: 5px; }
   .hero-title-back { font-size: 20vw; }
