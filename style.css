@@ -8,7 +8,7 @@
   --glass: rgba(5, 10, 24, 0.7);
   --glass-border: rgba(30, 80, 255, 0.2);
   --max-w: 1200px;
-  --gutter: clamp(20px, 5vw, 40px);
+  --gutter: clamp(15px, 4vw, 40px);
   color-scheme: dark;
 }
 
@@ -53,59 +53,61 @@ a:hover { color: var(--blue-light); }
 .video-container video { width: 100%; height: 100%; object-fit: cover; }
 
 /* ========================================================= */
-/* PROFILE SECTION (F-PATTERN PC)                            */
+/* PROFILE SECTION (FIX ALTEZZE E BUCHI)                     */
 /* ========================================================= */
 .profile-section { padding-top: 100px; }
 .profile-main-title { font-size: clamp(3rem, 6vw, 5rem); font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -2px; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
 .glow-script { font-family: 'Caveat', cursive; font-weight: 400; color: var(--blue-light); text-shadow: 0 0 20px var(--blue-glow); font-size: 1.2em; display: inline-block; transform: translateY(5px); }
 
-/* Griglia fissa per PC */
+/* align-items: start fa sì che i blocchi mantengano la loro altezza naturale senza allungarsi! */
 .profile-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
-.profile-content { grid-column: 1; grid-row: 1; display: block; }
-.profile-sidebar { grid-column: 2; grid-row: 1; display: block; }
+.profile-content { grid-column: 1; grid-row: 1; display: block; min-width: 0; }
+.profile-sidebar { grid-column: 2; grid-row: 1; display: block; min-width: 0; }
 
-/* SIDEBAR (Foto, Skills, ecc.) */
+/* SIDEBAR (Foto, Skills, Software, Lingue, Interessi) */
 .profile-pic-container { position: relative; width: 180px; height: 180px; margin-bottom: 30px; }
 .profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: relative; z-index: 2; filter: contrast(1.1); }
 .pic-ring { position: absolute; inset: -15px; border-radius: 50%; border: 2px solid transparent; border-left-color: var(--blue-glow); border-bottom-color: var(--blue-light); z-index: 1; transform: rotate(-30deg); filter: drop-shadow(0 0 15px var(--blue-glow)); }
 
-.profile-name { font-size: 1.8rem; margin: 0 0 5px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; line-height: 1.2;}
+.profile-name { font-size: 1.8rem; margin: 0 0 5px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; line-height: 1.1; }
 .profile-role { color: var(--text-gray); font-size: 0.85rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; }
 
 /* SHARED BLOCKS */
-.profile-block { margin-bottom: 40px; }
+.profile-block { margin-bottom: 40px; display: block; }
 .block-title { display: inline-block; background: var(--blue-glow); color: var(--white); padding: 6px 14px; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; border-radius: 2px; }
 
 .skills-list-text { list-style: none; padding: 0; margin: 0; }
-.skills-list-text li { font-size: 14px; color: var(--white); margin-bottom: 12px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
+.skills-list-text li { font-size: 14px; color: var(--white); margin-bottom: 12px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; word-wrap: break-word; }
 
 .software-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .software-tags span { background: rgba(30, 80, 255, 0.15); border: 1px solid var(--blue-glow); color: var(--blue-light); padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
 
 .software-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
-.software-list li { display: flex; align-items: center; gap: 15px; font-size: 13px; color: var(--white); font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; font-family: 'Space Grotesk', sans-serif;}
-.sw-icon-img { width: 20px; height: 20px; object-fit: contain; }
+.software-list li { display: flex; align-items: center; gap: 15px; font-size: 13px; color: var(--white); font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; font-family: 'Space Grotesk', sans-serif; }
+.sw-icon-img { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0;}
 
 /* MAIN CONTENT (Experience, About, Contact) */
 .about-text { font-size: 15px; color: var(--white); line-height: 1.7; margin: 0; }
 
-.exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; margin-bottom: 30px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 25px; }
+.exp-item { display: grid; grid-template-columns: minmax(90px, 120px) 1fr; gap: 20px; margin-bottom: 30px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 25px; align-items: start;}
 .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .exp-date { color: var(--text-gray); font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; padding-top: 3px; }
-.exp-desc strong { display: block; font-size: 16px; font-family: 'Space Grotesk', sans-serif; color: var(--white); text-transform: uppercase; letter-spacing: 0.5px; }
+.exp-desc { min-width: 0; }
+.exp-desc strong { display: block; font-size: 16px; font-family: 'Space Grotesk', sans-serif; color: var(--white); text-transform: uppercase; letter-spacing: 0.5px; word-wrap: break-word;}
 .exp-role { display: block; color: var(--blue-light); font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
 .exp-desc p { margin: 0; color: var(--text-gray); font-size: 14.5px; line-height: 1.6; }
 
-/* CONTACT E CV IN UN PANNELLO PULITO */
+/* CONTACT E CV */
 .contact-wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; background: rgba(30, 80, 255, 0.05); border: 1px solid var(--glass-border); padding: 25px; border-radius: 8px; }
-.contact-grid { display: flex; flex-direction: column; gap: 10px; }
-.contact-link { color: var(--white); font-size: 15px; font-weight: 500; }
+.contact-grid { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.contact-link { color: var(--white); font-size: 15px; font-weight: 500; word-wrap: break-word; }
 
-.btn-download { display: inline-block; background: var(--blue-glow); color: var(--white); padding: 14px 28px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; transition: 0.3s; white-space: nowrap; }
+.btn-download { display: inline-block; background: var(--blue-glow); color: var(--white); padding: 14px 28px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; transition: 0.3s; white-space: nowrap; text-align: center; }
 .btn-download:hover { background: var(--blue-light); color: var(--bg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
 
+
 /* ========================================================= */
-/* GALLERY GRID BENTO BOX                                    */
+/* GALLERY GRID & FILTERS                                    */
 /* ========================================================= */
 .filterbar { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
 .filter-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-gray); padding: 8px 20px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
@@ -130,7 +132,7 @@ a:hover { color: var(--blue-light); }
 }
 
 @media (min-width: 900px) {
-  .case { height: 350px; }
+  .case { height: 350px; } 
   .case[data-bento="1"] { grid-column: span 8; } 
   .case[data-bento="2"] { grid-column: span 4; } 
   .case[data-bento="3"] { grid-column: span 4; } 
@@ -141,7 +143,7 @@ a:hover { color: var(--blue-light); }
   .case[data-bento="8"] { grid-column: span 7; } 
   .case[data-bento="9"] { grid-column: span 4; } 
   .case[data-bento="10"]{ grid-column: span 8; }
-  .case[data-bento="11"], .case[data-bento="12"], .case[data-bento="13"] { grid-column: span 6; } 
+  .case[data-bento="11"], .case[data-bento="12"], .case[data-bento="13"], .case[data-bento="14"] { grid-column: span 6; } 
 }
 
 .case.is-hidden { display: none !important; }
@@ -153,8 +155,9 @@ a:hover { color: var(--blue-light); }
 .case-info h3 { margin: 0 0 10px; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; }
 .btn.small { padding: 6px 14px; font-size: 11px; background: rgba(30,80,255,0.2); border: 1px solid var(--blue-glow); color: var(--white); border-radius: 4px; }
 
+
 /* ========================================================= */
-/* COMING SOON 16:9 SU PC                                    */
+/* COMING SOON                                               */
 /* ========================================================= */
 .coming-section { margin-top: 60px; margin-bottom: 60px; }
 .coming-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 20px; }
@@ -187,6 +190,7 @@ a:hover { color: var(--blue-light); }
   .case-coming .mobile-bg { display: none; }
 }
 
+
 /* ========================================================= */
 /* UTILS & FOOTER                                            */
 /* ========================================================= */
@@ -194,49 +198,52 @@ a:hover { color: var(--blue-light); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text-gray); border-top: 1px solid var(--glass-border); margin-top: 40px;}
 
+
 /* ========================================================= */
-/* FIX DEFINITIVO PER IL MOBILE (DUE COLONNE AFFIANCATE)     */
+/* FIX: DUE COLONNE AFFIANCATE ANCHE SU MOBILE (COME FOTO 3) */
 /* ========================================================= */
 @media (max-width: 900px) {
   .wrap { padding: clamp(20px, 4vw, 40px) 15px; } 
   
-  /* Mantiene le due colonne, ma in percentuali fluide in modo che non si schiaccino! */
+  /* FORZA DUE COLONNE SU MOBILE! 60% Sinistra, 40% Destra */
   .profile-grid { 
-    grid-template-columns: 1.3fr 1fr; 
+    grid-template-columns: 1.5fr 1fr; 
     gap: 15px; 
+    align-items: start;
   }
   
-  /* La data e l'esperienza si mettono una sotto l'altra, per non prendere spazio in larghezza */
-  .exp-item { 
-    grid-template-columns: 1fr; 
-    gap: 4px; 
-    margin-bottom: 20px; 
-    padding-bottom: 15px; 
-  }
+  /* Mantiene le due colonne separate, non impilate! */
+  .profile-content { grid-column: 1; grid-row: 1; display: block; }
+  .profile-sidebar { grid-column: 2; grid-row: 1; display: block; }
   
-  /* Tutti i font e i box vengono ridimensionati per farli stare su uno schermo del cellulare */
-  .profile-name { font-size: 1.4rem; }
+  /* Ridimensionamento font e blocchi per far entrare tutto nei telefoni piccoli */
+  .profile-name { font-size: 1.3rem; }
   .profile-role { font-size: 0.7rem; margin-bottom: 20px; }
   .profile-pic-container { width: 100px; height: 100px; margin-bottom: 15px; }
   
-  .block-title { font-size: 10px; padding: 4px 8px; margin-bottom: 15px; }
-  .about-text, .exp-desc p { font-size: 11px; line-height: 1.4; }
+  .profile-block { margin-bottom: 25px; }
+  .block-title { font-size: 10px; padding: 4px 8px; margin-bottom: 12px; }
+  
+  .about-text { font-size: 11px; line-height: 1.4; }
+  
+  .exp-item { grid-template-columns: 1fr; gap: 4px; margin-bottom: 15px; padding-bottom: 15px; }
   .exp-desc strong { font-size: 12px; margin-bottom: 2px; }
+  .exp-desc p { font-size: 11px; }
   .exp-date, .exp-role { font-size: 10px; }
   
   .skills-list-text li, .software-list li { font-size: 10px; padding-bottom: 4px; margin-bottom: 8px; }
   .software-tags span { font-size: 9px; padding: 3px 6px; }
   .sw-icon-img { width: 14px; height: 14px; }
   
-  /* I contatti si impilano ordinatamente sotto al testo */
   .contact-wrap { padding: 12px; flex-direction: column; align-items: flex-start; gap: 10px;}
-  .contact-link { font-size: 10px; word-break: break-all; }
-  .btn-download { padding: 8px 12px; font-size: 10px; width: 100%; text-align: center; }
+  .contact-link { font-size: 10px; }
+  .btn-download { padding: 8px 12px; font-size: 10px; width: 100%; }
 
-  /* Correzione Video Hero */
+  /* Correzione Video Hero Mobile */
   .hero-title-back { font-size: 17vw; } 
   .video-container { width: 100%; margin-top: 100px; border-radius: 8px; border: none; }
 }
+
 
 /* ========================================================= */
 /* MODAL GALLERY                                             */
