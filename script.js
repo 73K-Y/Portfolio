@@ -56,19 +56,26 @@
   });
 })();
 
-/* ========= Filtro categorie ========= */
+/* ========= Filtro categorie (CON FIX BENTO BOX) ========= */
 (() => {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const cards = Array.from(document.querySelectorAll(".case"));
 
   function applyFilter(key) {
     const cat = (key || "all").trim();
+    let visibleIndex = 1; // Contatore solo per le card visibili
+    
     cards.forEach((c) => {
       const cc = (c.dataset.cat || "").trim();
       if (cat === "all" || cc === cat) {
-        c.style.display = ""; // Ripristina il display di default per la griglia
+        c.classList.remove("is-hidden");
+        // Assegna la posizione dinamica alla card visibile
+        c.setAttribute("data-bento", visibleIndex);
+        visibleIndex++;
       } else {
-        c.style.display = "none";
+        c.classList.add("is-hidden");
+        // Rimuovi l'attributo se nascosta per non sballare il CSS
+        c.removeAttribute("data-bento");
       }
     });
   }
@@ -168,8 +175,8 @@
 
       const updateArrows = () => {
         const idx = indexFromScroll();
-        prev.style.display = idx === 0 ? "none" : "grid"; 
-        next.style.display = idx === slides.length - 1 ? "none" : "grid"; 
+        prev.style.display = idx === 0 ? "none" : "block"; 
+        next.style.display = idx === slides.length - 1 ? "none" : "block"; 
       };
 
       prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
@@ -207,52 +214,49 @@
       openModal(items, title, desc, tools, note);
     }, { passive: true }
   );
+})();
 
-  /* ========= Sistema Navigazione SPA (Aggiornamento Pagina) ========= */
-  (() => {
-    const btnProfile = document.getElementById("btn-profile");
-    const btnShowreel = document.getElementById("btn-showreel");
-    const logoHome = document.getElementById("logo-home");
-    
-    const viewHome = document.getElementById("view-home");
-    const viewProfile = document.getElementById("view-profile");
+/* ========= Sistema Navigazione SPA (Aggiornamento Pagina) ========= */
+(() => {
+  const btnProfile = document.getElementById("btn-profile");
+  const btnShowreel = document.getElementById("btn-showreel");
+  const logoHome = document.getElementById("logo-home");
+  
+  const viewHome = document.getElementById("view-home");
+  const viewProfile = document.getElementById("view-profile");
 
-    function switchView(viewName) {
-      // Scrolla subito all'inizio della pagina
-      window.scrollTo({ top: 0, behavior: "instant" });
+  function switchView(viewName) {
+    window.scrollTo({ top: 0, behavior: "instant" });
 
-      if (viewName === "profile") {
-        viewHome.style.display = "none";
-        viewProfile.style.display = "block";
-        btnProfile.classList.add("active");
-        btnShowreel.classList.remove("active");
-      } else {
-        viewHome.style.display = "block";
-        viewProfile.style.display = "none";
-        btnShowreel.classList.add("active");
-        btnProfile.classList.remove("active");
-      }
-
-      // Riavvia le animazioni di "reveal" sulla nuova pagina
-      const observer = new IntersectionObserver((entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("is-visible");
-              observer.unobserve(e.target);
-            }
-          });
-        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-      );
-
-      document.querySelectorAll(".reveal").forEach((el) => {
-        el.classList.remove("is-visible");
-        setTimeout(() => observer.observe(el), 50);
-      });
+    if (viewName === "profile") {
+      viewHome.style.display = "none";
+      viewProfile.style.display = "block";
+      btnProfile.classList.add("active");
+      btnShowreel.classList.remove("active");
+    } else {
+      viewHome.style.display = "block";
+      viewProfile.style.display = "none";
+      btnShowreel.classList.add("active");
+      btnProfile.classList.remove("active");
     }
 
-    // Event Listeners sui bottoni
-    btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("profile"); });
-    btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
-    logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
-  })();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => {
+      el.classList.remove("is-visible");
+      setTimeout(() => observer.observe(el), 50);
+    });
+  }
+
+  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("profile"); });
+  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
 })();
