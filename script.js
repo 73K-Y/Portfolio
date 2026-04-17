@@ -207,4 +207,52 @@
       openModal(items, title, desc, tools, note);
     }, { passive: true }
   );
+
+  /* ========= Sistema Navigazione SPA (Aggiornamento Pagina) ========= */
+  (() => {
+    const btnProfile = document.getElementById("btn-profile");
+    const btnShowreel = document.getElementById("btn-showreel");
+    const logoHome = document.getElementById("logo-home");
+    
+    const viewHome = document.getElementById("view-home");
+    const viewProfile = document.getElementById("view-profile");
+
+    function switchView(viewName) {
+      // Scrolla subito all'inizio della pagina
+      window.scrollTo({ top: 0, behavior: "instant" });
+
+      if (viewName === "profile") {
+        viewHome.style.display = "none";
+        viewProfile.style.display = "block";
+        btnProfile.classList.add("active");
+        btnShowreel.classList.remove("active");
+      } else {
+        viewHome.style.display = "block";
+        viewProfile.style.display = "none";
+        btnShowreel.classList.add("active");
+        btnProfile.classList.remove("active");
+      }
+
+      // Riavvia le animazioni di "reveal" sulla nuova pagina
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              observer.unobserve(e.target);
+            }
+          });
+        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => {
+        el.classList.remove("is-visible");
+        setTimeout(() => observer.observe(el), 50);
+      });
+    }
+
+    // Event Listeners sui bottoni
+    btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("profile"); });
+    btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+    logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+  })();
 })();
