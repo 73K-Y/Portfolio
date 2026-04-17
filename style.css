@@ -52,24 +52,18 @@ a:hover { color: var(--blue-light); }
 .video-container video { width: 100%; height: 100%; object-fit: cover; }
 
 /* ========================================================= */
-/* PROFILE SECTION (F-PATTERN ATS-FRIENDLY)                  */
+/* PROFILE SECTION (FIX: Colonne allineate in alto)          */
 /* ========================================================= */
 .profile-section { padding-top: 100px; }
 .profile-main-title { font-size: clamp(3rem, 6vw, 5rem); font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -2px; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
 .glow-script { font-family: 'Caveat', cursive; font-weight: 400; color: var(--blue-light); text-shadow: 0 0 20px var(--blue-glow); font-size: 1.2em; display: inline-block; transform: translateY(5px); }
 
-/* ALLINEAMENTO COLONNE (Stretch per pareggiare le altezze) */
-.profile-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: stretch; }
+/* align-items: start fa sì che i blocchi non si allunghino per riempire lo spazio! */
+.profile-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
+.profile-content { grid-column: 1; grid-row: 1; display: block; }
+.profile-sidebar { grid-column: 2; grid-row: 1; display: block; }
 
-/* MAIN CONTENT (Experience, About, Contact) - Colonna SX */
-.profile-content { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; }
-.profile-content .profile-block:last-child { margin-bottom: 0; } /* Allinea esattamente alla fine */
-
-/* SIDEBAR (Foto, Skills, Software, Lingue, Interessi) - Colonna DX */
-.profile-sidebar { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; }
-.profile-sidebar .profile-block:last-child { margin-top: auto; margin-bottom: 0; } /* Spinge gli Interessi fino in fondo! */
-
-/* FOTO PROFILO E NOME */
+/* SIDEBAR (Foto, Skills, Software, Lingue, Interessi) */
 .profile-pic-container { position: relative; width: 180px; height: 180px; margin-bottom: 30px; }
 .profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: relative; z-index: 2; filter: contrast(1.1); }
 .pic-ring { position: absolute; inset: -15px; border-radius: 50%; border: 2px solid transparent; border-left-color: var(--blue-glow); border-bottom-color: var(--blue-light); z-index: 1; transform: rotate(-30deg); filter: drop-shadow(0 0 15px var(--blue-glow)); }
@@ -91,7 +85,7 @@ a:hover { color: var(--blue-light); }
 .software-list li { display: flex; align-items: center; gap: 15px; font-size: 13px; color: var(--white); font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; font-family: 'Space Grotesk', sans-serif;}
 .sw-icon-img { width: 20px; height: 20px; object-fit: contain; }
 
-/* TESTI EXPERIENCE E ABOUT */
+/* MAIN CONTENT (Experience, About, Contact) */
 .about-text { font-size: 15px; color: var(--white); line-height: 1.7; margin: 0; }
 
 .exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; margin-bottom: 30px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 25px; }
@@ -101,7 +95,7 @@ a:hover { color: var(--blue-light); }
 .exp-role { display: block; color: var(--blue-light); font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
 .exp-desc p { margin: 0; color: var(--text-gray); font-size: 14.5px; line-height: 1.6; }
 
-/* CONTACT E CV IN UN PANNELLO PULITO (Rimuove il "buco") */
+/* CONTACT E CV IN UN PANNELLO PULITO */
 .contact-wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; background: rgba(30, 80, 255, 0.05); border: 1px solid var(--glass-border); padding: 25px; border-radius: 8px; }
 .contact-grid { display: flex; flex-direction: column; gap: 10px; }
 .contact-link { color: var(--white); font-size: 15px; font-weight: 500; }
@@ -110,7 +104,7 @@ a:hover { color: var(--blue-light); }
 .btn-download:hover { background: var(--blue-light); color: var(--bg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
 
 /* ========================================================= */
-/* GALLERY GRID (BENTO BOX PIÙ DISORDINATO) & FILTERS        */
+/* GALLERY GRID (FIX: Altezze standard per evitare buchi)    */
 /* ========================================================= */
 .filterbar { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
 .filter-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-gray); padding: 8px 20px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
@@ -120,13 +114,13 @@ a:hover { color: var(--blue-light); }
   display: grid; 
   grid-template-columns: repeat(12, 1fr); 
   gap: 20px; 
-  grid-auto-flow: dense; /* TAPPA I BUCHI IN AUTOMATICO */
+  grid-auto-flow: dense; /* Cerca di tappare i buchi automaticamente */
 }
 
-/* Stile base per tutte le card (Mobile: altezza ridotta per non ingombrare) */
+/* Base per tutte le card */
 .case { 
   position: relative; 
-  height: 280px; 
+  height: 350px; /* ALTEZZA UNIFICATA: questo impedisce le separazioni in verticale! */
   border-radius: 8px; 
   overflow: hidden; 
   cursor: pointer; 
@@ -135,27 +129,27 @@ a:hover { color: var(--blue-light); }
   grid-column: span 12; 
 }
 
-/* Griglia Bento DISORDINATA per Desktop (> 900px) */
+/* Griglia Bento Asimmetrica per Desktop (> 900px) */
 @media (min-width: 900px) {
-  .case { height: auto; } /* Usa le altezze impostate sotto */
+  .case { height: 350px; } /* Manteniamo la stessa altezza di default per tutte per i filtri */
   
-  /* Creiamo un pattern davvero vario e asimmetrico */
-  .case:nth-child(1) { grid-column: span 8; height: 420px; } /* Progetto Largo */
-  .case:nth-child(2) { grid-column: span 4; height: 420px; } /* Progetto Quadrato alto */
+  .case:nth-child(1) { grid-column: span 8; } 
+  .case:nth-child(2) { grid-column: span 4; } 
   
-  .case:nth-child(3) { grid-column: span 4; height: 320px; } /* Tre più piccoli */
-  .case:nth-child(4) { grid-column: span 4; height: 320px; }
-  .case:nth-child(5) { grid-column: span 4; height: 320px; }
+  .case:nth-child(3) { grid-column: span 4; } 
+  .case:nth-child(4) { grid-column: span 4; }
+  .case:nth-child(5) { grid-column: span 4; }
   
-  .case:nth-child(6) { grid-column: span 12; height: 500px;} /* Il bannerone centrale enorme */
+  /* L'unica card che può avere un'altezza diversa è quella larga tutta la riga (12 span) */
+  .case:nth-child(6) { grid-column: span 12; height: 450px; } 
   
-  .case:nth-child(7) { grid-column: span 5; height: 380px; } /* Leggermente asimmetrici */
-  .case:nth-child(8) { grid-column: span 7; height: 380px; }
+  .case:nth-child(7) { grid-column: span 5; } 
+  .case:nth-child(8) { grid-column: span 7; } 
   
-  .case:nth-child(9) { grid-column: span 4; height: 300px; } /* Piccolo e uno enorme */
-  .case:nth-child(10){ grid-column: span 8; height: 300px; }
+  .case:nth-child(9) { grid-column: span 4; } 
+  .case:nth-child(10){ grid-column: span 8; }
   
-  .case:nth-child(n+11) { grid-column: span 6; height: 350px; } /* Ultimi a metà schermo */
+  .case:nth-child(n+11) { grid-column: span 6; } 
 }
 
 .case.is-hidden { display: none !important; }
@@ -210,19 +204,16 @@ a:hover { color: var(--blue-light); }
 footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text-gray); border-top: 1px solid var(--glass-border); margin-top: 40px;}
 
 /* ========================================================= */
-/* RESPONSIVE F-PATTERN - MOBILE MENO AMMASSATO              */
+/* RESPONSIVE F-PATTERN E MOBILE FIX                         */
 /* ========================================================= */
 @media (max-width: 900px) {
   .profile-grid { grid-template-columns: 1fr; gap: 50px; }
   
-  /* Ripristina l'allineamento naturale su mobile, rimuove la spinta "margin: auto" */
-  .profile-sidebar { grid-column: auto; grid-row: auto; }
-  .profile-sidebar .profile-block:last-child { margin-top: 0; margin-bottom: 40px; }
-
-  .profile-content { grid-column: auto; grid-row: auto; }
-  .profile-content .profile-block:last-child { margin-bottom: 40px; }
+  /* Ordine naturale su mobile: La Sidebar (Foto/Nome) prima dell'Experience */
+  .profile-sidebar { grid-column: 1; grid-row: 1; display: block; }
+  .profile-content { grid-column: 1; grid-row: 2; display: block; }
   
-  .profile-block { margin-bottom: 40px; }
+  .profile-block { margin-bottom: 40px; } 
   .exp-item { grid-template-columns: 1fr; gap: 8px; margin-bottom: 30px; padding-bottom: 25px; } 
   
   .contact-wrap { flex-direction: column; align-items: flex-start; }
