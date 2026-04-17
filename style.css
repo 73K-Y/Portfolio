@@ -8,7 +8,7 @@
   --glass: rgba(5, 10, 24, 0.7);
   --glass-border: rgba(30, 80, 255, 0.2);
   --max-w: 1200px;
-  --gutter: clamp(20px, 4vw, 40px);
+  --gutter: clamp(20px, 5vw, 40px);
   color-scheme: dark;
 }
 
@@ -28,7 +28,7 @@ html, body {
 a { color: var(--white); text-decoration: none; transition: 0.2s; }
 a:hover { color: var(--blue-light); }
 
-.wrap { max-width: var(--max-w); margin: 0 auto; padding: clamp(24px,4vw,48px) var(--gutter); }
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: clamp(30px, 6vw, 60px) var(--gutter); }
 .section { min-height: 60vh; }
 
 /* ========================================================= */
@@ -77,34 +77,31 @@ a:hover { color: var(--blue-light); }
 .block-title { display: inline-block; background: var(--blue-glow); color: var(--white); padding: 6px 14px; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border-radius: 2px; }
 
 /* LEFT LISTS */
-.block-item { margin-bottom: 15px; }
-.block-item strong { display: block; font-size: 15px; font-family: 'Space Grotesk', sans-serif; color: var(--white); margin-bottom: 3px; }
+.block-item { margin-bottom: 20px; }
+.block-item strong { display: block; font-size: 15px; font-family: 'Space Grotesk', sans-serif; color: var(--white); margin-bottom: 5px; }
 .block-item span { display: block; font-size: 13px; color: var(--text-gray); }
 
 .skills-list-text { list-style: none; padding: 0; margin: 0; }
-.skills-list-text li { font-size: 14px; color: var(--white); margin-bottom: 10px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
+.skills-list-text li { font-size: 14px; color: var(--white); margin-bottom: 12px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
 
-.software-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.software-tags span { background: rgba(30, 80, 255, 0.15); border: 1px solid var(--blue-glow); color: var(--blue-light); padding: 4px 10px; border-radius: 4px; font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
-
-.software-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.software-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
 .software-list li { display: flex; align-items: center; gap: 15px; font-size: 13px; color: var(--white); font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; font-family: 'Space Grotesk', sans-serif;}
 .sw-icon-img { width: 20px; height: 20px; object-fit: contain; }
 
 /* MAIN CONTENT (Experience, About) */
-.about-text { font-size: 15px; color: var(--white); line-height: 1.6; margin: 0; }
+.about-text { font-size: 15px; color: var(--white); line-height: 1.7; margin: 0; }
 
-.exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; margin-bottom: 25px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 20px; }
+.exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; margin-bottom: 30px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 25px; }
 .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .exp-date { color: var(--text-gray); font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; padding-top: 3px; }
 .exp-desc strong { display: block; font-size: 16px; font-family: 'Space Grotesk', sans-serif; color: var(--white); text-transform: uppercase; letter-spacing: 0.5px; }
-.exp-role { display: block; color: var(--blue-light); font-size: 13px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
-.exp-desc p { margin: 0; color: var(--text-gray); font-size: 14px; line-height: 1.5; }
+.exp-role { display: block; color: var(--blue-light); font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+.exp-desc p { margin: 0; color: var(--text-gray); font-size: 14.5px; line-height: 1.6; }
 
-.contact-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+.contact-grid { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
 .contact-link { color: var(--white); font-size: 15px; font-weight: 500; }
 
-.btn-download { display: inline-block; background: var(--blue-glow); color: var(--white); padding: 12px 24px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; transition: 0.3s; }
+.btn-download { display: inline-block; background: var(--blue-glow); color: var(--white); padding: 14px 28px; font-family: 'Space Grotesk', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; transition: 0.3s; }
 .btn-download:hover { background: var(--blue-light); color: var(--bg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
 
 /* ========================================================= */
@@ -114,12 +111,17 @@ a:hover { color: var(--blue-light); }
 .filter-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-gray); padding: 8px 20px; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
 .filter-btn.active, .filter-btn:hover { background: var(--blue-glow); color: var(--white); border-color: var(--blue-glow); }
 
-.gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+.gallery-grid { 
+  display: grid; 
+  grid-template-columns: repeat(12, 1fr); 
+  gap: 20px; 
+  grid-auto-flow: dense; /* TAPPA I BUCHI IN AUTOMATICO */
+}
 
 /* Stile base per tutte le card (Mobile) */
 .case { 
   position: relative; 
-  height: 300px; 
+  height: 280px; /* Ridotto per non ingombrare troppo su mobile */
   border-radius: 8px; 
   overflow: hidden; 
   cursor: pointer; 
@@ -128,29 +130,35 @@ a:hover { color: var(--blue-light); }
   grid-column: span 12; 
 }
 
-/* Griglia Bento ultra-dinamica per Desktop (> 900px) */
+/* Griglia Bento Senza Buchi per Desktop (> 900px) */
 @media (min-width: 900px) {
-  .case { height: auto; }
+  .case { height: 380px; } /* Altezza standard per evitare disallineamenti di riga */
   
-  /* Rompiamo la monotonia con formati disparati! */
-  .case:nth-child(1) { grid-column: span 12; aspect-ratio: 21 / 9; } /* Hero Project: Super Wide */
-  .case:nth-child(2) { grid-column: span 7; aspect-ratio: 4 / 3; }  /* Grande a sx */
-  .case:nth-child(3) { grid-column: span 5; aspect-ratio: 1 / 1; }  /* Quadrato a dx */
+  /* Riga 1: Totale 12 */
+  .case:nth-child(1) { grid-column: span 12; height: 500px; } 
   
-  .case:nth-child(4) { grid-column: span 4; aspect-ratio: 1 / 1; }  /* Tre in fila */
-  .case:nth-child(5) { grid-column: span 4; aspect-ratio: 1 / 1; }
-  .case:nth-child(6) { grid-column: span 4; aspect-ratio: 1 / 1; }
+  /* Riga 2: Totale 12 (8+4) */
+  .case:nth-child(2) { grid-column: span 8; }  
+  .case:nth-child(3) { grid-column: span 4; }  
   
-  .case:nth-child(7) { grid-column: span 8; aspect-ratio: 16 / 9; } /* Molto largo a sx */
-  .case:nth-child(8) { grid-column: span 4; aspect-ratio: 9 / 16; } /* Verticale a dx */
+  /* Riga 3: Totale 12 (4+4+4) */
+  .case:nth-child(4) { grid-column: span 4; }  
+  .case:nth-child(5) { grid-column: span 4; }
+  .case:nth-child(6) { grid-column: span 4; }
   
-  .case:nth-child(9) { grid-column: span 6; aspect-ratio: 16 / 9; } /* Classico a metà */
-  .case:nth-child(10) { grid-column: span 6; aspect-ratio: 16 / 9; }
+  /* Riga 4: Totale 12 (5+7) */
+  .case:nth-child(7) { grid-column: span 5; } 
+  .case:nth-child(8) { grid-column: span 7; } 
   
-  .case:nth-child(n+11) { grid-column: span 4; aspect-ratio: 4 / 3; } /* Restanti */
+  /* Riga 5: Totale 12 (6+6) */
+  .case:nth-child(9) { grid-column: span 6; } 
+  .case:nth-child(10) { grid-column: span 6; }
+  
+  /* Riga 6+: Totale 12 (4+4+4) */
+  .case:nth-child(n+11) { grid-column: span 4; } 
 }
 
-.case.is-hidden { display: none; }
+.case.is-hidden { display: none !important; }
 .case-bg { position: absolute; inset: 0; background-image: var(--bg); background-size: cover; background-position: center; transition: 0.6s ease; filter: brightness(0.6) contrast(1.1); z-index: 0; }
 .case:hover { border-color: var(--blue-glow); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(30, 80, 255, 0.2); z-index: 5; }
 .case:hover .case-bg { transform: scale(1.05); filter: brightness(1); }
@@ -171,7 +179,7 @@ a:hover { color: var(--blue-light); }
 }
 
 @media (min-width: 900px) {
-  .case-coming { height: auto; aspect-ratio: 16 / 9; }
+  .case-coming { height: 350px; }
 }
 
 .case-coming .pc-bg { display: none; }
@@ -200,21 +208,23 @@ a:hover { color: var(--blue-light); }
 footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text-gray); border-top: 1px solid var(--glass-border); margin-top: 40px;}
 
 /* ========================================================= */
-/* RESPONSIVE F-PATTERN (Identico visivamente ma impilato)   */
+/* RESPONSIVE F-PATTERN E FIX AMMASSAMENTO MOBILE            */
 /* ========================================================= */
 @media (max-width: 900px) {
   .profile-grid { 
     grid-template-columns: 1fr; 
-    gap: 40px; 
+    gap: 70px; /* Molto più spazio tra colonna destra e sinistra per far respirare */
   }
   
-  /* Rimuovo le restrizioni rigide, lascio impilare in modo naturale (Foto/Skills prima, poi Esperienza) */
   .profile-sidebar { grid-column: auto; grid-row: auto; }
   .profile-content { grid-column: auto; grid-row: auto; }
   
-  .exp-item { grid-template-columns: 1fr; gap: 5px; }
-  .hero-title-back { font-size: 20vw; }
-  .video-container { width: 95%; margin-top: 80px; }
+  .profile-block { margin-bottom: 50px; } /* Aumentato respiro tra i blocchi */
+  
+  .exp-item { grid-template-columns: 1fr; gap: 10px; margin-bottom: 40px; padding-bottom: 30px; } /* Più spazio nelle esperienze */
+  
+  .hero-title-back { font-size: 17vw; } /* Testo di sfondo leggermente più piccolo */
+  .video-container { width: 100%; margin-top: 100px; border-radius: 8px; border: none; }
 }
 
 /* ========================================================= */
