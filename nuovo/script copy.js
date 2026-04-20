@@ -56,17 +56,27 @@
   });
 })();
 
-/* ========= Filtro categorie ========= */
+/* ========= Filtro categorie (CON FIX BENTO BOX) ========= */
 (() => {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const cards = Array.from(document.querySelectorAll(".case"));
 
   function applyFilter(key) {
     const cat = (key || "all").trim();
+    let visibleIndex = 1; // Contatore solo per le card visibili
+    
     cards.forEach((c) => {
       const cc = (c.dataset.cat || "").trim();
-      if (cat === "all" || cc === cat) c.classList.remove("is-hidden");
-      else c.classList.add("is-hidden");
+      if (cat === "all" || cc === cat) {
+        c.classList.remove("is-hidden");
+        // Assegna la posizione dinamica alla card visibile
+        c.setAttribute("data-bento", visibleIndex);
+        visibleIndex++;
+      } else {
+        c.classList.add("is-hidden");
+        // Rimuovi l'attributo se nascosta per non sballare il CSS
+        c.removeAttribute("data-bento");
+      }
     });
   }
 
@@ -82,7 +92,7 @@
   applyFilter("all");
 })();
 
-/* ========= Modal & Gallery NATIVA SENZA NAVBAR SOTTO ========= */
+/* ========= Modal & Gallery NATIVA ========= */
 (() => {
   const modal = document.getElementById("modal");
   const modalInner = document.getElementById("modalInner");
@@ -151,7 +161,6 @@
     const indexFromScroll = () => Math.round(track.scrollLeft / slideW());
     const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * slideW(), behavior: "smooth" });
 
-    // Gestione Frecce per PC: compaiono SOLO SE CI SONO PIÙ FOTO e nascondono in modo intelligente
     const isPC = window.matchMedia("(min-width: 769px)").matches;
     
     if (items.length > 1 && isPC) {
@@ -166,15 +175,15 @@
 
       const updateArrows = () => {
         const idx = indexFromScroll();
-        prev.style.display = idx === 0 ? "none" : "block"; // Se è la prima, via la sinistra
-        next.style.display = idx === slides.length - 1 ? "none" : "block"; // Se è l'ultima, via la destra
+        prev.style.display = idx === 0 ? "none" : "block"; 
+        next.style.display = idx === slides.length - 1 ? "none" : "block"; 
       };
 
       prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
       next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
 
       track.addEventListener('scroll', updateArrows, { passive: true });
-      setTimeout(updateArrows, 50); // Inizializza subito
+      setTimeout(updateArrows, 50); 
     }
 
     const onKey = (e) => {
@@ -183,9 +192,6 @@
       if (e.key === "ArrowRight") { e.preventDefault(); goTo(indexFromScroll() + 1); }
     };
     document.addEventListener("keydown", onKey);
-
-    // Su mobile lo swipe è nativo (CSS overflow-x: auto + scroll-snap) quindi ho rimosso il custom touch JS.
-    // Nessuna navbar sotto o roba che interrompe la visione!
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
@@ -208,4 +214,49 @@
       openModal(items, title, desc, tools, note);
     }, { passive: true }
   );
+})();
+
+/* ========= Sistema Navigazione SPA (Aggiornamento Pagina) ========= */
+(() => {
+  const btnProfile = document.getElementById("btn-profile");
+  const btnShowreel = document.getElementById("btn-showreel");
+  const logoHome = document.getElementById("logo-home");
+  
+  const viewHome = document.getElementById("view-home");
+  const viewProfile = document.getElementById("view-profile");
+
+  function switchView(viewName) {
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    if (viewName === "profile") {
+      viewHome.style.display = "none";
+      viewProfile.style.display = "block";
+      btnProfile.classList.add("active");
+      btnShowreel.classList.remove("active");
+    } else {
+      viewHome.style.display = "block";
+      viewProfile.style.display = "none";
+      btnShowreel.classList.add("active");
+      btnProfile.classList.remove("active");
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => {
+      el.classList.remove("is-visible");
+      setTimeout(() => observer.observe(el), 50);
+    });
+  }
+
+  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("profile"); });
+  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
 })();

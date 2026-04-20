@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Portfolio - Tommy Raffaello Hodoroaba</title>
+    <meta name="description" content="Portfolio 3D — game art, rendering, motion." />
+
+    <meta name="theme-color" content="#030612" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="nav-wrapper">
+      <div class="nav-glass">
+        <div class="brand" id="logo-home" style="cursor: pointer;">
+          <div class="logo"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'"></div>
+          <div class="name-row">
+            <h1>TOMHODA</h1>
+            <p class="lead">AR/VR • GAME DEV • 3D ARTIST</p>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#" id="btn-showreel" class="active">Home</a>
+          <a href="#" id="btn-profile">Profile</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-home">
+      <section id="hero" class="hero-video-section">
+        <h1 class="hero-title-back">PORTFOLIO</h1>
+        <div class="video-container reveal">
+          <video autoplay loop muted playsinline poster="assets/EXAMPLE.png">
+            <source src="INSERISCI_QUI_IL_TUO_VIDEO.mp4" type="video/mp4">
+            Il tuo browser non supporta il tag video.
+          </video>
+        </div>
+      </section>
+
+      <div id="showreel" class="wrap section">
+        <h2 class="profile-main-title" style="margin-bottom: 20px;">PR<span class="glow-script">O</span>JECTS</h2>
+        <div id="filters" class="filterbar reveal">
+          <button class="filter-btn active" data-filter="all" type="button">Tutti</button>
+          <button class="filter-btn" data-filter="game" type="button">Game Art &amp; Dev</button>
+          <button class="filter-btn" data-filter="viz" type="button">3D Visualization</button>
+        </div>
+
+        <div class="gallery-grid">
+          
+          <section class="case reveal" data-cat="viz" data-title="Star Destroyer" data-desc="Nave imperiale dell’universo Star Wars." data-tools="Blender, Photoshop" data-images="assets/Screenshot 2025-10-12 210314.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Star Destroyer</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="Ambientazione - Oblivion Hospital" data-desc="Animazioni 3D e rendering di meccaniche." data-tools="Blender, Unreal Engine" data-images="assets/scena - background menù - ospedale.png" data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
+            <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Oblivion Hospital</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="Soldier Walker" data-desc="Personaggio 3D, studio materiali e posing." data-tools="Blender, Substance, Photoshop" data-images="assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg|assets/Untitled.png|assets/Screenshot 2025-10-12 205615.png">
+            <div class="case-bg" style="--bg:url('assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Soldier Walker</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz" data-title="Mini Appartamento e Aula Studio" data-desc="Mini render viewport." data-tools="Blender" data-images="assets/Screenshot 2025-07-04 1448315.png|assets/Screenshot 2025-07-04 144835.png|assets/Screenshot 2025-07-04 1446835.png|assets/Screenshot 2025-07-04 1444835.png|assets/Screenshot 2025-07-04 1448735.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-07-04 1448315.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Appartamento & Aula</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz" data-title="Alan Walker Remix" data-desc="Visualizer del remix musicale." data-tools="Premiere, After Effects, Blender" data-images="assets/Screenshot 2025-10-12 224346.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Beautiful Nightmare</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="Lego Mario" data-desc="Statuina Lego Mario." data-tools="Blender" data-images="assets/UntitledMario.png">
+            <div class="case-bg" style="--bg:url('assets/UntitledMario.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Lego Mario</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="2084 - Aetalya Chronicles" data-desc="Texturing ambientale." data-tools="Photoshop" data-images="assets/hud office left.png|assets/hud front office.png|assets/hud terminal office.png">
+            <div class="case-bg" style="--bg:url('assets/hud office left.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Aetalya Chronicles</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz" data-title="Statuina Baby Yoda" data-desc="Statuina scannerizzata." data-tools="Blender, Maya, Photoshop" data-images="assets/babyyodafront.png|assets/babyyodafrontUV.png|assets/babyyodaside.png|assets/babyyodasideUV.png|assets/babyyodaback.png|assets/babyyodabackUV.png">
+            <div class="case-bg" style="--bg:url('assets/babyyodafront.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Statuina Baby Yoda</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz" data-title="Lowpoly Planets" data-desc="Pianeti lowpoly per video." data-tools="Blender" data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Lowpoly Planets</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="Treni Trenitalia" data-desc="Asset per simulatori." data-tools="Blender, Substance" data-images="assets/Screenshot 2025-10-12 204155.png|assets/regfront.png|assets/regback.png|assets/regside.png|assets/regunder.png|assets/Screenshot 2025-10-12 204343.png|assets/Screenshot 2025-10-12 204346.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Treni Trenitalia</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="Tram Torino" data-desc="Asset low poly per videogioco." data-tools="Blender, Unity" data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 0049.png|assets/Screenshot 2025-06-06 00465349.png|assets/Screenshot 2025-10-12 346.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Tram Torino Lowpoly</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz" data-title="Città Low Poly" data-desc="Città low poly in viewport." data-tools="Blender" data-images="assets/Screenshot 2025-10-12 203652.png">
+            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Città Low Poly</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz" data-title="Auto Futuristica" data-desc="Concept car futuristica modellata in Blender." data-tools="Blender" data-images="assets/Screenshot_20251012_214749_Drive.jpg">
+            <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Auto Futuristica</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game" data-title="Animatrone Umanoide" data-desc="Modellazione e texturing del mostro per videogioco su Unreal Engine." data-tools="Blender, Unreal Engine" data-images="assets/animatronic.png|assets/animatronic2.png|assets/animatronic3.png|assets/animatronic4.png">
+            <div class="case-bg" style="--bg:url('assets/animatronic.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Animatrone Umanoide</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+        </div>
+
+        <section class="coming-section reveal">
+          <h3 class="block-title" style="margin-bottom: 20px;">IN SVILUPPO</h3>
+          <div class="coming-grid">
+            <article class="case-coming" data-title="Synclife Dynamics">
+              <div class="case-bg pc-bg" style="background-image:url('assets/pc_synclife_dynamics.png')"></div>
+              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_synclife_dynamics.png')"></div>
+              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
+              <div class="case-info"><h4 class="coming-title">Synclife Dynamics</h4></div>
+            </article>
+            <article class="case-coming" data-title="Brain.exe">
+              <div class="case-bg pc-bg" style="background-image:url('assets/pc_BrainEXE.png')"></div>
+              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_BrainEXE.png')"></div>
+              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
+              <div class="case-info"><h4 class="coming-title">Brain.exe</h4></div>
+            </article>
+            <article class="case-coming" data-title="TOMHODA Studios">
+              <div class="case-bg pc-bg" style="background-image:url('assets/pc_LogoTHOMODA.png')"></div>
+              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_LogoTHOMODA.png')"></div>
+              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
+              <div class="case-info"><h4 class="coming-title">TOMHODA Studios</h4></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="view-profile" style="display: none; padding-top: 40px;">
+      <section class="wrap profile-section reveal">
+        <h2 class="profile-main-title">PR<span class="glow-script">O</span>FILE</h2>
+        
+        <div class="profile-grid">
+          
+          <main class="profile-content">
+            <div class="profile-block">
+              <h4 class="block-title">ABOUT ME</h4>
+              <p class="about-text">Game Developer e 3D Artist con background tecnico in Informatica e specializzazione immersiva in AR/VR e Game
+                Dev. Faccio da ponte tra il mondo della programmazione e quello della grafica. Specializzato in gameplay
+                programming, sviluppo software e web , affiancati da solide competenze 3D in modellazione, texturing, rigging,
+                animazione e lighting. Sono un professionista versatile, pronto a ruotare in modo efficiente tra ruoli di grafica e
+                scrittura di codice.
+              </p>
+            </div>
+
+            <div class="profile-block">
+              <h4 class="block-title">EXPERIENCE</h4>
+              
+              <div class="exp-item">
+                <div class="exp-date">12/2025 - 04/2026</div>
+                <div class="exp-desc">
+                  <strong>PANDORA CREATIVE STUDIOS</strong>
+                  <span class="exp-role">3D Artist & Developer</span>
+                  <p>Gestione della pipeline 3D completa (modellazione, texturing, rigging, animazione e compositing). Sviluppo di add-on Blender e implementazione tool IA per ottimizzare i processi e i tempi di produzione.</p>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-date">2019 - Pres.</div>
+                <div class="exp-desc">
+                  <strong>ALAN WALKER</strong>
+                  <span class="exp-role">3D Artist</span>
+                  <p>Modellazione, animazione, rigging e weight painting di asset. Creazione di contenuti grafici tramite Blender e Unreal.</p>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-date">04/2024 - Pres.</div>
+                <div class="exp-desc">
+                  <strong>ALAN WALKER</strong>
+                  <span class="exp-role">Ambasciatore</span>
+                  <p>Coordinamento incontri (meet & greet) nel backstage tra fan e artista. Supporto organizzativo e operativo durante i tour italiani. Gestione della community italiana e mediazione per le comunicazioni del management.</p>
+                </div>
+              </div>
+              
+              <div class="exp-item">
+                <div class="exp-date">06/2024 - 07/2024</div>
+                <div class="exp-desc">
+                  <strong>BLACKSTAR MARKETING</strong>
+                  <span class="exp-role">Addetto Accoglienza</span>
+                  <p>Accoglienza clienti e rappresentanza del brand aziendale. Presentazione dei servizi offerti e dei relativi piani di contributo.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-block">
+              <h4 class="block-title">EDUCATION</h4>
+              <div class="exp-item">
+                <div class="exp-date">12/2024 - Pres.</div>
+                <div class="exp-desc">
+                  <strong>ITS ACADEMY ICT PIEMONTE</strong>
+                  <span class="exp-role">AR/VR & Game Developer</span>
+                  <p>Tecnico Superiore Augmented, Virtual e Mixed Reality.</p>
+                </div>
+              </div>
+              <div class="exp-item">
+                <div class="exp-date">2019 - 2024</div>
+                <div class="exp-desc">
+                  <strong>IIS PRIMO LEVI</strong>
+                  <span class="exp-role">Diploma Superiore</span>
+                  <p>Informatica & Telecomunicazioni.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-block">
+              <h4 class="block-title">CONTACT</h4>
+              <div class="contact-wrap">
+                <div class="contact-grid">
+                  <a href="mailto:raffaelprivate@gmail.com" class="contact-link">📧 raffaelprivate@gmail.com</a>
+                  <span class="contact-link">📱 +39 3925649950</span>
+                  <span class="contact-link">📍 Torino, Italia</span>
+                </div>
+                <a class="btn-download" href="Tommy Raffaello Hodoroaba 14-04-26.pdf" target="_blank">SCARICA CV IN PDF</a>
+              </div>
+            </div>
+          </main>
+
+          <aside class="profile-sidebar">
+            <div class="profile-pic-container">
+              <img src="assets/fronte.png" alt="Tommy Raffaello Hodoroaba" class="profile-pic" onerror="this.src='https://via.placeholder.com/200/030612/1e50ff?text=TR'">
+              <div class="pic-ring"></div>
+            </div>
+            
+            <h3 class="profile-name">TOMMY R. HODOROABA</h3>
+            <p class="profile-role">AR/VR • GAME DEV • 3D ARTIST</p>
+
+            <div class="profile-block">
+              <h4 class="block-title">SKILLS</h4>
+              <ul class="skills-list-text">
+                <li>Gameplay Programming</li>
+                <li>Sviluppo AR/VR</li>
+                <li>Modellazione & Texturing</li>
+                <li>Rigging & Animazione 3D</li>
+                <li>Metodologie Agile</li>
+                <li>Fotogrammetria</li>
+              </ul>
+            </div>
+            
+            <div class="profile-block">
+              <h4 class="block-title">SOFTWARE</h4>
+              <ul class="software-list">
+                <li><img src="assets/unreal.png" alt="Unreal" class="sw-icon-img" onerror="this.style.display='none'"> Unreal Engine 5</li>
+                <li><img src="assets/unity.png" alt="Unity" class="sw-icon-img" onerror="this.style.display='none'"> Unity</li>
+                <li><img src="assets/blender.png" alt="Blender" class="sw-icon-img" onerror="this.style.display='none'"> Blender</li>
+                <li><img src="assets/maya.png" alt="Maya" class="sw-icon-img" onerror="this.style.display='none'"> Maya / 3DS Max</li>
+                <li><img src="assets/vsc.png" alt="Code" class="sw-icon-img" onerror="this.style.display='none'"> C++ / C# / Python</li>
+                <li><img src="assets/photoshop.png" alt="Photoshop" class="sw-icon-img" onerror="this.style.display='none'"> Photoshop</li>
+                <li><img src="assets/after.png" alt="After Effects" class="sw-icon-img" onerror="this.style.display='none'"> After Effects</li>
+                <li><img src="assets/premiere.png" alt="Premiere" class="sw-icon-img" onerror="this.style.display='none'"> Premiere</li>
+              </ul>
+            </div>
+
+            <div class="profile-block">
+              <h4 class="block-title">LANGUAGES</h4>
+              <ul class="skills-list-text">
+                <li>Italiano <span style="color:var(--text-gray); font-size:12px; float:right;">Madrelingua</span></li>
+                <li>Inglese <span style="color:var(--text-gray); font-size:12px; float:right;">C1</span></li>
+                <li>Spagnolo <span style="color:var(--text-gray); font-size:12px; float:right;">B2</span></li>
+                <li>Rumeno <span style="color:var(--text-gray); font-size:12px; float:right;">B2</span></li>
+              </ul>
+            </div>
+
+            <div class="profile-block" style="margin-bottom: 0;">
+              <h4 class="block-title">INTERESTS</h4>
+              <div class="software-tags">
+                <span>Game Development</span>
+                <span>Mondo delle Corse (F1/WEC)</span>
+                <span>Simulatori</span>
+                <span>Produzione Musicale (FL Studio)</span>
+                <span>Viaggiare</span>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </section>
+    </div>
+
+    <footer class="wrap footer-tight">
+      <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
+    </footer>
+
+    <div id="modal" class="modal" role="dialog" aria-hidden="true">
+      <div class="backdrop" id="modalBackdrop"></div>
+      <div class="content" role="document">
+        <button id="closeModal" aria-label="Chiudi" type="button">✕</button>
+        <div id="modalInner"></div>
+        <div id="modalInfo" class="modal-info-text"></div>
+        <div id="modalTools" class="toolchips"></div>
+        <div id="modalNote" class="author-note"></div>
+      </div>
+    </div>
+
+    <script defer src="script.js"></script>
+  </body>
+</html>
