@@ -91,7 +91,7 @@
           <div class="stat-divider"></div>
           <div class="stat">
             <span class="stat-num">40M+</span>
-            <span class="stat-label">Fan dell'artista</span>
+            <span class="stat-label">Ascoltatori Spotify (Alan Walker)</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
@@ -364,7 +364,7 @@
         <!-- CTA FINALE nella home -->
         <div class="home-cta reveal">
           <p>Hai un progetto in mente o stai cercando un profilo AR/VR & 3D?</p>
-          <a href="mailto:raffaelprivate@gmail.com" class="btn-download">Scrivimi</a>
+          <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" type="button">Scrivimi</button>
           <a href="#" id="cta-profile-link" class="btn-outline">Guarda il profilo completo</a>
         </div>
 
@@ -552,28 +552,45 @@
 
     <script defer src="script.js"></script>
     <script>
-      // CTA nella home che switcha al profilo
+      // === CTA profile switch ===
       document.getElementById('cta-profile-link')?.addEventListener('click', function(e) {
         e.preventDefault();
         document.getElementById('btn-profile')?.click();
       });
 
-      // Slideshow fallback hero: se il video non carica, avvia lo slideshow
+      // === Slideshow fallback hero ===
       const video = document.getElementById('heroVideo');
       const slideshow = document.getElementById('heroSlideshow');
       if (video) {
-        video.addEventListener('error', () => {
+        const showSlideshow = () => {
           video.style.display = 'none';
-          slideshow.style.display = 'block';
-        });
-        // Se dopo 3s il video non ha dati, mostra slideshow
-        setTimeout(() => {
-          if (video.readyState === 0) {
-            video.style.display = 'none';
-            slideshow.style.display = 'block';
-          }
-        }, 3000);
+          if (slideshow) slideshow.style.display = 'block';
+        };
+        video.addEventListener('error', showSlideshow);
+        setTimeout(() => { if (video.readyState === 0) showSlideshow(); }, 2500);
+      } else if (slideshow) {
+        slideshow.style.display = 'block';
       }
+
+      // === Bottone "Scrivimi" — copia email negli appunti ===
+      document.querySelectorAll('.btn-copy-email').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const email = this.dataset.email;
+          if (!email) return;
+          navigator.clipboard.writeText(email).then(() => {
+            const orig = this.textContent;
+            this.textContent = '✓ Email copiata!';
+            this.style.background = '#00c864';
+            setTimeout(() => {
+              this.textContent = orig;
+              this.style.background = '';
+            }, 2200);
+          }).catch(() => {
+            // Fallback se clipboard non disponibile
+            window.location.href = 'mailto:' + email;
+          });
+        });
+      });
     </script>
   </body>
 </html>
