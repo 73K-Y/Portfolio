@@ -40,9 +40,17 @@
     if (badges) {
       badges.innerHTML = "";
       if (cat) {
+        // FIX: Mappatura delle nuove categorie
+        const catNames = { 
+          "characters": "Characters", 
+          "environments": "Environments", 
+          "hardsurface": "Hard Surface", 
+          "props": "Props & Scans", 
+          "motion": "Motion & UI" 
+        };
         const b = document.createElement("span");
         b.className = "badge cat";
-        b.textContent = cat === "game" ? "Game Art & Dev" : "3D Viz";
+        b.textContent = catNames[cat] || cat; // Se non la trova, stampa la stringa grezza
         badges.appendChild(b);
       }
       tools.forEach((t) => {
@@ -216,7 +224,7 @@
   );
 })();
 
-/* ========= Sistema Navigazione SPA (Aggiornamento Pagina) ========= */
+/* ========= Sistema Navigazione SPA (Hash Routing) ========= */
 (() => {
   const btnProfile = document.getElementById("btn-profile");
   const btnShowreel = document.getElementById("btn-showreel");
@@ -225,10 +233,10 @@
   const viewHome = document.getElementById("view-home");
   const viewProfile = document.getElementById("view-profile");
 
-  function switchView(viewName) {
+  function switchView(hash) {
     window.scrollTo({ top: 0, behavior: "instant" });
 
-    if (viewName === "profile") {
+    if (hash === "#profile") {
       viewHome.style.display = "none";
       viewProfile.style.display = "block";
       btnProfile.classList.add("active");
@@ -238,7 +246,11 @@
       viewProfile.style.display = "none";
       btnShowreel.classList.add("active");
       btnProfile.classList.remove("active");
+      hash = "#home"; // Fallback di sicurezza
     }
+
+    // Aggiorna l'URL del browser senza ricaricare
+    history.pushState(null, null, hash);
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
@@ -256,9 +268,14 @@
     });
   }
 
-  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("profile"); });
-  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
-  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+  // Caricamento iniziale e navigazione "Avanti/Indietro" del browser
+  window.addEventListener("load", () => switchView(window.location.hash || "#home"));
+  window.addEventListener("popstate", () => switchView(window.location.hash || "#home"));
+
+  // Click fisici
+  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("#profile"); });
+  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
+  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
 })();
 
 /* ========= Interazioni Extra (CTA, Video Fallback, Copia Email) ========= */

@@ -21,7 +21,6 @@
 
   <body>
 
-    <!-- NAVBAR -->
     <div class="nav-wrapper">
       <div class="nav-glass">
         <div class="brand" id="logo-home" style="cursor: pointer;">
@@ -44,33 +43,31 @@
 
     <div id="view-home">
 
-      <!-- HERO con video + fallback slideshow se video assente -->
       <section id="hero" class="hero-video-section">
         <h1 class="hero-title-back">PORTFOLIO</h1>
 
         <div class="video-container reveal">
-          <!-- 
-            SE HAI UN VIDEO SHOWREEL: sostituisci il src qui sotto.
-            SE NON HAI UN VIDEO: il JS mostrerà automaticamente lo slideshow delle immagini.
-          -->
           <video id="heroVideo" autoplay loop muted playsinline poster="assets/EXAMPLE.png"
                  onerror="this.style.display='none'; document.getElementById('heroSlideshow').style.display='block';">
             <source src="INSERISCI_QUI_IL_TUO_SHOWREEL.mp4" type="video/mp4">
           </video>
+        </div>
       </section>
 
-      <!-- PROJECTS -->
       <div id="showreel" class="wrap section">
         <h2 class="profile-main-title" style="margin-bottom: 20px;">PR<span class="glow-script">O</span>JECTS</h2>
         <div id="filters" class="filterbar reveal">
           <button class="filter-btn active" data-filter="all" type="button">Tutti</button>
-          <button class="filter-btn" data-filter="game" type="button">Game Art &amp; Dev</button>
-          <button class="filter-btn" data-filter="viz" type="button">3D Visualization</button>
+          <button class="filter-btn" data-filter="characters" type="button">Characters</button>
+          <button class="filter-btn" data-filter="environments" type="button">Environments</button>
+          <button class="filter-btn" data-filter="hardsurface" type="button">Hard Surface</button>
+          <button class="filter-btn" data-filter="props" type="button">Props & Scans</button>
+          <button class="filter-btn" data-filter="motion" type="button">Motion & UI</button>
         </div>
 
         <div class="gallery-grid">
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="environments"
             data-title="Ambientazione — Oblivion Hospital"
             data-desc="Ambientazione horror completa con animazioni interattive per videogioco."
             data-tools="Blender, Unreal Engine 5"
@@ -85,7 +82,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="hardsurface"
             data-title="Treni Trenitalia"
             data-desc="Asset hard-surface ad alta fedeltà per simulatori ferroviari."
             data-tools="Blender, Substance Painter"
@@ -99,7 +96,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="characters"
             data-title="Animatrone Umanoide"
             data-desc="Personaggio mostro per UE5 — modellazione, texturing, rigging completo."
             data-tools="Blender, Unreal Engine 5"
@@ -113,7 +110,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="characters"
             data-title="Soldier Walker"
             data-desc="Personaggio 3D con studio materiali, sculpt e posing."
             data-tools="Blender, Substance Painter, Photoshop"
@@ -127,7 +124,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="hardsurface"
             data-title="Star Destroyer"
             data-desc="Hard-surface modeling di nave capitale Star Wars — rendering cinematico."
             data-tools="Blender, Photoshop"
@@ -141,7 +138,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="environments"
             data-title="Mini Appartamento e Aula Studio"
             data-desc="Architectural visualization di interni — lighting e materiali realistici."
             data-tools="Blender (Cycles)"
@@ -155,7 +152,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="motion"
             data-title="Alan Walker — Beautiful Nightmare Visualizer"
             data-desc="Motion graphics e visualizer 3D per remix musicale ufficiale."
             data-tools="Premiere Pro, After Effects, Blender"
@@ -169,7 +166,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="hardsurface"
             data-title="Tram Torino — Low Poly Game Asset"
             data-desc="Asset low poly ottimizzato per videogioco ambientato a Torino."
             data-tools="Blender, Unity"
@@ -183,7 +180,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="motion"
             data-title="2084 — Aetalya Chronicles"
             data-desc="UI/HUD design per videogioco sci-fi distopico."
             data-tools="Photoshop"
@@ -197,7 +194,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="props"
             data-title="Statuina Baby Yoda — Fotogrammetria"
             data-desc="Ricostruzione 3D fotogrammetrica di un oggetto reale."
             data-tools="Blender, Maya, Photoshop"
@@ -211,7 +208,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="props"
             data-title="Lowpoly Planets"
             data-desc="Pianeti stilizzati low-poly per video musicali e motion graphics."
             data-tools="Blender"
@@ -225,7 +222,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="environments"
             data-title="Città Low Poly"
             data-desc="Scena urbana low-poly — compositing e lighting atmosferico."
             data-tools="Blender"
@@ -239,7 +236,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz"
+          <section class="case reveal" data-cat="hardsurface"
             data-title="Auto Futuristica — Concept Car"
             data-desc="Concept car futuristica — modellazione carrozzeria e rendering studio."
             data-tools="Blender"
@@ -253,7 +250,7 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game"
+          <section class="case reveal" data-cat="props"
             data-title="Lego Mario — Digital Replica"
             data-desc="Ricostruzione digitale 3D e rendering di una statuina Lego Mario."
             data-tools="Blender"
@@ -267,9 +264,9 @@
               <button class="btn small open-modal" type="button">Apri galleria</button>
             </div>
           </section>
+
         </div>
 
-        <!-- COMING SOON con descrizioni -->
         <section class="coming-section reveal">
           <h3 class="block-title" style="margin-bottom: 20px;">IN SVILUPPO</h3>
           <div class="coming-grid">
@@ -303,7 +300,6 @@
           </div>
         </section>
 
-        <!-- CTA FINALE nella home -->
         <div class="home-cta reveal">
           <p>Hai un progetto in mente o stai cercando un coltellino svizzero di esperienza??</p>
           <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" type="button">Scrivimi</button>
@@ -313,7 +309,6 @@
       </div>
     </div>
 
-    <!-- ===================== VIEW PROFILE ===================== -->
     <div id="view-profile" style="display: none; padding-top: 40px;">
       <section class="wrap profile-section reveal">
         <h2 class="profile-main-title">PR<span class="glow-script">O</span>FILE</h2>
@@ -459,19 +454,7 @@
               </ul>
             </div>
 
-            <!--<div class="profile-block" style="margin-bottom: 0;">
-              <h4 class="block-title">INTERESTS</h4>
-              <div class="software-tags">
-                <span>Game Development</span>
-                <span>F1 / WEC</span>
-                <span>Simulatori Racing</span>
-                <span>FL Studio</span>
-                <span>Viaggiare</span>
-              </div>
             </div>
-          </aside>-->
-
-        </div>
       </section>
     </div>
 
@@ -479,7 +462,6 @@
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
-    <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
       <div class="content" role="document">
