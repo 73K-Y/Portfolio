@@ -3,8 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Portfolio - Tommy Raffaello Hodoroaba</title>
-    <meta name="description" content="AR/VR Developer & 3D Artist — Game Art, Rendering, Motion. Disponibile a nuove opportunità." />
+    <title>Tommy Hodoroaba — AR/VR Developer & 3D Artist</title>
+    <meta name="description" content="AR/VR Developer & 3D Artist. 6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#. Disponibile a nuove opportunità a Torino." />
+
+    <!-- ===== OPEN GRAPH (anteprima su LinkedIn, WhatsApp, ecc.) ===== -->
+    <meta property="og:title" content="Tommy Hodoroaba — AR/VR Developer & 3D Artist" />
+    <meta property="og:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#. Disponibile a nuove opportunità." />
+    <meta property="og:image" content="https://portfoliotommy.netlify.app/assets/EXAMPLE.png" />
+    <meta property="og:url" content="https://portfoliotommy.netlify.app" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <meta name="theme-color" content="#030612" />
     <meta name="color-scheme" content="dark" />
@@ -15,6 +23,8 @@
   </head>
 
   <body>
+
+    <!-- NAVBAR -->
     <div class="nav-wrapper">
       <div class="nav-glass">
         <div class="brand" id="logo-home" style="cursor: pointer;">
@@ -27,26 +37,72 @@
         <div class="nav-links">
           <a href="#" id="btn-showreel" class="active">Home</a>
           <a href="#" id="btn-profile">Profile</a>
+          <!-- CTA sempre visibile nella navbar -->
+          <a href="mailto:raffaelprivate@gmail.com" class="nav-cta">Contattami</a>
         </div>
       </div>
     </div>
 
-    <!-- BADGE "OPEN TO WORK" FISSO -->
+    <!-- BADGE OPEN TO WORK fisso in basso a destra -->
     <div class="open-to-work-badge">
       <span class="otw-dot"></span> Open to Work
     </div>
 
+    <!-- ===================== VIEW HOME ===================== -->
     <div id="view-home">
+
+      <!-- HERO con video + fallback slideshow se video assente -->
       <section id="hero" class="hero-video-section">
         <h1 class="hero-title-back">PORTFOLIO</h1>
+
         <div class="video-container reveal">
-          <video autoplay loop muted playsinline poster="assets/EXAMPLE.png">
-            <source src="INSERISCI_QUI_IL_TUO_VIDEO.mp4" type="video/mp4">
-            Il tuo browser non supporta il tag video.
+          <!-- 
+            SE HAI UN VIDEO SHOWREEL: sostituisci il src qui sotto.
+            SE NON HAI UN VIDEO: il JS mostrerà automaticamente lo slideshow delle immagini.
+          -->
+          <video id="heroVideo" autoplay loop muted playsinline poster="assets/EXAMPLE.png"
+                 onerror="this.style.display='none'; document.getElementById('heroSlideshow').style.display='block';">
+            <source src="INSERISCI_QUI_IL_TUO_SHOWREEL.mp4" type="video/mp4">
           </video>
+          <!-- FALLBACK: slideshow automatico se il video non carica -->
+          <div id="heroSlideshow" class="hero-slideshow" style="display:none;">
+            <div class="hs-track">
+              <img src="assets/animatronic.png" alt="Animatrone">
+              <img src="assets/Screenshot 2025-10-12 204155.png" alt="Treni">
+              <img src="assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg" alt="Soldier">
+              <img src="assets/Screenshot 2025-10-12 210314.png" alt="Star Destroyer">
+              <img src="assets/hud office left.png" alt="HUD">
+              <img src="assets/Screenshot 2025-07-04 1448315.png" alt="Archviz">
+            </div>
+          </div>
         </div>
+
+        <!-- STAT BAR sotto il video -->
+        <div class="hero-stats reveal">
+          <div class="stat">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">Anni con Alan Walker</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">14</span>
+            <span class="stat-label">Progetti nel portfolio</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">40M+</span>
+            <span class="stat-label">Fan dell'artista</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">8+</span>
+            <span class="stat-label">Software padroneggiati</span>
+          </div>
+        </div>
+
       </section>
 
+      <!-- PROJECTS -->
       <div id="showreel" class="wrap section">
         <h2 class="profile-main-title" style="margin-bottom: 20px;">PR<span class="glow-script">O</span>JECTS</h2>
         <div id="filters" class="filterbar reveal">
@@ -57,13 +113,14 @@
 
         <div class="gallery-grid">
 
-          <!-- ALAN WALKER: spostato in posizione 1 — esperienza professionale reale -->
+          <!-- 1. ALAN WALKER (posizione di punta — esperienza professionale reale) -->
           <section class="case reveal" data-cat="game"
             data-title="Alan Walker — Digital Artist Team"
             data-desc="Asset 3D ufficiali per concerti, tour e contenuti digitali dell'artista."
             data-tools="Blender, Unreal Engine"
             data-note="Collaborazione professionale continuativa dal 2019. Modellazione, rigging, weight painting e animazione di personaggi e prop per video musicali e visual live. Produzione contenuti su Blender e Unreal Engine per un artista con oltre 40 milioni di fan su Spotify."
             data-images="assets/scena - background menù - ospedale.png">
+            <!-- ⚠️ CAMBIA L'IMMAGINE QUI CON UN ASSET REALE DEL PROGETTO ALAN WALKER -->
             <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
             <div class="case-info">
               <div class="badges"></div>
@@ -72,12 +129,12 @@
             </div>
           </section>
 
-          <!-- OBLIVION HOSPITAL -->
+          <!-- 2. OBLIVION HOSPITAL -->
           <section class="case reveal" data-cat="game"
-            data-title="Ambientazione - Oblivion Hospital"
+            data-title="Ambientazione — Oblivion Hospital"
             data-desc="Ambientazione horror completa con animazioni interattive per videogioco."
-            data-tools="Blender, Unreal Engine"
-            data-note="Progetto scolastico ITS ICT Piemonte. Pipeline completa: modellazione ambiente, texturing PBR, lighting atmosphere, animazioni di interazione con l'ambiente in Unreal Engine 5. Include 3 clip video di gameplay/animazione."
+            data-tools="Blender, Unreal Engine 5"
+            data-note="Progetto ITS ICT Piemonte. Pipeline completa: modellazione ambiente, texturing PBR, lighting atmosphere, animazioni di interazione in Unreal Engine 5. Include 3 clip video di gameplay."
             data-images="assets/scena - background menù - ospedale.png"
             data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
             <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
@@ -88,12 +145,12 @@
             </div>
           </section>
 
-          <!-- TRENI TRENITALIA -->
+          <!-- 3. TRENI TRENITALIA -->
           <section class="case reveal" data-cat="game"
             data-title="Treni Trenitalia"
             data-desc="Asset hard-surface ad alta fedeltà per simulatori ferroviari."
             data-tools="Blender, Substance Painter"
-            data-note="Modellazione hard-surface di convogli Trenitalia con topologia ottimizzata per simulatori. UV unwrap manuale, texturing PBR con Substance Painter (albedo, normal, roughness, metalness). Attenzione ai dettagli tecnici: porte, pantografi, carrelli."
+            data-note="Modellazione hard-surface di convogli Trenitalia con topologia ottimizzata per simulatori. UV unwrap manuale, texturing PBR con Substance Painter (albedo, normal, roughness, metalness). Attenzione ai dettagli tecnici: porte, pantografi, carrelli. ~40h di lavoro."
             data-images="assets/Screenshot 2025-10-12 204155.png|assets/regfront.png|assets/regback.png|assets/regside.png|assets/regunder.png|assets/Screenshot 2025-10-12 204343.png|assets/Screenshot 2025-10-12 204346.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
             <div class="case-info">
@@ -103,7 +160,22 @@
             </div>
           </section>
 
-          <!-- SOLDIER WALKER -->
+          <!-- 4. ANIMATRONE -->
+          <section class="case reveal" data-cat="game"
+            data-title="Animatrone Umanoide"
+            data-desc="Personaggio mostro per UE5 — modellazione, texturing, rigging completo."
+            data-tools="Blender, Unreal Engine 5"
+            data-note="Character art completo di un nemico umanoide meccanico per videogioco horror. Pipeline: sculpt, retopology per real-time, UV unwrap, texturing PBR, rigging con skeleton custom, weight painting. Importato e configurato in Unreal Engine 5 con animazioni di idle e attacco."
+            data-images="assets/animatronic.png|assets/animatronic2.png|assets/animatronic3.png|assets/animatronic4.png">
+            <div class="case-bg" style="--bg:url('assets/animatronic.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Animatrone Umanoide</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <!-- 5. SOLDIER WALKER -->
           <section class="case reveal" data-cat="game"
             data-title="Soldier Walker"
             data-desc="Personaggio 3D con studio materiali, sculpt e posing."
@@ -118,12 +190,12 @@
             </div>
           </section>
 
-          <!-- STAR DESTROYER -->
+          <!-- 6. STAR DESTROYER -->
           <section class="case reveal" data-cat="viz"
             data-title="Star Destroyer"
-            data-desc="Nave imperiale Star Wars — hard-surface modeling e rendering cinematico."
+            data-desc="Hard-surface modeling di nave capitale Star Wars — rendering cinematico."
             data-tools="Blender, Photoshop"
-            data-note="Modellazione hard-surface complessa di una nave capitale dell'universo Star Wars. Focus su dettaglio delle superfici, pannellature e greeble. Rendering cinematico con HDR lighting e compositing in post. ~30 ore di lavoro totali."
+            data-note="Modellazione hard-surface complessa con pannellature e greeble dettagliati. Rendering cinematico con HDR lighting e compositing in post. Circa 30 ore di lavoro totali. Esercizio avanzato di gestione della complessità geometrica."
             data-images="assets/Screenshot 2025-10-12 210314.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
             <div class="case-info">
@@ -133,12 +205,12 @@
             </div>
           </section>
 
-          <!-- MINI APPARTAMENTO -->
+          <!-- 7. MINI APPARTAMENTO -->
           <section class="case reveal" data-cat="viz"
             data-title="Mini Appartamento e Aula Studio"
-            data-desc="Architectural viz di interni residenziali — lighting e materiali realistici."
-            data-tools="Blender"
-            data-note="Archviz di due ambienti interni: mini appartamento e aula studio. Studio del lighting naturale con HDRI, materiali PBR (legno, tessuti, metalli). Renderizzato con Cycles. Utile per presentazioni a clienti o studi di architettura/interior design."
+            data-desc="Architectural visualization di interni — lighting e materiali realistici."
+            data-tools="Blender (Cycles)"
+            data-note="Archviz di due ambienti interni: mini appartamento e aula studio. Studio del lighting naturale con HDRI e luce artificiale, materiali PBR (legno, tessuti, metalli). Renderizzato con Cycles. Competenze direttamente applicabili a interior design e real estate visualization."
             data-images="assets/Screenshot 2025-07-04 1448315.png|assets/Screenshot 2025-07-04 144835.png|assets/Screenshot 2025-07-04 1446835.png|assets/Screenshot 2025-07-04 1444835.png|assets/Screenshot 2025-07-04 1448735.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-07-04 1448315.png')"></div>
             <div class="case-info">
@@ -148,12 +220,12 @@
             </div>
           </section>
 
-          <!-- ALAN WALKER REMIX VISUALIZER -->
+          <!-- 8. ALAN WALKER VISUALIZER -->
           <section class="case reveal" data-cat="viz"
             data-title="Alan Walker — Beautiful Nightmare Visualizer"
             data-desc="Motion graphics e visualizer 3D per remix musicale ufficiale."
             data-tools="Premiere Pro, After Effects, Blender"
-            data-note="Creazione di un visualizer musicale per il remix 'Beautiful Nightmare'. Pipeline: modellazione elementi 3D in Blender, compositing e animazione in After Effects, editing finale in Premiere. Contenuto destinato ai canali social ufficiali dell'artista."
+            data-note="Creazione di un visualizer musicale per il remix 'Beautiful Nightmare'. Pipeline: modellazione elementi 3D in Blender, compositing e animazione in After Effects, editing finale in Premiere. Contenuto per i canali social ufficiali dell'artista."
             data-images="assets/Screenshot 2025-10-12 224346.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
             <div class="case-info">
@@ -163,12 +235,12 @@
             </div>
           </section>
 
-          <!-- TRAM TORINO -->
+          <!-- 9. TRAM TORINO -->
           <section class="case reveal" data-cat="game"
             data-title="Tram Torino — Low Poly Game Asset"
             data-desc="Asset low poly ottimizzato per videogioco ambientato a Torino."
             data-tools="Blender, Unity"
-            data-note="Modellazione low-poly di un tram GTT di Torino per un videogioco ambientato in città. Budget poligoni ottimizzato per real-time. Texturing con atlas UV, import e configurazione in Unity con collider e materiali. Progetto personale."
+            data-note="Modellazione low-poly di un tram GTT di Torino con budget poligoni ottimizzato per real-time. Texturing con atlas UV, import e configurazione in Unity con collider e materiali. Progetto personale per un gioco ambientato a Torino."
             data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 0049.png|assets/Screenshot 2025-06-06 00465349.png|assets/Screenshot 2025-10-12 346.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
             <div class="case-info">
@@ -178,12 +250,12 @@
             </div>
           </section>
 
-          <!-- AETALYA -->
+          <!-- 10. AETALYA CHRONICLES -->
           <section class="case reveal" data-cat="game"
             data-title="2084 — Aetalya Chronicles"
-            data-desc="UI/HUD design per videogioco sci-fi — texturing ambientale."
+            data-desc="UI/HUD design per videogioco sci-fi distopico."
             data-tools="Photoshop"
-            data-note="Design di interfacce HUD per un videogioco sci-fi distopico. Tre varianti di pannelli (terminale, office laterale, frontale). Stile tecno-organico con palette fredda. Ottimizzati per risoluzione 1080p e integrazione in motore di gioco."
+            data-note="Design di interfacce HUD per un videogioco sci-fi. Tre varianti di pannelli (terminale, office laterale, frontale). Stile tecno-organico con palette fredda. Ottimizzati per risoluzione 1080p e integrazione in motore di gioco."
             data-images="assets/hud office left.png|assets/hud front office.png|assets/hud terminal office.png">
             <div class="case-bg" style="--bg:url('assets/hud office left.png')"></div>
             <div class="case-info">
@@ -193,27 +265,12 @@
             </div>
           </section>
 
-          <!-- ANIMATRONE -->
-          <section class="case reveal" data-cat="game"
-            data-title="Animatrone Umanoide"
-            data-desc="Personaggio mostro per Unreal Engine — modellazione, texturing, rigging."
-            data-tools="Blender, Unreal Engine"
-            data-note="Character art completo di un nemico umanoide meccanico per videogioco horror. Pipeline: sculpt, retopology per real-time, UV unwrap, texturing PBR, rigging con skeleton custom, weight painting. Importato e configurato in Unreal Engine 5 con animazioni di idle e attacco."
-            data-images="assets/animatronic.png|assets/animatronic2.png|assets/animatronic3.png|assets/animatronic4.png">
-            <div class="case-bg" style="--bg:url('assets/animatronic.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Animatrone Umanoide</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <!-- BABY YODA -->
+          <!-- 11. BABY YODA FOTOGRAMMETRIA -->
           <section class="case reveal" data-cat="viz"
             data-title="Statuina Baby Yoda — Fotogrammetria"
-            data-desc="Ricostruzione 3D fotogrammetrica di un oggetto reale con UV e texturing."
+            data-desc="Ricostruzione 3D fotogrammetrica di un oggetto reale."
             data-tools="Blender, Maya, Photoshop"
-            data-note="Scansione fotogrammetrica di una statuina fisica. Ricostruzione della mesh, pulizia manuale della geometria, UV unwrap e baking delle texture originali. Competenza applicabile a digital twin, architettura e produzione industriale."
+            data-note="Scansione fotogrammetrica di una statuina fisica. Ricostruzione della mesh, pulizia manuale della geometria, UV unwrap e baking delle texture originali. Tecnica applicabile a digital twin, catalogazione industriale e architettura."
             data-images="assets/babyyodafront.png|assets/babyyodafrontUV.png|assets/babyyodaside.png|assets/babyyodasideUV.png|assets/babyyodaback.png|assets/babyyodabackUV.png">
             <div class="case-bg" style="--bg:url('assets/babyyodafront.png')"></div>
             <div class="case-info">
@@ -223,12 +280,12 @@
             </div>
           </section>
 
-          <!-- LOWPOLY PLANETS -->
+          <!-- 12. LOWPOLY PLANETS -->
           <section class="case reveal" data-cat="viz"
             data-title="Lowpoly Planets"
             data-desc="Pianeti stilizzati low-poly per video musicali e motion graphics."
             data-tools="Blender"
-            data-note="Serie di pianeti low-poly stilizzati creati come asset per video e motion graphics. Palette cromatica coordinata, shading flat/toon. Ottimizzati per animazioni real-time."
+            data-note="Serie di pianeti low-poly stilizzati come asset per video e motion graphics. Palette cromatica coordinata, shading flat/toon. Ottimizzati per animazioni real-time e compositing video."
             data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
             <div class="case-info">
@@ -238,12 +295,12 @@
             </div>
           </section>
 
-          <!-- CITTA LOW POLY -->
+          <!-- 13. CITTA LOW POLY -->
           <section class="case reveal" data-cat="viz"
             data-title="Città Low Poly"
-            data-desc="Scena urbana low-poly — compositing e lighting atmosphere."
+            data-desc="Scena urbana low-poly — compositing e lighting atmosferico."
             data-tools="Blender"
-            data-note="Scena ambientale urbana low-poly con illuminazione cinematica. Studio del lighting con HDRI e luce artificiale. Shader stilizzati. Tecnica applicabile a background di giochi, animazioni e visualizzazioni architetturali semplificate."
+            data-note="Scena ambientale urbana low-poly con illuminazione cinematica. Studio del lighting con HDRI e luci artificiali. Shader stilizzati. Tecnica applicabile a background di giochi, animazioni e visualizzazioni architetturali semplificate."
             data-images="assets/Screenshot 2025-10-12 203652.png">
             <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
             <div class="case-info">
@@ -253,12 +310,12 @@
             </div>
           </section>
 
-          <!-- AUTO FUTURISTICA -->
+          <!-- 14. AUTO FUTURISTICA -->
           <section class="case reveal" data-cat="viz"
             data-title="Auto Futuristica — Concept Car"
-            data-desc="Concept car futuristica — modellazione carrozzeria e rendering finale."
+            data-desc="Concept car futuristica — modellazione carrozzeria e rendering studio."
             data-tools="Blender"
-            data-note="Modellazione di una concept car futuristica a partire da concept personale. Studio delle forme aerodinamiche, modellazione della carrozzeria con superfici curve pulite. Rendering con studio lighting per esaltare i riflessi della verniciatura."
+            data-note="Modellazione di una concept car da zero. Studio delle forme aerodinamiche e modellazione della carrozzeria con superfici curve pulite. Rendering con studio lighting per esaltare i riflessi della verniciatura. Applicabile a automotive design e product viz."
             data-images="assets/Screenshot_20251012_214749_Drive.jpg">
             <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
             <div class="case-info">
@@ -268,23 +325,9 @@
             </div>
           </section>
 
-          <!-- LEGO MARIO -->
-          <section class="case reveal" data-cat="game"
-            data-title="Lego Mario"
-            data-desc="Statuina Lego Mario — studio materiali plastici e SSS."
-            data-tools="Blender"
-            data-note="Modellazione fedele di una minifigure Lego Mario. Studio approfondito dei materiali plastici con Subsurface Scattering (SSS) per simulare la translucenza della plastica. Buon esercizio per la comprensione dei materiali realistici in Cycles."
-            data-images="assets/UntitledMario.png">
-            <div class="case-bg" style="--bg:url('assets/UntitledMario.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Lego Mario</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
         </div>
 
+        <!-- COMING SOON con descrizioni -->
         <section class="coming-section reveal">
           <h3 class="block-title" style="margin-bottom: 20px;">IN SVILUPPO</h3>
           <div class="coming-grid">
@@ -292,25 +335,43 @@
               <div class="case-bg pc-bg" style="background-image:url('assets/pc_synclife_dynamics.png')"></div>
               <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_synclife_dynamics.png')"></div>
               <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info"><h4 class="coming-title">Synclife Dynamics</h4></div>
+              <div class="case-info">
+                <h4 class="coming-title">Synclife Dynamics</h4>
+                <p class="coming-desc">Gioco VR — Unreal Engine 5</p>
+              </div>
             </article>
             <article class="case-coming" data-title="Brain.exe">
               <div class="case-bg pc-bg" style="background-image:url('assets/pc_BrainEXE.png')"></div>
               <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_BrainEXE.png')"></div>
               <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info"><h4 class="coming-title">Brain.exe</h4></div>
+              <div class="case-info">
+                <h4 class="coming-title">Brain.exe</h4>
+                <p class="coming-desc">Progetto interattivo — Unity + C#</p>
+              </div>
             </article>
             <article class="case-coming" data-title="TOMHODA Studios">
               <div class="case-bg pc-bg" style="background-image:url('assets/pc_LogoTHOMODA.png')"></div>
               <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_LogoTHOMODA.png')"></div>
               <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info"><h4 class="coming-title">TOMHODA Studios</h4></div>
+              <div class="case-info">
+                <h4 class="coming-title">TOMHODA Studios</h4>
+                <p class="coming-desc">Brand personale in costruzione</p>
+              </div>
             </article>
           </div>
         </section>
+
+        <!-- CTA FINALE nella home -->
+        <div class="home-cta reveal">
+          <p>Hai un progetto in mente o stai cercando un profilo AR/VR & 3D?</p>
+          <a href="mailto:raffaelprivate@gmail.com" class="btn-download">Scrivimi</a>
+          <a href="#" id="cta-profile-link" class="btn-outline">Guarda il profilo completo</a>
+        </div>
+
       </div>
     </div>
 
+    <!-- ===================== VIEW PROFILE ===================== -->
     <div id="view-profile" style="display: none; padding-top: 40px;">
       <section class="wrap profile-section reveal">
         <h2 class="profile-main-title">PR<span class="glow-script">O</span>FILE</h2>
@@ -321,9 +382,9 @@
             <div class="profile-block">
               <h4 class="block-title">ABOUT ME</h4>
               <p class="about-text">
-                Sono un Game Developer e 3D Artist con background tecnico in Informatica e specializzazione in AR/VR. 
-                Faccio da ponte tra il mondo della programmazione e quello della grafica — so scrivere codice <em>e</em> costruire pipeline 3D complete. 
-                Dal 2019 collaboro con il team creativo di <strong>Alan Walker</strong>, producendo asset e contenuti per uno degli artisti più ascoltati al mondo. 
+                Sono un Game Developer e 3D Artist con background tecnico in Informatica e specializzazione in AR/VR.
+                Faccio da ponte tra programmazione e grafica — so scrivere codice <em>e</em> costruire pipeline 3D complete.
+                Dal 2019 collaboro con il team creativo di <strong>Alan Walker</strong>, producendo asset e contenuti per uno degli artisti più ascoltati al mondo.
                 Attualmente sto completando il percorso ITS Academy ICT Piemonte in AR/VR & Game Developer.
                 Sono aperto a opportunità nel settore tech, simulazione, archviz e sviluppo software.
               </p>
@@ -331,13 +392,13 @@
 
             <div class="profile-block">
               <h4 class="block-title">EXPERIENCE</h4>
-              
+
               <div class="exp-item">
                 <div class="exp-date">2019 – Oggi</div>
                 <div class="exp-desc">
                   <strong>ALAN WALKER — Digital Artist Team</strong>
                   <span class="exp-role">3D Artist</span>
-                  <p>Modellazione, animazione, rigging e weight painting di asset per video musicali e visual live. Creazione di contenuti grafici in Blender e Unreal per un artista con oltre 40M di ascolti su Spotify.</p>
+                  <p>Modellazione, animazione, rigging e weight painting di asset per video musicali e visual live. Creazione contenuti grafici in Blender e Unreal Engine per un artista con oltre 40M di ascolti su Spotify.</p>
                 </div>
               </div>
 
@@ -358,7 +419,7 @@
                   <p>Coordinamento meet & greet nel backstage durante i tour italiani. Gestione della community italiana e mediazione con il management internazionale.</p>
                 </div>
               </div>
-              
+
               <div class="exp-item">
                 <div class="exp-date">06/2024 – 07/2024</div>
                 <div class="exp-desc">
@@ -396,7 +457,8 @@
                   <a href="mailto:raffaelprivate@gmail.com" class="contact-link">📧 raffaelprivate@gmail.com</a>
                   <span class="contact-link">📱 +39 392 564 9950</span>
                   <span class="contact-link">📍 Torino, Italia</span>
-                  <a href="https://www.linkedin.com/in/tommy-hodoroaba" target="_blank" rel="noopener" class="contact-link">🔗 LinkedIn</a>
+                  <!-- ⚠️ SOSTITUISCI CON IL TUO URL LINKEDIN REALE -->
+                  <a href="https://www.linkedin.com/in/IL-TUO-URL-QUI" target="_blank" rel="noopener" class="contact-link">🔗 LinkedIn</a>
                   <a href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener" class="contact-link">🌐 portfoliotommy.netlify.app</a>
                 </div>
                 <a class="btn-download" href="Tommy Raffaello Hodoroaba 14-04-26.pdf" target="_blank">SCARICA CV IN PDF</a>
@@ -406,14 +468,14 @@
 
           <aside class="profile-sidebar">
             <div class="profile-pic-container">
-              <img src="assets/fronte.png" alt="Tommy Raffaello Hodoroaba" class="profile-pic" onerror="this.src='https://via.placeholder.com/200/030612/1e50ff?text=TR'">
+              <img src="assets/fronte.png" alt="Tommy Raffaello Hodoroaba" class="profile-pic"
+                   onerror="this.src='https://via.placeholder.com/200/030612/1e50ff?text=TR'">
               <div class="pic-ring"></div>
             </div>
             
             <h3 class="profile-name">TOMMY R. HODOROABA</h3>
             <p class="profile-role">AR/VR • GAME DEV • 3D ARTIST</p>
 
-            <!-- BADGE "OPEN TO WORK" nella sidebar -->
             <div class="otw-sidebar-badge">
               <span class="otw-dot"></span> Disponibile a nuove opportunità
             </div>
@@ -476,6 +538,7 @@
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
+    <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
       <div class="content" role="document">
@@ -488,5 +551,29 @@
     </div>
 
     <script defer src="script.js"></script>
+    <script>
+      // CTA nella home che switcha al profilo
+      document.getElementById('cta-profile-link')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('btn-profile')?.click();
+      });
+
+      // Slideshow fallback hero: se il video non carica, avvia lo slideshow
+      const video = document.getElementById('heroVideo');
+      const slideshow = document.getElementById('heroSlideshow');
+      if (video) {
+        video.addEventListener('error', () => {
+          video.style.display = 'none';
+          slideshow.style.display = 'block';
+        });
+        // Se dopo 3s il video non ha dati, mostra slideshow
+        setTimeout(() => {
+          if (video.readyState === 0) {
+            video.style.display = 'none';
+            slideshow.style.display = 'block';
+          }
+        }, 3000);
+      }
+    </script>
   </body>
 </html>
