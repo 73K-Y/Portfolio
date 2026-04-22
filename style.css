@@ -135,9 +135,7 @@ a:hover { color: var(--blue-light); }
   .case { height: 350px; } 
   .case[data-bento="1"] { grid-column: span 8; } 
   .case[data-bento="2"] { grid-column: span 4; } 
-  .case[data-bento="3"] { grid-column: span 4; } 
-  .case[data-bento="4"] { grid-column: span 4; }
-  .case[data-bento="5"] { grid-column: span 4; }
+  .case[data-bento="3"], .case[data-bento="4"], .case[data-bento="5"] { grid-column: span 4; }
   .case[data-bento="6"] { grid-column: span 12; height: 450px; } 
   .case[data-bento="7"] { grid-column: span 5; } 
   .case[data-bento="8"] { grid-column: span 7; } 
@@ -154,6 +152,37 @@ a:hover { color: var(--blue-light); }
 .case-info { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 2; }
 .case-info h3 { margin: 0 0 10px; font-family: 'Space Grotesk', sans-serif; font-size: 20px; text-transform: uppercase; }
 .btn.small { padding: 6px 14px; font-size: 11px; background: rgba(30,80,255,0.2); border: 1px solid var(--blue-glow); color: var(--white); border-radius: 4px; }
+
+/* ========================================================= */
+/* BADGES (ETICHETTE CATEGORIA E TOOLS SULLE IMMAGINI)       */
+/* ========================================================= */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+.badge.cat {
+  background: rgba(30, 80, 255, 0.2);
+  border-color: var(--blue-glow);
+  color: var(--blue-light);
+  font-weight: 700;
+}
 
 
 /* ========================================================= */
