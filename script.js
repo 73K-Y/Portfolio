@@ -40,7 +40,6 @@
     if (badges) {
       badges.innerHTML = "";
       if (cat) {
-        // FIX: Mappatura delle nuove categorie
         const catNames = { 
           "characters": "Characters", 
           "environments": "Environments", 
@@ -50,7 +49,7 @@
         };
         const b = document.createElement("span");
         b.className = "badge cat";
-        b.textContent = catNames[cat] || cat; // Se non la trova, stampa la stringa grezza
+        b.textContent = catNames[cat] || cat; 
         badges.appendChild(b);
       }
       tools.forEach((t) => {
