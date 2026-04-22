@@ -13,74 +13,20 @@
   if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
 })();
 
-/* ========= Sistema Navigazione SPA (HASH ROUTING) ========= */
+/* ========= Reveal on scroll ========= */
 (() => {
-  const btnProfile = document.getElementById("btn-profile");
-  const btnShowreel = document.getElementById("btn-showreel");
-  const logoHome = document.getElementById("logo-home");
-  const viewHome = document.getElementById("view-home");
-  const viewProfile = document.getElementById("view-profile");
-
-  function switchView(hash) {
-    window.scrollTo({ top: 0, behavior: "instant" });
-
-    if (hash === "#profile") {
-      viewHome.style.display = "none";
-      viewProfile.style.display = "block";
-      btnProfile.classList.add("active");
-      btnShowreel.classList.remove("active");
-    } else {
-      viewHome.style.display = "block";
-      viewProfile.style.display = "none";
-      btnShowreel.classList.add("active");
-      btnProfile.classList.remove("active");
-      hash = "#home"; // Fallback di sicurezza
-    }
-
-    // Aggiorna l'URL senza ricaricare la pagina
-    history.pushState(null, null, hash);
-
-    // Riavvia animazioni
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            observer.unobserve(e.target);
-          }
-        });
-      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-    );
-
-    document.querySelectorAll(".reveal").forEach((el) => {
-      el.classList.remove("is-visible");
-      setTimeout(() => observer.observe(el), 50);
-    });
-  }
-
-  // Intercetta URL iniziale
-  window.addEventListener("load", () => {
-    switchView(window.location.hash || "#home");
-  });
-
-  // Click bottoni menu
-  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("#profile"); });
-  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
-  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
-
-  // Tasti indietro/avanti browser
-  window.addEventListener("popstate", () => {
-    switchView(window.location.hash || "#home");
-  });
-
-  // Clic su "Open to Work" scrolla a contatti
-  document.getElementById('otw-badge')?.addEventListener('click', () => {
-    if (window.location.hash !== '#profile') {
-      switchView('#profile');
-      setTimeout(() => document.getElementById('contact-section')?.scrollIntoView({behavior: 'smooth'}), 100);
-    } else {
-      document.getElementById('contact-section')?.scrollIntoView({behavior: 'smooth'});
-    }
-  });
+  const revealEls = document.querySelectorAll(".reveal");
+  if (!revealEls.length) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-visible");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+  );
+  revealEls.forEach((el) => io.observe(el));
 })();
 
 /* ========= Badge categoria + tools + descrizione ========= */
@@ -117,16 +63,18 @@
 
   function applyFilter(key) {
     const cat = (key || "all").trim();
-    let visibleIndex = 1; // Contatore dinamico
+    let visibleIndex = 1; // Contatore solo per le card visibili
     
     cards.forEach((c) => {
       const cc = (c.dataset.cat || "").trim();
       if (cat === "all" || cc === cat) {
         c.classList.remove("is-hidden");
+        // Assegna la posizione dinamica alla card visibile
         c.setAttribute("data-bento", visibleIndex);
         visibleIndex++;
       } else {
         c.classList.add("is-hidden");
+        // Rimuovi l'attributo se nascosta per non sballare il CSS
         c.removeAttribute("data-bento");
       }
     });
@@ -154,7 +102,7 @@
   const closeModal = document.getElementById("closeModal");
   const backdrop = document.getElementById("modalBackdrop");
 
-  if (!modal || !modalInner) return;
+  if (!modal || !modalInner || !modalInfo || !modalTools || !modalNote) return;
 
   function closeModalFn() {
     modal.classList.remove("open");
@@ -169,18 +117,18 @@
 
   function openModal(items, title, desc, tools, note) {
     modalInner.innerHTML = "";
-    if (modalTools) modalTools.innerHTML = "";
-    if (modalNote) modalNote.textContent = "";
-    if (modalInfo) modalInfo.textContent = title + (desc ? " — " + desc : "");
+    modalTools.innerHTML = "";
+    modalNote.textContent = "";
+    modalInfo.textContent = title + (desc ? " — " + desc : "");
 
-    if (tools && modalTools) {
+    if (tools) {
       tools.split(",").map((s) => s.trim()).filter(Boolean).forEach((t) => {
           const span = document.createElement("span");
           span.className = "chip"; span.textContent = t;
           modalTools.appendChild(span);
       });
     }
-    if (note && modalNote) modalNote.textContent = note;
+    if (note) modalNote.textContent = note;
 
     const gallery = document.createElement("div");
     gallery.className = "gallery";
@@ -251,7 +199,7 @@
   }
 
   document.getElementById("showreel")?.addEventListener("click", (e) => {
-      const btn = e.target.closest(".open-modal") || e.target.closest(".case");
+      const btn = e.target.closest(".open-modal");
       if (!btn) return;
       const card = e.target.closest(".case");
       if (!card) return;
@@ -268,8 +216,60 @@
   );
 })();
 
-/* ========= Interazioni Extra ========= */
+/* ========= Sistema Navigazione SPA (Aggiornamento Pagina) ========= */
 (() => {
+  const btnProfile = document.getElementById("btn-profile");
+  const btnShowreel = document.getElementById("btn-showreel");
+  const logoHome = document.getElementById("logo-home");
+  
+  const viewHome = document.getElementById("view-home");
+  const viewProfile = document.getElementById("view-profile");
+
+  function switchView(viewName) {
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    if (viewName === "profile") {
+      viewHome.style.display = "none";
+      viewProfile.style.display = "block";
+      btnProfile.classList.add("active");
+      btnShowreel.classList.remove("active");
+    } else {
+      viewHome.style.display = "block";
+      viewProfile.style.display = "none";
+      btnShowreel.classList.add("active");
+      btnProfile.classList.remove("active");
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            observer.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => {
+      el.classList.remove("is-visible");
+      setTimeout(() => observer.observe(el), 50);
+    });
+  }
+
+  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("profile"); });
+  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
+})();
+
+/* ========= Interazioni Extra (CTA, Video Fallback, Copia Email) ========= */
+(() => {
+  // === CTA profile switch ===
+  document.getElementById('cta-profile-link')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('btn-profile')?.click();
+  });
+
+  // === Slideshow fallback hero ===
   const video = document.getElementById('heroVideo');
   const slideshow = document.getElementById('heroSlideshow');
   if (video) {
@@ -283,6 +283,7 @@
     slideshow.style.display = 'block';
   }
 
+  // === Bottone "Scrivimi" — copia email negli appunti ===
   document.querySelectorAll('.btn-copy-email').forEach(btn => {
     btn.addEventListener('click', function() {
       const email = this.dataset.email;
@@ -291,15 +292,14 @@
         const orig = this.textContent;
         this.textContent = '✓ Email copiata!';
         this.style.background = '#00c864';
-        this.style.borderColor = '#00c864';
-        this.style.color = '#fff';
         setTimeout(() => {
           this.textContent = orig;
           this.style.background = '';
-          this.style.borderColor = '';
-          this.style.color = '';
         }, 2200);
-      }).catch(() => { window.location.href = 'mailto:' + email; });
+      }).catch(() => {
+        // Fallback se clipboard non disponibile
+        window.location.href = 'mailto:' + email;
+      });
     });
   });
 })();
