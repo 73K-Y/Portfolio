@@ -296,3 +296,103 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
 @media (max-width: 900px) {
   .gallery-btn { display: none !important; }
 }
+
+/* ========================================================= */
+/* OPEN TO WORK BADGE                                        */
+/* ========================================================= */
+.open-to-work-badge {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  background: rgba(5, 10, 24, 0.85);
+  border: 1px solid rgba(0, 200, 100, 0.5);
+  color: #00e87a;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 200, 100, 0.15);
+}
+
+.otw-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e87a;
+  display: inline-block;
+  animation: pulse-green 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 232, 122, 0.5); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(0, 232, 122, 0); }
+}
+
+.otw-sidebar-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 200, 100, 0.08);
+  border: 1px solid rgba(0, 200, 100, 0.3);
+  color: #00e87a;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 30px;
+}
+
+/* ========================================================= */
+/* AUTHOR NOTE NEL MODAL (note tecniche dei progetti)        */
+/* ========================================================= */
+.author-note {
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: rgba(30, 80, 255, 0.07);
+  border-left: 3px solid var(--blue-glow);
+  border-radius: 0 6px 6px 0;
+  color: var(--text-gray);
+  font-size: 13.5px;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.author-note:empty { display: none; }
+
+/* ========================================================= */
+/* TOOLCHIPS (chip tool nel modal)                           */
+/* ========================================================= */
+.toolchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.chip {
+  background: rgba(30, 80, 255, 0.15);
+  border: 1px solid var(--blue-glow);
+  color: var(--blue-light);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .open-to-work-badge { bottom: 16px; right: 16px; font-size: 10px; padding: 6px 12px; }
+}
