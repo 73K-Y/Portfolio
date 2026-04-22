@@ -260,3 +260,46 @@
   btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
   logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("home"); });
 })();
+
+/* ========= Interazioni Extra (CTA, Video Fallback, Copia Email) ========= */
+(() => {
+  // === CTA profile switch ===
+  document.getElementById('cta-profile-link')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('btn-profile')?.click();
+  });
+
+  // === Slideshow fallback hero ===
+  const video = document.getElementById('heroVideo');
+  const slideshow = document.getElementById('heroSlideshow');
+  if (video) {
+    const showSlideshow = () => {
+      video.style.display = 'none';
+      if (slideshow) slideshow.style.display = 'block';
+    };
+    video.addEventListener('error', showSlideshow);
+    setTimeout(() => { if (video.readyState === 0) showSlideshow(); }, 2500);
+  } else if (slideshow) {
+    slideshow.style.display = 'block';
+  }
+
+  // === Bottone "Scrivimi" — copia email negli appunti ===
+  document.querySelectorAll('.btn-copy-email').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const email = this.dataset.email;
+      if (!email) return;
+      navigator.clipboard.writeText(email).then(() => {
+        const orig = this.textContent;
+        this.textContent = '✓ Email copiata!';
+        this.style.background = '#00c864';
+        setTimeout(() => {
+          this.textContent = orig;
+          this.style.background = '';
+        }, 2200);
+      }).catch(() => {
+        // Fallback se clipboard non disponibile
+        window.location.href = 'mailto:' + email;
+      });
+    });
+  });
+})();
