@@ -23,6 +23,7 @@
 
   <body>
 
+    <!-- NAVBAR -->
     <div class="nav-wrapper">
       <div class="nav-glass">
         <div class="brand" id="logo-home" style="cursor: pointer;">
@@ -33,28 +34,35 @@
           </div>
         </div>
         <div class="nav-links">
-          <a href="#home" id="btn-showreel" class="active">Home</a>
-          <a href="#profile" id="btn-profile">Profile</a>
+          <a href="#" id="btn-showreel" class="active">Home</a>
+          <a href="#" id="btn-profile">Profile</a>
           <a href="mailto:raffaelprivate@gmail.com" class="nav-cta">Contattami</a>
         </div>
       </div>
     </div>
 
-    <div class="open-to-work-badge" id="otw-badge" role="button" tabindex="0">
+    <div class="open-to-work-badge">
       <span class="otw-dot"></span> Open to Work
     </div>
 
     <div id="view-home">
+
+      <!-- HERO con video + fallback slideshow se video assente -->
       <section id="hero" class="hero-video-section">
         <h1 class="hero-title-back">PORTFOLIO</h1>
+
         <div class="video-container reveal">
+          <!-- 
+            SE HAI UN VIDEO SHOWREEL: sostituisci il src qui sotto.
+            SE NON HAI UN VIDEO: il JS mostrerà automaticamente lo slideshow delle immagini.
+          -->
           <video id="heroVideo" autoplay loop muted playsinline poster="assets/EXAMPLE.png"
                  onerror="this.style.display='none'; document.getElementById('heroSlideshow').style.display='block';">
             <source src="INSERISCI_QUI_IL_TUO_SHOWREEL.mp4" type="video/mp4">
           </video>
-        </div>
       </section>
 
+      <!-- PROJECTS -->
       <div id="showreel" class="wrap section">
         <h2 class="profile-main-title" style="margin-bottom: 20px;">PR<span class="glow-script">O</span>JECTS</h2>
         <div id="filters" class="filterbar reveal">
@@ -64,16 +72,14 @@
         </div>
 
         <div class="gallery-grid">
-          <section class="case reveal" data-cat="game" data-title="Animatrone Umanoide" data-desc="Personaggio mostro per UE5 — modellazione, texturing, rigging completo." data-tools="Blender, Unreal Engine 5" data-images="assets/Screenshot 2025-10-15 142447.png|assets/Screenshot 2025-10-15 142636.png|assets/Screenshot 2025-10-15 142652.png|assets/Screenshot 2025-10-15 142718.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-15 142447.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Animatrone Umanoide</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
 
-          <section class="case reveal" data-cat="game" data-title="Ambientazione — Oblivion Hospital" data-desc="Ambientazione horror completa con animazioni interattive per videogioco." data-tools="Blender, Unreal Engine 5" data-images="assets/scena - background menù - ospedale.png" data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4" tabindex="0" role="button">
+          <section class="case reveal" data-cat="game"
+            data-title="Ambientazione — Oblivion Hospital"
+            data-desc="Ambientazione horror completa con animazioni interattive per videogioco."
+            data-tools="Blender, Unreal Engine 5"
+            data-note="Progetto ITS ICT Piemonte. Pipeline completa: modellazione ambiente, texturing PBR, lighting atmosphere, animazioni di interazione in Unreal Engine 5. Include 3 clip video di gameplay."
+            data-images="assets/scena - background menù - ospedale.png"
+            data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
             <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.png')"></div>
             <div class="case-info">
               <div class="badges"></div>
@@ -82,8 +88,41 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game" data-title="Soldier Walker" data-desc="Personaggio 3D con studio materiali, sculpt e posing." data-tools="Blender, Substance Painter, Photoshop" data-images="assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg|assets/Untitled.png|assets/Screenshot 2025-10-12 205615.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/SnapInsta.to_312812566_809739247000721_1404716673628474885_n.jpg')"></div>
+          <section class="case reveal" data-cat="game"
+            data-title="Treni Trenitalia"
+            data-desc="Asset hard-surface ad alta fedeltà per simulatori ferroviari."
+            data-tools="Blender, Substance Painter"
+            data-note="Modellazione hard-surface di convogli Trenitalia con topologia ottimizzata per simulatori. UV unwrap manuale, texturing PBR con Substance Painter (albedo, normal, roughness, metalness). Attenzione ai dettagli tecnici: porte, pantografi, carrelli. ~40h di lavoro."
+            data-images="assets/treno to.png|assets/regfront.png|assets/regback.png|assets/regside.png|assets/regunder.png|assets/treno to2.png|treno to3.png">
+            <div class="case-bg" style="--bg:url('assets/treno to.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Treni Trenitalia</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game"
+            data-title="Animatrone Umanoide"
+            data-desc="Personaggio mostro per UE5 — modellazione, texturing, rigging completo."
+            data-tools="Blender, Unreal Engine 5"
+            data-note="Character art completo di un nemico umanoide meccanico per videogioco horror. Pipeline: sculpt, retopology per real-time, UV unwrap, texturing PBR, rigging con skeleton custom, weight painting. Importato e configurato in Unreal Engine 5 con animazioni di idle e attacco."
+            data-images="assets/animatronic.png|assets/animatronic2.png|assets/animatronic3.png|assets/animatronic4.png">
+            <div class="case-bg" style="--bg:url('assets/animatronic.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Animatrone Umanoide</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game"
+            data-title="Soldier Walker"
+            data-desc="Personaggio 3D con studio materiali, sculpt e posing."
+            data-tools="Blender, Substance Painter, Photoshop"
+            data-note="Character modeling completo: sculpt hi-poly, retopology manuale per uso real-time, UV mapping, texturing con Substance Painter. Studio dei materiali (metallo, tessuto, cuoio). Posing finale con skeleton e weight painting."
+            data-images="assets/soldier3.jpg|assets/soldier.png|assets/soldier2.png">
+            <div class="case-bg" style="--bg:url('assets/soldier3.jpg')"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Soldier Walker</h3>
@@ -91,8 +130,13 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz" data-title="Star Destroyer" data-desc="Hard-surface modeling di nave capitale Star Wars." data-tools="Blender, Photoshop" data-images="assets/Screenshot 2025-10-12 210314.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 210314.png')"></div>
+          <section class="case reveal" data-cat="viz"
+            data-title="Star Destroyer"
+            data-desc="Hard-surface modeling di nave capitale Star Wars — rendering cinematico."
+            data-tools="Blender, Photoshop"
+            data-note="Modellazione hard-surface complessa con pannellature e greeble dettagliati. Rendering cinematico con HDR lighting e compositing in post. Circa 30 ore di lavoro totali. Esercizio avanzato di gestione della complessità geometrica."
+            data-images="assets/star destroyer.png">
+            <div class="case-bg" style="--bg:url('assets/star destroyer.png')"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Star Destroyer</h3>
@@ -100,8 +144,13 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz" data-title="Mini Appartamento e Aula Studio" data-desc="Architectural visualization di interni — lighting e materiali realistici." data-tools="Blender (Cycles)" data-images="assets/Screenshot 2025-07-04 1448315.png|assets/Screenshot 2025-07-04 144835.png|assets/Screenshot 2025-07-04 1446835.png|assets/Screenshot 2025-07-04 1444835.png|assets/Screenshot 2025-07-04 1448735.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-07-04 1448315.png')"></div>
+          <section class="case reveal" data-cat="viz"
+            data-title="Mini Appartamento e Aula Studio"
+            data-desc="Architectural visualization di interni — lighting e materiali realistici."
+            data-tools="Blender (Cycles)"
+            data-note="Archviz di due ambienti interni: mini appartamento e aula studio. Studio del lighting naturale con HDRI e luce artificiale, materiali PBR (legno, tessuti, metalli). Renderizzato con Cycles. Competenze direttamente applicabili a interior design e real estate visualization."
+            data-images="assets/appartamento.png|assets/appartamento2.png|assets/appartamento3.png|assets/appartamento4.png|assets/studio.png">
+            <div class="case-bg" style="--bg:url('assets/appartamento.png')"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Appartamento & Aula</h3>
@@ -109,11 +158,100 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="viz" data-title="Alan Walker — Beautiful Nightmare Visualizer" data-desc="Motion graphics e visualizer 3D per remix musicale ufficiale." data-tools="Premiere Pro, After Effects, Blender" data-images="assets/Screenshot 2025-10-12 224346.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 224346.png')"></div>
+          <section class="case reveal" data-cat="viz"
+            data-title="Alan Walker — Beautiful Nightmare Visualizer"
+            data-desc="Motion graphics e visualizer 3D per remix musicale ufficiale."
+            data-tools="Premiere Pro, After Effects, Blender"
+            data-note="Creazione di un visualizer musicale per il remix 'Beautiful Nightmare'. Pipeline: modellazione elementi 3D in Blender, compositing e animazione in After Effects, editing finale in Premiere. Contenuto per i canali social ufficiali dell'artista."
+            data-images="assets/walker scene.png">
+            <div class="case-bg" style="--bg:url('assets/walker scene.png')"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Beautiful Nightmare</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game"
+            data-title="Tram Torino — Low Poly Game Asset"
+            data-desc="Asset low poly ottimizzato per videogioco ambientato a Torino."
+            data-tools="Blender, Unity"
+            data-note="Modellazione low-poly di un tram GTT di Torino con budget poligoni ottimizzato per real-time. Texturing con atlas UV, import e configurazione in Unity con collider e materiali. Progetto personale per un gioco ambientato a Torino."
+            data-images="assets/tram.png|assets/treno.png|assets/treno2.png|assets/treno3.png|assets/treno4.png">
+            <div class="case-bg" style="--bg:url('assets/tram.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Tram Torino Lowpoly</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="game"
+            data-title="2084 — Aetalya Chronicles"
+            data-desc="UI/HUD design per videogioco sci-fi distopico."
+            data-tools="Photoshop"
+            data-note="Design di interfacce HUD per un videogioco sci-fi. Tre varianti di pannelli (terminale, office laterale, frontale). Stile tecno-organico con palette fredda. Ottimizzati per risoluzione 1080p e integrazione in motore di gioco."
+            data-images="assets/hud office left.png|assets/hud front office.png|assets/hud terminal office.png">
+            <div class="case-bg" style="--bg:url('assets/hud office left.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Aetalya Chronicles</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz"
+            data-title="Statuina Baby Yoda — Fotogrammetria"
+            data-desc="Ricostruzione 3D fotogrammetrica di un oggetto reale."
+            data-tools="Blender, Maya, Photoshop"
+            data-note="Scansione fotogrammetrica di una statuina fisica. Ricostruzione della mesh, pulizia manuale della geometria, UV unwrap e baking delle texture originali. Tecnica applicabile a digital twin, catalogazione industriale e architettura."
+            data-images="assets/babyyodafront.png|assets/babyyodafrontUV.png|assets/babyyodaside.png|assets/babyyodasideUV.png|assets/babyyodaback.png|assets/babyyodabackUV.png">
+            <div class="case-bg" style="--bg:url('assets/babyyodafront.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Statuina Baby Yoda</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz"
+            data-title="Lowpoly Planets"
+            data-desc="Pianeti stilizzati low-poly per video musicali e motion graphics."
+            data-tools="Blender"
+            data-note="Serie di pianeti low-poly stilizzati come asset per video e motion graphics. Palette cromatica coordinata, shading flat/toon. Ottimizzati per animazioni real-time e compositing video."
+            data-images="assets/pianeta.png|assets/pianeta2.png">
+            <div class="case-bg" style="--bg:url('assets/pianeta2.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Lowpoly Planets</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz"
+            data-title="Città Low Poly"
+            data-desc="Scena urbana low-poly — compositing e lighting atmosferico."
+            data-tools="Blender"
+            data-note="Scena ambientale urbana low-poly con illuminazione cinematica. Studio del lighting con HDRI e luci artificiali. Shader stilizzati. Tecnica applicabile a background di giochi, animazioni e visualizzazioni architetturali semplificate."
+            data-images="assets/città.png">
+            <div class="case-bg" style="--bg:url('assets/città.png')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Città Low Poly</h3>
+              <button class="btn small open-modal" type="button">Apri galleria</button>
+            </div>
+          </section>
+
+          <section class="case reveal" data-cat="viz"
+            data-title="Auto Futuristica — Concept Car"
+            data-desc="Concept car futuristica — modellazione carrozzeria e rendering studio."
+            data-tools="Blender"
+            data-note="Modellazione di una concept car da zero. Studio delle forme aerodinamiche e modellazione della carrozzeria con superfici curve pulite. Rendering con studio lighting per esaltare i riflessi della verniciatura. Applicabile a automotive design e product viz."
+            data-images="assets/auto futuristica.jpg">
+            <div class="case-bg" style="--bg:url('assets/auto futuristica.jpg')"></div>
+            <div class="case-info">
+              <div class="badges"></div>
+              <h3>Auto Futuristica</h3>
               <button class="btn small open-modal" type="button">Apri galleria</button>
             </div>
           </section>
@@ -127,71 +265,9 @@
             </div>
           </section>
 
-          <section class="case reveal" data-cat="game" data-title="2084 — Aetalya Chronicles" data-desc="UI/HUD design per videogioco sci-fi distopico." data-tools="Photoshop" data-images="assets/hud office left.png|assets/hud front office.png|assets/hud terminal office.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/hud office left.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Aetalya Chronicles</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <section class="case reveal" data-cat="viz" data-title="Statuina Baby Yoda — Fotogrammetria" data-desc="Ricostruzione 3D fotogrammetrica di un oggetto reale." data-tools="Blender, Maya, Photoshop" data-images="assets/babyyodafront.png|assets/babyyodafrontUV.png|assets/babyyodaside.png|assets/babyyodasideUV.png|assets/babyyodaback.png|assets/babyyodabackUV.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/babyyodafront.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Statuina Baby Yoda</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <section class="case reveal" data-cat="viz" data-title="Lowpoly Planets" data-desc="Pianeti stilizzati low-poly per video musicali e motion graphics." data-tools="Blender" data-images="assets/Screenshot 2025-10-12 203921.png|assets/Screenshot 2025-10-12 203837.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203921.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Lowpoly Planets</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <section class="case reveal" data-cat="game" data-title="Treni Trenitalia" data-desc="Asset hard-surface ad alta fedeltà per simulatori ferroviari." data-tools="Blender, Substance Painter" data-images="assets/Screenshot 2025-10-12 204155.png|assets/regfront.png|assets/regback.png|assets/regside.png|assets/regunder.png|assets/Screenshot 2025-10-12 204343.png|assets/Screenshot 2025-10-12 204346.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 204155.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Treni Trenitalia</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <section class="case reveal" data-cat="game" data-title="Tram Torino — Low Poly Game Asset" data-desc="Asset low poly ottimizzato per videogioco ambientato a Torino." data-tools="Blender, Unity" data-images="assets/Screenshot 2025-06-05 221951.png|assets/Screenshot 2025-06-06 004449.png|assets/Screenshot 2025-06-06 0049.png|assets/Screenshot 2025-06-06 00465349.png|assets/Screenshot 2025-10-12 346.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-06-05 221951.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Tram Torino Lowpoly</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <section class="case reveal" data-cat="viz" data-title="Città Low Poly" data-desc="Scena urbana low-poly — compositing e lighting atmosferico." data-tools="Blender" data-images="assets/Screenshot 2025-10-12 203652.png" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot 2025-10-12 203652.png')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Città Low Poly</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
-          <section class="case reveal" data-cat="viz" data-title="Auto Futuristica — Concept Car" data-desc="Concept car futuristica — modellazione carrozzeria e rendering studio." data-tools="Blender" data-images="assets/Screenshot_20251012_214749_Drive.jpg" tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/Screenshot_20251012_214749_Drive.jpg')"></div>
-            <div class="case-info">
-              <div class="badges"></div>
-              <h3>Auto Futuristica</h3>
-              <button class="btn small open-modal" type="button">Apri galleria</button>
-            </div>
-          </section>
-
         </div>
 
+        <!-- COMING SOON con descrizioni -->
         <section class="coming-section reveal">
           <h3 class="block-title" style="margin-bottom: 20px;">IN SVILUPPO</h3>
           <div class="coming-grid">
@@ -224,9 +300,18 @@
             </article>
           </div>
         </section>
+
+        <!-- CTA FINALE nella home -->
+        <div class="home-cta reveal">
+          <p>Hai un progetto in mente o stai cercando un profilo AR/VR & 3D?</p>
+          <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" type="button">Scrivimi</button>
+          <a href="#" id="cta-profile-link" class="btn-outline">Guarda il profilo completo</a>
+        </div>
+
       </div>
     </div>
 
+    <!-- ===================== VIEW PROFILE ===================== -->
     <div id="view-profile" style="display: none; padding-top: 40px;">
       <section class="wrap profile-section reveal">
         <h2 class="profile-main-title">PR<span class="glow-script">O</span>FILE</h2>
@@ -247,63 +332,75 @@
 
             <div class="profile-block">
               <h4 class="block-title">EXPERIENCE</h4>
-              <div class="timeline">
-                <div class="exp-item primary-role">
-                  <div class="exp-date">12/2025 – 04/2026</div>
-                  <div class="exp-desc">
-                    <strong>PANDORA CREATIVE STUDIOS</strong>
-                    <span class="exp-role">3D Artist & Developer</span>
-                    <p>Pipeline 3D completa (modellazione, texturing, rigging, animazione, compositing). Sviluppo di add-on Blender in Python e implementazione di tool AI per ottimizzare i tempi di produzione.</p>
-                  </div>
-                </div>
 
-                <div class="exp-item primary-role">
-                  <div class="exp-date">2019 – Oggi</div>
-                  <div class="exp-desc">
-                    <strong>ALAN WALKER — Digital Artist Team</strong>
-                    <span class="exp-role">3D Artist</span>
-                    <p>Modellazione, animazione, rigging e weight painting di asset per video musicali e visual live. Creazione contenuti grafici in Blender e Unreal Engine per un artista con oltre 40M di ascolti su Spotify.</p>
-                  </div>
+              <div class="exp-item">
+                <div class="exp-date">2019 – Oggi</div>
+                <div class="exp-desc">
+                  <strong>ALAN WALKER — Digital Artist Team</strong>
+                  <span class="exp-role">3D Artist</span>
+                  <p>Modellazione, animazione, rigging e weight painting di asset per video musicali e visual live. Creazione contenuti grafici in Blender e Unreal Engine per un artista con oltre 40M di ascolti su Spotify.</p>
                 </div>
+              </div>
 
-                <div class="exp-item secondary-role">
-                  <div class="exp-date">04/2024 – Oggi</div>
-                  <div class="exp-desc">
-                    <strong>ALAN WALKER</strong>
-                    <span class="exp-role">Brand Ambassador — Italia</span>
-                    <p>Coordinamento meet & greet nel backstage durante i tour italiani. Gestione della community e mediazione con il management internazionale.</p>
-                  </div>
+              <div class="exp-item">
+                <div class="exp-date">12/2025 – 04/2026</div>
+                <div class="exp-desc">
+                  <strong>PANDORA CREATIVE STUDIOS</strong>
+                  <span class="exp-role">3D Artist & Developer</span>
+                  <p>Pipeline 3D completa (modellazione, texturing, rigging, animazione, compositing). Sviluppo di add-on Blender in Python e implementazione di tool AI per ottimizzare i tempi di produzione.</p>
                 </div>
+              </div>
 
-                <div class="exp-item secondary-role">
-                  <div class="exp-date">06/2024 – 07/2024</div>
-                  <div class="exp-desc">
-                    <strong>BLACKSTAR MARKETING</strong>
-                    <span class="exp-role">Addetto Accoglienza</span>
-                  </div>
+              <div class="exp-item">
+                <div class="exp-date">04/2024 – Oggi</div>
+                <div class="exp-desc">
+                  <strong>ALAN WALKER</strong>
+                  <span class="exp-role">Brand Ambassador — Italia</span>
+                  <p>Coordinamento meet & greet nel backstage durante i tour italiani. Gestione della community italiana e mediazione con il management internazionale.</p>
+                </div>
+              </div>
+
+              <div class="exp-item">
+                <div class="exp-date">06/2024 – 07/2024</div>
+                <div class="exp-desc">
+                  <strong>BLACKSTAR MARKETING</strong>
+                  <span class="exp-role">Addetto Accoglienza</span>
+                  <p>Accoglienza clienti e rappresentanza del brand. Presentazione servizi e piani commerciali.</p>
                 </div>
               </div>
             </div>
 
             <div class="profile-block">
               <h4 class="block-title">EDUCATION</h4>
-              <div class="timeline">
-                <div class="exp-item">
-                  <div class="exp-date">12/2024 – Oggi</div>
-                  <div class="exp-desc">
-                    <strong>ITS ACADEMY ICT PIEMONTE</strong>
-                    <span class="exp-role">AR/VR & Game Developer</span>
-                    <p>Tecnico Superiore Augmented, Virtual e Mixed Reality. Formazione su Unreal Engine 5, Unity, pipeline 3D, gameplay programming e metodologie Agile.</p>
-                  </div>
+              <div class="exp-item">
+                <div class="exp-date">12/2024 – Oggi</div>
+                <div class="exp-desc">
+                  <strong>ITS ACADEMY ICT PIEMONTE — Torino</strong>
+                  <span class="exp-role">AR/VR & Game Developer</span>
+                  <p>Tecnico Superiore Augmented, Virtual e Mixed Reality. Formazione su Unreal Engine 5, Unity, pipeline 3D, gameplay programming e metodologie Agile.</p>
                 </div>
-                <div class="exp-item">
-                  <div class="exp-date">2019 – 2024</div>
-                  <div class="exp-desc">
-                    <strong>IIS PRIMO LEVI — Torino</strong>
-                    <span class="exp-role">Diploma Superiore (Informatica & Telecomunicazioni)</span>
-                    <p>Basi di programmazione (C, C++), reti, sistemi operativi, sviluppo web.</p>
-                  </div>
+              </div>
+              <div class="exp-item">
+                <div class="exp-date">2019 – 2024</div>
+                <div class="exp-desc">
+                  <strong>IIS PRIMO LEVI — Torino</strong>
+                  <span class="exp-role">Diploma Superiore in Informatica & Telecomunicazioni</span>
+                  <p>Basi di programmazione (C, C++), reti, sistemi operativi, sviluppo web.</p>
                 </div>
+              </div>
+            </div>
+
+            <div class="profile-block">
+              <h4 class="block-title">CONTACT</h4>
+              <div class="contact-wrap">
+                <div class="contact-grid">
+                  <a href="mailto:raffaelprivate@gmail.com" class="contact-link">📧 raffaelprivate@gmail.com</a>
+                  <span class="contact-link">📱 +39 392 564 9950</span>
+                  <span class="contact-link">📍 Torino, Italia</span>
+                  <a href="www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener" class="contact-link">🔗 LinkedIn</a>
+                  <a href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener" class="contact-link">🌐 portfoliotommy.netlify.app</a>
+                </div>
+                <a class="btn-download" href="Tommy Raffaello Hodoroaba 14-04-26.pdf" target="_blank">SCARICA CV IN PDF</a>
               </div>
             </div>
           </main>
@@ -318,6 +415,10 @@
             <h3 class="profile-name">TOMMY R. HODOROABA</h3>
             <p class="profile-role">AR/VR • GAME DEV • 3D ARTIST</p>
 
+            <div class="otw-sidebar-badge">
+              <span class="otw-dot"></span> Disponibile a nuove opportunità
+            </div>
+
             <div class="profile-block">
               <h4 class="block-title">SKILLS</h4>
               <ul class="skills-list-text">
@@ -325,9 +426,10 @@
                 <li>Sviluppo AR/VR</li>
                 <li>Modellazione & Texturing</li>
                 <li>Rigging & Animazione 3D</li>
-                <li>Add-on Python (Blender)</li>
+                <li>Sviluppo Add-on Python (Blender)</li>
                 <li>Metodologie Agile</li>
                 <li>Fotogrammetria</li>
+                <li>Motion Graphics</li>
               </ul>
             </div>
             
@@ -367,20 +469,6 @@
             </div>
           </aside>
 
-          <div class="contact-section-wrapper" id="contact-section">
-            <h4 class="block-title">CONTACT</h4>
-            <div class="contact-wrap">
-              <div class="contact-grid">
-                <a href="mailto:raffaelprivate@gmail.com" class="contact-link">📧 raffaelprivate@gmail.com</a>
-                <span class="contact-link">📱 +39 392 564 9950</span>
-                <span class="contact-link">📍 Torino, Italia</span>
-              </div>
-              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" style="background: rgba(30, 80, 255, 0.2); border: 1px solid var(--blue-glow);">COPIA EMAIL</button>
-                <a class="btn-download" href="Tommy Raffaello Hodoroaba 14-04-26.pdf" target="_blank">SCARICA CV IN PDF</a>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>
@@ -389,6 +477,7 @@
       <p id="footerText">© <span id="year"></span> Tommy Raffaello Hodoroaba</p>
     </footer>
 
+    <!-- MODAL -->
     <div id="modal" class="modal" role="dialog" aria-hidden="true">
       <div class="backdrop" id="modalBackdrop"></div>
       <div class="content" role="document">
