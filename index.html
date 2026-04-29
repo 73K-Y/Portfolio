@@ -428,49 +428,6 @@
               </div>
             </div>
 
-            <div class="profile-block">
-              <h4 class="block-title">CONTACT</h4>
-              <div class="contact-wrap">
-                <div class="contact-grid">
-
-                  <!-- Form Netlify — email protetta, niente indirizzo in chiaro -->
-                  <form name="contatti" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex; flex-direction:column; gap:14px; max-width:520px; width:100%;">
-                    <input type="hidden" name="form-name" value="contatti">
-                    <p style="display:none;"><label>Non compilare: <input name="bot-field"></label></p>
-
-                    <div style="display:flex; flex-direction:column; gap:6px;">
-                      <label for="nome" style="font-size:13px; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">Nome</label>
-                      <input type="text" id="nome" name="nome" required
-                        style="background:var(--glass); border:1px solid var(--glass-border); border-radius:4px; padding:10px 14px; color:var(--white); font-size:14px; outline:none;">
-                    </div>
-
-                    <div style="display:flex; flex-direction:column; gap:6px;">
-                      <label for="email" style="font-size:13px; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">Email</label>
-                      <input type="email" id="email" name="email" required
-                        style="background:var(--glass); border:1px solid var(--glass-border); border-radius:4px; padding:10px 14px; color:var(--white); font-size:14px; outline:none;">
-                    </div>
-
-                    <div style="display:flex; flex-direction:column; gap:6px;">
-                      <label for="messaggio" style="font-size:13px; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">Messaggio</label>
-                      <textarea id="messaggio" name="messaggio" rows="4" required
-                        style="background:var(--glass); border:1px solid var(--glass-border); border-radius:4px; padding:10px 14px; color:var(--white); font-size:14px; outline:none; resize:vertical;"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-download" style="align-self:flex-start; cursor:pointer; border:none;">
-                      Invia messaggio
-                    </button>
-                  </form>
-
-                  <!-- Link extra — telefono cliccabile, LinkedIn con URL corretto -->
-                  <a href="tel:+393925649950" class="contact-link" style="margin-top:16px;">📱 Cellulare</a>
-                  <a href="https://www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 LinkedIn</a>
-                  <a href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener" class="contact-link">🌐 Portfolio</a>
-                </div>
-
-                <!-- CV: nome file senza spazi -->
-                <a class="btn-download" href="CV-Tommy-Hodoroaba.pdf" download target="_blank" rel="noopener">SCARICA CV IN PDF</a>
-              </div>
-            </div>
           </main>
 
           <aside class="profile-sidebar">
@@ -527,7 +484,68 @@
             </div>
 
           </aside>
-        </div>
+        </div><!-- /profile-grid -->
+
+        <!-- CONTACT — full width, fuori dalla griglia -->
+        <div class="contact-section-full">
+          <h4 class="block-title" style="margin-bottom: 28px;">CONTACT</h4>
+          <div class="contact-card">
+
+            <!-- Colonna sinistra: Form -->
+            <div class="contact-form-col">
+              <p class="contact-col-label">Inviami un messaggio</p>
+              <form name="contatti" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+                <input type="hidden" name="form-name" value="contatti">
+                <p class="honeypot-wrap"><label>Non compilare: <input name="bot-field"></label></p>
+
+                <div class="form-group">
+                  <label for="nome" class="form-label">Nome</label>
+                  <input type="text" id="nome" name="nome" required class="form-input" placeholder="Il tuo nome">
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" name="email" required class="form-input" placeholder="la@tua.email">
+                </div>
+                <div class="form-group">
+                  <label for="messaggio" class="form-label">Messaggio</label>
+                  <textarea id="messaggio" name="messaggio" rows="5" required class="form-input form-textarea" placeholder="Ciao Tommy, ho un progetto interessante..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Invia messaggio →</button>
+              </form>
+            </div>
+
+            <!-- Colonna destra: Contatti + CV -->
+            <div class="contact-info-col">
+              <p class="contact-col-label">Trovami anche qui</p>
+              <div class="contact-links-list">
+                <a href="tel:+393925649950" class="contact-link-pill">
+                  <span class="clp-icon">📱</span>
+                  <div class="clp-text">
+                    <span class="clp-label">Cellulare</span>
+                    <span class="clp-value">+39 392 564 9950</span>
+                  </div>
+                </a>
+                <a href="https://www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener noreferrer" class="contact-link-pill">
+                  <span class="clp-icon">🔗</span>
+                  <div class="clp-text">
+                    <span class="clp-label">LinkedIn</span>
+                    <span class="clp-value">tommy-raffaello-hodoroaba</span>
+                  </div>
+                </a>
+                <a href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener" class="contact-link-pill">
+                  <span class="clp-icon">🌐</span>
+                  <div class="clp-text">
+                    <span class="clp-label">Portfolio</span>
+                    <span class="clp-value">portfoliotommy.netlify.app</span>
+                  </div>
+                </a>
+              </div>
+              <a class="btn-download btn-cv-full" href="CV-Tommy-Hodoroaba.pdf" download target="_blank" rel="noopener">↓ &nbsp;SCARICA CV IN PDF</a>
+            </div>
+
+          </div>
+        </div><!-- /contact-section-full -->
+
       </section>
     </div>
 

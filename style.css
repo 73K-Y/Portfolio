@@ -53,6 +53,19 @@ a:hover { color: var(--blue-light); }
 .video-container video { width: 100%; height: 100%; object-fit: cover; }
 
 /* ========================================================= */
+/* NAVBAR COMPENSATION — evita che il titolo finisca sotto   */
+/* la navbar fixed (specialmente su mobile con nome su 3 rig)*/
+/* ========================================================= */
+#showreel {
+  padding-top: 110px;
+}
+@media (max-width: 600px) {
+  #showreel {
+    padding-top: 140px;
+  }
+}
+
+/* ========================================================= */
 /* PROFILE SECTION (FIX ALTEZZE E BUCHI)                     */
 /* ========================================================= */
 .profile-section { padding-top: 100px; }
@@ -97,7 +110,129 @@ a:hover { color: var(--blue-light); }
 .exp-role { display: block; color: var(--blue-light); font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
 .exp-desc p { margin: 0; color: var(--text-gray); font-size: 14.5px; line-height: 1.6; }
 
-/* CONTACT E CV */
+/* ========================================================= */
+/* CONTACT FULL-WIDTH SECTION (nuovo design)                 */
+/* ========================================================= */
+.contact-section-full {
+  margin-top: 50px;
+  padding-top: 40px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  background: rgba(30, 80, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 36px;
+}
+
+.contact-col-label {
+  font-size: 11px;
+  color: var(--text-gray);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  margin: 0 0 22px;
+}
+
+/* FORM */
+.contact-form   { display: flex; flex-direction: column; gap: 18px; }
+.honeypot-wrap  { display: none; }
+.form-group     { display: flex; flex-direction: column; gap: 7px; }
+
+.form-label {
+  font-size: 11px;
+  color: var(--text-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+}
+
+.form-input {
+  background: rgba(5, 10, 24, 0.85);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--white);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  width: 100%;
+}
+.form-input::placeholder { color: rgba(160, 171, 192, 0.35); }
+.form-input:focus {
+  border-color: var(--blue-glow);
+  box-shadow: 0 0 0 3px rgba(30, 80, 255, 0.12);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+
+.btn-submit {
+  background: var(--blue-glow);
+  color: var(--white);
+  border: none;
+  padding: 14px 28px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  align-self: flex-start;
+}
+.btn-submit:hover {
+  background: var(--blue-light);
+  color: var(--bg);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.4);
+}
+
+/* INFO COLUMN */
+.contact-info-col   { display: flex; flex-direction: column; }
+.contact-links-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-bottom: 18px; }
+
+.contact-link-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.contact-link-pill:hover {
+  border-color: var(--blue-glow);
+  background: rgba(30, 80, 255, 0.09);
+  color: var(--white);
+}
+.clp-icon  { font-size: 20px; flex-shrink: 0; }
+.clp-text  { display: flex; flex-direction: column; gap: 2px; }
+.clp-label { font-size: 10px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+.clp-value { font-size: 13px; color: var(--white); font-weight: 500; }
+.contact-link-pill:hover .clp-value { color: var(--blue-light); }
+
+.btn-cv-full { width: 100%; text-align: center; }
+
+@media (max-width: 768px) {
+  .contact-card { grid-template-columns: 1fr; padding: 24px; gap: 28px; }
+}
+@media (max-width: 600px) {
+  .contact-section-full { margin-top: 30px; padding-top: 24px; }
+  .contact-card { padding: 18px; }
+  .btn-submit { width: 100%; text-align: center; }
+}
+
+/* ========================================================= */
+/* CONTACT E CV (vecchi stili — mantenuti per compatibilità) */
 .contact-wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; background: rgba(30, 80, 255, 0.05); border: 1px solid var(--glass-border); padding: 25px; border-radius: 8px; }
 .contact-grid { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .contact-link { color: var(--white); font-size: 15px; font-weight: 500; word-wrap: break-word; }
