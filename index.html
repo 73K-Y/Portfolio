@@ -391,13 +391,37 @@
               <h4 class="block-title">CONTACT</h4>
               <div class="contact-wrap">
                 <div class="contact-grid">
-                  <a href="mailto:raffaelprivate@gmail.com" class="contact-link">📧 Email</a>
-                  <span class="contact-link">📱 +39 392 564 9950</span>
-                  <span class="contact-link">📍 Torino TO, Italia</span>
-                  <a href="www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener" class="contact-link">🔗 LinkedIn</a>
+                  <form name="contatti" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex; flex-direction:column; gap:14px; max-width:520px;">
+                    <!-- Campo honeypot nascosto: i bot lo compilano, tu filtri lo spam -->
+                    <input type="hidden" name="form-name" value="contatti">
+                    <p style="display:none;"><label>Non compilare: <input name="bot-field"></label></p>
+
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <label for="nome" style="font-size:13px; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">Nome</label>
+                      <input type="text" id="nome" name="nome" required
+                        style="background:var(--glass); border:1px solid var(--glass-border); border-radius:4px; padding:10px 14px; color:var(--white); font-size:14px; outline:none;">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <label for="email" style="font-size:13px; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">Email</label>
+                      <input type="email" id="email" name="email" required
+                        style="background:var(--glass); border:1px solid var(--glass-border); border-radius:4px; padding:10px 14px; color:var(--white); font-size:14px; outline:none;">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <label for="messaggio" style="font-size:13px; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">Messaggio</label>
+                      <textarea id="messaggio" name="messaggio" rows="4" required
+                        style="background:var(--glass); border:1px solid var(--glass-border); border-radius:4px; padding:10px 14px; color:var(--white); font-size:14px; outline:none; resize:vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-download" style="align-self:flex-start; cursor:pointer; border:none;">
+                      Invia messaggio
+                    </button>
+                  </form>
+                  <a href="https://www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
                   <a href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener" class="contact-link">🌐 Portfolio</a>
                 </div>
-                <a class="btn-download" href="Tommy Raffaello Hodoroaba 14-04-26.pdf" target="_blank">SCARICA CV IN PDF</a>
+                <a class="btn-download" href="CV-Tommy-Hodoroaba.pdf" target="_blank">SCARICA CV IN PDF</a>
               </div>
             </div>
           </main>
