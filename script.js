@@ -94,6 +94,22 @@
     );
   });
   applyFilter("all");
+
+  /* ── Contatore progetti per categoria ── */
+  const catCount = {};
+  cards.forEach((c) => {
+    const cc = (c.dataset.cat || "").trim();
+    if (cc) catCount[cc] = (catCount[cc] || 0) + 1;
+  });
+  filterBtns.forEach((btn) => {
+    const f = btn.dataset.filter;
+    if (f === "all") {
+      btn.textContent = `Tutti (${cards.length})`;
+    } else {
+      const cnt = catCount[f] || 0;
+      if (cnt > 0) btn.textContent = `${btn.textContent} (${cnt})`;
+    }
+  });
 })();
 
 /* ========= Modal & Gallery NATIVA ========= */
@@ -171,6 +187,39 @@
 
     const isPC = window.matchMedia("(min-width: 769px)").matches;
 
+    /* ── Indicatore posizione: counter su PC, dots su mobile ── */
+    if (items.length > 1) {
+      const indicator = document.createElement("div");
+
+      if (isPC) {
+        indicator.className = "gallery-counter";
+        const updateCounter = () => {
+          indicator.textContent = `${indexFromScroll() + 1} / ${slides.length}`;
+        };
+        updateCounter();
+        track.addEventListener("scroll", updateCounter, { passive: true });
+      } else {
+        indicator.className = "gallery-dots";
+        slides.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.className = "gallery-dot" + (i === 0 ? " active" : "");
+          dot.setAttribute("aria-label", `Vai alla slide ${i + 1}`);
+          dot.type = "button";
+          dot.addEventListener("click", () => goTo(i), { passive: true });
+          indicator.appendChild(dot);
+        });
+        const updateDots = () => {
+          const idx = indexFromScroll();
+          indicator.querySelectorAll(".gallery-dot").forEach((d, i) => {
+            d.classList.toggle("active", i === idx);
+          });
+        };
+        track.addEventListener("scroll", updateDots, { passive: true });
+      }
+
+      gallery.appendChild(indicator);
+    }
+
     if (items.length > 1 && isPC) {
       const prev = document.createElement("button");
       prev.className = "gallery-btn prev"; prev.innerHTML = "‹";
@@ -198,6 +247,21 @@
       if (!modal.classList.contains("open")) return;
       if (e.key === "ArrowLeft")  { e.preventDefault(); goTo(indexFromScroll() - 1); }
       if (e.key === "ArrowRight") { e.preventDefault(); goTo(indexFromScroll() + 1); }
+
+      /* ── Focus trap WCAG ── */
+      if (e.key === "Tab") {
+        const focusable = Array.from(modal.querySelectorAll(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )).filter((el) => el.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        }
+      }
     };
     document.addEventListener("keydown", onKey);
     modal._onKey = onKey;
@@ -205,6 +269,8 @@
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    /* Sposta il focus al pulsante di chiusura all'apertura del modal */
+    requestAnimationFrame(() => closeModal?.focus());
   }
 
   document.getElementById("showreel")?.addEventListener("click", (e) => {
