@@ -40,16 +40,16 @@
     if (badges) {
       badges.innerHTML = "";
       if (cat) {
-        const catNames = { 
-          "characters": "Characters", 
-          "environments": "Environments", 
-          "hardsurface": "Hard Surface", 
-          "props": "Props & Scans", 
-          "motion": "Motion & UI" 
+        const catNames = {
+          "characters": "Characters",
+          "environments": "Environments",
+          "hardsurface": "Hard Surface",
+          "props": "Props & Scans",
+          "motion": "Motion & UI"
         };
         const b = document.createElement("span");
         b.className = "badge cat";
-        b.textContent = catNames[cat] || cat; 
+        b.textContent = catNames[cat] || cat;
         badges.appendChild(b);
       }
       tools.forEach((t) => {
@@ -70,18 +70,15 @@
 
   function applyFilter(key) {
     const cat = (key || "all").trim();
-    let visibleIndex = 1; // Contatore solo per le card visibili
-    
+    let visibleIndex = 1;
     cards.forEach((c) => {
       const cc = (c.dataset.cat || "").trim();
       if (cat === "all" || cc === cat) {
         c.classList.remove("is-hidden");
-        // Assegna la posizione dinamica alla card visibile
         c.setAttribute("data-bento", visibleIndex);
         visibleIndex++;
       } else {
         c.classList.add("is-hidden");
-        // Rimuovi l'attributo se nascosta per non sballare il CSS
         c.removeAttribute("data-bento");
       }
     });
@@ -111,11 +108,16 @@
 
   if (!modal || !modalInner || !modalInfo || !modalTools || !modalNote) return;
 
+  /* ✅ FIX: rimuove il listener tastiera ad ogni chiusura */
   function closeModalFn() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     modalInner.innerHTML = "";
     document.body.style.overflow = "";
+    if (modal._onKey) {
+      document.removeEventListener("keydown", modal._onKey);
+      modal._onKey = null;
+    }
   }
 
   closeModal?.addEventListener("click", closeModalFn, { passive: true });
@@ -130,9 +132,9 @@
 
     if (tools) {
       tools.split(",").map((s) => s.trim()).filter(Boolean).forEach((t) => {
-          const span = document.createElement("span");
-          span.className = "chip"; span.textContent = t;
-          modalTools.appendChild(span);
+        const span = document.createElement("span");
+        span.className = "chip"; span.textContent = t;
+        modalTools.appendChild(span);
       });
     }
     if (note) modalNote.textContent = note;
@@ -147,7 +149,6 @@
     items.forEach((src) => {
       const slide = document.createElement("div");
       slide.className = "slide";
-
       if (src.toLowerCase().endsWith(".mp4")) {
         const v = document.createElement("video");
         v.src = src; v.controls = true; v.playsInline = true; v.preload = "metadata"; v.style.maxHeight = "80vh";
@@ -169,11 +170,11 @@
     const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * slideW(), behavior: "smooth" });
 
     const isPC = window.matchMedia("(min-width: 769px)").matches;
-    
+
     if (items.length > 1 && isPC) {
       const prev = document.createElement("button");
       prev.className = "gallery-btn prev"; prev.innerHTML = "‹";
-      
+
       const next = document.createElement("button");
       next.className = "gallery-btn next"; next.innerHTML = "›";
 
@@ -182,23 +183,24 @@
 
       const updateArrows = () => {
         const idx = indexFromScroll();
-        prev.style.display = idx === 0 ? "none" : "block"; 
-        next.style.display = idx === slides.length - 1 ? "none" : "block"; 
+        prev.style.display = idx === 0 ? "none" : "block";
+        next.style.display = idx === slides.length - 1 ? "none" : "block";
       };
 
       prev.addEventListener("click", () => { goTo(indexFromScroll() - 1); }, { passive: true });
       next.addEventListener("click", () => { goTo(indexFromScroll() + 1); }, { passive: true });
-
-      track.addEventListener('scroll', updateArrows, { passive: true });
-      setTimeout(updateArrows, 50); 
+      track.addEventListener("scroll", updateArrows, { passive: true });
+      setTimeout(updateArrows, 50);
     }
 
+    /* ✅ FIX: salva riferimento per rimozione in closeModalFn */
     const onKey = (e) => {
       if (!modal.classList.contains("open")) return;
-      if (e.key === "ArrowLeft") { e.preventDefault(); goTo(indexFromScroll() - 1); }
+      if (e.key === "ArrowLeft")  { e.preventDefault(); goTo(indexFromScroll() - 1); }
       if (e.key === "ArrowRight") { e.preventDefault(); goTo(indexFromScroll() + 1); }
     };
     document.addEventListener("keydown", onKey);
+    modal._onKey = onKey;
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
@@ -210,13 +212,13 @@
       if (!btn) return;
       const card = e.target.closest(".case");
       if (!card) return;
-      const title = card.dataset.title || "Progetto";
-      const desc = card.dataset.desc || "";
-      const tools = card.dataset.tools || "";
-      const note = card.dataset.note || "";
+      const title  = card.dataset.title  || "Progetto";
+      const desc   = card.dataset.desc   || "";
+      const tools  = card.dataset.tools  || "";
+      const note   = card.dataset.note   || "";
       const images = (card.dataset.images || "").split("|").map((s) => s.trim()).filter(Boolean);
       const videos = (card.dataset.videos || "").split("|").map((s) => s.trim()).filter(Boolean);
-      const items = [...images, ...videos];
+      const items  = [...images, ...videos];
       if (!items.length) return;
       openModal(items, title, desc, tools, note);
     }, { passive: true }
@@ -224,97 +226,102 @@
 })();
 
 /* ========= Sistema Navigazione SPA (Hash Routing) ========= */
+/* ✅ FIX: IntersectionObserver creato una sola volta fuori da switchView */
 (() => {
-  const btnProfile = document.getElementById("btn-profile");
+  const btnProfile  = document.getElementById("btn-profile");
   const btnShowreel = document.getElementById("btn-showreel");
-  const logoHome = document.getElementById("logo-home");
-  
-  const viewHome = document.getElementById("view-home");
+  const logoHome    = document.getElementById("logo-home");
+  const viewHome    = document.getElementById("view-home");
   const viewProfile = document.getElementById("view-profile");
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-visible");
+          revealObserver.unobserve(e.target);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+  );
 
   function switchView(hash) {
     window.scrollTo({ top: 0, behavior: "instant" });
 
     if (hash === "#profile") {
-      viewHome.style.display = "none";
+      viewHome.style.display    = "none";
       viewProfile.style.display = "block";
       btnProfile.classList.add("active");
       btnShowreel.classList.remove("active");
     } else {
-      viewHome.style.display = "block";
+      viewHome.style.display    = "block";
       viewProfile.style.display = "none";
       btnShowreel.classList.add("active");
       btnProfile.classList.remove("active");
-      hash = "#home"; // Fallback di sicurezza
+      hash = "#home";
     }
 
-    // Aggiorna l'URL del browser senza ricaricare
     history.pushState(null, null, hash);
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            observer.unobserve(e.target);
-          }
-        });
-      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-    );
 
     document.querySelectorAll(".reveal").forEach((el) => {
       el.classList.remove("is-visible");
-      setTimeout(() => observer.observe(el), 50);
+      setTimeout(() => revealObserver.observe(el), 50);
     });
   }
 
-  // Caricamento iniziale e navigazione "Avanti/Indietro" del browser
-  window.addEventListener("load", () => switchView(window.location.hash || "#home"));
+  window.addEventListener("load",     () => switchView(window.location.hash || "#home"));
   window.addEventListener("popstate", () => switchView(window.location.hash || "#home"));
 
-  // Click fisici
-  btnProfile?.addEventListener("click", (e) => { e.preventDefault(); switchView("#profile"); });
+  btnProfile?.addEventListener( "click", (e) => { e.preventDefault(); switchView("#profile"); });
   btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
-  logoHome?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
+  logoHome?.addEventListener(   "click", (e) => { e.preventDefault(); switchView("#home"); });
 })();
 
 /* ========= Interazioni Extra (CTA, Video Fallback, Copia Email) ========= */
 (() => {
   // === CTA profile switch ===
-  document.getElementById('cta-profile-link')?.addEventListener('click', function(e) {
+  document.getElementById("cta-profile-link")?.addEventListener("click", function(e) {
     e.preventDefault();
-    document.getElementById('btn-profile')?.click();
+    document.getElementById("btn-profile")?.click();
   });
 
   // === Slideshow fallback hero ===
-  const video = document.getElementById('heroVideo');
-  const slideshow = document.getElementById('heroSlideshow');
+  const video = document.getElementById("heroVideo");
+  const slideshow = document.getElementById("heroSlideshow");
   if (video) {
     const showSlideshow = () => {
-      video.style.display = 'none';
-      if (slideshow) slideshow.style.display = 'block';
+      video.style.display = "none";
+      if (slideshow) slideshow.style.display = "block";
     };
-    video.addEventListener('error', showSlideshow);
+    video.addEventListener("error", showSlideshow);
     setTimeout(() => { if (video.readyState === 0) showSlideshow(); }, 2500);
   } else if (slideshow) {
-    slideshow.style.display = 'block';
+    slideshow.style.display = "block";
   }
 
   // === Bottone "Scrivimi" — copia email negli appunti ===
-  document.querySelectorAll('.btn-copy-email').forEach(btn => {
-    btn.addEventListener('click', function() {
+  document.querySelectorAll(".btn-copy-email").forEach(btn => {
+    btn.addEventListener("click", function() {
       const email = this.dataset.email;
       if (!email) return;
       navigator.clipboard.writeText(email).then(() => {
         const orig = this.textContent;
-        this.textContent = '✓ Email copiata!';
-        this.style.background = '#00c864';
+        this.textContent = "✓ Email copiata!";
+        this.style.background = "#00c864";
         setTimeout(() => {
           this.textContent = orig;
-          this.style.background = '';
+          this.style.background = "";
         }, 2200);
       }).catch(() => {
-        // Fallback se clipboard non disponibile
-        window.location.href = 'mailto:' + email;
+        // Fallback visivo invece di aprire il client email
+        const orig = this.textContent;
+        this.textContent = email;
+        this.style.background = "#333";
+        setTimeout(() => {
+          this.textContent = orig;
+          this.style.background = "";
+        }, 4000);
       });
     });
   });
