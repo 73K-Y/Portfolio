@@ -4,19 +4,71 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
+    <!-- TITOLO -->
+    <title>Tommy Hodoroaba — AR/VR Developer & 3D Artist | Torino</title>
+
+    <!-- SEO BASE -->
+    <meta name="description" content="Game Developer e 3D Artist con 6 anni nel team creativo di Alan Walker. Specializzato in AR/VR, Unreal Engine 5, Unity e pipeline 3D complete. Disponibile a nuove opportunità — Torino." />
+    <meta name="author" content="Tommy Raffaello Hodoroaba" />
+    <meta name="keywords" content="AR VR developer, 3D artist, Unreal Engine 5, Unity, Blender, game developer, Torino, portfolio" />
+    <link rel="canonical" href="https://portfoliotommy.netlify.app" />
+
+    <!-- OPEN GRAPH — sostituisci og-cover.jpg con un'immagine reale 1200×630px -->
     <meta property="og:title" content="Tommy Hodoroaba — AR/VR Developer & 3D Artist" />
     <meta property="og:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#. Disponibile a nuove opportunità." />
-    <meta property="og:image" content="https://portfoliotommy.netlify.app/assets/EXAMPLE.png" />
+    <meta property="og:image" content="https://portfoliotommy.netlify.app/assets/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://portfoliotommy.netlify.app" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Tommy Hodoroaba Portfolio" />
 
+    <!-- TWITTER / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tommy Hodoroaba — AR/VR Developer & 3D Artist" />
+    <meta name="twitter:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#." />
+    <meta name="twitter:image" content="https://portfoliotommy.netlify.app/assets/og-cover.jpg" />
+
+    <!-- TEMA -->
     <meta name="theme-color" content="#030612" />
     <meta name="color-scheme" content="dark" />
 
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="assets/logo.png" />
+
+    <!-- FONT — preconnect aggiunto per velocità -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- SCHEMA.ORG -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Tommy Raffaello Hodoroaba",
+      "jobTitle": "AR/VR Developer & 3D Artist",
+      "url": "https://portfoliotommy.netlify.app",
+      "image": "https://portfoliotommy.netlify.app/assets/fronte.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Torino",
+        "addressCountry": "IT"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tommy-raffaello-hodoroaba"
+      ],
+      "knowsAbout": ["AR/VR Development", "3D Art", "Unreal Engine 5", "Unity", "Blender", "Game Development"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Alan Walker — Digital Artist Team"
+      }
+    }
+    </script>
   </head>
 
   <body>
@@ -24,7 +76,7 @@
     <div class="nav-wrapper">
       <div class="nav-glass">
         <div class="brand" id="logo-home" style="cursor: pointer;">
-          <div class="logo"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'"></div>
+          <div class="logo"><img src="assets/logo.png" alt="Logo Tommy Hodoroaba" onerror="this.style.display='none'"></div>
           <div class="name-row">
             <h1>Tommy Raffaello Hodoroaba</h1>
             <p class="lead">AR/VR • GAME DEV • 3D ARTIST</p>
@@ -42,17 +94,6 @@
     </div>
 
     <div id="view-home">
-
-      <!--<section id="hero" class="hero-video-section">
-        <h1 class="hero-title-back">PORTFOLIO</h1>
-
-        <div class="video-container reveal">
-          <video id="heroVideo" autoplay loop muted playsinline poster="assets/EXAMPLE.png"
-                 onerror="this.style.display='none'; document.getElementById('heroSlideshow').style.display='block';">
-            <source src="INSERISCI_QUI_IL_TUO_SHOWREEL.mp4" type="video/mp4">
-          </video>
-        
-      </section></div>-->
 
       <div id="showreel" class="wrap section">
         <h2 class="profile-main-title" style="margin-bottom: 20px;">PR<span class="glow-script">O</span>JECTS</h2>
@@ -255,7 +296,7 @@
             data-desc="Ricostruzione digitale 3D e rendering di una statuina Lego Mario."
             data-tools="Blender"
             data-note="Ricostruzione 3D e rendering di una statuina Lego Mario. Focus sulla riproduzione fedele delle proporzioni originali e impostazione dei materiali plastici fisicamente accurati (PBR). Set di illuminazione in stile macro photography/studio lighting per esaltare i riflessi e i micro-dettagli della plastica."
-            data-images="assets/UntitledMario.png" 
+            data-images="assets/UntitledMario.png"
             tabindex="0" role="button">
             <div class="case-bg" style="--bg:url('assets/UntitledMario.png')"></div>
             <div class="case-info">
@@ -312,9 +353,9 @@
     <div id="view-profile" style="display: none; padding-top: 40px;">
       <section class="wrap profile-section reveal">
         <h2 class="profile-main-title">PR<span class="glow-script">O</span>FILE</h2>
-        
+
         <div class="profile-grid">
-          
+
           <main class="profile-content">
             <div class="profile-block">
               <h4 class="block-title">ABOUT ME</h4>
@@ -391,8 +432,9 @@
               <h4 class="block-title">CONTACT</h4>
               <div class="contact-wrap">
                 <div class="contact-grid">
-                  <form name="contatti" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex; flex-direction:column; gap:14px; max-width:520px;">
-                    <!-- Campo honeypot nascosto: i bot lo compilano, tu filtri lo spam -->
+
+                  <!-- Form Netlify — email protetta, niente indirizzo in chiaro -->
+                  <form name="contatti" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex; flex-direction:column; gap:14px; max-width:520px; width:100%;">
                     <input type="hidden" name="form-name" value="contatti">
                     <p style="display:none;"><label>Non compilare: <input name="bot-field"></label></p>
 
@@ -418,21 +460,27 @@
                       Invia messaggio
                     </button>
                   </form>
-                  <a href="https://www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+
+                  <!-- Link extra — telefono cliccabile, LinkedIn con URL corretto -->
+                  <a href="tel:+393925649950" class="contact-link" style="margin-top:16px;">📱 +39 392 564 9950</a>
+                  <a href="https://www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 LinkedIn</a>
                   <a href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener" class="contact-link">🌐 Portfolio</a>
                 </div>
-                <a class="btn-download" href="CV-Tommy-Hodoroaba.pdf" target="_blank">SCARICA CV IN PDF</a>
+
+                <!-- CV: nome file senza spazi -->
+                <a class="btn-download" href="CV-Tommy-Hodoroaba.pdf" download target="_blank" rel="noopener">SCARICA CV IN PDF</a>
               </div>
             </div>
           </main>
 
           <aside class="profile-sidebar">
             <div class="profile-pic-container">
-              <img src="assets/fronte.png" alt="Tommy Raffaello Hodoroaba" class="profile-pic"
-                   onerror="this.src='https://via.placeholder.com/200/030612/1e50ff?text=TR'">
+              <img src="assets/fronte.png" alt="Tommy Raffaello Hodoroaba — AR/VR Developer" class="profile-pic"
+                   width="180" height="180"
+                   onerror="this.style.background='#0a1954';this.style.borderRadius='50%'">
               <div class="pic-ring"></div>
             </div>
-            
+
             <h3 class="profile-name">TOMMY R. HODOROABA</h3>
             <p class="profile-role">AR/VR • GAME DEV • 3D ARTIST</p>
 
@@ -453,18 +501,18 @@
                 <li>Motion Graphics</li>
               </ul>
             </div>
-            
+
             <div class="profile-block">
               <h4 class="block-title">SOFTWARE</h4>
               <ul class="software-list">
-                <li><img src="assets/unreal.png" alt="Unreal" class="sw-icon-img" onerror="this.style.display='none'"> Unreal Engine 5</li>
-                <li><img src="assets/unity.png" alt="Unity" class="sw-icon-img" onerror="this.style.display='none'"> Unity</li>
-                <li><img src="assets/blender.png" alt="Blender" class="sw-icon-img" onerror="this.style.display='none'"> Blender</li>
-                <li><img src="assets/maya.png" alt="Maya" class="sw-icon-img" onerror="this.style.display='none'"> Maya / 3DS Max</li>
-                <li><img src="assets/vsc.png" alt="Code" class="sw-icon-img" onerror="this.style.display='none'"> C++ / C# / Python</li>
-                <li><img src="assets/photoshop.png" alt="Photoshop" class="sw-icon-img" onerror="this.style.display='none'"> Photoshop</li>
-                <li><img src="assets/after.png" alt="After Effects" class="sw-icon-img" onerror="this.style.display='none'"> After Effects</li>
-                <li><img src="assets/premiere.png" alt="Premiere" class="sw-icon-img" onerror="this.style.display='none'"> Premiere</li>
+                <li><img src="assets/unreal.png" alt="Unreal Engine" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Unreal Engine 5</li>
+                <li><img src="assets/unity.png" alt="Unity" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Unity</li>
+                <li><img src="assets/blender.png" alt="Blender" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Blender</li>
+                <li><img src="assets/maya.png" alt="Maya" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Maya / 3DS Max</li>
+                <li><img src="assets/vsc.png" alt="VSCode" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> C++ / C# / Python</li>
+                <li><img src="assets/photoshop.png" alt="Photoshop" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Photoshop</li>
+                <li><img src="assets/after.png" alt="After Effects" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> After Effects</li>
+                <li><img src="assets/premiere.png" alt="Premiere Pro" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Premiere</li>
               </ul>
             </div>
 
@@ -478,7 +526,8 @@
               </ul>
             </div>
 
-            </div>
+          </aside>
+        </div>
       </section>
     </div>
 
