@@ -339,7 +339,7 @@ a:hover { color: var(--blue-light); }
 .case-coming .pc-bg { display: none; }
 .case-coming .pc-bg, .case-coming .mobile-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(10px) brightness(0.5); z-index: 0; transition: 0.6s ease; }
 .case-coming .mobile-bg { display: block; }
-.case-coming .case-overlay { cursor: pointer; text-decoration: none; color: inherit; background: rgba(0, 0, 0, 0.25);}
+.case-coming .case-overlay { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); transition: 0.4s ease; }
 .case-coming .label { background: var(--white); color: var(--bg); padding: 6px 14px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; font-size: 12px; }
 .case-coming .case-info { position: absolute; z-index: 2; bottom: 20px; left: 0; right: 0; text-align: center; pointer-events: none; }
 .case-coming .coming-title { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 16px; text-transform: uppercase; color: var(--text-gray); }
