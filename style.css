@@ -267,7 +267,6 @@ a:hover { color: var(--blue-light); }
 }
 
 @media (min-width: 900px) {
-  .coming-grid { grid-template-columns: repeat(3, 1fr); }
   .case { height: 350px; } 
   .case[data-bento="1"] { grid-column: span 8; } 
   .case[data-bento="2"] { grid-column: span 4; } 
@@ -366,11 +365,6 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   .wrap { padding: clamp(20px, 4vw, 40px) 15px; } 
   
   /* FORZA DUE COLONNE SU MOBILE! 60% Sinistra, 40% Destra */
-  .profile-grid { 
-    grid-template-columns: 1.5fr 1fr; 
-    gap: 15px; 
-    align-items: start;
-  }
   
   /* Mantiene le due colonne separate, non impilate! */
   .profile-content { grid-column: 1; grid-row: 1; display: block; }
@@ -413,6 +407,13 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   .video-container { width: 100%; margin-top: 100px; border-radius: 8px; border: none; }
 }
 
+@media (min-width: 901px) {
+  .profile-sidebar {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+  }
+}
 
 /* ========================================================= */
 /* MODAL GALLERY                                             */
