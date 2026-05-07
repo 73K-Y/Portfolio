@@ -391,4 +391,25 @@
       });
     });
   });
+  /* ========= Coming Soon: griglia auto-adattiva ========= */
+  (() => {
+    const grid = document.querySelector('.coming-grid');
+    if (!grid) return;
+
+    function updateComingCols() {
+      if (window.innerWidth < 900) {
+        grid.style.gridTemplateColumns = '1fr';
+        return;
+      }
+      const count = grid.querySelectorAll('.case-coming').length;
+      let cols;
+      if (count % 3 === 0)      cols = 3;   // 3, 6, 9…
+      else if (count % 2 === 0) cols = 2;   // 2, 4, 8…
+      else                      cols = 3;   // 1, 5, 7… → default 3
+      grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    }
+
+    updateComingCols();
+    window.addEventListener('resize', updateComingCols, { passive: true });
+  })();
 })();

@@ -267,6 +267,7 @@ a:hover { color: var(--blue-light); }
 }
 
 @media (min-width: 900px) {
+  .coming-grid { grid-template-columns: repeat(3, 1fr); }
   .case { height: 350px; } 
   .case[data-bento="1"] { grid-column: span 8; } 
   .case[data-bento="2"] { grid-column: span 4; } 
@@ -331,11 +332,6 @@ a:hover { color: var(--blue-light); }
   display: flex; align-items: center; justify-content: center; padding: 20px; cursor: default; height: 250px; 
 }
 
-@media (min-width: 900px) {
-  .coming-grid { grid-template-columns: repeat(3, 1fr); }
-  .case-coming { height: auto; aspect-ratio: 16 / 9; }
-}
-
 .case-coming .pc-bg { display: none; }
 .case-coming .pc-bg, .case-coming .mobile-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(10px) brightness(0.5); z-index: 0; transition: 0.6s ease; }
 .case-coming .mobile-bg { display: block; }
@@ -379,6 +375,15 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   /* Mantiene le due colonne separate, non impilate! */
   .profile-content { grid-column: 1; grid-row: 1; display: block; }
   .profile-sidebar { grid-column: 2; grid-row: 1; display: block; }
+
+  /* ========= SIDEBAR STICKY (fix buco profilo desktop) ========= */
+  @media (min-width: 901px) {
+    .profile-sidebar {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+  }
   
   /* Ridimensionamento font e blocchi per far entrare tutto nei telefoni piccoli */
   .profile-name { font-size: 1.3rem; }
