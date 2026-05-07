@@ -328,7 +328,9 @@ a:hover { color: var(--blue-light); }
 
 .case-coming { 
   position: relative; border-radius: 8px; overflow: hidden; border: 1px dashed var(--glass-border); 
-  display: flex; align-items: center; justify-content: center; padding: 20px; cursor: default; height: 250px; 
+  display: flex; align-items: center; justify-content: center; padding: 20px; cursor: default;
+  aspect-ratio: 16 / 9;
+  height: auto;
 }
 
 .case-coming .pc-bg { display: none; }
