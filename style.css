@@ -360,53 +360,169 @@ a:hover { color: var(--blue-light); }
 footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text-gray); border-top: 1px solid var(--glass-border); margin-top: 40px;}
 
 
-/* ========================================================= */
-/* FIX: DUE COLONNE AFFIANCATE ANCHE SU MOBILE (COME FOTO 3) */
-/* ========================================================= */
-@media (max-width: 900px) {
-  .wrap { padding: clamp(20px, 4vw, 40px) 15px; } 
-  
-  /* FORZA DUE COLONNE SU MOBILE! 60% Sinistra, 40% Destra */
-  
-  /* Mantiene le due colonne separate, non impilate! */
-  .profile-content { grid-column: 1; grid-row: 1; display: block; }
-  .profile-sidebar { grid-column: 2; grid-row: 1; display: block; }
+/* =====================================================
+   MOBILE PROFILE LAYOUT FIX
+   Sostituisce il blocco @media (max-width: 900px)
+   nel tuo style.css esistente
+   ===================================================== */
 
-  /* ========= SIDEBAR STICKY (fix buco profilo desktop) ========= */
-  @media (min-width: 901px) {
-    .profile-sidebar {
-      position: sticky;
-      top: 100px;
-      align-self: start;
-    }
+/* ── Desktop: due colonne, sidebar sticky ── */
+@media (min-width: 901px) {
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 60px;
+    align-items: start;
   }
-  
-  /* Ridimensionamento font e blocchi per far entrare tutto nei telefoni piccoli */
-  .profile-name { font-size: 1.3rem; }
-  .profile-role { font-size: 0.7rem; margin-bottom: 20px; }
-  .profile-pic-container { width: 100px; height: 100px; margin-bottom: 15px; }
-  
-  .profile-block { margin-bottom: 25px; }
-  .block-title { font-size: 10px; padding: 4px 8px; margin-bottom: 12px; }
-  
-  .about-text { font-size: 11px; line-height: 1.4; }
-  
-  .exp-item { grid-template-columns: 1fr; gap: 4px; margin-bottom: 15px; padding-bottom: 15px; }
-  .exp-desc strong { font-size: 12px; margin-bottom: 2px; }
-  .exp-desc p { font-size: 11px; }
-  .exp-date, .exp-role { font-size: 10px; }
-  
-  .skills-list-text li, .software-list li { font-size: 10px; padding-bottom: 4px; margin-bottom: 8px; }
-  .software-tags span { font-size: 9px; padding: 3px 6px; }
-  .sw-icon-img { width: 14px; height: 14px; }
-  
-  .contact-wrap { padding: 12px; flex-direction: column; align-items: flex-start; gap: 10px;}
-  .contact-link { font-size: 10px; }
-  .btn-download { padding: 8px 12px; font-size: 10px; width: 100%; }
 
-  /* Correzione Video Hero Mobile */
-  .hero-title-back { font-size: 17vw; } 
-  .video-container { width: 100%; margin-top: 100px; border-radius: 8px; border: none; }
+  .profile-content { grid-column: 1; grid-row: 1; }
+  .profile-sidebar  { grid-column: 2; grid-row: 1; position: sticky; top: 100px; align-self: start; }
+}
+
+/* ── Tablet (600–900px): impila verticalmente ── */
+@media (max-width: 900px) {
+  .wrap { padding: clamp(20px, 4vw, 40px) 15px; }
+
+  /* Griglia a colonna singola: sidebar SOPRA, content SOTTO */
+  .profile-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Sidebar diventa una riga orizzontale su tablet */
+  .profile-sidebar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px 24px;
+    align-items: start;
+  }
+
+  /* Foto + nome/ruolo/badge in colonna sinistra della sidebar */
+  .profile-pic-container {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 130px;
+    height: 130px;
+    margin: 0;
+  }
+
+  .profile-name {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 1.4rem;
+    margin: 0;
+    align-self: end;
+  }
+
+  .profile-role {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.72rem;
+    margin: 0 0 0;
+    align-self: start;
+  }
+
+  /* Badge "Disponibile" e blocchi skills/software full-width sotto */
+  .otw-sidebar-badge,
+  .profile-sidebar .profile-block {
+    grid-column: 1 / -1;
+  }
+
+  .profile-block  { margin-bottom: 24px; }
+  .block-title    { font-size: 11px; padding: 5px 10px; margin-bottom: 14px; }
+
+  /* Skills e software: due colonne affiancate in orizzontale su tablet */
+  .skills-list-text {
+    columns: 2;
+    column-gap: 20px;
+  }
+  .skills-list-text li {
+    font-size: 12px;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    break-inside: avoid;
+  }
+
+  .software-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+  }
+  .software-list li {
+    font-size: 12px;
+    padding-bottom: 6px;
+    margin-bottom: 0;
+  }
+  .sw-icon-img { width: 16px; height: 16px; }
+
+  /* Content (experience, about, education) */
+  .about-text { font-size: 13px; line-height: 1.65; }
+
+  .exp-item {
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+  .exp-desc strong { font-size: 13px; }
+  .exp-desc p      { font-size: 13px; }
+  .exp-date        { font-size: 11px; }
+  .exp-role        { font-size: 11px; }
+
+  /* Contact */
+  .contact-wrap    { padding: 14px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .contact-link    { font-size: 11px; }
+  .btn-download    { padding: 10px 16px; font-size: 11px; width: 100%; }
+
+  /* Hero */
+  .hero-title-back  { font-size: 17vw; }
+  .video-container  { width: 100%; margin-top: 100px; border-radius: 8px; border: none; }
+}
+
+/* ── Mobile piccolo (<600px): layout completamente impilato ── */
+@media (max-width: 600px) {
+  /* Sidebar: colonna unica, foto centrata */
+  .profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-pic-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 16px;
+  }
+
+  .profile-name { font-size: 1.3rem; text-align: center; }
+  .profile-role { text-align: center; margin-bottom: 16px; }
+
+  .otw-sidebar-badge { justify-content: center; }
+
+  /* Skills e software: singola colonna su mobile piccolo */
+  .skills-list-text { columns: 1; }
+  .skills-list-text li { text-align: left; }
+
+  .software-list { grid-template-columns: 1fr; }
+  .software-list li { text-align: left; }
+
+  /* Experience: impila data sopra descrizione */
+  .exp-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  /* Navbar e CTA */
+  .open-to-work-badge { bottom: 16px; right: 16px; font-size: 10px; padding: 6px 12px; }
+  .home-cta .btn-outline { margin-left: 0; margin-top: 12px; display: block; width: fit-content; margin: 12px auto 0; }
+  .nav-cta { display: none; }
+
+  /* Contact card */
+  .contact-card    { grid-template-columns: 1fr; padding: 18px; gap: 24px; }
+  .btn-submit      { width: 100%; text-align: center; }
+  .contact-section-full { margin-top: 24px; padding-top: 20px; }
 }
 
 @media (min-width: 901px) {
