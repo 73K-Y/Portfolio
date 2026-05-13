@@ -58,14 +58,6 @@
         b.textContent = t;
         badges.appendChild(b);
       });
-
-      const hasVideos = (card.dataset.videos || "").trim().length > 0;
-      if (hasVideos) {
-        const vb = document.createElement("span");
-        vb.className = "badge";
-        vb.textContent = "🎬 Video";
-        badges.appendChild(vb);
-      }
     }
     if (descEl && card.dataset.desc) descEl.textContent = card.dataset.desc;
   });
@@ -175,7 +167,7 @@
       slide.className = "slide";
       if (src.toLowerCase().endsWith(".mp4")) {
         const v = document.createElement("video");
-        v.src = src; v.controls = true; v.playsInline = true; v.preload = "none"; v.style.maxHeight = "80vh";
+        v.src = src; v.controls = true; v.playsInline = true; v.preload = "metadata"; v.style.maxHeight = "80vh";
         slide.appendChild(v);
       } else {
         const img = document.createElement("img");
@@ -192,12 +184,6 @@
     const slideW = () => track.getBoundingClientRect().width || 1;
     const indexFromScroll = () => Math.round(track.scrollLeft / slideW());
     const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * slideW(), behavior: "smooth" });
-
-    track.addEventListener("scroll", () => {
-      track.querySelectorAll("video").forEach(v => {
-        if (!v.paused) v.pause();
-      });
-    }, { passive: true });
 
     const isPC = window.matchMedia("(min-width: 769px)").matches;
 
