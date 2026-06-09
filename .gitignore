@@ -1,1 +1,41 @@
+# ====== Segreti: MAI nel repo ======
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+config.local.*
+serviceAccount*.json
 
+# ====== Sistema operativo ======
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ====== Editor / IDE ======
+.vscode/
+.idea/
+*.swp
+
+# ====== Node (se presente) ======
+node_modules/
+dist/
+build/
+
+# ====== Python (add-on e tool) ======
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ====== Blender ======
+*.blend1
+*.blend2
+
+# ====== Unreal Engine (repo dei giochi) ======
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+*.sln
