@@ -22,7 +22,9 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--white);
   background-color: var(--bg);
-  background-image: radial-gradient(circle at 50% 30%, #0a1954 0%, #02040a 60%);
+  background-image:
+    radial-gradient(1100px 600px at 72% -8%, rgba(45,91,255,0.18), transparent 60%),
+    radial-gradient(circle at 50% 30%, #0a1330 0%, #04060f 62%);
   background-attachment: fixed;
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -46,6 +48,13 @@ a:hover { color: var(--blue-light); }
 .lead { margin: 0; font-size: 11px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; }
 .nav-links { display: flex; gap: 20px; font-size: 13px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; }
 .nav-links a.active { color: var(--blue-light); }
+
+/* Voce di menu attiva: sottolineatura discreta */
+.nav-links a { position: relative; }
+.nav-links a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+  background: var(--blue-light); border-radius: 2px; box-shadow: 0 0 10px var(--blue-glow);
+}
 
 /* ========================================================= */
 /* HERO (Video in Overlay)                                   */
@@ -845,4 +854,54 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   .open-to-work-badge { bottom: 16px; right: 16px; font-size: 10px; padding: 6px 12px; }
   .home-cta .btn-outline { margin-left: 0; margin-top: 12px; display: block; width: fit-content; margin: 12px auto 0; }
   .nav-cta { display: none; } /* Su mobile piccolo nasconde la CTA dalla navbar per spazio */
+}
+
+
+/* ========================================================= */
+/* ====================  SEZIONE CODE  ===================== */
+/* Stili per la vista #view-code (Tool & Codice, Giochi).    */
+/* ========================================================= */
+.code-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 10px; }
+.code-hero-copy .about-text { font-size: 16px; }
+.code-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.code-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+
+/* finestra di codice (elemento firma della sezione) */
+.code-window { background: #070c1a; border: 1px solid var(--glass-border); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,30,120,0.4); }
+.cw-bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--glass-border); }
+.cw-dot { width: 11px; height: 11px; border-radius: 50%; }
+.cw-dot.r { background: #ff5f57; } .cw-dot.y { background: #febc2e; } .cw-dot.g { background: #28c840; }
+.cw-name { margin-left: 8px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; color: var(--text-dim); }
+.cw-body { padding: 16px 18px; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12.5px; line-height: 1.7; overflow-x: auto; white-space: pre; color: var(--white); }
+.cw-body .kw { color: #ff7bd5; } .cw-body .fn { color: #62b6ff; }
+.cw-body .st { color: #5ef0a8; } .cw-body .cm { color: var(--text-dim); font-style: italic; }
+
+/* griglie */
+.dev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.game-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+
+/* card (prefisso .code- per non toccare le .case della gallery) */
+.code-card { background: var(--surface-1); border: 1px solid var(--glass-border); border-radius: 10px; overflow: hidden; transition: .35s; display: flex; flex-direction: column; }
+.code-card:hover { border-color: var(--blue-glow); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,91,255,0.22); }
+.code-thumb { height: 160px; position: relative; display: grid; place-items: center; border-bottom: 1px solid var(--glass-border); overflow: hidden; background-size: cover; background-position: center; }
+.code-thumb .ph-label { font-family: ui-monospace, monospace; font-size: 11px; color: rgba(243,246,252,0.55); text-align: center; padding: 0 12px; line-height: 1.5; }
+.g1 { background: linear-gradient(135deg,#1b0f3a,#3a1170); }
+.g2 { background: linear-gradient(135deg,#07223f,#0a4f7a); }
+.g5 { background: linear-gradient(135deg,#0a1240,#2d5bff); }
+.code-status { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 7px; background: rgba(5,10,24,0.85); border: 1px solid rgba(255,255,255,0.18); color: #fff; padding: 5px 11px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+.code-status.live { border-color: rgba(0,232,122,0.5); color: #00e87a; }
+.code-status .d { width: 7px; height: 7px; border-radius: 50%; background: #febc2e; }
+.code-status.live .d { background: #00e87a; }
+.code-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.code-body h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 18px; text-transform: uppercase; letter-spacing: .5px; }
+.code-role { color: var(--blue-light); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-top: -4px; }
+.code-body p { margin: 0; color: var(--text-gray); font-size: 13.5px; line-height: 1.6; }
+.code-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.code-tags span { font-family: ui-monospace, monospace; font-size: 10px; color: var(--blue-light); background: rgba(45,91,255,0.12); border: 1px solid var(--glass-border); padding: 3px 8px; border-radius: 4px; }
+.code-link { margin-top: auto; padding-top: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--blue-light); display: inline-flex; align-items: center; gap: 6px; }
+.code-link:hover { color: var(--white); }
+
+@media (max-width: 900px) {
+  .code-hero { grid-template-columns: 1fr; gap: 28px; }
+  .dev-grid, .game-grid { grid-template-columns: 1fr; }
 }
