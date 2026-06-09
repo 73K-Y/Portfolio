@@ -1,12 +1,15 @@
 :root {
-  --bg: #02040a; 
-  --panel-bg: #050a18;
-  --white: #ffffff;
-  --text-gray: #a0abc0;
-  --blue-glow: #1e50ff; 
-  --blue-light: #00e5ff;
-  --glass: rgba(5, 10, 24, 0.7);
-  --glass-border: rgba(30, 80, 255, 0.2);
+  --bg: #04060f;
+  --panel-bg: #080d1c;
+  --surface-1: rgba(255,255,255,0.025);
+  --surface-2: rgba(255,255,255,0.05);
+  --white: #f3f6fc;
+  --text-gray: #9aa6be;
+  --text-dim: #61708c;
+  --blue-glow: #2d5bff;
+  --blue-light: #38e1ff;
+  --glass: rgba(8,13,28,0.72);
+  --glass-border: rgba(74,112,220,0.22);
   --max-w: 1200px;
   --gutter: clamp(15px, 4vw, 40px);
   color-scheme: dark;

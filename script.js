@@ -296,10 +296,12 @@
 (() => {
   const btnProfile  = document.getElementById("btn-profile");
   const btnShowreel = document.getElementById("btn-showreel");
+  const btnCode     = document.getElementById("btn-code");
   const logoHome    = document.getElementById("logo-home");
   const viewHome    = document.getElementById("view-home");
   const viewProfile = document.getElementById("view-profile");
-
+  const viewCode    = document.getElementById("view-code");
+ 
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
@@ -311,35 +313,41 @@
     },
     { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
   );
-
+ 
   function switchView(hash) {
     window.scrollTo({ top: 0, behavior: "instant" });
-
+ 
+    // nascondi tutte le viste e disattiva tutti i bottoni
+    if (viewHome)    viewHome.style.display    = "none";
+    if (viewProfile) viewProfile.style.display = "none";
+    if (viewCode)    viewCode.style.display    = "none";
+    [btnShowreel, btnCode, btnProfile].forEach((b) => b && b.classList.remove("active"));
+ 
     if (hash === "#profile") {
-      viewHome.style.display    = "none";
-      viewProfile.style.display = "block";
-      btnProfile.classList.add("active");
-      btnShowreel.classList.remove("active");
+      if (viewProfile) viewProfile.style.display = "block";
+      btnProfile && btnProfile.classList.add("active");
+    } else if (hash === "#code") {
+      if (viewCode) viewCode.style.display = "block";
+      btnCode && btnCode.classList.add("active");
     } else {
-      viewHome.style.display    = "block";
-      viewProfile.style.display = "none";
-      btnShowreel.classList.add("active");
-      btnProfile.classList.remove("active");
+      if (viewHome) viewHome.style.display = "block";
+      btnShowreel && btnShowreel.classList.add("active");
       hash = "#home";
     }
-
+ 
     history.pushState(null, null, hash);
-
+ 
     document.querySelectorAll(".reveal").forEach((el) => {
       el.classList.remove("is-visible");
       setTimeout(() => revealObserver.observe(el), 50);
     });
   }
-
+ 
   window.addEventListener("load",     () => switchView(window.location.hash || "#home"));
   window.addEventListener("popstate", () => switchView(window.location.hash || "#home"));
-
+ 
   btnProfile?.addEventListener( "click", (e) => { e.preventDefault(); switchView("#profile"); });
+  btnCode?.addEventListener(    "click", (e) => { e.preventDefault(); switchView("#code"); });
   btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
   logoHome?.addEventListener(   "click", (e) => { e.preventDefault(); switchView("#home"); });
 })();

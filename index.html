@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://portfoliotommy.netlify.app" />
 
     <!-- OPEN GRAPH - sostituisci og-cover.jpg con un'immagine reale 1200×630px -->
-    <meta property="og:title" content="Tommy Hodoroaba - AR/VR Developer & 3D Artist" />
+    <meta property="og:title" content="Tommy Hodoroaba - 3D Artist & Developer" />
     <meta property="og:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#. Disponibile a nuove opportunità." />
     <meta property="og:image" content="https://portfoliotommy.netlify.app/assets/og-cover.webp" />
     <meta property="og:image:width" content="1200" />
@@ -26,7 +26,7 @@
 
     <!-- TWITTER / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tommy Hodoroaba - AR/VR Developer & 3D Artist" />
+    <meta name="twitter:title" content="Tommy Hodoroaba - 3D Artist & Developer" />
     <meta name="twitter:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#." />
     <meta name="twitter:image" content="https://portfoliotommy.netlify.app/assets/og-cover.webp" />
 
@@ -51,7 +51,7 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tommy Raffaello Hodoroaba",
-      "jobTitle": "AR/VR Developer & 3D Artist",
+      "jobTitle": "3D Artist & Developer",
       "url": "https://portfoliotommy.netlify.app",
       "image": "https://portfoliotommy.netlify.app/assets/fronte.webp",
       "address": {
@@ -79,11 +79,12 @@
           <div class="logo"><img src="assets/logo.webp" alt="Logo Tommy Hodoroaba" onerror="this.style.display='none'"></div>
           <div class="name-row">
             <h1>Tommy Raffaello Hodoroaba</h1>
-            <p class="lead">AR/VR • GAME DEV • 3D ARTIST • @ ALAN WALKER</p>
+            <p class="lead">3D ARTIST • DEVELOPER • @ ALAN WALKER</p>
           </div>
         </div>
         <div class="nav-links">
           <a href="#" id="btn-showreel" class="active">Home</a>
+          <a href="#" id="btn-code">Code</a>
           <a href="#" id="btn-profile">Profile</a>
         </div>
       </div>
@@ -475,7 +476,7 @@
             </div>
 
             <h3 class="profile-name">TOMMY R. HODOROABA</h3>
-            <p class="profile-role">AR/VR • GAME DEV • 3D ARTIST</p>
+            <p class="profile-role">3D ARTIST • DEVELOPER</p>
 
             <div class="otw-sidebar-badge">
               <span class="otw-dot"></span> Disponibile a nuove opportunità
@@ -574,6 +575,145 @@
 
           </div>
         </div><!-- /contact-section-full -->
+      </section>
+    </div>
+
+    <div id="view-code" style="display:none; padding-top:40px;">
+      <section class="wrap profile-section reveal">
+        <h2 class="profile-main-title">C<span class="glow-script">O</span>DE</h2>
+    
+        <div class="code-hero">
+          <div class="code-hero-copy">
+            <p class="about-text">Non solo 3D. Ho un diploma in <strong>Informatica e Telecomunicazioni</strong> e un percorso ITS in game development: scrivo codice, costruisco <strong>tool che automatizzano la produzione</strong> e sviluppo giochi in Unreal Engine 5.</p>
+            <div class="code-cta">
+              <a class="btn-download" href="https://github.com/73K-Y" target="_blank" rel="noopener">&#9733;&nbsp; Vedi il codice su GitHub</a>
+              <a class="btn-outline" href="CV_Tommy_Hodoroaba_2026.pdf" download>Scarica CV</a>
+            </div>
+            <div class="code-chips">
+              <span class="chip">Unreal Engine 5</span>
+              <span class="chip">C++</span>
+              <span class="chip">C#</span>
+              <span class="chip">Python</span>
+              <span class="chip">Blueprint</span>
+              <span class="chip">Blender API</span>
+              <span class="chip">Git</span>
+              <span class="chip">HTML / CSS / JS</span>
+            </div>
+          </div>
+    
+          <div class="code-window">
+            <div class="cw-bar">
+              <span class="cw-dot r"></span><span class="cw-dot y"></span><span class="cw-dot g"></span>
+              <span class="cw-name">batch_export.py</span>
+            </div>
+            <div class="cw-body"><span class="cm"># esempio: sostituisci con un estratto del tuo add-on</span>
+    <span class="kw">import</span> bpy
+    
+    <span class="kw">class</span> <span class="fn">QuickExport</span>(bpy.types.Operator):
+        bl_idname = <span class="st">"object.quick_export"</span>
+        bl_label  = <span class="st">"Batch Export FBX"</span>
+    
+        <span class="kw">def</span> <span class="fn">execute</span>(self, context):
+            <span class="kw">for</span> obj <span class="kw">in</span> context.selected_objects:
+                export_fbx(obj)  <span class="cm"># pipeline automatizzata</span>
+            <span class="kw">return</span> {<span class="st">"FINISHED"</span>}</div>
+          </div>
+        </div>
+    
+        <div class="profile-block" style="margin-top:50px;">
+          <h4 class="block-title">Tool &amp; Codice</h4>
+          <div class="dev-grid">
+    
+            <div class="code-card">
+              <div class="code-thumb g1"><span class="ph-label">il tuo screenshot<br>(add-on in Blender)</span></div>
+              <div class="code-body">
+                <h3>Add-on Blender</h3>
+                <span class="code-role">Automazione pipeline 3D</span>
+                <p>Add-on personalizzati in Python per automatizzare i passaggi ripetitivi della pipeline e ridurre i tempi di produzione.</p>
+                <div class="code-tags"><span>Python</span><span>Blender API</span></div>
+                <a class="code-link" href="https://github.com/73K-Y" target="_blank" rel="noopener">Repo GitHub &rarr;</a>
+              </div>
+            </div>
+    
+            <div class="code-card">
+              <div class="code-thumb g2"><span class="ph-label">il tuo screenshot<br>(tool AI)</span></div>
+              <div class="code-body">
+                <h3>Tool AI</h3>
+                <span class="code-role">Ottimizzazione produzione</span>
+                <p>Strumenti basati su IA per velocizzare e ottimizzare i processi di produzione, sviluppati in Pandora Creative Studios.</p>
+                <div class="code-tags"><span>Python</span><span>AI</span></div>
+                <a class="code-link" href="https://github.com/73K-Y" target="_blank" rel="noopener">Repo GitHub &rarr;</a>
+              </div>
+            </div>
+    
+            <div class="code-card">
+              <div class="code-thumb g5"><span class="ph-label">questo sito</span><span class="code-status live"><span class="d"></span>Live</span></div>
+              <div class="code-body">
+                <h3>Questo Portfolio</h3>
+                <span class="code-role">Front-end da zero</span>
+                <p>Sito single-page costruito a mano, senza framework: gallery filtrata, routing, gallery modale e form di contatto.</p>
+                <div class="code-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                <a class="code-link" href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener">Sito live &rarr;</a>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+    
+        <div class="profile-block">
+          <h4 class="block-title">Giochi in sviluppo</h4>
+          <div class="game-grid">
+    
+            <div class="code-card">
+              <div class="code-thumb" style="background-image:url('assets/pc_synclife_dynamics.webp')"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
+              <div class="code-body">
+                <h3>Synclife Dynamics</h3>
+                <span class="code-role">Videogioco horror</span>
+                <p>Gioco horror in sviluppo: gameplay, ambienti e meccaniche di interazione.</p>
+                <div class="code-tags"><span>Unreal Engine 5</span><span>C++ / Blueprint</span></div>
+              </div>
+            </div>
+    
+            <div class="code-card">
+              <div class="code-thumb" style="background-image:url('assets/pc_BrainEXE.webp')"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
+              <div class="code-body">
+                <h3>Brain.exe</h3>
+                <span class="code-role">Videogioco meme</span>
+                <p>Progetto sperimentale e ironico in Unreal Engine 5.</p>
+                <div class="code-tags"><span>Unreal Engine 5</span><span>Blueprint</span></div>
+              </div>
+            </div>
+    
+            <div class="code-card">
+              <div class="code-thumb" style="background-image:url('assets/pc_Orbitalys.webp')"><span class="code-status live"><span class="d"></span>Live</span></div>
+              <div class="code-body">
+                <h3>Orbitalys</h3>
+                <span class="code-role">Arcade web</span>
+                <p>Gioco arcade giocabile online. Versione gia pubblicata e accessibile.</p>
+                <div class="code-tags"><span>Unreal Engine 5</span><span>Web</span></div>
+                <a class="code-link" href="https://orbitalys.netlify.app" target="_blank" rel="noopener">Gioca ora &rarr;</a>
+              </div>
+            </div>
+    
+            <div class="code-card">
+              <div class="code-thumb" style="background-image:url('assets/pc_SpaceFun.webp')"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
+              <div class="code-body">
+                <h3>Space Fun</h3>
+                <span class="code-role">Arcade</span>
+                <p>Arcade spaziale in sviluppo all'interno del tuo studio indie.</p>
+                <div class="code-tags"><span>Unreal Engine 5</span></div>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+    
+        <div class="home-cta">
+          <p>Vuoi vedere il codice o parlare di un progetto?</p>
+          <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" type="button">&#9733;&nbsp; Scrivimi</button>
+          <a class="btn-outline" href="https://github.com/73K-Y" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    
       </section>
     </div>
 
