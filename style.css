@@ -883,8 +883,7 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
 /* card (prefisso .code- per non toccare le .case della gallery) */
 .code-card { background: var(--surface-1); border: 1px solid var(--glass-border); border-radius: 10px; overflow: hidden; transition: .35s; display: flex; flex-direction: column; }
 .code-card:hover { border-color: var(--blue-glow); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,91,255,0.22); }
-.code-thumb { height: 160px; position: relative; display: grid; place-items: center; border-bottom: 1px solid var(--glass-border); overflow: hidden; background-size: cover; background-position: center; }
-.code-thumb .ph-label { font-family: ui-monospace, monospace; font-size: 11px; color: rgba(243,246,252,0.55); text-align: center; padding: 0 12px; line-height: 1.5; }
+.code-thumb { height: auto; aspect-ratio: 16 / 9; position: relative; display: grid; place-items: center; border-bottom: 1px solid var(--glass-border); overflow: hidden; background-size: cover; background-position: center; }.code-thumb .ph-label { font-family: ui-monospace, monospace; font-size: 11px; color: rgba(243,246,252,0.55); text-align: center; padding: 0 12px; line-height: 1.5; }
 .g1 { background: linear-gradient(135deg,#1b0f3a,#3a1170); }
 .g2 { background: linear-gradient(135deg,#07223f,#0a4f7a); }
 .g5 { background: linear-gradient(135deg,#0a1240,#2d5bff); }
