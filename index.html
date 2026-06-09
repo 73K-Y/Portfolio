@@ -3,17 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
-    <!-- TITOLO -->
     <title>Portfolio - Tommy Raffaello Hodoroaba</title>
-
-    <!-- SEO BASE -->
     <meta name="description" content="Game Developer e 3D Artist con 6 anni nel team creativo di Alan Walker. Specializzato in AR/VR, Unreal Engine 5, Unity e pipeline 3D complete. Disponibile a nuove opportunità - Torino." />
     <meta name="author" content="Tommy Raffaello Hodoroaba" />
     <meta name="keywords" content="AR VR developer, 3D artist, Unreal Engine 5, Unity, Blender, game developer, Torino, portfolio" />
     <link rel="canonical" href="https://portfoliotommy.netlify.app" />
-
-    <!-- OPEN GRAPH - sostituisci og-cover.jpg con un'immagine reale 1200×630px -->
     <meta property="og:title" content="Tommy Hodoroaba - 3D Artist & Developer" />
     <meta property="og:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#. Disponibile a nuove opportunità." />
     <meta property="og:image" content="https://portfoliotommy.netlify.app/assets/og-cover.webp" />
@@ -23,29 +17,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:site_name" content="Tommy Hodoroaba Portfolio" />
-
-    <!-- TWITTER / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Tommy Hodoroaba - 3D Artist & Developer" />
     <meta name="twitter:description" content="6 anni nel team creativo di Alan Walker. Unreal Engine 5, Unity, Blender, C#." />
     <meta name="twitter:image" content="https://portfoliotommy.netlify.app/assets/og-cover.webp" />
-
-    <!-- TEMA -->
     <meta name="theme-color" content="#030612" />
     <meta name="color-scheme" content="dark" />
-
-    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="assets/logo.webp" />
-
-    <!-- FONT - preconnect aggiunto per velocità -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
-
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- SCHEMA.ORG -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -95,7 +77,6 @@
     </div>
 
     <div id="view-home">
-
       <div id="showreel" class="wrap section">
         <h2 class="profile-main-title" style="margin-bottom: 20px;">PR<span class="glow-script">O</span>JECTS</h2>
         <div id="filters" class="filterbar reveal">
@@ -523,18 +504,15 @@
           </aside>
         </div><!-- /profile-grid -->
 
-        <!-- CONTACT - full width, fuori dalla griglia -->
         <div class="contact-section-full">
           <h4 class="block-title" style="margin-bottom: 28px;">CONTACT</h4>
           <div class="contact-card">
 
-            <!-- Colonna sinistra: Form -->
             <div class="contact-form-col">
               <p class="contact-col-label">Inviami un messaggio</p>
               <form name="contatti" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
                 <input type="hidden" name="form-name" value="contatti">
                 <p class="honeypot-wrap"><label>Non compilare: <input name="bot-field"></label></p>
-
                 <div class="form-group">
                   <label for="nome" class="form-label">Nome</label>
                   <input type="text" id="nome" name="nome" required class="form-input" placeholder="Il tuo nome e cognome">
@@ -551,7 +529,6 @@
               </form>
             </div>
 
-            <!-- Colonna destra: Contatti + CV -->
             <div class="contact-info-col">
               <p class="contact-col-label">Trovami anche qui</p>
               <div class="contact-links-list">
@@ -581,7 +558,7 @@
     <div id="view-code" style="display:none; padding-top:40px;">
       <section class="wrap profile-section reveal">
         <h2 class="profile-main-title">C<span class="glow-script">O</span>DE</h2>
-    
+
         <div class="code-hero">
           <div class="code-hero-copy">
             <p class="about-text">Non solo 3D. Ho un diploma in <strong>Informatica e Telecomunicazioni</strong> e un percorso ITS in game development: scrivo codice, costruisco <strong>tool che automatizzano la produzione</strong> e sviluppo giochi in Unreal Engine 5.</p>
@@ -600,30 +577,32 @@
               <span class="chip">HTML / CSS / JS</span>
             </div>
           </div>
-    
+
           <div class="code-window">
             <div class="cw-bar">
               <span class="cw-dot r"></span><span class="cw-dot y"></span><span class="cw-dot g"></span>
-              <span class="cw-name">batch_export.py</span>
+              <span class="cw-name">tail_wrap_generator.py</span>
             </div>
-            <div class="cw-body"><span class="cm"># esempio: sostituisci con un estratto del tuo add-on</span>
-    <span class="kw">import</span> bpy
-    
-    <span class="kw">class</span> <span class="fn">QuickExport</span>(bpy.types.Operator):
-        bl_idname = <span class="st">"object.quick_export"</span>
-        bl_label  = <span class="st">"Batch Export FBX"</span>
-    
-        <span class="kw">def</span> <span class="fn">execute</span>(self, context):
-            <span class="kw">for</span> obj <span class="kw">in</span> context.selected_objects:
-                export_fbx(obj)  <span class="cm"># pipeline automatizzata</span>
-            <span class="kw">return</span> {<span class="st">"FINISHED"</span>}</div>
+            <div class="cw-body"><span class="cm"># distribuisce le linee sulla superficie della mesh target</span>
+<span class="kw">for</span> j, point <span class="kw">in</span> <span class="fn">enumerate</span>(points):
+    local_point = mat_inv @ point  <span class="cm"># world → local space</span>
+
+    success, co, normal, _ = \
+        eval_target.<span class="fn">closest_point_on_mesh</span>(local_point)
+
+    <span class="kw">if</span> success:
+        world_co     = mat @ co
+        world_normal = (mat.<span class="fn">to_3x3</span>() @ normal).<span class="fn">normalized</span>()
+        points[j]    = world_co + world_normal * settings.offset
+    <span class="kw">else</span>:
+        points[j] = point  <span class="cm"># fallback sicuro</span></div>
           </div>
         </div>
-    
+
         <div class="profile-block" style="margin-top:50px;">
           <h4 class="block-title">Tool &amp; Codice</h4>
           <div class="dev-grid">
-    
+
             <div class="code-card">
               <div class="code-thumb g1"><span class="ph-label">il tuo screenshot<br>(add-on in Blender)</span></div>
               <div class="code-body">
@@ -634,7 +613,7 @@
                 <a class="code-link" href="https://github.com/73K-Y" target="_blank" rel="noopener">Repo GitHub &rarr;</a>
               </div>
             </div>
-    
+
             <div class="code-card">
               <div class="code-thumb g2"><span class="ph-label">il tuo screenshot<br>(tool AI)</span></div>
               <div class="code-body">
@@ -645,7 +624,7 @@
                 <a class="code-link" href="https://github.com/73K-Y" target="_blank" rel="noopener">Repo GitHub &rarr;</a>
               </div>
             </div>
-    
+
             <div class="code-card">
               <div class="code-thumb g5"><span class="ph-label">questo sito</span><span class="code-status live"><span class="d"></span>Live</span></div>
               <div class="code-body">
@@ -656,14 +635,14 @@
                 <a class="code-link" href="https://portfoliotommy.netlify.app" target="_blank" rel="noopener">Sito live &rarr;</a>
               </div>
             </div>
-    
+
           </div>
         </div>
-    
+
         <div class="profile-block">
           <h4 class="block-title">Giochi in sviluppo</h4>
           <div class="game-grid">
-    
+
             <div class="code-card">
               <div class="code-thumb" style="background-image:url('assets/pc_synclife_dynamics.webp')"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
               <div class="code-body">
@@ -673,7 +652,7 @@
                 <div class="code-tags"><span>Unreal Engine 5</span><span>C++ / Blueprint</span></div>
               </div>
             </div>
-    
+
             <div class="code-card">
               <div class="code-thumb" style="background-image:url('assets/pc_BrainEXE.webp')"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
               <div class="code-body">
@@ -683,18 +662,18 @@
                 <div class="code-tags"><span>Unreal Engine 5</span><span>Blueprint</span></div>
               </div>
             </div>
-    
+
             <div class="code-card">
               <div class="code-thumb" style="background-image:url('assets/pc_Orbitalys.webp')"><span class="code-status live"><span class="d"></span>Live</span></div>
               <div class="code-body">
                 <h3>Orbitalys</h3>
                 <span class="code-role">Arcade web</span>
-                <p>Gioco arcade giocabile online. Versione gia pubblicata e accessibile.</p>
+                <p>Gioco arcade giocabile online. Versione già pubblicata e accessibile.</p>
                 <div class="code-tags"><span>Unreal Engine 5</span><span>Web</span></div>
                 <a class="code-link" href="https://orbitalys.netlify.app" target="_blank" rel="noopener">Gioca ora &rarr;</a>
               </div>
             </div>
-    
+
             <div class="code-card">
               <div class="code-thumb" style="background-image:url('assets/pc_SpaceFun.webp')"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
               <div class="code-body">
@@ -704,16 +683,16 @@
                 <div class="code-tags"><span>Unreal Engine 5</span></div>
               </div>
             </div>
-    
+
           </div>
         </div>
-    
+
         <div class="home-cta">
           <p>Vuoi vedere il codice o parlare di un progetto?</p>
           <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" type="button">&#9733;&nbsp; Scrivimi</button>
           <a class="btn-outline" href="https://github.com/73K-Y" target="_blank" rel="noopener">GitHub</a>
         </div>
-    
+
       </section>
     </div>
 
