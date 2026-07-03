@@ -65,8 +65,8 @@ a:hover { color: var(--blue-light); }
 .video-container video { width: 100%; height: 100%; object-fit: cover; }
 
 /* ========================================================= */
-/* NAVBAR COMPENSATION — evita che il titolo finisca sotto   */
-/* la navbar fixed (specialmente su mobile con nome su 3 rig)*/
+/* Padding-top per non far finire il titolo sotto la navbar  */
+/* fixed. Piu spazio su mobile dove il nome va su tre righe. */
 /* ========================================================= */
 #showreel {
   padding-top: 110px;
@@ -84,7 +84,7 @@ a:hover { color: var(--blue-light); }
 .profile-main-title { font-size: clamp(3rem, 6vw, 5rem); font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: -2px; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
 .glow-script { font-family: 'Caveat', cursive; font-weight: 400; color: var(--blue-light); text-shadow: 0 0 20px var(--blue-glow); font-size: 1.2em; display: inline-block; transform: translateY(5px); }
 
-/* align-items: start fa sì che i blocchi mantengano la loro altezza naturale senza allungarsi! */
+/* align-items:start cosi i due blocchi tengono la loro altezza invece di stirarsi uguali */
 .profile-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
 .profile-content { grid-column: 1; grid-row: 1; display: block; min-width: 0; }
 .profile-sidebar { grid-column: 2; grid-row: 1; display: block; min-width: 0; }
@@ -244,7 +244,7 @@ a:hover { color: var(--blue-light); }
 }
 
 /* ========================================================= */
-/* CONTACT E CV (vecchi stili — mantenuti per compatibilità) */
+/* Contatti e CV, vecchi stili tenuti per compatibilita */
 .contact-wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; background: rgba(30, 80, 255, 0.05); border: 1px solid var(--glass-border); padding: 25px; border-radius: 8px; }
 .contact-grid { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .contact-link { color: var(--white); font-size: 15px; font-weight: 500; word-wrap: break-word; }
@@ -373,12 +373,12 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
 
 
 /* =====================================================
-   MOBILE PROFILE LAYOUT FIX
-   Sostituisce il blocco @media (max-width: 900px)
-   nel tuo style.css esistente
+   LAYOUT PROFILO RESPONSIVE
+   Desktop a due colonne con sidebar sticky, tablet e
+   mobile impilati.
    ===================================================== */
 
-/* ── Desktop: due colonne, sidebar sticky ── */
+/* Desktop: due colonne, sidebar sticky */
 @media (min-width: 901px) {
   .profile-grid {
     display: grid;
@@ -391,7 +391,7 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   .profile-sidebar  { grid-column: 2; grid-row: 1; position: sticky; top: 100px; align-self: start; }
 }
 
-/* ── Tablet (600–900px): impila verticalmente ── */
+/* Tablet (600-900px): impilo tutto in colonna */
 @media (max-width: 900px) {
   .wrap { padding: clamp(20px, 4vw, 40px) 15px; }
 
@@ -492,7 +492,7 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   .video-container  { width: 100%; margin-top: 100px; border-radius: 8px; border: none; }
 }
 
-/* ── Mobile piccolo (<600px): layout completamente impilato ── */
+/* Mobile piccolo (sotto i 600px): una colonna, foto centrata */
 @media (max-width: 600px) {
   /* Sidebar: colonna unica, foto centrata */
   .profile-sidebar {

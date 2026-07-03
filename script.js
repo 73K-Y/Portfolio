@@ -95,7 +95,7 @@
   });
   applyFilter("all");
 
-  /* ── Contatore progetti per categoria ── */
+  /* Conto i progetti per categoria e scrivo il numero nei bottoni filtro */
   const catCount = {};
   cards.forEach((c) => {
     const cc = (c.dataset.cat || "").trim();
@@ -124,7 +124,7 @@
 
   if (!modal || !modalInner || !modalInfo || !modalTools || !modalNote) return;
 
-  /* ✅ FIX: rimuove il listener tastiera ad ogni chiusura */
+  /* Alla chiusura rimuovo il listener della tastiera, altrimenti ne resta uno attaccato a ogni apertura */
   function closeModalFn() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
@@ -187,7 +187,7 @@
 
     const isPC = window.matchMedia("(min-width: 769px)").matches;
 
-    /* ── Indicatore posizione: counter su PC, dots su mobile ── */
+    /* Su PC uso il contatore numerico, su mobile i puntini */
     if (items.length > 1) {
       const indicator = document.createElement("div");
 
@@ -242,13 +242,13 @@
       setTimeout(updateArrows, 50);
     }
 
-    /* ✅ FIX: salva riferimento per rimozione in closeModalFn */
+    /* Salvo il riferimento su modal._onKey cosi posso rimuoverlo alla chiusura */
     const onKey = (e) => {
       if (!modal.classList.contains("open")) return;
       if (e.key === "ArrowLeft")  { e.preventDefault(); goTo(indexFromScroll() - 1); }
       if (e.key === "ArrowRight") { e.preventDefault(); goTo(indexFromScroll() + 1); }
 
-      /* ── Focus trap WCAG ── */
+      /* Tengo il focus dentro il modal con Tab, per accessibilita */
       if (e.key === "Tab") {
         const focusable = Array.from(modal.querySelectorAll(
           'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -292,7 +292,7 @@
 })();
 
 /* ========= Sistema Navigazione SPA (Hash Routing) ========= */
-/* ✅ FIX: IntersectionObserver creato una sola volta fuori da switchView */
+/* Creo l'observer una volta sola qui fuori, non a ogni cambio vista, per non accumularne uno per switch */
 (() => {
   const btnProfile  = document.getElementById("btn-profile");
   const btnShowreel = document.getElementById("btn-showreel");
@@ -411,9 +411,9 @@
       }
       const count = grid.querySelectorAll('.case-coming').length;
       let cols;
-      if (count % 3 === 0)      cols = 3;   // 3, 6, 9…
+      if (count % 3 === 0)      cols = 3;   // multipli di 3
       else if (count % 2 === 0) cols = 2;   // 2, 4, 8…
-      else                      cols = 3;   // 1, 5, 7… → default 3
+      else                      cols = 3;   // numeri dispari rimanenti: default a 3
       grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
     }
 
