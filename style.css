@@ -877,7 +877,7 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
 .cw-body .st { color: #5ef0a8; } .cw-body .cm { color: var(--text-dim); font-style: italic; }
 
 /* griglie */
-.dev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.dev-grid { display: grid; gap: 20px; grid-template-columns: repeat(3,1fr); }
 .game-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
 
 /* card (prefisso .code- per non toccare le .case della gallery) */

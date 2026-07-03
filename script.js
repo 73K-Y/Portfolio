@@ -411,13 +411,32 @@
       }
       const count = grid.querySelectorAll('.case-coming').length;
       let cols;
-      if (count % 3 === 0)      cols = 3;   // multipli di 3
-      else if (count % 2 === 0) cols = 2;   // 2, 4, 8…
-      else                      cols = 3;   // numeri dispari rimanenti: default a 3
+      if (count % 3 === 0)      cols = 3;
+      else if (count % 2 === 0) cols = 2;
+      else                      cols = 3;
       grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
     }
 
     updateComingCols();
     window.addEventListener('resize', updateComingCols, { passive: true });
+  })();
+
+  /* ========= Tool & Codice: colonne bilanciate (mai una card orfana) ========= */
+  (() => {
+    const grid = document.querySelector('.dev-grid');
+    if (!grid) return;
+
+    function updateDevCols() {
+      if (window.innerWidth < 900) {
+        grid.style.gridTemplateColumns = '';
+        return;
+      }
+      const count = grid.querySelectorAll('.code-card').length;
+      const cols = (count % 3 === 0) ? 3 : 2;
+      grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    }
+
+    updateDevCols();
+    window.addEventListener('resize', updateDevCols, { passive: true });
   })();
 })();
