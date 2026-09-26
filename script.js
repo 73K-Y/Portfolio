@@ -541,9 +541,23 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
         body.className = "ft-update-body";
         const time = document.createElement("time");
         time.dateTime = u.date; time.textContent = fmtDate(u.date);
-        const p = document.createElement("p");
-        p.textContent = u.text;
-        body.append(time, p);
+        body.appendChild(time);
+        if (u.title) {
+          const h = document.createElement("h5");
+          h.textContent = u.title;
+          body.appendChild(h);
+        }
+        if (u.text) {
+          const p = document.createElement("p");
+          p.textContent = u.text;
+          body.appendChild(p);
+        }
+        if (u.link && /^https:\/\/discord\.com\/channels\/\d+\/\d+\/\d+$/.test(u.link)) {
+          const a = document.createElement("a");
+          a.href = u.link; a.target = "_blank"; a.rel = "noopener";
+          a.className = "ft-update-link"; a.textContent = "Leggi su Discord";
+          body.appendChild(a);
+        }
         art.appendChild(body);
         return art;
       }));
