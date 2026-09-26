@@ -92,6 +92,14 @@ function tiktokIds(messages) {
   for (const m of messages) {
     if (!m.author?.bot) continue;
     const raw = JSON.stringify(m);
+    // Il bottone di PingSync contiene "account:ID" in base64: se l'account non è
+    // @ferrovietricolore (per esempio lo studio), il post si scarta.
+    const share = raw.match(/pingsync\.app\/share\/([A-Za-z0-9_-]+)/);
+    if (share) {
+      const decoded = Buffer.from(share[1], "base64url").toString("utf8");
+      const handle = decoded.split(":")[0].toLowerCase();
+      if (handle && handle !== TIKTOK_HANDLE) continue;
+    }
     if (/tomhoda/i.test(raw)) continue;
     for (const match of [...raw.matchAll(link), ...raw.matchAll(pingsync)]) {
       if (!ids.includes(match[1])) ids.push(match[1]);
