@@ -243,3 +243,56 @@ footer { border-top: 1px solid var(--line); color: var(--ink-3); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* =========================================================
+   Livello tecnico: ogni progetto è una "tavola" con cartiglio,
+   come nel disegno tecnico. Il cartiglio contiene dati veri
+   (numero tavola, categoria, software), non decorazione.
+   ========================================================= */
+.works-intro { max-width: 60ch; color: var(--ink-2); font-size: 18px; line-height: 1.55; margin: -12px 0 40px; }
+
+.gallery-grid { counter-reset: tav; gap: 40px 24px; }
+.case:not(.is-hidden) { counter-increment: tav; }
+
+.case-bg { border-radius: 0; }
+.case-info {
+  display: grid; grid-template-columns: 1fr; padding: 0; gap: 0;
+  border: 1px solid var(--line); border-top: 0;
+}
+.case-info h3 {
+  grid-row: 1; display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding: 10px 12px; border-bottom: 1px solid var(--line);
+}
+.case-info h3::after {
+  content: "Tav. " counter(tav, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; font-weight: 400;
+  color: var(--ink-3); white-space: nowrap;
+}
+.case:hover h3, .case:focus-visible h3 { text-decoration: none; }
+.case:hover .case-info, .case:focus-visible .case-info { border-color: var(--ink-3); }
+.case:hover .case-info h3 { border-color: var(--ink-3); }
+
+.badges { grid-row: 2; display: flex; align-items: stretch; flex-wrap: wrap; }
+.badge.cat {
+  display: block; padding: 8px 12px !important; margin-right: 12px;
+  border-right: 1px solid var(--line) !important; color: var(--ink-2) !important;
+}
+.badge { padding: 8px 0 !important; font-size: 13px; }
+
+/* Griglia editoriale: una tavola grande in apertura, poi ritmo 2 / 3 / 1 */
+@media (min-width: 900px) {
+  .case[data-bento] { grid-column: span 6; }
+  .case[data-bento] .case-bg { height: 380px; }
+  .case[data-bento="1"], .case[data-bento="7"], .case[data-bento="15"] { grid-column: span 12; }
+  .case[data-bento="1"] .case-bg { height: 600px; }
+  .case[data-bento="7"] .case-bg, .case[data-bento="15"] .case-bg { height: 520px; }
+  .case[data-bento="4"], .case[data-bento="5"], .case[data-bento="6"],
+  .case[data-bento="10"], .case[data-bento="11"], .case[data-bento="12"] { grid-column: span 4; }
+  .case[data-bento="4"] .case-bg, .case[data-bento="5"] .case-bg, .case[data-bento="6"] .case-bg,
+  .case[data-bento="10"] .case-bg, .case[data-bento="11"] .case-bg, .case[data-bento="12"] .case-bg { height: 300px; }
+}
+
+/* Date e metadati in monospace, come nel CV: stessa identità su carta e su schermo */
+.exp-date, .code-tags span { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace !important; font-size: 12.5px; }
+
+.btn-cv-alt { display: block; margin-top: 10px; text-align: center; }
