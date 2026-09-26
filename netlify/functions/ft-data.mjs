@@ -83,13 +83,11 @@ async function getPins(channel, token) {
 }
 
 function tiktokIds(messages) {
+  // Cerca i link in tutto il messaggio: testo, embed, campi, bottoni.
   const ids = [];
   const re = new RegExp(`tiktok\\.com/@${TIKTOK_HANDLE}/(?:video|photo)/(\\d+)`, "gi");
   for (const m of messages) {
-    const text = [m.content, ...(m.embeds || []).flatMap((e) => [e.url, e.description, e.title])]
-      .filter(Boolean)
-      .join(" ");
-    for (const match of text.matchAll(re)) {
+    for (const match of JSON.stringify(m).matchAll(re)) {
       if (!ids.includes(match[1])) ids.push(match[1]);
     }
     if (ids.length >= MAX_VIDEOS) break;
@@ -147,10 +145,16 @@ export default async (req) => {
     jobs.push(discord(`/channels/${tiktokCh}/messages?limit=30`, token).then((msgs) => {
       out.tiktok = tiktokIds(msgs);
       if (debug) {
+        const all = JSON.stringify(msgs);
         out.debug.tiktokMessages = msgs.length;
-        out.debug.tiktokLinks = msgs
-          .flatMap((m) => [m.content, ...(m.embeds || []).map((e) => e.url)])
-          .join(" ").match(/https?:\/\/\S*tiktok\S*/gi)?.slice(0, 5) ?? [];
+        out.debug.tiktokLinks = (all.match(/https?:\/\/[^"\s)]*tiktok[^"\s)]*/gi) || []).slice(0, 5);
+        out.debug.sample = msgs.slice(0, 2).map((m) => ({
+          author: m.author?.username,
+          bot: !!m.author?.bot,
+          content: (m.content || "").slice(0, 200),
+          embeds: (m.embeds || []).map((e) => ({ type: e.type, url: e.url, title: e.title, author: e.author?.name })),
+          buttons: (m.components || []).flatMap((r) => (r.components || []).map((c) => c.url || c.label)).slice(0, 4),
+        }));
       }
     }));
   }
