@@ -144,7 +144,7 @@
     modalInner.innerHTML = "";
     modalTools.innerHTML = "";
     modalNote.textContent = "";
-    modalInfo.textContent = title + (desc ? " — " + desc : "");
+    modalInfo.textContent = title + (desc ? " - " + desc : "");
 
     if (tools) {
       tools.split(",").map((s) => s.trim()).filter(Boolean).forEach((t) => {
@@ -383,7 +383,7 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
     slideshow.style.display = "block";
   }
 
-  // === Bottone "Scrivimi" — copia email negli appunti ===
+  // === Bottone "Scrivimi" - copia email negli appunti ===
   document.querySelectorAll(".btn-copy-email").forEach(btn => {
     btn.addEventListener("click", function() {
       const email = this.dataset.email;

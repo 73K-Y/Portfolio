@@ -396,3 +396,26 @@ body { font-size: 16px; line-height: 1.55; font-stretch: 100%; }
 .dev-grid, .game-grid { gap: 32px 24px; }
 .home-cta { text-align: left; }
 .home-cta p { font-size: 20px; font-stretch: 112%; font-weight: 600; color: var(--ink); }
+
+/* ---------- In sviluppo: tavole con immagine intera e cartiglio ---------- */
+.coming-grid { gap: 32px 24px; }
+@media (min-width: 900px) { .coming-grid { grid-template-columns: repeat(3, 1fr); } }
+.case-coming {
+  display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;
+  padding: 0; aspect-ratio: auto; height: auto; overflow: visible;
+  border: 0; border-radius: 0; background: none;
+}
+.case-coming .case-bg.pc-bg {
+  display: block !important; position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 9;
+  background-size: cover; background-position: center; filter: none; transform: none;
+  border: 1px solid var(--line); border-bottom: 0;
+}
+.case-coming .case-bg.mobile-bg, .case-coming .case-overlay { display: none !important; }
+.case-coming .case-info {
+  position: static; opacity: 1 !important; text-align: left; pointer-events: auto;
+  padding: 10px 12px 12px; border: 1px solid var(--line);
+}
+.case-coming .coming-title { font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+.case-coming .coming-desc { font-style: normal; margin: 0; }
+.case-coming:hover .case-bg, .case-coming:hover .case-info { filter: none !important; transform: none !important; opacity: 1 !important; }
+a:hover .case-coming .case-info, a:focus-visible .case-coming .case-info { border-color: var(--ink-3); }
