@@ -351,15 +351,15 @@
                 <p class="coming-desc">Videogioco arcade, Unreal Engine 5</p>
               </div>
             </article>
-            <article class="case-coming" data-title="TOMHODA Studios">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_LogoTHOMODA.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_LogoTHOMODA.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">TOMHODA Studios</h4>
-                <p class="coming-desc">Studio indie personale, in costruzione</p>
-              </div>
-            </article>
+            <a href="#ferrovie-tricolore" class="coming-link" style="display:block; text-decoration:none; color:inherit;">
+              <article class="case-coming" data-title="Ferrovie Tricolore">
+                <div class="case-bg pc-bg" style="background-image:url('assets/ferrovie-tricolore.webp')"></div>
+                <div class="case-info">
+                  <h4 class="coming-title">Ferrovie Tricolore</h4>
+                  <p class="coming-desc">Simulatore ferroviario, Roblox Studio</p>
+                </div>
+              </article>
+            </a>
           </div>
         </section>
 
@@ -674,8 +674,9 @@
               <div class="code-body">
                 <h3>Ferrovie Tricolore</h3>
                 <span class="code-role">Simulatore ferroviario - Roblox Studio</span>
-                <p>Simulatore di treni ambientato in Italia.</p>
+                <p>Simulatore di treni ambientato in Italia, con tracciati generati da dati reali OpenStreetMap e GPX.</p>
                 <div class="code-tags"><span>Luau</span><span>Python</span><span>Roblox Studio</span><span>Blender</span></div>
+                <a class="code-link" href="#ferrovie-tricolore">Scheda del progetto</a>
                 <a class="code-link" href="https://github.com/73K-Y/Ferrovie-Tricolore" target="_blank" rel="noopener">Repo GitHub</a>
               </div>
             </div>
@@ -770,6 +771,82 @@
           <a class="btn-outline" href="https://github.com/73K-Y" target="_blank" rel="noopener">GitHub</a>
         </div>
 
+      </section>
+    </div>
+
+    <div id="view-ft" style="display:none; padding-top:40px;">
+      <section class="wrap profile-section ft">
+        <a class="ft-back" href="#code">Codice</a>
+        <h2 class="profile-main-title">Ferrovie Tricolore</h2>
+        <p class="ft-lead">Un simulatore ferroviario italiano in Roblox Studio, costruito sul realismo: tratte vere e treni autentici. Seguo sia i modelli 3D sia il codice, e il progetto esce sotto il nome TOMHODA Studios.</p>
+
+        <div class="hero-stats ft-stats">
+          <div class="stat"><span class="stat-num">In sviluppo</span><span class="stat-label">Stato</span></div>
+          <div class="stat"><span class="stat-num">Roblox Studio</span><span class="stat-label">Luau, Python, Blender</span></div>
+          <div class="stat"><span class="stat-num">202</span><span class="stat-label">Membri Discord, settembre 2026</span></div>
+        </div>
+
+        <figure class="ft-cover"><img src="assets/ferrovie-tricolore.webp" alt="Logo di Ferrovie Tricolore" loading="lazy" decoding="async"></figure>
+
+        <div class="ft-grid">
+          <div class="profile-block">
+            <h4 class="block-title">Dati reali, generati con codice</h4>
+            <dl class="ft-list">
+              <dt>Stazioni</dt>
+              <dd>Uno script Python legge OpenStreetMap e genera 3.039 segnaposto di stazioni italiane in scala 1:200.</dd>
+              <dt>Binari</dt>
+              <dd>Lo script GenBinario posa i tratti di binario lungo una spline Catmull-Rom costruita dal tracciato GPX Torino - Genova Brignole. Una correzione sul CFrame ha eliminato gli spazi tra i tratti.</dd>
+              <dt>Tracciato in Blender</dt>
+              <dd>Il corridoio ferroviario è modellato in Blender partendo dai dati OpenStreetMap.</dd>
+            </dl>
+          </div>
+
+          <div class="profile-block">
+            <h4 class="block-title">Sistemi di gioco</h4>
+            <dl class="ft-list">
+              <dt>Cabina di guida</dt>
+              <dd>Pannello di guida unico con comandi, luci, porte e clacson a tre fasi, gestiti lato server.</dd>
+              <dt>Composizione</dt>
+              <dd>Treni con numero di carrozze variabile.</dd>
+              <dt>Velocità</dt>
+              <dd>Limiti di velocità a zone e tachimetro tarato sui 160 km/h dei treni regionali.</dd>
+              <dt>Ambiente</dt>
+              <dd>Ciclo giorno e notte sincronizzato con l'ora italiana, ambientazione a Torino Porta Nuova.</dd>
+            </dl>
+          </div>
+
+          <div class="profile-block">
+            <h4 class="block-title">Da Blender a Roblox</h4>
+            <dl class="ft-list">
+              <dt>Locomotiva</dt>
+              <dd>Modello importato da Blender: mesh multi-materiale divisa, texture segnaposto sostituite con i colori reali, e uno script che rimuove le SurfaceAppearance generate in automatico che coprivano i colori delle parti.</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="profile-block ft-gallery-block">
+          <h4 class="block-title">Dallo sviluppo</h4>
+          <div class="ft-gallery">
+            <figure><img src="assets/ft-1.webp" alt="Ferrovie Tricolore, immagine di sviluppo 1" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-2.webp" alt="Ferrovie Tricolore, immagine di sviluppo 2" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-3.webp" alt="Ferrovie Tricolore, immagine di sviluppo 3" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-4.webp" alt="Ferrovie Tricolore, immagine di sviluppo 4" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-5.webp" alt="Ferrovie Tricolore, immagine di sviluppo 5" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-6.webp" alt="Ferrovie Tricolore, immagine di sviluppo 6" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+          </div>
+        </div>
+
+        <div class="profile-block">
+          <h4 class="block-title">Community</h4>
+          <p class="about-text">Gli aggiornamenti di sviluppo escono principalmente su Discord, e in video brevi su TikTok.</p>
+          <div class="ft-links">
+            <a class="ft-link" href="https://discord.gg/pH62fm3nkG" target="_blank" rel="noopener"><span class="ft-link-name">Discord</span><span class="ft-link-meta">202 membri</span></a>
+            <a class="ft-link" href="https://www.tiktok.com/@ferrovietricolore" target="_blank" rel="noopener"><span class="ft-link-name">TikTok</span><span class="ft-link-meta">@ferrovietricolore</span></a>
+            <a class="ft-link" href="https://www.tiktok.com/@tomhodastudioofficial" target="_blank" rel="noopener"><span class="ft-link-name">TikTok dello studio</span><span class="ft-link-meta">@tomhodastudioofficial</span></a>
+            <a class="ft-link" href="https://github.com/73K-Y/Ferrovie-Tricolore" target="_blank" rel="noopener"><span class="ft-link-name">GitHub</span><span class="ft-link-meta">73K-Y/Ferrovie-Tricolore</span></a>
+            <a class="ft-link" href="https://linktr.ee/thomodastudio" target="_blank" rel="noopener"><span class="ft-link-name">Tutti i link</span><span class="ft-link-meta">linktr.ee/thomodastudio</span></a>
+          </div>
+        </div>
       </section>
     </div>
 

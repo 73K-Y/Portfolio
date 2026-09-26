@@ -308,6 +308,7 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
   const viewHome    = document.getElementById("view-home");
   const viewProfile = document.getElementById("view-profile");
   const viewCode    = document.getElementById("view-code");
+  const viewFt      = document.getElementById("view-ft");
  
   const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -328,11 +329,16 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
     if (viewHome)    viewHome.style.display    = "none";
     if (viewProfile) viewProfile.style.display = "none";
     if (viewCode)    viewCode.style.display    = "none";
+    if (viewFt)      viewFt.style.display      = "none";
     [btnShowreel, btnCode, btnProfile].forEach((b) => b && b.classList.remove("active"));
  
     if (hash === "#profile") {
       if (viewProfile) viewProfile.style.display = "block";
       btnProfile && btnProfile.classList.add("active");
+    } else if (hash === "#ferrovie-tricolore") {
+      if (viewFt) viewFt.style.display = "block";
+      btnCode && btnCode.classList.add("active");
+      document.title = "Ferrovie Tricolore - Tommy Raffaello Hodoroaba";
     } else if (hash === "#code") {
       if (viewCode) viewCode.style.display = "block";
       btnCode && btnCode.classList.add("active");
@@ -342,6 +348,7 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
       hash = "#home";
     }
  
+    if (hash !== "#ferrovie-tricolore") document.title = "Portfolio - Tommy Raffaello Hodoroaba";
     // push solo su click; su load/popstate si sostituisce, altrimenti "Indietro" non funziona
     if (mode === "push" && location.hash !== hash) history.pushState(null, "", hash);
     else if (mode === "replace") history.replaceState(null, "", hash);
