@@ -274,8 +274,6 @@
   }
 
   document.getElementById("showreel")?.addEventListener("click", (e) => {
-      const btn = e.target.closest(".open-modal");
-      if (!btn) return;
       const card = e.target.closest(".case");
       if (!card) return;
       const title  = card.dataset.title  || "Progetto";
@@ -290,6 +288,15 @@
     }, { passive: true }
   );
 })();
+
+/* Tastiera: le card sono role="button", quindi Invio e Spazio aprono la galleria */
+document.getElementById("showreel")?.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const card = e.target.closest(".case");
+  if (!card || e.target !== card) return;
+  e.preventDefault();
+  card.click();
+});
 
 /* ========= Sistema Navigazione SPA (Hash Routing) ========= */
 /* Creo l'observer una volta sola qui fuori, non a ogni cambio vista, per non accumularne uno per switch */

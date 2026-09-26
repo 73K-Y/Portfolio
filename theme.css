@@ -32,12 +32,13 @@
   --glass: var(--wall);
   --glass-border: var(--line);
   --max-w: 1280px;
-  --font: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
 html, body { background: var(--wall); color: var(--ink); font-family: var(--font); }
-body * { font-family: inherit; text-shadow: none !important; }
-code, pre, .cw-body, .cw-body * { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace !important; }
+body * { font-family: var(--font) !important; text-shadow: none !important; }
+code, pre, .cw-body, .cw-body * { font-family: var(--mono) !important; }
 
 a:hover { color: var(--ink); }
 :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
@@ -265,7 +266,7 @@ footer { border-top: 1px solid var(--line); color: var(--ink-3); }
 }
 .case-info h3::after {
   content: "Tav. " counter(tav, decimal-leading-zero);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; font-weight: 400;
+  font-family: var(--mono); font-size: 12px; font-weight: 400;
   color: var(--ink-3); white-space: nowrap;
 }
 .case:hover h3, .case:focus-visible h3 { text-decoration: none; }
@@ -293,6 +294,105 @@ footer { border-top: 1px solid var(--line); color: var(--ink-3); }
 }
 
 /* Date e metadati in monospace, come nel CV: stessa identità su carta e su schermo */
-.exp-date, .code-tags span { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace !important; font-size: 12.5px; }
+.exp-date, .code-tags span { font-family: var(--mono) !important; font-size: 12.5px; }
 
 .btn-cv-alt { display: block; margin-top: 10px; text-align: center; }
+
+/* =========================================================
+   Tipografia: Archivo (una famiglia, larghezza variabile)
+   - titoli in versione "expanded": larghi, da disegno tecnico
+   - testo in larghezza normale, leggibile
+   - IBM Plex Mono solo per dati: date, numeri di tavola, codice
+   ========================================================= */
+body { font-size: 16px; line-height: 1.55; font-stretch: 100%; }
+.profile-main-title {
+  font-stretch: 125%; font-weight: 800; letter-spacing: -0.02em;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+}
+.name-row h1 { font-stretch: 112%; font-weight: 700; }
+.block-title, .case-info h3, .code-body h3, .profile-name, .exp-desc strong, .coming-title {
+  font-stretch: 112%;
+}
+.block-title { font-size: 22px; font-weight: 700; }
+.case-info h3 { font-size: 17px; font-weight: 600; }
+.about-text { font-size: 17px; line-height: 1.65; max-width: 68ch; color: var(--ink); }
+.exp-desc p { font-size: 15px; line-height: 1.6; max-width: 68ch; }
+.nav-links { font-size: 15px; font-weight: 500; }
+.filter-btn { font-size: 15px; }
+.stat-num, .exp-date, .case-info h3::after, .cw-name, .code-tags span, .code-status { font-family: var(--mono) !important; }
+
+/* ---------- Profilo ---------- */
+/* Striscia di dati come un cartiglio, allineata a sinistra */
+.hero-stats {
+  display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 0 !important;
+  justify-content: stretch !important; margin: 0 0 56px !important;
+  border: 1px solid var(--line); background: none; padding: 0 !important;
+}
+.hero-stats .stat-divider { display: none; }
+.hero-stats .stat {
+  align-items: flex-start !important; text-align: left !important; padding: 14px 16px;
+  border-right: 1px solid var(--line); gap: 4px;
+}
+.hero-stats .stat:last-child { border-right: 0; }
+.stat-num { font-size: 20px !important; font-weight: 500 !important; color: var(--ink); }
+.stat-label { font-size: 14px !important; color: var(--ink-2) !important; }
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stats .stat { border-right: 0; border-bottom: 1px solid var(--line); }
+  .hero-stats .stat:last-child { border-bottom: 0; }
+}
+
+.profile-grid { gap: 72px; grid-template-columns: 1fr 320px; }
+.profile-block { margin-bottom: 56px; }
+.exp-item { grid-template-columns: 170px 1fr; gap: 24px; padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+.exp-date { font-size: 13px !important; padding-top: 3px; white-space: nowrap; }
+.exp-desc strong { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+.exp-role { font-size: 14px; margin-bottom: 8px; }
+@media (max-width: 600px) { .exp-item { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Certificazioni: elenco compatto, una riga ciascuna */
+#view-profile .profile-block:has(> .block-title:only-of-type) .exp-item:not(:has(p)) {
+  padding-bottom: 12px; margin-bottom: 12px;
+}
+#view-profile .exp-item:not(:has(p)) .exp-role { margin-bottom: 0; }
+#view-profile .exp-item:not(:has(p)) .exp-desc strong { font-size: 16px; }
+
+/* Ritratto come tavola con cartiglio */
+.profile-pic-container { width: 100%; height: auto; margin-bottom: 0; }
+.profile-pic { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border-radius: 0; }
+.profile-name { font-size: 20px; font-weight: 700; margin: 0; padding: 10px 12px; border: 1px solid var(--line); border-top: 0; }
+.profile-role { margin: 0 0 32px; padding: 8px 12px; border: 1px solid var(--line); border-top: 0; font-size: 14px; }
+.otw-sidebar-badge { margin-bottom: 32px; }
+
+/* Competenze e software: liste pulite, niente icone spaiate */
+.sw-icon-img { display: none !important; }
+.skills-list-text li, .software-list li {
+  font-size: 15px; font-weight: 400; color: var(--ink); margin: 0; padding: 8px 0;
+  border-bottom: 1px solid var(--line); gap: 0;
+}
+.software-list { gap: 0; }
+
+/* CV: due bottoni della stessa misura */
+.btn-cv-full { box-sizing: border-box; width: 100%; margin-left: 0; margin-right: 0; padding: 14px 18px; }
+.btn-cv-alt { margin-top: 8px; }
+
+/* ---------- Codice ---------- */
+.code-hero { gap: 56px; align-items: start; }
+.code-hero-copy .about-text { font-size: 18px; }
+.code-chips { display: none; }   /* ripetevano i tag delle schede sotto */
+.code-window { font-size: 13px; }
+
+/* Schede codice come tavole: immagine + cartiglio */
+.code-card { display: flex; flex-direction: column; }
+.code-thumb { border: 1px solid var(--line); border-bottom: 0; }
+.code-body {
+  padding: 12px 14px 14px; gap: 8px; border: 1px solid var(--line);
+}
+.code-body h3 { font-size: 18px; font-weight: 700; }
+.code-role { font-size: 14px; margin-top: -4px; }
+.code-body p { font-size: 15px; color: var(--ink-2); line-height: 1.55; }
+.code-tags span { font-size: 12px; padding: 2px 6px; }
+.code-link { font-size: 15px; font-weight: 500; padding-top: 4px; }
+.dev-grid, .game-grid { gap: 32px 24px; }
+.home-cta { text-align: left; }
+.home-cta p { font-size: 20px; font-stretch: 112%; font-weight: 600; color: var(--ink); }
