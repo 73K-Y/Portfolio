@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="nav-links">
-          <a href="#home" id="btn-showreel" class="active">Lavori</a>
+          <a href="#assets" id="btn-showreel" class="active">Lavori</a>
           <a href="#code" id="btn-code">Codice</a>
           <a href="#profile" id="btn-profile">Profilo</a>
         </div>
@@ -80,7 +80,14 @@
 
     <div id="view-home">
       <div id="showreel" class="wrap section">
-        <h2 class="profile-main-title" style="margin-bottom: 20px;">Lavori</h2>
+        <h2 class="profile-main-title">Assets</h2>
+        <nav class="subnav" aria-label="Sezioni dei lavori">
+          <a href="#assets">Assets</a>
+          <a href="#in-sviluppo">In sviluppo</a>
+          <a href="#terminati">Terminati</a>
+          <a href="#annunci">Annunci</a>
+          <a href="#studio">Studio</a>
+        </nav>
         <div id="filters" class="filterbar reveal">
           <button class="filter-btn active" data-filter="all" type="button">Tutti</button>
           <button class="filter-btn" data-filter="characters" type="button">Personaggi</button>
@@ -310,58 +317,6 @@
 
         </div>
 
-        <section class="coming-section reveal">
-          <h3 class="block-title" style="margin-bottom: 20px;">In sviluppo</h3>
-          <div class="coming-grid">
-            <article class="case-coming" data-title="Synclife Dynamics">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_synclife_dynamics.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_synclife_dynamics.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">Synclife Dynamics</h4>
-                <p class="coming-desc">Videogioco horror, Unreal Engine 5</p>
-              </div>
-            </article>
-            <article class="case-coming" data-title="Brain.exe">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_BrainEXE.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_BrainEXE.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">Brain.exe</h4>
-                <p class="coming-desc">Videogioco meme, Unreal Engine 5</p>
-              </div>
-            </article>
-            <a href="https://orbitalys.netlify.app" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; color:inherit;">
-              <article class="case-coming" data-title="Orbitalys" style="cursor:pointer;">
-                <div class="case-bg pc-bg" style="background-image:url('assets/pc_Orbitalys.webp')"></div>
-                <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_Orbitalys.webp')"></div>
-                <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-                <div class="case-info">
-                  <h4 class="coming-title">Orbitalys</h4>
-                  <p class="coming-desc">Videogioco arcade, Unreal Engine 5</p>
-                </div>
-              </article>
-            </a>
-            <article class="case-coming" data-title="Space Fun">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_SpaceFun.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_SpaceFun.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">Space Fun</h4>
-                <p class="coming-desc">Videogioco arcade, Unreal Engine 5</p>
-              </div>
-            </article>
-            <a href="#ferrovie-tricolore" class="coming-link" style="display:block; text-decoration:none; color:inherit;">
-              <article class="case-coming" data-title="Ferrovie Tricolore">
-                <div class="case-bg pc-bg" style="background-image:url('assets/ferrovie-tricolore.webp')"></div>
-                <div class="case-info">
-                  <h4 class="coming-title">Ferrovie Tricolore</h4>
-                  <p class="coming-desc">Simulatore ferroviario, Roblox Studio</p>
-                </div>
-              </article>
-            </a>
-          </div>
-        </section>
 
         <div class="home-cta reveal">
           <p>Lavori su un gioco, un simulatore, o hai bisogno di asset 3D di qualità professionale?</p>
@@ -670,18 +625,6 @@
           <div class="dev-grid">
 
             <div class="code-card">
-              <div class="code-thumb" style="background-image:url('assets/ferrovie-tricolore.webp'); background-size:cover; background-position:center;"><span class="code-status"><span class="d"></span>In sviluppo</span></div>
-              <div class="code-body">
-                <h3>Ferrovie Tricolore</h3>
-                <span class="code-role">Simulatore ferroviario - Roblox Studio</span>
-                <p>Simulatore di treni ambientato in Italia, con tracciati generati da dati reali OpenStreetMap e GPX.</p>
-                <div class="code-tags"><span>Luau</span><span>Python</span><span>Roblox Studio</span><span>Blender</span></div>
-                <a class="code-link" href="#ferrovie-tricolore">Scheda del progetto</a>
-                <a class="code-link" href="https://github.com/73K-Y/Ferrovie-Tricolore" target="_blank" rel="noopener">Repo GitHub</a>
-              </div>
-            </div>
-
-            <div class="code-card">
               <div class="code-thumb g1" style="background-image:url('assets/addon.webp'); background-size:cover; background-position:center;"></div>
               <div class="code-body">
                 <h3>Add-on Blender</h3>
@@ -774,16 +717,22 @@
       </section>
     </div>
 
-    <div id="view-ft" style="display:none; padding-top:40px;">
+    <div id="view-dev" class="work-view" style="display:none; padding-top:40px;">
       <section class="wrap profile-section ft">
-        <a class="ft-back" href="#code">Codice</a>
         <h2 class="profile-main-title">Ferrovie Tricolore</h2>
+        <nav class="subnav" aria-label="Sezioni dei lavori">
+          <a href="#assets">Assets</a>
+          <a href="#in-sviluppo">In sviluppo</a>
+          <a href="#terminati">Terminati</a>
+          <a href="#annunci">Annunci</a>
+          <a href="#studio">Studio</a>
+        </nav>
         <p class="ft-lead">Un simulatore ferroviario italiano in Roblox Studio, costruito sul realismo: tratte vere e treni autentici. Seguo sia i modelli 3D sia il codice, e il progetto esce sotto il nome TOMHODA Studios.</p>
 
         <div class="hero-stats ft-stats">
-          <div class="stat"><span class="stat-num">In sviluppo</span><span class="stat-label">Stato</span></div>
+          <div class="stat"><span class="stat-num" data-ft="stato">In sviluppo</span><span class="stat-label">Stato</span></div>
           <div class="stat"><span class="stat-num">Roblox Studio</span><span class="stat-label">Luau, Python, Blender</span></div>
-          <div class="stat"><span class="stat-num">202</span><span class="stat-label">Membri Discord, settembre 2026</span></div>
+          <div class="stat"><span class="stat-num" data-ft="members">202</span><span class="stat-label" data-ft="members-label">Membri Discord</span></div>
         </div>
 
         <figure class="ft-cover"><img src="assets/ferrovie-tricolore.webp" alt="Logo di Ferrovie Tricolore" loading="lazy" decoding="async"></figure>
@@ -824,6 +773,21 @@
           </div>
         </div>
 
+        <div class="profile-block ft-live" data-ft-block="scheda" hidden>
+          <h4 class="block-title">Scheda aggiornata</h4>
+          <dl class="ft-list" data-ft="scheda"></dl>
+        </div>
+
+        <div class="profile-block ft-live" data-ft-block="updates" hidden>
+          <h4 class="block-title">Ultimi aggiornamenti da Discord</h4>
+          <div class="ft-updates" data-ft="updates"></div>
+        </div>
+
+        <div class="profile-block ft-live" data-ft-block="tiktok" hidden>
+          <h4 class="block-title">Ultimi video su TikTok</h4>
+          <div class="ft-tiktok" data-ft="tiktok"></div>
+        </div>
+
         <div class="profile-block ft-gallery-block">
           <h4 class="block-title">Dallo sviluppo</h4>
           <div class="ft-gallery">
@@ -840,10 +804,107 @@
           <h4 class="block-title">Community</h4>
           <p class="about-text">Gli aggiornamenti di sviluppo escono principalmente su Discord, e in video brevi su TikTok.</p>
           <div class="ft-links">
-            <a class="ft-link" href="https://discord.gg/pH62fm3nkG" target="_blank" rel="noopener"><span class="ft-link-name">Discord</span><span class="ft-link-meta">202 membri</span></a>
-            <a class="ft-link" href="https://www.tiktok.com/@ferrovietricolore" target="_blank" rel="noopener"><span class="ft-link-name">TikTok</span><span class="ft-link-meta">@ferrovietricolore</span></a>
-            <a class="ft-link" href="https://www.tiktok.com/@tomhodastudioofficial" target="_blank" rel="noopener"><span class="ft-link-name">TikTok dello studio</span><span class="ft-link-meta">@tomhodastudioofficial</span></a>
+            <a class="ft-link" href="https://discord.gg/pH62fm3nkG" target="_blank" rel="noopener"><span class="ft-link-name">Discord</span><span class="ft-link-meta" data-ft="members-short">202 membri</span></a>
+            <a class="ft-link" href="https://www.tiktok.com/@ferrovietricolore" target="_blank" rel="noopener"><span class="ft-link-name">TikTok Ferrovie Tricolore</span><span class="ft-link-meta">@ferrovietricolore</span></a>
             <a class="ft-link" href="https://github.com/73K-Y/Ferrovie-Tricolore" target="_blank" rel="noopener"><span class="ft-link-name">GitHub</span><span class="ft-link-meta">73K-Y/Ferrovie-Tricolore</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="view-done" class="work-view" style="display:none; padding-top:40px;">
+      <section class="wrap profile-section">
+        <h2 class="profile-main-title">Progetti terminati</h2>
+        <nav class="subnav" aria-label="Sezioni dei lavori">
+          <a href="#assets">Assets</a>
+          <a href="#in-sviluppo">In sviluppo</a>
+          <a href="#terminati">Terminati</a>
+          <a href="#annunci">Annunci</a>
+          <a href="#studio">Studio</a>
+        </nav>
+        <p class="ft-lead">Progetti pubblicati e giocabili.</p>
+        <div class="coming-grid done-grid">
+            <a href="https://orbitalys.netlify.app" target="_blank" rel="noopener" class="done-link">
+              <article class="case-coming is-done" data-title="Orbitalys">
+                <div class="case-bg pc-bg" style="background-image:url('assets/pc_Orbitalys.webp')"></div>
+                <div class="case-info">
+                  <h4 class="coming-title">Orbitalys</h4>
+                  <p class="coming-desc">Arcade in stile pachinko, Unreal Engine 5. Pubblicato su orbitalys.netlify.app.</p>
+                </div>
+              </article>
+            </a>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-news" class="work-view" style="display:none; padding-top:40px;">
+      <section class="wrap profile-section">
+        <h2 class="profile-main-title">Annunci</h2>
+        <nav class="subnav" aria-label="Sezioni dei lavori">
+          <a href="#assets">Assets</a>
+          <a href="#in-sviluppo">In sviluppo</a>
+          <a href="#terminati">Terminati</a>
+          <a href="#annunci">Annunci</a>
+          <a href="#studio">Studio</a>
+        </nav>
+        <p class="ft-lead">Progetti annunciati, non ancora mostrabili. Le immagini si svelano al passaggio del mouse.</p>
+        <div class="coming-grid">
+            <article class="case-coming" data-title="Synclife Dynamics">
+              <div class="case-bg pc-bg" style="background-image:url('assets/pc_synclife_dynamics.webp')"></div>
+              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_synclife_dynamics.webp')"></div>
+              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
+              <div class="case-info">
+                <h4 class="coming-title">Synclife Dynamics</h4>
+                <p class="coming-desc">Videogioco horror, Unreal Engine 5</p>
+              </div>
+            </article>
+            <article class="case-coming" data-title="Brain.exe">
+              <div class="case-bg pc-bg" style="background-image:url('assets/pc_BrainEXE.webp')"></div>
+              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_BrainEXE.webp')"></div>
+              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
+              <div class="case-info">
+                <h4 class="coming-title">Brain.exe</h4>
+                <p class="coming-desc">Videogioco meme, Unreal Engine 5</p>
+              </div>
+            </article>
+            <article class="case-coming" data-title="Space Fun">
+              <div class="case-bg pc-bg" style="background-image:url('assets/pc_SpaceFun.webp')"></div>
+              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_SpaceFun.webp')"></div>
+              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
+              <div class="case-info">
+                <h4 class="coming-title">Space Fun</h4>
+                <p class="coming-desc">Videogioco arcade, Unreal Engine 5</p>
+              </div>
+            </article>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-studio" class="work-view" style="display:none; padding-top:40px;">
+      <section class="wrap profile-section">
+        <h2 class="profile-main-title">TOMHODA Studios</h2>
+        <nav class="subnav" aria-label="Sezioni dei lavori">
+          <a href="#assets">Assets</a>
+          <a href="#in-sviluppo">In sviluppo</a>
+          <a href="#terminati">Terminati</a>
+          <a href="#annunci">Annunci</a>
+          <a href="#studio">Studio</a>
+        </nav>
+        <p class="ft-lead">Il mio studio indie: il nome sotto cui escono i miei giochi.</p>
+        <figure class="ft-cover studio-cover"><img src="assets/pc_LogoTHOMODA.webp" alt="Logo TOMHODA Studios" loading="lazy" decoding="async"></figure>
+        <div class="profile-block">
+          <h4 class="block-title">Giochi dello studio</h4>
+          <div class="ft-links">
+            <a class="ft-link" href="#in-sviluppo"><span class="ft-link-name">Ferrovie Tricolore</span><span class="ft-link-meta">in sviluppo</span></a>
+            <a class="ft-link" href="#terminati"><span class="ft-link-name">Orbitalys</span><span class="ft-link-meta">pubblicato</span></a>
+            <a class="ft-link" href="#annunci"><span class="ft-link-name">Synclife Dynamics, Brain.exe, Space Fun</span><span class="ft-link-meta">annunciati</span></a>
+          </div>
+        </div>
+        <div class="profile-block">
+          <h4 class="block-title">Canali dello studio</h4>
+          <div class="ft-links">
+            <a class="ft-link" href="https://www.tiktok.com/@tomhodastudioofficial" target="_blank" rel="noopener"><span class="ft-link-name">TikTok TOMHODA Studios</span><span class="ft-link-meta">@tomhodastudioofficial</span></a>
             <a class="ft-link" href="https://linktr.ee/thomodastudio" target="_blank" rel="noopener"><span class="ft-link-name">Tutti i link</span><span class="ft-link-meta">linktr.ee/thomodastudio</span></a>
           </div>
         </div>

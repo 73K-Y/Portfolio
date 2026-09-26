@@ -299,73 +299,61 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
 });
 
 /* ========= Sistema Navigazione SPA (Hash Routing) ========= */
-/* Creo l'observer una volta sola qui fuori, non a ogni cambio vista, per non accumularne uno per switch */
 (() => {
-  const btnProfile  = document.getElementById("btn-profile");
-  const btnShowreel = document.getElementById("btn-showreel");
-  const btnCode     = document.getElementById("btn-code");
-  const logoHome    = document.getElementById("logo-home");
-  const viewHome    = document.getElementById("view-home");
-  const viewProfile = document.getElementById("view-profile");
-  const viewCode    = document.getElementById("view-code");
-  const viewFt      = document.getElementById("view-ft");
- 
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("is-visible");
-          revealObserver.unobserve(e.target);
-        }
-      });
-    },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-  );
- 
+  const nav = {
+    work:    document.getElementById("btn-showreel"),
+    code:    document.getElementById("btn-code"),
+    profile: document.getElementById("btn-profile"),
+  };
+  /* hash -> [id vista, voce di menu attiva, titolo pagina] */
+  const routes = {
+    "#assets":      ["view-home",    "work",    "Assets"],
+    "#in-sviluppo": ["view-dev",     "work",    "Ferrovie Tricolore"],
+    "#terminati":   ["view-done",    "work",    "Progetti terminati"],
+    "#annunci":     ["view-news",    "work",    "Annunci"],
+    "#studio":      ["view-studio",  "work",    "TOMHODA Studios"],
+    "#code":        ["view-code",    "code",    "Codice"],
+    "#profile":     ["view-profile", "profile", "Profilo"],
+  };
+  /* vecchi indirizzi ancora validi */
+  const aliases = { "": "#assets", "#home": "#assets", "#ferrovie-tricolore": "#in-sviluppo" };
+  const views = [...new Set(Object.values(routes).map((r) => r[0]))]
+    .map((id) => document.getElementById(id)).filter(Boolean);
+
   function switchView(hash, mode = "push") {
+    hash = aliases[hash] ?? hash;
+    if (!routes[hash]) hash = "#assets";
+    const [viewId, navKey, title] = routes[hash];
+
     window.scrollTo({ top: 0, behavior: "instant" });
- 
-    // nascondi tutte le viste e disattiva tutti i bottoni
-    if (viewHome)    viewHome.style.display    = "none";
-    if (viewProfile) viewProfile.style.display = "none";
-    if (viewCode)    viewCode.style.display    = "none";
-    if (viewFt)      viewFt.style.display      = "none";
-    [btnShowreel, btnCode, btnProfile].forEach((b) => b && b.classList.remove("active"));
- 
-    if (hash === "#profile") {
-      if (viewProfile) viewProfile.style.display = "block";
-      btnProfile && btnProfile.classList.add("active");
-    } else if (hash === "#ferrovie-tricolore") {
-      if (viewFt) viewFt.style.display = "block";
-      btnCode && btnCode.classList.add("active");
-      document.title = "Ferrovie Tricolore - Tommy Raffaello Hodoroaba";
-    } else if (hash === "#code") {
-      if (viewCode) viewCode.style.display = "block";
-      btnCode && btnCode.classList.add("active");
-    } else {
-      if (viewHome) viewHome.style.display = "block";
-      btnShowreel && btnShowreel.classList.add("active");
-      hash = "#home";
-    }
- 
-    if (hash !== "#ferrovie-tricolore") document.title = "Portfolio - Tommy Raffaello Hodoroaba";
+    views.forEach((v) => { v.style.display = v.id === viewId ? "block" : "none"; });
+    Object.entries(nav).forEach(([k, el]) => el && el.classList.toggle("active", k === navKey));
+    document.querySelectorAll(".subnav a").forEach((a) => {
+      if (a.getAttribute("href") === hash) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    document.title = `${title} - Tommy Raffaello Hodoroaba`;
+
     // push solo su click; su load/popstate si sostituisce, altrimenti "Indietro" non funziona
     if (mode === "push" && location.hash !== hash) history.pushState(null, "", hash);
-    else if (mode === "replace") history.replaceState(null, "", hash);
- 
-    document.querySelectorAll(".reveal").forEach((el) => {
-      el.classList.remove("is-visible");
-      setTimeout(() => revealObserver.observe(el), 50);
-    });
+    else if (mode !== "push" && location.hash !== hash) history.replaceState(null, "", hash);
+
+    document.dispatchEvent(new CustomEvent("viewchange", { detail: { hash } }));
   }
- 
-  window.addEventListener("load",     () => switchView(window.location.hash || "#home", "replace"));
-  window.addEventListener("popstate", () => switchView(window.location.hash || "#home", "none"));
- 
-  btnProfile?.addEventListener( "click", (e) => { e.preventDefault(); switchView("#profile"); });
-  btnCode?.addEventListener(    "click", (e) => { e.preventDefault(); switchView("#code"); });
-  btnShowreel?.addEventListener("click", (e) => { e.preventDefault(); switchView("#home"); });
-  logoHome?.addEventListener(   "click", (e) => { e.preventDefault(); switchView("#home"); });
+
+  window.addEventListener("load",     () => switchView(location.hash, "replace"));
+  window.addEventListener("popstate", () => switchView(location.hash, "none"));
+
+  /* Ogni link interno a una vista passa dal router */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const h = a.getAttribute("href");
+    if (!(h in routes) && !(h in aliases)) return;
+    e.preventDefault();
+    switchView(h);
+  });
+  document.getElementById("logo-home")?.addEventListener("click", (e) => { e.preventDefault(); switchView("#assets"); });
 })();
 
 /* ========= Interazioni Extra (CTA, Video Fallback, Copia Email) ========= */
@@ -504,4 +492,88 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
       btn.textContent = label;
     }
   });
+})();
+/* ========= Ferrovie Tricolore: dati live da Discord ========= */
+(() => {
+  const root = document.getElementById("view-dev");
+  if (!root) return;
+  let loaded = false;
+  const q = (sel) => root.querySelector(sel);
+  const fmtDate = (iso) => new Date(iso).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+  const nf = new Intl.NumberFormat("it-IT");
+
+  function show(block) { const b = q(`[data-ft-block="${block}"]`); if (b) b.hidden = false; }
+
+  function render(d) {
+    if (typeof d.members === "number") {
+      q('[data-ft="members"]').textContent = nf.format(d.members);
+      q('[data-ft="members-short"]').textContent = `${nf.format(d.members)} membri`;
+      q('[data-ft="members-label"]').textContent =
+        typeof d.online === "number" ? `Membri Discord, ${nf.format(d.online)} online ora` : "Membri Discord";
+    }
+
+    const scheda = (d.scheda || []).filter((r) => r.key && r.value);
+    const stato = scheda.find((r) => r.key.toLowerCase() === "stato");
+    if (stato) q('[data-ft="stato"]').textContent = stato.value;
+    const rows = scheda.filter((r) => r !== stato);
+    if (rows.length) {
+      const dl = q('[data-ft="scheda"]');
+      dl.replaceChildren(...rows.flatMap((r) => {
+        const dt = document.createElement("dt"); dt.textContent = r.key;
+        const dd = document.createElement("dd"); dd.textContent = r.value;
+        return [dt, dd];
+      }));
+      show("scheda");
+    }
+
+    if ((d.updates || []).length) {
+      const box = q('[data-ft="updates"]');
+      box.replaceChildren(...d.updates.map((u) => {
+        const art = document.createElement("article");
+        art.className = "ft-update";
+        if (u.image && u.image.url) {
+          const img = document.createElement("img");
+          img.src = u.image.url; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+          if (u.image.width && u.image.height) { img.width = u.image.width; img.height = u.image.height; }
+          art.appendChild(img);
+        }
+        const body = document.createElement("div");
+        body.className = "ft-update-body";
+        const time = document.createElement("time");
+        time.dateTime = u.date; time.textContent = fmtDate(u.date);
+        const p = document.createElement("p");
+        p.textContent = u.text;
+        body.append(time, p);
+        art.appendChild(body);
+        return art;
+      }));
+      show("updates");
+    }
+
+    if ((d.tiktok || []).length) {
+      const box = q('[data-ft="tiktok"]');
+      box.replaceChildren(...d.tiktok.filter((id) => /^\d+$/.test(id)).map((id) => {
+        const f = document.createElement("iframe");
+        f.src = `https://www.tiktok.com/embed/v2/${id}`;
+        f.title = "Video TikTok di Ferrovie Tricolore";
+        f.loading = "lazy";
+        f.allow = "encrypted-media; fullscreen";
+        f.referrerPolicy = "strict-origin-when-cross-origin";
+        return f;
+      }));
+      show("tiktok");
+    }
+  }
+
+  async function load() {
+    if (loaded) return;
+    loaded = true;
+    try {
+      const res = await fetch("/.netlify/functions/ft-data");
+      if (!res.ok) return; // resta il contenuto statico
+      render(await res.json());
+    } catch { /* offline o funzione non attiva: resta il contenuto statico */ }
+  }
+
+  document.addEventListener("viewchange", (e) => { if (e.detail.hash === "#in-sviluppo") load(); });
 })();

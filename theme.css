@@ -462,3 +462,33 @@ a:hover .case-coming .case-info, a:focus-visible .case-coming .case-info { borde
 .ft-link-meta { font-family: var(--mono) !important; font-size: 13px; color: var(--ink-3); }
 .ft-link:hover .ft-link-name { text-decoration: underline; text-underline-offset: 4px; }
 .code-body .code-link + .code-link { margin-top: 0; }
+/* =========================================================
+   Sotto-navigazione dei lavori
+   ========================================================= */
+.subnav {
+  display: flex; flex-wrap: wrap; gap: 4px 24px; margin: 0 0 40px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--line);
+}
+.subnav a { color: var(--ink-3); font-size: 16px; font-weight: 500; padding: 4px 0; }
+.subnav a:hover { color: var(--ink); }
+.subnav a[aria-current="page"] {
+  color: var(--ink); text-decoration: underline; text-decoration-color: var(--signal);
+  text-decoration-thickness: 2px; text-underline-offset: 8px;
+}
+/* i filtri degli assets diventano il secondo livello: più piccoli e senza doppia linea */
+#view-home .filterbar { border-bottom: 0; padding-bottom: 0; margin-bottom: 28px; }
+#view-home .filter-btn { font-size: 14px; }
+
+.work-view .ft-lead { margin-top: 0; }
+.done-grid .case-coming .case-bg.pc-bg { filter: none; }
+.studio-cover { background: var(--wall-2); }
+
+/* Aggiornamenti e video live */
+.ft-updates { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.ft-update { border: 1px solid var(--line); display: flex; flex-direction: column; }
+.ft-update img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); }
+.ft-update-body { padding: 12px 14px 14px; }
+.ft-update time { display: block; font-family: var(--mono) !important; font-size: 13px; color: var(--ink-3); margin-bottom: 6px; }
+.ft-update p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.6; white-space: pre-line; overflow-wrap: anywhere; }
+.ft-tiktok { display: flex; flex-wrap: wrap; gap: 24px; }
+.ft-tiktok iframe { width: 325px; max-width: 100%; height: 740px; border: 1px solid var(--line); background: var(--wall-2); }
