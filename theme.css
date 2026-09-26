@@ -1,0 +1,245 @@
+/* =========================================================
+   Direzione A - Galleria editoriale
+   Si carica DOPO style.css e ne sovrascrive l'estetica.
+   Per tornare indietro: togli il <link> a theme.css.
+
+   Idea: il sito è una parete di galleria. Grigio grafite
+   neutro, niente glow, niente vetro. I render si vedono a
+   piena luminosità e la UI parla sottovoce. Un solo accento,
+   il giallo dei segnali ferroviari, usato solo per dire
+   "sei qui" (vista attiva, filtro attivo, focus).
+   ========================================================= */
+
+:root {
+  --wall:   #1d1e21;   /* parete */
+  --wall-2: #25262a;   /* superfici */
+  --line:   #37393e;   /* bordi e separatori */
+  --ink:    #ecebe6;   /* testo */
+  --ink-2:  #a3a29b;   /* testo secondario */
+  --ink-3:  #75746e;   /* meta, date */
+  --signal: #e6b53d;   /* accento: solo stato attivo e focus */
+
+  /* rimappo le variabili del vecchio tema */
+  --bg: var(--wall);
+  --panel-bg: var(--wall);
+  --surface-1: var(--wall-2);
+  --surface-2: var(--wall-2);
+  --white: var(--ink);
+  --text-gray: var(--ink-2);
+  --text-dim: var(--ink-3);
+  --blue-glow: var(--line);
+  --blue-light: var(--ink);
+  --glass: var(--wall);
+  --glass-border: var(--line);
+  --max-w: 1280px;
+  --font: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html, body { background: var(--wall); color: var(--ink); font-family: var(--font); }
+body * { font-family: inherit; text-shadow: none !important; }
+code, pre, .cw-body, .cw-body * { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace !important; }
+
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+/* Movimento: niente fade-in a cascata sulle sezioni */
+.reveal, .reveal.is-visible { opacity: 1; transform: none; transition: none; }
+
+/* ---------- Navigazione ---------- */
+.nav-wrapper { padding: 0; background: var(--wall); border-bottom: 1px solid var(--line); }
+.nav-glass {
+  max-width: var(--max-w); margin: 0 auto; padding: 14px var(--gutter);
+  background: none; border: 0; border-radius: 0; box-shadow: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.logo { background: none; border: 0; }
+.name-row h1 { font-size: 16px; font-weight: 700; letter-spacing: 0; }
+.lead { font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--ink-2); }
+@media (max-width: 600px) { .lead { display: none; } .name-row h1 { font-size: 15px; } }
+.nav-links { gap: 28px; font-size: 15px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.nav-links a { color: var(--ink-2); }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
+.nav-links a.active::after {
+  background: var(--signal); box-shadow: none; height: 2px; bottom: -6px;
+}
+
+/* Il badge "Open to Work" fluttuante con pallino pulsante esce:
+   la disponibilità resta nel profilo, scritta come testo. */
+.open-to-work-badge { display: none !important; }
+.otw-sidebar-badge {
+  background: none; border: 0; padding: 0; box-shadow: none;
+  color: var(--ink-2); font-size: 14px; text-transform: none; letter-spacing: 0; font-weight: 500;
+}
+.otw-dot { background: var(--signal); box-shadow: none; animation: none; }
+
+/* ---------- Titoli di sezione ---------- */
+.wrap { padding-top: clamp(96px, 12vw, 132px); }
+.profile-section { padding-top: 100px; }
+
+/* Niente maiuscolo forzato da nessuna parte */
+body * { text-transform: none !important; }
+.profile-main-title {
+  font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1; text-transform: none; margin: 0 0 32px !important;
+  background: none; -webkit-text-fill-color: currentColor; color: var(--ink);
+}
+.glow-script { font: inherit; color: inherit; }
+
+.block-title {
+  display: block; background: none; color: var(--ink); padding: 0;
+  border-radius: 0; font-size: 20px; font-weight: 700; text-transform: none; letter-spacing: 0;
+  margin: 0 0 16px; box-shadow: none;
+}
+
+/* ---------- Filtri ---------- */
+.filterbar { gap: 4px 22px; margin-bottom: 36px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+.filter-btn {
+  background: none; border: 0; border-radius: 0; padding: 4px 0;
+  color: var(--ink-3); font-size: 15px; font-weight: 500; text-transform: none; letter-spacing: 0;
+  box-shadow: none;
+}
+.filter-btn:hover { background: none; color: var(--ink); box-shadow: none; }
+.filter-btn.active {
+  background: none; color: var(--ink); box-shadow: none;
+  text-decoration: underline; text-decoration-color: var(--signal);
+  text-decoration-thickness: 2px; text-underline-offset: 8px;
+}
+
+/* ---------- Card progetto: immagine piena + didascalia sotto ---------- */
+.gallery-grid { gap: 48px 24px; }
+.case {
+  height: auto !important; border: 0; border-radius: 0; overflow: visible;
+  background: none; box-shadow: none; transition: none;
+  display: flex; flex-direction: column;
+}
+.case::after { display: none; }
+.case-bg {
+  position: relative; inset: auto; height: 260px; border-radius: 2px;
+  filter: none; transition: none; background-color: var(--wall-2);
+}
+.case:hover { transform: none; box-shadow: none; border: 0; }
+.case:hover .case-bg { transform: none; filter: none; }
+.case:hover h3, .case:focus-visible h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.case:focus-visible { outline-offset: 6px; }
+
+@media (min-width: 900px) {
+  .case-bg { height: 360px; }
+  .case[data-bento="6"] .case-bg { height: 520px; }
+}
+
+.case-info {
+  position: static; padding-top: 14px;
+  display: flex; flex-direction: column-reverse; gap: 4px;
+}
+.case-info h3 {
+  font-size: 18px; font-weight: 600; text-transform: none; letter-spacing: 0; margin: 0;
+}
+.case-info .open-modal { display: none; }  /* tutta la card apre la galleria */
+
+.badges { display: flex; flex-wrap: wrap; gap: 0; margin: 0; }
+.badge, .badge.cat {
+  background: none !important; border: 0 !important; padding: 0 !important; border-radius: 0;
+  color: var(--ink-3) !important; font-size: 14px; font-weight: 400;
+  text-transform: none !important; letter-spacing: 0 !important; box-shadow: none !important;
+}
+.badge.cat { display: none; }  /* la categoria è già nel filtro */
+.badge + .badge::before { content: ", "; }
+.badge.cat + .badge::before { content: none; }
+
+/* ---------- In sviluppo ---------- */
+.coming-section { margin-top: 96px; }
+.coming-grid { gap: 24px; }
+.case-coming { border: 0; border-radius: 2px; box-shadow: none; background: var(--wall-2); }
+.case-coming:hover { transform: none; box-shadow: none; }
+.case-coming .case-overlay { background: none; }
+.case-coming .label {
+  background: var(--wall); color: var(--ink-2); border: 1px solid var(--line);
+  text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 500; border-radius: 2px;
+}
+.case-coming .case-info { position: static; text-align: left; padding: 12px 0 0; }
+.case-coming .coming-title { font-size: 16px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+.coming-desc { color: var(--ink-3); font-size: 14px; text-transform: none; letter-spacing: 0; }
+
+/* ---------- Pulsanti ---------- */
+.btn-download, .btn-submit, .nav-cta {
+  background: var(--ink); color: var(--wall); border: 1px solid var(--ink); border-radius: 2px;
+  box-shadow: none; text-transform: none; letter-spacing: 0; font-weight: 600; font-size: 15px;
+}
+.btn-download:hover, .btn-submit:hover, .nav-cta:hover {
+  background: var(--wall); color: var(--ink); box-shadow: none; transform: none;
+}
+.btn-outline {
+  background: none; color: var(--ink); border: 1px solid var(--line); border-radius: 2px;
+  box-shadow: none; text-transform: none; letter-spacing: 0; font-weight: 500;
+}
+.btn-outline:hover { border-color: var(--ink); background: none; color: var(--ink); box-shadow: none; }
+.home-cta { border: 0; background: none; box-shadow: none; border-top: 1px solid var(--line); border-radius: 0; }
+
+/* ---------- Profilo ---------- */
+.stat-num { background: none; -webkit-text-fill-color: currentColor; color: var(--ink); font-weight: 800; }
+.stat-label { text-transform: none; letter-spacing: 0; color: var(--ink-3); font-size: 14px; }
+.stat-divider { background: var(--line); }
+.pic-ring { display: none; }
+.profile-pic { border-radius: 2px; box-shadow: none; }
+.profile-role { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 15px; }
+.skills-list-text li { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.software-list li { text-transform: none; letter-spacing: 0; font-size: 14px; }
+.software-tags span, .chip, .code-tags span {
+  background: none; border: 1px solid var(--line); color: var(--ink-2);
+  border-radius: 2px; text-transform: none; letter-spacing: 0; box-shadow: none;
+}
+.exp-item { border-color: var(--line); }
+.exp-date { color: var(--ink-3); font-weight: 500; text-transform: none; letter-spacing: 0; }
+.exp-desc strong { text-transform: none; letter-spacing: 0; }
+.exp-role { color: var(--ink-2); font-weight: 500; text-transform: none; letter-spacing: 0; }
+
+/* ---------- Contatti ---------- */
+.contact-card { background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; padding-left: 0; padding-right: 0; }
+.contact-col-label, .form-label, .clp-label { text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-2); }
+.form-input { background: var(--wall-2); border: 1px solid var(--line); border-radius: 2px; box-shadow: none; }
+.form-input:focus { border-color: var(--ink-2); box-shadow: none; }
+.form-input::placeholder { color: var(--ink-3); }
+.contact-link-pill { background: none; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding-left: 0; box-shadow: none; }
+.contact-link-pill:hover { background: none; transform: none; box-shadow: none; }
+.contact-link-pill:hover .clp-value { color: var(--ink); text-decoration: underline; }
+.clp-icon { display: none; }
+
+/* ---------- Codice ---------- */
+.code-window { background: #17181b; border: 1px solid var(--line); border-radius: 2px; box-shadow: none; }
+.cw-bar { background: var(--wall-2); border-bottom: 1px solid var(--line); }
+.cw-dot { display: none; }
+.cw-name { margin-left: 0; color: var(--ink-3); text-transform: none; letter-spacing: 0; }
+.cw-body .kw { color: #d9a94f; } .cw-body .fn { color: #c9c7bf; }
+.cw-body .st { color: #a9b98a; } .cw-body .cm { color: var(--ink-3); }
+
+.code-card { background: none; border: 0; border-radius: 0; box-shadow: none; }
+.code-card:hover { transform: none; box-shadow: none; border: 0; }
+.code-thumb { border-radius: 2px; }
+.g1, .g2, .g5 { background: var(--wall-2); }
+.code-status, .code-status.live {
+  background: var(--wall); border: 1px solid var(--line); color: var(--ink-2);
+  text-transform: none; letter-spacing: 0; box-shadow: none; border-radius: 2px;
+}
+.code-status .d { background: var(--ink-3); box-shadow: none; }
+.code-status.live .d { background: var(--signal); }
+.code-body { padding: 14px 0 0; }
+.code-body h3 { text-transform: none; letter-spacing: 0; font-weight: 600; }
+.code-role { color: var(--ink-3); text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 14px; }
+.code-link { color: var(--ink); text-transform: none; letter-spacing: 0; text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- Galleria modale ---------- */
+.modal .backdrop { background: rgba(20, 21, 23, 0.97); backdrop-filter: none; }
+.gallery { border: 0; border-radius: 2px; }
+#closeModal, .gallery-btn {
+  background: var(--wall); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 2px; box-shadow: none;
+}
+#closeModal:hover, .gallery-btn:hover { border-color: var(--ink); background: var(--wall); box-shadow: none; }
+.modal-info-text { text-transform: none; letter-spacing: 0; }
+
+footer { border-top: 1px solid var(--line); color: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

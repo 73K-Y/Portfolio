@@ -41,11 +41,11 @@
       badges.innerHTML = "";
       if (cat) {
         const catNames = {
-          "characters": "Characters",
-          "environments": "Environments",
-          "hardsurface": "Hard Surface",
-          "props": "Props & Scans",
-          "motion": "Motion & UI"
+          "characters": "Personaggi",
+          "environments": "Ambienti",
+          "hardsurface": "Hard surface",
+          "props": "Props e scan",
+          "motion": "Motion e UI"
         };
         const b = document.createElement("span");
         b.className = "badge cat";
