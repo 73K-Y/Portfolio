@@ -314,7 +314,7 @@
     { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
   );
  
-  function switchView(hash) {
+  function switchView(hash, mode = "push") {
     window.scrollTo({ top: 0, behavior: "instant" });
  
     // nascondi tutte le viste e disattiva tutti i bottoni
@@ -335,7 +335,9 @@
       hash = "#home";
     }
  
-    history.pushState(null, null, hash);
+    // push solo su click; su load/popstate si sostituisce, altrimenti "Indietro" non funziona
+    if (mode === "push" && location.hash !== hash) history.pushState(null, "", hash);
+    else if (mode === "replace") history.replaceState(null, "", hash);
  
     document.querySelectorAll(".reveal").forEach((el) => {
       el.classList.remove("is-visible");
@@ -343,8 +345,8 @@
     });
   }
  
-  window.addEventListener("load",     () => switchView(window.location.hash || "#home"));
-  window.addEventListener("popstate", () => switchView(window.location.hash || "#home"));
+  window.addEventListener("load",     () => switchView(window.location.hash || "#home", "replace"));
+  window.addEventListener("popstate", () => switchView(window.location.hash || "#home", "none"));
  
   btnProfile?.addEventListener( "click", (e) => { e.preventDefault(); switchView("#profile"); });
   btnCode?.addEventListener(    "click", (e) => { e.preventDefault(); switchView("#code"); });
@@ -439,4 +441,53 @@
     updateDevCols();
     window.addEventListener('resize', updateDevCols, { passive: true });
   })();
+})();
+/* ========= Lazy load delle copertine delle card ========= */
+(() => {
+  const cards = document.querySelectorAll(".case-bg[data-bg]");
+  const load = (el) => {
+    el.style.setProperty("--bg", `url("${encodeURI(el.dataset.bg)}")`);
+    el.removeAttribute("data-bg");
+  };
+  if (!("IntersectionObserver" in window)) { cards.forEach(load); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } });
+  }, { rootMargin: "300px 0px" });
+  cards.forEach((el) => io.observe(el));
+})();
+
+/* ========= Form contatti: invio via fetch con stati ========= */
+(() => {
+  const form = document.querySelector("form.contact-form");
+  if (!form) return;
+  const status = form.querySelector(".form-status");
+  const btn = form.querySelector(".btn-submit");
+  const show = (msg, type) => {
+    status.textContent = msg;
+    status.className = `form-status is-${type}`;
+    status.hidden = false;
+  };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (btn.disabled) return;
+    btn.disabled = true;
+    const label = btn.textContent;
+    btn.textContent = "Invio in corso...";
+    status.hidden = true;
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      });
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      show("Messaggio inviato, grazie! Ti rispondo appena possibile.", "ok");
+    } catch {
+      show("Invio non riuscito. Riprova o scrivimi su LinkedIn.", "err");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = label;
+    }
+  });
 })();

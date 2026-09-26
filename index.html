@@ -22,7 +22,9 @@
     <meta name="twitter:image" content="https://portfoliotommy.netlify.app/assets/og-cover.webp" />
     <meta name="theme-color" content="#030612" />
     <meta name="color-scheme" content="dark" />
-    <link rel="icon" type="image/png" href="assets/logo.webp" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
@@ -64,9 +66,9 @@
           </div>
         </div>
         <div class="nav-links">
-          <a href="#" id="btn-showreel" class="active">Home</a>
-          <a href="#" id="btn-code">Code</a>
-          <a href="#" id="btn-profile">Profile</a>
+          <a href="#home" id="btn-showreel" class="active">Home</a>
+          <a href="#code" id="btn-code">Code</a>
+          <a href="#profile" id="btn-profile">Profile</a>
         </div>
       </div>
     </div>
@@ -95,8 +97,8 @@
             data-tools="Blender, Unreal Engine 5"
             data-note="Progetto ITS ICT Piemonte. Pipeline completa: modellazione ambiente, texturing PBR, lighting atmosphere, animazioni di interazione in Unreal Engine 5. Include 3 clip video di gameplay."
             data-images="assets/scena - background menù - ospedale.webp"
-            data-videos="assets/Animazione 4 - interazione ambiente.mp4|assets/Senza titolo (1).mp4|assets/Senza titolo (2).mp4">
-            <div class="case-bg" style="--bg:url('assets/scena - background menù - ospedale.webp')"></div>
+            data-videos="assets/oblivion-hospital-clip-1.mp4|assets/oblivion-hospital-clip-2.mp4|assets/oblivion-hospital-clip-3.mp4">
+            <div class="case-bg" data-bg="assets/scena - background menù - ospedale.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Oblivion Hospital</h3>
@@ -110,7 +112,7 @@
             data-tools="Blender, Substance Painter"
             data-note="Modellazione hard-surface di convogli Trenitalia con topologia ottimizzata per simulatori. UV unwrap manuale, texturing PBR con Substance Painter (albedo, normal, roughness, metalness). Attenzione ai dettagli tecnici: porte, pantografi, carrelli. ~40h di lavoro."
             data-images="assets/treno to.webp|assets/regfront.webp|assets/regback.webp|assets/regside.webp|assets/regunder.webp|assets/treno to2.webp|assets/treno to3.webp">
-            <div class="case-bg" style="--bg:url('assets/treno to.webp')"></div>
+            <div class="case-bg" data-bg="assets/treno to.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Treni Trenitalia</h3>
@@ -124,7 +126,7 @@
             data-tools="Blender, Unreal Engine 5"
             data-note="Character art completo di un nemico umanoide meccanico per videogioco horror. Pipeline: sculpt, retopology per real-time, UV unwrap, texturing PBR, rigging con skeleton custom, weight painting. Importato e configurato in Unreal Engine 5 con animazioni di idle e attacco."
             data-images="assets/animatronic.webp|assets/animatronic2.webp|assets/animatronic3.webp|assets/animatronic4.webp">
-            <div class="case-bg" style="--bg:url('assets/animatronic.webp')"></div>
+            <div class="case-bg" data-bg="assets/animatronic.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Animatrone Umanoide</h3>
@@ -138,7 +140,7 @@
             data-tools="Blender, Substance Painter, Photoshop"
             data-note="Character modeling completo: sculpt hi-poly, retopology manuale per uso real-time, UV mapping, texturing con Substance Painter. Studio dei materiali (metallo, tessuto, cuoio). Posing finale con skeleton e weight painting."
             data-images="assets/soldier3.webp|assets/soldier.webp|assets/soldier2.webp">
-            <div class="case-bg" style="--bg:url('assets/soldier3.webp')"></div>
+            <div class="case-bg" data-bg="assets/soldier3.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Soldier Walker</h3>
@@ -152,7 +154,7 @@
             data-tools="Blender, Photoshop"
             data-note="Modellazione hard surface realizzata interamente in Blender, dalla geometria hi-poly fino alla retopology manuale ottimizzata per uso real-time. UV unwrapping, texturing e compositing finale completati in Blender e Photoshop. Design property of Alan Walker Creative Team."
             data-images="assets/AV_front.webp|assets/AV_side.webp|assets/AV_back.webp|assets/AV_up.webp|assets/AV_down.webp|assets/Crea_front.webp|assets/Crea_side.webp|assets/Crea_back.webp|assets/Crea_up.webp|assets/Crea_down.webp|assets/Explor_front.webp|assets/Explor_side.webp|assets/Explor_back.webp|assets/Explor_up.webp|assets/Explor_down.webp">
-            <div class="case-bg" style="--bg:url('assets/AV_front.webp')"></div>
+            <div class="case-bg" data-bg="assets/AV_front.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Alan Walker Drones</h3>
@@ -166,7 +168,7 @@
             data-tools="Blender, Photoshop"
             data-note="Modellazione hard-surface complessa con pannellature e greeble dettagliati. Rendering cinematico con HDR lighting e compositing in post. Circa 30 ore di lavoro totali. Esercizio avanzato di gestione della complessità geometrica."
             data-images="assets/star destroyer.webp|assets/star destroyer2.webp">
-            <div class="case-bg" style="--bg:url('assets/star destroyer.webp')"></div>
+            <div class="case-bg" data-bg="assets/star destroyer.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Star Destroyer</h3>
@@ -180,7 +182,7 @@
             data-tools="Blender (Cycles)"
             data-note="Archviz di due ambienti interni: mini appartamento e aula studio. Studio del lighting naturale con HDRI e luce artificiale, materiali PBR (legno, tessuti, metalli). Renderizzato con Cycles. Competenze direttamente applicabili a interior design e real estate visualization."
             data-images="assets/living1.webp|assets/living_s.webp|assets/bath1.webp|assets/bath_s.webp|assets/kitchen1.webp|assets/kitchen_s.webp|assets/bed1.webp|assets/bed_s.webp|assets/studio.webp">
-            <div class="case-bg" style="--bg:url('assets/living1.webp')"></div>
+            <div class="case-bg" data-bg="assets/living1.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Appartamento & Aula</h3>
@@ -194,7 +196,7 @@
             data-tools="Premiere Pro, After Effects, Blender"
             data-note="Creazione di un visualizer musicale per il remix 'Beautiful Nightmare'. Pipeline: modellazione elementi 3D in Blender, compositing e animazione in After Effects, editing finale in Premiere. Contenuto per i canali social ufficiali dell'artista."
             data-images="assets/walker scene.webp|assets/walker scene_s.webp">
-            <div class="case-bg" style="--bg:url('assets/walker scene.webp')"></div>
+            <div class="case-bg" data-bg="assets/walker scene.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Beautiful Nightmare</h3>
@@ -212,7 +214,7 @@
                           assets/treno4.webp|assets/treno5.webp|assets/treno_s3.webp|assets/vagone.webp|assets/vagone_s.webp|assets/vagone2.webp|
                           assets/vagone_s2.webp|assets/vagone3.webp|assets/vagone_s3.webp|assets/vagone_t2.webp|assets/vagone_st2.webp|assets/vagone_t3.webp|
                           assets/vagone_st3.webp|assets/vagone_st32.webp|assets/vagone_t33.webp|assets/vagone_st33.webp|assets/vagone_t4.webp|assets/vagone_t42.webp|assets/vagone_st42.webp">
-            <div class="case-bg" style="--bg:url('assets/tram.webp')"></div>
+            <div class="case-bg" data-bg="assets/tram.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Railway Runners - Asset Torino Lowpoly</h3>
@@ -226,7 +228,7 @@
             data-tools="Photoshop"
             data-note="Design di interfacce HUD per un videogioco sci-fi. Tre varianti di pannelli (terminale, office laterale, frontale). Stile tecno-organico con palette fredda. Ottimizzati per risoluzione 1080p e integrazione in motore di gioco."
             data-images="assets/hud office left.webp|assets/hud front office.webp|assets/hud terminal office.webp">
-            <div class="case-bg" style="--bg:url('assets/hud office left.webp')"></div>
+            <div class="case-bg" data-bg="assets/hud office left.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Aetalya Chronicles</h3>
@@ -240,7 +242,7 @@
             data-tools="Blender, Maya, Photoshop"
             data-note="Scansione fotogrammetrica di una statuina fisica. Ricostruzione della mesh, pulizia manuale della geometria, UV unwrap e baking delle texture originali. Tecnica applicabile a digital twin, catalogazione industriale e architettura."
             data-images="assets/babyyodafront.webp|assets/babyyodafrontUV.webp|assets/babyyodaside.webp|assets/babyyodasideUV.webp|assets/babyyodaback.webp|assets/babyyodabackUV.webp">
-            <div class="case-bg" style="--bg:url('assets/babyyodafront.webp')"></div>
+            <div class="case-bg" data-bg="assets/babyyodafront.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Statuina Baby Yoda</h3>
@@ -254,7 +256,7 @@
             data-tools="Blender"
             data-note="Serie di pianeti low-poly stilizzati come asset per video e motion graphics. Palette cromatica coordinata, shading flat/toon. Ottimizzati per animazioni real-time e compositing video."
             data-images="assets/pianeta.webp|assets/pianeta2.webp|assets/pianeta3.webp|assets/pianeta4.webp|assets/pianeta5.webp|assets/pianeta6.webp">
-            <div class="case-bg" style="--bg:url('assets/pianeta.webp')"></div>
+            <div class="case-bg" data-bg="assets/pianeta.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Lowpoly Planets</h3>
@@ -268,7 +270,7 @@
             data-tools="Blender"
             data-note="Scena ambientale urbana low-poly con illuminazione cinematica. Studio del lighting con HDRI e luci artificiali. Shader stilizzati. Tecnica applicabile a background di giochi, animazioni e visualizzazioni architetturali semplificate."
             data-images="assets/città.webp">
-            <div class="case-bg" style="--bg:url('assets/città.webp')"></div>
+            <div class="case-bg" data-bg="assets/città.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Città Low Poly</h3>
@@ -282,7 +284,7 @@
             data-tools="Blender"
             data-note="Modellazione di una concept car da zero. Studio delle forme aerodinamiche e modellazione della carrozzeria con superfici curve pulite. Rendering con studio lighting per esaltare i riflessi della verniciatura. Applicabile a automotive design e product viz."
             data-images="assets/auto futuristica.webp">
-            <div class="case-bg" style="--bg:url('assets/auto futuristica.webp')"></div>
+            <div class="case-bg" data-bg="assets/auto futuristica.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Auto Futuristica</h3>
@@ -297,7 +299,7 @@
             data-note="Ricostruzione 3D e rendering di una statuina Lego Mario. Focus sulla riproduzione fedele delle proporzioni originali e impostazione dei materiali plastici fisicamente accurati (PBR). Set di illuminazione in stile macro photography/studio lighting per esaltare i riflessi e i micro-dettagli della plastica."
             data-images="assets/UntitledMario.webp"
             tabindex="0" role="button">
-            <div class="case-bg" style="--bg:url('assets/UntitledMario.webp')"></div>
+            <div class="case-bg" data-bg="assets/UntitledMario.webp"></div>
             <div class="case-info">
               <div class="badges"></div>
               <h3>Lego Mario</h3>
@@ -363,7 +365,7 @@
         <div class="home-cta reveal">
           <p>Lavori su un gioco, un simulatore, o hai bisogno di asset 3D di qualità professionale?</p>
           <button class="btn-download btn-copy-email" data-email="raffaelprivate@gmail.com" type="button">Parliamo del tuo progetto</button>
-          <a href="#" id="cta-profile-link" class="btn-outline">Guarda il profilo completo</a>
+          <a href="#profile" id="cta-profile-link" class="btn-outline">Guarda il profilo completo</a>
         </div>
 
       </div>
@@ -495,7 +497,7 @@
 
         <aside class="profile-sidebar">
           <div class="profile-pic-container">
-            <img src="assets/fronte.webp" alt="Tommy Raffaello Hodoroaba - 3D Artist & Developer" class="profile-pic"
+            <img src="assets/fronte.webp" alt="Tommy Raffaello Hodoroaba - 3D Artist & Developer" class="profile-pic" loading="lazy" decoding="async"
                 width="180" height="180"
                 onerror="this.style.background='#0a1954';this.style.borderRadius='50%'">
             <div class="pic-ring"></div>
@@ -525,15 +527,15 @@
           <div class="profile-block">
             <h4 class="block-title">SOFTWARE</h4>
             <ul class="software-list">
-              <li><img src="assets/unreal.webp" alt="Unreal Engine" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Unreal Engine 5</li>
-              <li><img src="assets/unity.webp" alt="Unity" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Unity</li>
-              <li><img src="assets/blender.webp" alt="Blender" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Blender</li>
-              <li><img src="assets/maya.webp" alt="Maya" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Maya / 3DS Max</li>
-              <li><img src="assets/vsc.webp" alt="VSCode" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> C++ / C# / Python</li>
-              <li><img src="assets/git.webp" alt="Git" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Git / GitHub</li>
-              <li><img src="assets/photoshop.webp" alt="Photoshop" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Photoshop</li>
-              <li><img src="assets/after.webp" alt="After Effects" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> After Effects</li>
-              <li><img src="assets/premiere.webp" alt="Premiere Pro" class="sw-icon-img" width="20" height="20" onerror="this.style.display='none'"> Premiere</li>
+              <li><img src="assets/unreal.webp" alt="Unreal Engine" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Unreal Engine 5</li>
+              <li><img src="assets/unity.webp" alt="Unity" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Unity</li>
+              <li><img src="assets/blender.webp" alt="Blender" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Blender</li>
+              <li><img src="assets/maya.webp" alt="Maya" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Maya / 3DS Max</li>
+              <li><img src="assets/vsc.webp" alt="VSCode" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> C++ / C# / Python</li>
+              <li><img src="assets/git.webp" alt="Git" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Git / GitHub</li>
+              <li><img src="assets/photoshop.webp" alt="Photoshop" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Photoshop</li>
+              <li><img src="assets/after.webp" alt="After Effects" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> After Effects</li>
+              <li><img src="assets/premiere.webp" alt="Premiere Pro" class="sw-icon-img" loading="lazy" decoding="async" width="20" height="20" onerror="this.style.display='none'"> Premiere</li>
             </ul>
           </div>
 
@@ -572,6 +574,7 @@
                 <textarea id="messaggio" name="messaggio" rows="5" required class="form-input form-textarea" placeholder="Ciao Tommy, sto cercando qualcuno per [tipo di progetto]..."></textarea>
               </div>
               <button type="submit" class="btn-submit">Invia messaggio</button>
+              <p class="form-status" role="status" aria-live="polite" hidden></p>
             </form>
           </div>
 
@@ -743,7 +746,7 @@
               <div class="code-body">
                 <h3>Space Fun</h3>
                 <span class="code-role">Arcade</span>
-                <p>Arcade spaziale in sviluppo all'interno del tuo studio indie.</p>
+                <p>Arcade spaziale in sviluppo all'interno del mio studio indie.</p>
                 <div class="code-tags"><span>Unreal Engine 5</span></div>
               </div>
             </div>

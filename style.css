@@ -904,3 +904,8 @@ footer { text-align: center; padding: 40px 0; font-size: 12px; color: var(--text
   .code-hero { grid-template-columns: 1fr; gap: 28px; }
   .dev-grid, .game-grid { grid-template-columns: 1fr; }
 }
+/* Stato invio form */
+.form-status { margin: 0; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+.form-status.is-ok  { background: rgba(46, 204, 113, 0.12); border: 1px solid rgba(46, 204, 113, 0.5); color: #7fe0a8; }
+.form-status.is-err { background: rgba(231, 76, 60, 0.12);  border: 1px solid rgba(231, 76, 60, 0.5);  color: #f19a90; }
+.btn-submit:disabled { opacity: 0.6; cursor: wait; }

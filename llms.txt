@@ -1,0 +1,18 @@
+# Tommy Raffaello Hodoroaba
+
+> 3D Artist e Developer con base a Torino. Dal 2019 nel team creativo di Alan Walker. Pipeline 3D completa in Blender e Unreal Engine 5, add-on Python per Blender, sviluppo su Roblox Studio (Luau).
+
+## Pagine
+- [Portfolio](https://portfoliotommy.netlify.app/#home): progetti 3D (characters, environments, hard surface, props, motion)
+- [Codice](https://portfoliotommy.netlify.app/#code): tool, add-on e giochi in sviluppo
+- [Profilo](https://portfoliotommy.netlify.app/#profile): esperienza, formazione, contatti
+- [CV (PDF)](https://portfoliotommy.netlify.app/CV_3D_Tommy_Hodoroaba_2026.pdf)
+
+## Progetti di codice
+- [Ferrovie Tricolore](https://github.com/73K-Y/Ferrovie-Tricolore): simulatore ferroviario italiano in Roblox Studio (Luau)
+- [tail_wrap_generator](https://github.com/73K-Y/tail_wrap_generator): add-on Blender in Python
+- [3D-Workflow-Pipeline](https://github.com/73K-Y/3D-Workflow-Pipeline): pipeline Meshy AI, Blender, RetopoFlow 4, Auto-Rig Pro
+
+## Contatti
+- [LinkedIn](https://www.linkedin.com/in/tommy-raffaello-hodoroaba)
+- [GitHub](https://github.com/73K-Y)
