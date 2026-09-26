@@ -83,11 +83,17 @@ async function getPins(channel, token) {
 }
 
 function tiktokIds(messages) {
-  // Cerca i link in tutto il messaggio: testo, embed, campi, bottoni.
+  // Il canale contiene anche messaggi dello staff: si guardano solo i post dei bot.
+  // PingSync non mette il link del video ma un'immagine "TikTokPost-<ID>.jpg": l'ID è quello.
+  // Si scartano i post dello studio, così restano solo quelli di @ferrovietricolore.
   const ids = [];
-  const re = new RegExp(`tiktok\\.com/@${TIKTOK_HANDLE}/(?:video|photo)/(\\d+)`, "gi");
+  const link = new RegExp(`tiktok\\.com/@${TIKTOK_HANDLE}/(?:video|photo)/(\\d+)`, "gi");
+  const pingsync = /TikTokPost-(\d{15,21})/g;
   for (const m of messages) {
-    for (const match of JSON.stringify(m).matchAll(re)) {
+    if (!m.author?.bot) continue;
+    const raw = JSON.stringify(m);
+    if (/tomhoda/i.test(raw)) continue;
+    for (const match of [...raw.matchAll(link), ...raw.matchAll(pingsync)]) {
       if (!ids.includes(match[1])) ids.push(match[1]);
     }
     if (ids.length >= MAX_VIDEOS) break;
@@ -148,7 +154,7 @@ export default async (req) => {
         const all = JSON.stringify(msgs);
         out.debug.tiktokMessages = msgs.length;
         out.debug.tiktokLinks = (all.match(/https?:\/\/[^"\s)]*tiktok[^"\s)]*/gi) || []).slice(0, 5);
-        out.debug.sample = msgs.slice(0, 2).map((m) => ({
+        out.debug.sample = msgs.filter((m) => m.author?.bot).slice(0, 1).map((m) => ({
           author: m.author?.username,
           bot: !!m.author?.bot,
           content: (m.content || "").slice(0, 200),
