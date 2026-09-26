@@ -516,3 +516,8 @@ a:hover .case-coming .case-info, a:focus-visible .case-coming .case-info { borde
 .ft-tt-body time { font-family: var(--mono) !important; font-size: 13px; color: var(--ink-3); }
 .ft-tt-body p { margin: 6px 0 0; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
 .ft-tt:hover .ft-update-link { color: var(--ink); }
+
+/* Codice: elenco repository */
+.gh-list { max-width: none; }
+.gh-repo .ft-link-name { text-transform: none; }
+[hidden] { display: none !important; }

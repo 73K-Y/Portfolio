@@ -613,3 +613,44 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
 
   document.addEventListener("viewchange", (e) => { if (e.detail.hash === "#in-sviluppo") load(); });
 })();
+
+/* ========= Codice: repository aggiornati da GitHub ========= */
+(() => {
+  const block = document.querySelector(".gh-block");
+  const list = document.querySelector('[data-gh="list"]');
+  if (!block || !list) return;
+  let loaded = false;
+  const rtf = new Intl.RelativeTimeFormat("it", { numeric: "always" });
+  const ago = (iso) => {
+    const days = Math.round((new Date(iso) - Date.now()) / 86400000);
+    if (days > -1) return "aggiornato oggi";
+    if (days > -30) return "aggiornato " + rtf.format(days, "day");
+    if (days > -365) return "aggiornato " + rtf.format(Math.round(days / 30), "month");
+    return "aggiornato " + rtf.format(Math.round(days / 365), "year");
+  };
+  async function load() {
+    if (loaded) return;
+    loaded = true;
+    try {
+      const res = await fetch("https://api.github.com/users/73K-Y/repos?sort=pushed&per_page=12");
+      if (!res.ok) return;
+      const repos = (await res.json()).filter((r) => !r.fork && !r.archived);
+      if (!repos.length) return;
+      list.replaceChildren(...repos.map((r) => {
+        const a = document.createElement("a");
+        a.className = "ft-link gh-repo";
+        a.href = r.html_url; a.target = "_blank"; a.rel = "noopener";
+        const name = document.createElement("span");
+        name.className = "ft-link-name";
+        name.textContent = r.name.replace(/[-_]/g, " ");
+        const meta = document.createElement("span");
+        meta.className = "ft-link-meta";
+        meta.textContent = [r.language, ago(r.pushed_at)].filter(Boolean).join(", ");
+        a.append(name, meta);
+        return a;
+      }));
+      block.hidden = false;
+    } catch { /* senza rete o limite GitHub raggiunto: la sezione resta nascosta */ }
+  }
+  document.addEventListener("viewchange", (e) => { if (e.detail.hash === "#code") load(); });
+})();
