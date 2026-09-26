@@ -29,7 +29,7 @@ async function discord(path, token) {
 
 
 /* Converte il markdown di Discord in testo pulito per il sito */
-const PICTO = /[\p{Extended_Pictographic}\u{FE0F}\u{200D}\u{20E3}]/gu;
+const PICTO = /[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}\u{20E3}]/gu;
 function cleanDiscord(raw) {
   const txt = (raw || "")
     .replace(/<a?:\w+:\d+>/g, "")                         // emoji personalizzate
@@ -82,31 +82,45 @@ async function getPins(channel, token) {
   }
 }
 
-function tiktokIds(messages) {
+function tiktokPosts(messages) {
   // Il canale contiene anche messaggi dello staff: si guardano solo i post dei bot.
   // PingSync non mette il link del video ma un'immagine "TikTokPost-<ID>.jpg": l'ID è quello.
-  // Si scartano i post dello studio, così restano solo quelli di @ferrovietricolore.
-  const ids = [];
-  const link = new RegExp(`tiktok\\.com/@${TIKTOK_HANDLE}/(?:video|photo)/(\\d+)`, "gi");
-  const pingsync = /TikTokPost-(\d{15,21})/g;
+  // L'account si legge dal bottone di PingSync ("account:ID" in base64): si tengono solo
+  // i post di @ferrovietricolore.
+  const posts = [];
+  const link = new RegExp(`tiktok\\.com/@${TIKTOK_HANDLE}/(?:video|photo)/(\\d+)`, "i");
+  const pingsync = /TikTokPost-(\d{15,21})/;
   for (const m of messages) {
     if (!m.author?.bot) continue;
     const raw = JSON.stringify(m);
-    // Il bottone di PingSync contiene "account:ID" in base64: se l'account non è
-    // @ferrovietricolore (per esempio lo studio), il post si scarta.
     const share = raw.match(/pingsync\.app\/share\/([A-Za-z0-9_-]+)/);
     if (share) {
-      const decoded = Buffer.from(share[1], "base64url").toString("utf8");
-      const handle = decoded.split(":")[0].toLowerCase();
+      const handle = Buffer.from(share[1], "base64url").toString("utf8").split(":")[0].toLowerCase();
       if (handle && handle !== TIKTOK_HANDLE) continue;
     }
     if (/tomhoda/i.test(raw)) continue;
-    for (const match of [...raw.matchAll(link), ...raw.matchAll(pingsync)]) {
-      if (!ids.includes(match[1])) ids.push(match[1]);
-    }
-    if (ids.length >= MAX_VIDEOS) break;
+    const id = (raw.match(link) || raw.match(pingsync) || [])[1];
+    if (!id || posts.some((p) => p.id === id)) continue;
+
+    const embed = (m.embeds || []).find((e) => e.image || e.thumbnail) || (m.embeds || [])[0] || {};
+    const img = embed.image || embed.thumbnail || {};
+    // La didascalia vera è la parte prima dell'invito fisso a Discord
+    const caption = cleanDiscord(embed.description || "").text
+      .split(/\bunisciti\b/i)[0]
+      .split(/\s*•\s*|\n/)
+      .map((x) => x.trim())
+      .filter(Boolean)
+      .join(" ");
+    posts.push({
+      id,
+      url: `https://www.tiktok.com/@${TIKTOK_HANDLE}/video/${id}`,
+      thumb: img.proxy_url || img.url || null,
+      caption: summarize(caption, 140),
+      date: m.timestamp,
+    });
+    if (posts.length >= MAX_VIDEOS) break;
   }
-  return ids.slice(0, MAX_VIDEOS);
+  return posts;
 }
 
 export default async (req) => {
@@ -157,7 +171,7 @@ export default async (req) => {
 
   if (token && tiktokCh) {
     jobs.push(discord(`/channels/${tiktokCh}/messages?limit=30`, token).then((msgs) => {
-      out.tiktok = tiktokIds(msgs);
+      out.tiktok = tiktokPosts(msgs);
       if (debug) {
         const all = JSON.stringify(msgs);
         out.debug.tiktokMessages = msgs.length;
@@ -166,7 +180,7 @@ export default async (req) => {
           author: m.author?.username,
           bot: !!m.author?.bot,
           content: (m.content || "").slice(0, 200),
-          embeds: (m.embeds || []).map((e) => ({ type: e.type, url: e.url, title: e.title, author: e.author?.name })),
+          embeds: (m.embeds || []).map((e) => ({ type: e.type, url: e.url, title: e.title, description: (e.description || '').slice(0, 200), image: e.image?.proxy_url || e.image?.url, author: e.author?.name })),
           buttons: (m.components || []).flatMap((r) => (r.components || []).map((c) => c.url || c.label)).slice(0, 4),
         }));
       }

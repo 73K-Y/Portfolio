@@ -309,14 +309,13 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
   const routes = {
     "#assets":      ["view-home",    "work",    "Assets"],
     "#in-sviluppo": ["view-dev",     "work",    "Ferrovie Tricolore"],
-    "#terminati":   ["view-done",    "work",    "Progetti terminati"],
     "#annunci":     ["view-news",    "work",    "Annunci"],
     "#studio":      ["view-studio",  "work",    "TOMHODA Studios"],
     "#code":        ["view-code",    "code",    "Codice"],
     "#profile":     ["view-profile", "profile", "Profilo"],
   };
   /* vecchi indirizzi ancora validi */
-  const aliases = { "": "#assets", "#home": "#assets", "#ferrovie-tricolore": "#in-sviluppo" };
+  const aliases = { "": "#assets", "#home": "#assets", "#ferrovie-tricolore": "#in-sviluppo", "#terminati": "#annunci" };
   const views = [...new Set(Object.values(routes).map((r) => r[0]))]
     .map((id) => document.getElementById(id)).filter(Boolean);
 
@@ -564,16 +563,39 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
       show("updates");
     }
 
-    if ((d.tiktok || []).length) {
+    const posts = (d.tiktok || []).filter((t) => t && /^\d+$/.test(t.id));
+    if (posts.length) {
       const box = q('[data-ft="tiktok"]');
-      box.replaceChildren(...d.tiktok.filter((id) => /^\d+$/.test(id)).map((id) => {
-        const f = document.createElement("iframe");
-        f.src = `https://www.tiktok.com/embed/v2/${id}`;
-        f.title = "Video TikTok di Ferrovie Tricolore";
-        f.loading = "lazy";
-        f.allow = "encrypted-media; fullscreen";
-        f.referrerPolicy = "strict-origin-when-cross-origin";
-        return f;
+      box.replaceChildren(...posts.map((t) => {
+        const a = document.createElement("a");
+        a.className = "ft-tt";
+        a.href = `https://www.tiktok.com/@ferrovietricolore/video/${t.id}`;
+        a.target = "_blank"; a.rel = "noopener";
+        a.setAttribute("aria-label", `Guarda il video su TikTok${t.caption ? ": " + t.caption : ""}`);
+        const media = document.createElement("div");
+        media.className = "ft-tt-media";
+        if (t.thumb && /^https:\/\/(cdn\.pingsync\.app|images-ext-\d\.discordapp\.net|media\.discordapp\.net|cdn\.discordapp\.com)\//.test(t.thumb)) {
+          const img = document.createElement("img");
+          img.src = t.thumb; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+          img.onerror = () => img.remove();
+          media.appendChild(img);
+        }
+        const play = document.createElement("span");
+        play.className = "ft-tt-play"; play.setAttribute("aria-hidden", "true");
+        media.appendChild(play);
+        const body = document.createElement("div");
+        body.className = "ft-tt-body";
+        const time = document.createElement("time");
+        time.dateTime = t.date; time.textContent = t.date ? fmtDate(t.date) : "TikTok";
+        body.appendChild(time);
+        if (t.caption) {
+          const p = document.createElement("p"); p.textContent = t.caption; body.appendChild(p);
+        }
+        const cta = document.createElement("span");
+        cta.className = "ft-update-link"; cta.textContent = "Guarda su TikTok";
+        body.appendChild(cta);
+        a.append(media, body);
+        return a;
       }));
       show("tiktok");
     }
