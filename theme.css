@@ -399,14 +399,17 @@ body { font-size: 16px; line-height: 1.55; font-stretch: 100%; }
 
 /* ---------- In sviluppo: tavole con immagine intera e cartiglio ---------- */
 .coming-grid { gap: 32px 24px; }
-@media (min-width: 900px) { .coming-grid { grid-template-columns: repeat(3, 1fr); } }
+.coming-grid { grid-template-columns: minmax(0, 1fr); }
+.coming-grid > * { min-width: 0; }
+@media (min-width: 700px) { .coming-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .coming-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .case-coming {
   display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;
   padding: 0; aspect-ratio: auto; height: auto; overflow: visible;
   border: 0; border-radius: 0; background: none;
 }
 .case-coming .case-bg.pc-bg {
-  display: block !important; position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 9;
+  display: block !important; position: relative; inset: auto; width: 100%; height: auto !important; aspect-ratio: 16 / 9;
   background-size: cover; background-position: center; filter: none; transform: none;
   border: 1px solid var(--line); border-bottom: 0;
 }
@@ -417,5 +420,13 @@ body { font-size: 16px; line-height: 1.55; font-stretch: 100%; }
 }
 .case-coming .coming-title { font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
 .case-coming .coming-desc { font-style: normal; margin: 0; }
-.case-coming:hover .case-bg, .case-coming:hover .case-info { filter: none !important; transform: none !important; opacity: 1 !important; }
+/* Sfocatura: sono progetti non ancora mostrabili. Si svelano al passaggio del mouse o al focus. */
+.case-coming .case-bg.pc-bg {
+  filter: blur(8px) brightness(0.55); clip-path: inset(0); transition: filter 0.4s ease;
+}
+.case-coming .case-info { opacity: 1 !important; transform: none !important; filter: none !important; }
+@media (hover: hover) {
+  .case-coming:hover .case-bg.pc-bg, a:focus-visible .case-coming .case-bg.pc-bg { filter: blur(0) brightness(1); transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .case-coming .case-bg.pc-bg { transition: none; } }
 a:hover .case-coming .case-info, a:focus-visible .case-coming .case-info { border-color: var(--ink-3); }
