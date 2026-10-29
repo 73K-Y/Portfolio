@@ -88,12 +88,19 @@ body * { text-transform: none !important; }
 .glow-script { font: inherit; color: inherit; }
 
 /* ---------- Presentazione in apertura ---------- */
-.home-intro { margin: 0 0 72px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
-.home-intro-kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 14px; font-weight: 500; color: var(--ink-2); }
+.home-intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; align-items: end; margin: 8px 0 64px; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
+.home-intro-kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; font-size: 14px; font-weight: 500; color: var(--ink-2); }
 .home-intro-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--signal); }
-.home-intro-text { max-width: 34ch; margin: 0 0 28px; font-size: clamp(1.5rem, 3.2vw, 2.25rem); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; color: var(--ink); }
+.home-intro-title { margin: 0 0 32px; font-size: clamp(2.1rem, 4.6vw, 3.6rem); font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; color: var(--ink); }
 .home-intro-cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .home-intro-cta .btn-outline { margin: 0; }
+.home-intro-facts { margin: 0; border-top: 1px solid var(--line); }
+.home-intro-facts > div { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.home-intro-facts dt { font-size: 13px; color: var(--ink-3); }
+.home-intro-facts dd { margin: 0; font-size: 15px; color: var(--ink); }
+.home-intro-facts a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.home-section-title { margin: 0 0 20px; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+@media (max-width: 860px) { .home-intro { grid-template-columns: 1fr; gap: 36px; margin-bottom: 56px; padding-bottom: 0; border-bottom: 0; } }
 @media (max-width: 600px) { .home-intro-cta > a { width: 100%; margin: 0; text-align: center; box-sizing: border-box; } }
 
 .block-title {
