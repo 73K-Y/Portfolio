@@ -80,11 +80,18 @@
 
     <div id="view-home">
       <div id="showreel" class="wrap section">
+        <div class="home-intro">
+          <p class="home-intro-kicker"><span class="home-intro-dot" aria-hidden="true"></span>3D Artist e Technical Artist · Torino · Disponibile per nuove opportunità</p>
+          <p class="home-intro-text">Modello asset per giochi e simulatori e scrivo gli strumenti che li portano in engine: Blender, Unreal Engine 5, Roblox Studio e Python.</p>
+          <div class="home-intro-cta">
+            <a class="btn-download" href="CV_3D_Tommy_Hodoroaba_2026.pdf" download>Scarica il CV</a>
+            <a class="btn-outline" href="#in-sviluppo">Il mio progetto: Ferrovie Tricolore</a>
+          </div>
+        </div>
         <h2 class="profile-main-title">Assets</h2>
         <nav class="subnav" aria-label="Sezioni dei lavori">
           <a href="#assets">Assets</a>
           <a href="#in-sviluppo">In sviluppo</a>
-          <a href="#annunci">Annunci</a>
           <a href="#studio">Studio</a>
         </nav>
         <div id="filters" class="filterbar reveal">
@@ -544,13 +551,6 @@
           <div class="contact-info-col">
             <p class="contact-col-label">Trovami anche qui</p>
             <div class="contact-links-list">
-              <a href="tel:+393925649950" class="contact-link-pill">
-                <span class="clp-icon">📱</span>
-                <div class="clp-text">
-                  <span class="clp-label">Cellulare</span>
-                  <span class="clp-value">+39 392 564 9950</span>
-                </div>
-              </a>
               <a href="https://www.linkedin.com/in/tommy-raffaello-hodoroaba" target="_blank" rel="noopener noreferrer" class="contact-link-pill">
                 <span class="clp-icon">🔗</span>
                 <div class="clp-text">
@@ -669,51 +669,56 @@
         <nav class="subnav" aria-label="Sezioni dei lavori">
           <a href="#assets">Assets</a>
           <a href="#in-sviluppo">In sviluppo</a>
-          <a href="#annunci">Annunci</a>
           <a href="#studio">Studio</a>
         </nav>
-        <p class="ft-lead">Un simulatore ferroviario italiano in Roblox Studio, costruito sul realismo: tratte vere e treni autentici. Seguo sia i modelli 3D sia il codice, e il progetto esce sotto il nome TOMHODA Studios.</p>
+        <p class="ft-lead">Un simulatore ferroviario italiano in Roblox Studio con una regola sola: i binari devono essere quelli veri. Si parte da Torino Porta Nuova e oggi si guida fino ad Asti. Faccio da solo modelli 3D, codice e strumenti, sotto il nome TOMHODA Studios.</p>
 
         <div class="hero-stats ft-stats">
-          <div class="stat"><span class="stat-num" data-ft="stato">In sviluppo</span><span class="stat-label">Stato</span></div>
+          <div class="stat"><span class="stat-num" data-ft="stato">Playtest chiuso</span><span class="stat-label">Stato</span></div>
           <div class="stat"><span class="stat-num">Roblox Studio</span><span class="stat-label">Luau, Python, Blender</span></div>
-          <div class="stat"><span class="stat-num" data-ft="members">202</span><span class="stat-label" data-ft="members-label">Membri Discord</span></div>
+          <div class="stat"><span class="stat-num" data-ft="members">229</span><span class="stat-label" data-ft="members-label">Membri Discord</span></div>
         </div>
 
-        <figure class="ft-cover"><img src="assets/ferrovie-tricolore.webp" alt="Logo di Ferrovie Tricolore" loading="lazy" decoding="async"></figure>
+        <figure class="ft-cover ft-shot"><img src="assets/ft-cover.webp" alt="Banchina di Torino Porta Nuova in Ferrovie Tricolore, con colonne, cartelli dei binari e linea aerea" width="1200" height="750" loading="lazy" decoding="async"></figure>
 
         <div class="ft-grid">
           <div class="profile-block">
-            <h4 class="block-title">Dati reali, generati con codice</h4>
+            <h4 class="block-title">Sulla linea</h4>
             <dl class="ft-list">
-              <dt>Stazioni</dt>
-              <dd>Uno script Python legge OpenStreetMap e genera 3.039 segnaposto di stazioni italiane in scala 1:200.</dd>
+              <dt>Tratte</dt>
+              <dd>Porta Nuova - Lingotto e Lingotto - Asti guidabili, merci fino ad Alessandria. La linea per Genova Brignole è già posata.</dd>
+              <dt>Una corsa</dt>
+              <dd>Componi il treno veicolo per veicolo, alzi il pantografo, carichi i freni e chiedi la partenza. Il semaforo decide quando puoi muoverti.</dd>
+              <dt>Traffico</dt>
+              <dd>Treni guidati dal server che rispettano segnali e limiti, e lasciano il binario ai giocatori.</dd>
+              <dt>Rotabili</dt>
+              <dd>E464, Mazinga, MDVC, POP, E652, carrozze e carri merci, con le livree che hanno avuto davvero.</dd>
+            </dl>
+          </div>
+
+          <div class="profile-block">
+            <h4 class="block-title">Torino Porta Nuova</h4>
+            <dl class="ft-list">
+              <dt>Stazione</dt>
+              <dd>20 binari, gola, due depositi e Sala Comandi.</dd>
+              <dt>Tabelloni e annunci</dt>
+              <dd>I tabelloni mostrano il tuo treno appena ti siedi in cabina, la stazione annuncia partenze e arrivi.</dd>
+              <dt>Passeggeri</dt>
+              <dd>Biglietteria, timbratrici e tornelli che si aprono solo con il biglietto.</dd>
+              <dt>Ora</dt>
+              <dd>Orologi e orari seguono l'ora italiana, ora legale compresa.</dd>
+            </dl>
+          </div>
+
+          <div class="profile-block">
+            <h4 class="block-title">Come è costruito</h4>
+            <dl class="ft-list">
               <dt>Binari</dt>
-              <dd>Lo script GenBinario posa i tratti di binario lungo una spline Catmull-Rom costruita dal tracciato GPX Torino - Genova Brignole. Una correzione sul CFrame ha eliminato gli spazi tra i tratti.</dd>
-              <dt>Tracciato in Blender</dt>
-              <dd>Il corridoio ferroviario è modellato in Blender partendo dai dati OpenStreetMap.</dd>
-            </dl>
-          </div>
-
-          <div class="profile-block">
-            <h4 class="block-title">Sistemi di gioco</h4>
-            <dl class="ft-list">
-              <dt>Cabina di guida</dt>
-              <dd>Pannello di guida unico con comandi, luci, porte e clacson a tre fasi, gestiti lato server.</dd>
-              <dt>Composizione</dt>
-              <dd>Treni con numero di carrozze variabile.</dd>
-              <dt>Velocità</dt>
-              <dd>Limiti di velocità a zone e tachimetro tarato sui 160 km/h dei treni regionali.</dd>
-              <dt>Ambiente</dt>
-              <dd>Ciclo giorno e notte sincronizzato con l'ora italiana, ambientazione a Torino Porta Nuova.</dd>
-            </dl>
-          </div>
-
-          <div class="profile-block">
-            <h4 class="block-title">Da Blender a Roblox</h4>
-            <dl class="ft-list">
-              <dt>Locomotiva</dt>
-              <dd>Modello importato da Blender: mesh multi-materiale divisa, texture segnaposto sostituite con i colori reali, e uno script che rimuove le SurfaceAppearance generate in automatico che coprivano i colori delle parti.</dd>
+              <dd>Tile da 20 studs posati sui dati di OpenStreetMap, a 3,011 studs per metro.</dd>
+              <dt>Segnalamento</dt>
+              <dd>Blocco automatico a tre aspetti; i percorsi vengono generati dai binari stessi.</dd>
+              <dt>Linea aerea</dt>
+              <dd>Pali e fili generati da script: il palo giusto viene scelto in base a dove cadono i ganci rispetto ai binari.</dd>
             </dl>
           </div>
         </div>
@@ -736,12 +741,9 @@
         <div class="profile-block ft-gallery-block">
           <h4 class="block-title">Dallo sviluppo</h4>
           <div class="ft-gallery">
-            <figure><img src="assets/ft-1.webp" alt="Ferrovie Tricolore, immagine di sviluppo 1" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
-            <figure><img src="assets/ft-2.webp" alt="Ferrovie Tricolore, immagine di sviluppo 2" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
-            <figure><img src="assets/ft-3.webp" alt="Ferrovie Tricolore, immagine di sviluppo 3" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
-            <figure><img src="assets/ft-4.webp" alt="Ferrovie Tricolore, immagine di sviluppo 4" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
-            <figure><img src="assets/ft-5.webp" alt="Ferrovie Tricolore, immagine di sviluppo 5" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
-            <figure><img src="assets/ft-6.webp" alt="Ferrovie Tricolore, immagine di sviluppo 6" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-1.webp" alt="Treni in sosta nel deposito di Porta Nuova" width="1200" height="750" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-2.webp" alt="Linea aerea sui binari di Torino Lingotto" width="1200" height="750" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
+            <figure><img src="assets/ft-3.webp" alt="Tornelli di accesso ai binari 1-8" width="1200" height="750" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></figure>
           </div>
         </div>
 
@@ -749,7 +751,7 @@
           <h4 class="block-title">Community</h4>
           <p class="about-text">Gli aggiornamenti di sviluppo escono principalmente su Discord, e in video brevi su TikTok.</p>
           <div class="ft-links">
-            <a class="ft-link" href="https://discord.gg/pH62fm3nkG" target="_blank" rel="noopener"><span class="ft-link-name">Discord</span><span class="ft-link-meta" data-ft="members-short">202 membri</span></a>
+            <a class="ft-link" href="https://discord.gg/pH62fm3nkG" target="_blank" rel="noopener"><span class="ft-link-name">Discord</span><span class="ft-link-meta" data-ft="members-short">229 membri</span></a>
             <a class="ft-link" href="https://www.tiktok.com/@ferrovietricolore" target="_blank" rel="noopener"><span class="ft-link-name">TikTok Ferrovie Tricolore</span><span class="ft-link-meta">@ferrovietricolore</span></a>
             <a class="ft-link" href="https://github.com/73K-Y/Ferrovie-Tricolore" target="_blank" rel="noopener"><span class="ft-link-name">GitHub</span><span class="ft-link-meta">73K-Y/Ferrovie-Tricolore</span></a>
           </div>
@@ -758,64 +760,12 @@
     </div>
 
 
-    <div id="view-news" class="work-view" style="display:none; padding-top:40px;">
-      <section class="wrap profile-section">
-        <h2 class="profile-main-title">Annunci</h2>
-        <nav class="subnav" aria-label="Sezioni dei lavori">
-          <a href="#assets">Assets</a>
-          <a href="#in-sviluppo">In sviluppo</a>
-          <a href="#annunci">Annunci</a>
-          <a href="#studio">Studio</a>
-        </nav>
-        <p class="ft-lead">Progetti annunciati, non ancora mostrabili. Le immagini si svelano al passaggio del mouse.</p>
-        <div class="coming-grid">
-            <article class="case-coming" data-title="Synclife Dynamics">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_synclife_dynamics.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_synclife_dynamics.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">Synclife Dynamics</h4>
-                <p class="coming-desc">Videogioco horror, Unreal Engine 5</p>
-              </div>
-            </article>
-            <article class="case-coming" data-title="Brain.exe">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_BrainEXE.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_BrainEXE.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">Brain.exe</h4>
-                <p class="coming-desc">Videogioco meme, Unreal Engine 5</p>
-              </div>
-            </article>
-            <a href="https://orbitalys.netlify.app" target="_blank" rel="noopener" class="coming-link">
-              <article class="case-coming" data-title="Orbitalys">
-                <div class="case-bg pc-bg" style="background-image:url('assets/pc_Orbitalys.webp')"></div>
-                <div class="case-info">
-                  <h4 class="coming-title">Orbitalys</h4>
-                  <p class="coming-desc">Videogioco arcade, Unreal Engine 5</p>
-                </div>
-              </article>
-            </a>
-            <article class="case-coming" data-title="Space Fun">
-              <div class="case-bg pc-bg" style="background-image:url('assets/pc_SpaceFun.webp')"></div>
-              <div class="case-bg mobile-bg" style="background-image:url('assets/mobile_SpaceFun.webp')"></div>
-              <div class="case-overlay" aria-hidden="true"><span class="label">Soon</span></div>
-              <div class="case-info">
-                <h4 class="coming-title">Space Fun</h4>
-                <p class="coming-desc">Videogioco arcade, Unreal Engine 5</p>
-              </div>
-            </article>
-        </div>
-      </section>
-    </div>
-
     <div id="view-studio" class="work-view" style="display:none; padding-top:40px;">
       <section class="wrap profile-section">
         <h2 class="profile-main-title">TOMHODA Studios</h2>
         <nav class="subnav" aria-label="Sezioni dei lavori">
           <a href="#assets">Assets</a>
           <a href="#in-sviluppo">In sviluppo</a>
-          <a href="#annunci">Annunci</a>
           <a href="#studio">Studio</a>
         </nav>
         <p class="ft-lead">Il mio studio indie: il nome sotto cui escono i miei giochi.</p>
@@ -824,14 +774,15 @@
           <h4 class="block-title">Giochi dello studio</h4>
           <div class="ft-links">
             <a class="ft-link" href="#in-sviluppo"><span class="ft-link-name">Ferrovie Tricolore</span><span class="ft-link-meta">in sviluppo</span></a>
-            <a class="ft-link" href="#annunci"><span class="ft-link-name">Synclife Dynamics, Brain.exe, Orbitalys, Space Fun</span><span class="ft-link-meta">annunciati</span></a>
+            <a class="ft-link" href="https://orbitalys.netlify.app" target="_blank" rel="noopener"><span class="ft-link-name">Orbitalys</span><span class="ft-link-meta">annunciato, Unreal Engine 5</span></a>
+            <div class="ft-link"><span class="ft-link-name">Synclife Dynamics, Brain.exe, Space Fun</span><span class="ft-link-meta">in preparazione</span></div>
           </div>
         </div>
         <div class="profile-block">
           <h4 class="block-title">Canali dello studio</h4>
           <div class="ft-links">
             <a class="ft-link" href="https://www.tiktok.com/@tomhodastudioofficial" target="_blank" rel="noopener"><span class="ft-link-name">TikTok TOMHODA Studios</span><span class="ft-link-meta">@tomhodastudioofficial</span></a>
-            <a class="ft-link" href="https://linktr.ee/thomodastudio" target="_blank" rel="noopener"><span class="ft-link-name">Tutti i link</span><span class="ft-link-meta">linktr.ee/thomodastudio</span></a>
+            <a class="ft-link" href="https://linktr.ee/thomodastudio" target="_blank" rel="noopener"><span class="ft-link-name">Linktree</span><span class="ft-link-meta">tutti i link dello studio</span></a>
           </div>
         </div>
       </section>

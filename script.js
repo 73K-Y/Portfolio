@@ -309,13 +309,12 @@ document.getElementById("showreel")?.addEventListener("keydown", (e) => {
   const routes = {
     "#assets":      ["view-home",    "work",    "Assets"],
     "#in-sviluppo": ["view-dev",     "work",    "Ferrovie Tricolore"],
-    "#annunci":     ["view-news",    "work",    "Annunci"],
     "#studio":      ["view-studio",  "work",    "TOMHODA Studios"],
     "#code":        ["view-code",    "code",    "Codice"],
     "#profile":     ["view-profile", "profile", "Profilo"],
   };
   /* vecchi indirizzi ancora validi */
-  const aliases = { "": "#assets", "#home": "#assets", "#ferrovie-tricolore": "#in-sviluppo", "#terminati": "#annunci" };
+  const aliases = { "": "#assets", "#home": "#assets", "#ferrovie-tricolore": "#in-sviluppo", "#terminati": "#studio", "#annunci": "#studio" };
   const views = [...new Set(Object.values(routes).map((r) => r[0]))]
     .map((id) => document.getElementById(id)).filter(Boolean);
 
