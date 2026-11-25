@@ -540,3 +540,9 @@ a:hover .case-coming .case-info, a:focus-visible .case-coming .case-info { borde
 .gh-repo .ft-link-name { text-transform: none; }
 [hidden] { display: none !important; }
 div.ft-link:hover .ft-link-name { text-decoration: none; }
+
+/* Tavole di presentazione (3/4, fronte, lato, retro, pianta) */
+.ft-sheets { display: grid; gap: 28px; }
+.ft-sheets figure { margin: 0; border: 1px solid var(--line); }
+.ft-sheets img { display: block; width: 100%; height: auto; }
+.ft-sheets figcaption { padding: 10px 12px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; font-stretch: 112%; color: var(--ink); }
